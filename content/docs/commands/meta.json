@@ -1,0 +1,7 @@
+{
+  "root": false,
+  "title": "Commands",
+  "description": "The CLI tool for docs automation",
+  "icon": "Terminal",
+  "pages": ["version", "help", "definitions"]
+}

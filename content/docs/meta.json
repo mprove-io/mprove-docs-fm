@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "index",
+    "---Topics---",
+    "topics-access-roles",
+
+    "---Mprove CLI---",
+    "cli-install",
+    "cli-configuration",
+    "commands",
+
+    "---Example---",
+    "test"
+  ]
+}

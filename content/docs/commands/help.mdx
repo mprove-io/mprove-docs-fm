@@ -1,0 +1,81 @@
+---
+title: help
+---
+
+### Usage
+
+```
+➜  ~ mprove help -h
+Print help
+
+━━━ Usage ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+$ mprove help
+
+━━━ Examples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Print help
+  $ mprove help
+```
+
+### Example Output
+
+```
+➜  ~ mprove help
+━━━ Mprove CLI - <version> ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  $ mprove <command>
+
+━━━ General commands ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  mprove commit [--project-id #0] <--repo #0> <--branch #0> <--commit-message #0> [--get-repo] [--json] [--env-file-path #0]
+    Commit changes
+
+  mprove create-branch [--project-id #0] <--repo #0> <--new-branch #0> <--from-branch #0> [--json] [--env-file-path #0]
+    Create branch
+
+  mprove definitions [--json]
+    Print the CLI definitions
+
+  mprove delete-branch [--project-id #0] <--repo #0> <--branch #0> [--json] [--env-file-path #0]
+    Delete branch
+
+  mprove get-branches [--project-id #0] <--repo #0> [--json] [--env-file-path #0]
+    Get branches
+
+  mprove get-query [--project-id #0] <--repo #0> <--branch #0> <--env #0> [--dashboard-id #0] [--tile-index #0] [--chart-id #0] [--report-id #0] [--row-id #0] [--timezone #0] [--timeSpec #0] [--timeRange #0] [--get-sql] [--get-data] [--json] [--env-file-path #0]
+    Get query
+
+  mprove get-state [--project-id #0] <--repo #0> <--branch #0> <--env #0> [--get-errors] [--get-repo] [--get-repo-nodes] [--get-models] [--get-dashboards] [--get-charts] [--get-metrics] [--get-reports] [--json] [--env-file-path #0]
+    Get state (models, dashboards, charts, reports, metrics, errors, repo nodes)
+
+  mprove help
+    Print help
+
+  mprove merge [--project-id #0] <--branch #0> <--their-branch #0> <--env #0> [--get-errors] [--get-repo] [--json] [--env-file-path #0]
+    Merge their-branch to branch for Dev repo, validate Mprove Files for selected env
+
+  mprove pull [--project-id #0] <--repo #0> <--branch #0> <--env #0> [--get-errors] [--get-repo] [--json] [--env-file-path #0]
+    Pull committed changes from Remote to repo, validate Mprove Files for selected env
+
+  mprove push [--project-id #0] <--repo #0> <--branch #0> <--env #0> [--get-errors] [--get-repo] [--json] [--env-file-path #0]
+    Push committed changes from repo to Remote, validate Mprove Files for selected env
+
+  mprove revert <--to #0> [--project-id #0] <--repo #0> <--branch #0> <--env #0> [--get-errors] [--get-repo] [--json] [--env-file-path #0]
+    Revert (reset) repo to the state of a last commit or Remote repo, validate Mprove Files for selected env
+
+  mprove run [--project-id #0] <--repo #0> <--branch #0> <--env #0> [--concurrency #0] [--wait] [--sleep #0] [--dashboard-ids #0] [--chart-ids #0] [--no-dashboards] [--no-charts] [--get-dashboards] [--get-charts] [--json] [--env-file-path #0]
+    Run dashboards and charts
+
+  mprove sync [--project-id #0] <--env #0> [--local-path #0] [--first-sync] [--get-repo] [--get-repo-nodes] [--get-errors] [--json] [--debug] [--env-file-path #0]
+    Synchronize files (uncommitted changes) between Local and Dev repo, validate Mprove Files for selected env
+
+  mprove validate [--project-id #0] <--repo #0> <--branch #0> <--env #0> [--get-errors] [--get-repo] [--json] [--env-file-path #0]
+    Validate (rebuild) Mprove Files for selected env
+
+  mprove version [--json]
+    Print version of Mprove CLI
+
+You can also print more details about any of these commands by calling them with 
+the `-h,--help` flag right after the command name.
+```

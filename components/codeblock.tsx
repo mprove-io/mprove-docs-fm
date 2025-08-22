@@ -140,7 +140,7 @@ export function CodeBlock({
         {...viewportProps}
         className={cn(
           !isTab && [bg, 'rounded-lg border'],
-          'text-[13px] py-3.5 overflow-auto max-h-[600px] fd-scroll-container',
+          'text-[13px] py-3.5 overflow-auto fd-scroll-container',
           viewportProps.className,
         )}
         style={

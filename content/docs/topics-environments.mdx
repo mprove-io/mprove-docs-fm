@@ -1,0 +1,28 @@
+---
+title: Environments
+---
+
+{/* ## Environments */}
+
+Each project has **prod** environment by default. All project members have access to it.
+
+A project administrator can create additional environments and give a project member access to that environment.
+
+Each connection is tied to one environment.
+
+<Callout type="info" title="Connection names are not unique">
+  Two connections can have the same name but still belong to different
+  environments.
+</Callout>
+
+The Model refers to a connection through the connection name.
+
+The user selects an environment via the UI.
+
+SQL queries go through connections tied to the selected Environment.
+
+## Environment variables
+
+If you need to modify the SQL query itself for a specific environment, then you can use Environment Variables.
+
+To do this, a user with access to the Environment can create an Environment Variables via the UI. And then use [reference](/top/reference/reference-operator) in View files (in `table` or `derived_table` parameters).

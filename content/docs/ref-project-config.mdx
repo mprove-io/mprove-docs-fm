@@ -1,0 +1,34 @@
+---
+title: Project Config
+---
+
+## File
+
+Each project must have <strong>mprove.yml</strong> config file:
+
+```yml
+mprove_dir: ./
+
+case_sensitive_string_filters: false
+simplify_safe_aggregates: true
+week_start: Monday
+allow_timezones: true
+default_timezone: UTC
+format_number: ",.0f"
+currency_prefix: $
+currency_suffix: ""
+```
+
+## Project
+
+| Name                          | Type    | Default | Description                                                                                                                                          |
+| ----------------------------- | ------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| mprove_dir\*                  | string  | ./      | Relative subpath of the repository to the folder containing Mprove YAML files                                                                        |
+| case_sensitive_string_filters | boolean | false   | Specify whether string filters should be case sensitive                                                                                              |
+| simplify_safe_aggregates      | boolean | true    | Simplifies the SQL measure types "sum_by_key" and "average_by_key" based on the join relationships for each query, depending on the fields selected. |
+| week_start                    | enum    | Monday  | <span>Start day of the week:</span><ul><li>Sunday</li><li>Monday</li></ul>                                                                           |
+| allow_timezones               | boolean | true    | Allow users to change timezone in UI                                                                                                                 |
+| default_timezone              | enum    | UTC     | Specify default timezone for UI (useful if allow_timezones is false)                                                                                 |
+| format_number                 | string  | ',.0f'  | [Format Number](/top/reference/format-number)                                                                                                        |
+| currency_prefix               | string  | $       | [Format Number - Symbol](/top/reference/format-number#symbol)                                                                                        |
+| currency_suffix               | string  | ''      | [Format Number - Symbol](/top/reference/format-number#symbol)                                                                                        |

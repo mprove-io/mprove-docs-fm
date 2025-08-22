@@ -1,0 +1,247 @@
+---
+title: Format Number
+---
+
+# Format Number
+
+The goal of **format_number** parameter is to help display numbers in a human-readable form.
+
+```yaml
+fields: #begin of fields section (inside View or Model)
+  - dimension: price
+    format_number: "$,.2f" # 1057.1258 >> $1 057.13
+    currency_prefix: $
+    currency_suffix: ""
+    sql: product_price
+```
+
+## Syntax
+
+Fields with `result: number` (implicitly or explicitly set) can accept **format_number** using special syntax of [D3 format](https://github.com/d3/d3-format):
+
+`[[fill]align][sign][symbol][0][width][,][.precision][type]`
+
+If options are specified, they must preserve its order.
+
+## Fill, Align, Width
+
+The **align** can be:
+
+- `<` - left alignment
+- `^` - center alignment
+- `>` - right alignment (default)
+
+The **fill** can be any character. Fill can be specified only if **align** specified. It fills empty characters if value requires less characters than width.
+The **width** defines the minimum field width in characters. If not specified, then the width will be determined by the content.
+
+`[[fill]align][sign][symbol][0][width][,][.precision][type]`
+
+| Input | format_number | output        | description                                      |
+| ----- | ------------- | ------------- | ------------------------------------------------ |
+| 5     | B\<7           | 5BBBBBB       | set width to 7 and fill empty characters with B  |
+| 5     | \*^7          | \*\*\*5\*\*\* | set width to 7 and fill empty characters with \* |
+| 5     | A>7           | AAAAAA5       | set width to 7 and fill empty characters with A  |
+
+## Sign
+
+The **sign** can be:
+
+- `-` - nothing for zero or positive and a minus sign for negative (default)
+- `+` - a plus sign for zero or positive and a minus sign for negative
+- `(` - nothing for zero or positive and parentheses for negative
+
+`[[fill]align][sign][symbol][0][width][,][.precision][type]`
+
+| Input | format_number | output |
+| ----- | ------------- | ------ |
+| 5     | +             | +5     |
+| -5    | +             | -5     |
+| 5     | -             | 5      |
+| -5    | -             | -5     |
+| 5     | (             | 5      |
+| -5    | (             | (5)    |
+
+## Symbol
+
+The **symbol** can be:
+
+- `$` - apply currency_prefix and currency_suffix
+- `#` - for binary, octal, or hexadecimal types, prefix by 0b, 0o, or 0x, respectively.
+
+`[[fill]align][sign][symbol][0][width][,][.precision][type]`
+
+| Input | format_number | output    | description                                                                            |
+| ----- | ------------- | --------- | -------------------------------------------------------------------------------------- |
+| 5     | $             | $5        | <span></span><ul><li>currency_prefix: '$'</li><li>currency_suffix: ''</li></ul>        |
+| 5     | $             | 5         | <span></span><ul><li>currency_prefix: ''</li><li>currency_suffix: ''</li></ul>         |
+| 5     | $             | 5$        | <span></span><ul><li>currency_prefix: ''</li><li>currency_suffix: '$'</li></ul>        |
+| 5     | $             | usd 5     | <span></span><ul><li>currency_prefix: 'usd '</li><li>currency_suffix: ''</li></ul>     |
+| 5     | $             | 5 usd     | <span></span><ul><li>currency_prefix: ''</li><li>currency_suffix: ' usd'</li></ul>     |
+| 5     | $             | abc 5 def | <span></span><ul><li>currency_prefix: 'abc '</li><li>currency_suffix: ' def'</li></ul> |
+| 5     | $             | 5 units   | <span></span><ul><li>currency_prefix: ''</li><li>currency_suffix: ' units'</li></ul>   |
+| 100   | #b            | 0b1100100 |                                                                                        |
+| 100   | #o            | 0o144     |                                                                                        |
+| 100   | #x            | 0x64      |                                                                                        |
+
+## Zero
+
+The zero `0` option enables zero-padding; this implicitly sets fill to `0`.
+
+`[[fill]align][sign][symbol][0][width][,][.precision][type]`
+
+| Input     | format_number | output    |
+| --------- | ------------- | --------- |
+| 5         | 07            | 0000005   |
+| 123       | 07            | 0000123   |
+| 123456789 | 07            | 123456789 |
+
+## Comma
+
+The comma `,` option enables the use of a group separator for thousands.
+
+`[[fill]align][sign][symbol][0][width][,][.precision][type]`
+
+| Input     | format_number | output     |
+| --------- | ------------- | ---------- |
+| 1000000   | ,             | 1,000,000  |
+| -57023.55 | ,             | -57,023.55 |
+| 705       | ,             | 705        |
+
+## Precision and Type
+
+The available type values are:
+
+- `e` - exponent notation
+- `d` - decimal notation, rounded to integer
+- `%` - multiply by 100, and then decimal notation with a percent sign
+- `p` - multiply by 100, round to significant digits, and then decimal notation with a percent sign
+- `s` - decimal notation with an SI prefix, rounded to significant digits
+- `b` - binary notation, rounded to integer
+- `o` - octal notation, rounded to integer
+- `x` - hexadecimal notation, using lower-case letters, rounded to integer
+- `X` - hexadecimal notation, using upper-case letters, rounded to integer
+- `c` - (not yet supported) converts the integer to the corresponding unicode character before printing
+- `g` - either decimal or exponent notation, rounded to significant digits
+- ` ` - (none) like g, but trim insignificant trailing zeros
+- `f` - fixed point notation
+- `r` - decimal notation, rounded to significant digits
+- `n` - shorthand for ,g
+
+For the `g`, `n` and ` ` (none) types, decimal notation is used if the resulting string would have **precision** or fewer digits; otherwise, exponent notation is used. Depending on the **type**, the **precision** either indicates the number of digits that follow the decimal point (types `f` and `%`), or the number of significant digits (types ` ` (none), `e`, `g`, `r`, `s` and `p`). If the **precision** is not specified, it defaults to 6 for all types except ` ` (none), which defaults to 12. **Precision** is ignored for integer formats (types `b`, `o`, `d`, `x`, `X` and `c`).
+
+`[[fill]align][sign][symbol][0][width][,][.precision][type]`
+
+### Exponential
+
+| Input    | format_number | output      |
+| -------- | ------------- | ----------- |
+| 2000     | e             | 2.000000e+3 |
+| 20003010 | e             | 2.000301e+7 |
+| 0.000001 | e             | 1.000000e-6 |
+
+### Integer
+
+| Input  | format_number | output |
+| ------ | ------------- | ------ |
+| 1000.1 | d             | 1000   |
+| 1000.5 | d             | 1001   |
+| -1.12  | d             | -1     |
+
+### Percentage
+
+| Input | format_number | output      |
+| ----- | ------------- | ----------- |
+| 1     | %             | 100.000000% |
+| 0.999 | %             | 99.900000%  |
+| 0.12  | %             | 12.000000%  |
+| -0.12 | %             | -12.000000% |
+| 0.25  | .3%           | 25.000%     |
+| 1     | p             | 100.000%    |
+| 0.999 | p             | 99.9000%    |
+| 0.12  | p             | 12.0000%    |
+| -0.12 | p             | -12.0000%   |
+| 0.25  | .3p           | 25.0%       |
+
+### Scientific
+
+| Input    | format_number | output   |
+| -------- | ------------- | -------- |
+| 0.000001 | s             | 1.00000µ |
+| 0.001    | s             | 1.00000m |
+| 1        | s             | 1.00000  |
+| 1000     | s             | 1.00000k |
+| 1000000  | s             | 1.00000M |
+
+### Binary
+
+| Input | format_number | output      |
+| ----- | ------------- | ----------- |
+| 1     | b             | 1           |
+| 8     | b             | 1000        |
+| 16    | b             | 10000       |
+| 2012  | b             | 11111011100 |
+
+### Octal
+
+| Input | format_number | output |
+| ----- | ------------- | ------ |
+| 1     | o             | 1      |
+| 8     | o             | 10     |
+| 16    | o             | 20     |
+| 2012  | o             | 3734   |
+
+### Hexadecimal
+
+| Input | format_number | output |
+| ----- | ------------- | ------ |
+| 17    | x             | 11     |
+| 2012  | x             | 7dc    |
+| 17    | X             | 11     |
+| 2012  | X             | 7DC    |
+
+### General
+
+| Input         | format_number | output      |
+| ------------- | ------------- | ----------- |
+| 1000000000000 | g             | 1.00000e+12 |
+| 2000          | g             | 2000.00     |
+| 2000.0301     | g             | 2000.03     |
+| 0.00012       | g             | 0.000120000 |
+| 0.987654      | .1g           | 1           |
+| 0.987654      | .2g           | 0.99        |
+| 0.987654      | .3g           | 0.988       |
+
+### None
+
+| Input         | format_number | output    |
+| ------------- | ------------- | --------- |
+| 1000000000000 |               | 1e+12     |
+| 2000          |               | 2000      |
+| 2000.0301     |               | 2000.0301 |
+| 0.00012       |               | 0.00012   |
+| 0.987654      | .1            | 1         |
+| 0.987654      | .2            | 0.99      |
+| 0.987654      | .3            | 0.988     |
+
+### Fixed
+
+| Input         | format_number | output               |
+| ------------- | ------------- | -------------------- |
+| 1000000000000 | f             | 1000000000000.000000 |
+| 2000          | f             | 2000.000000          |
+| 2000.0301     | f             | 2000.030100          |
+| 0.00012       | f             | 0.000120             |
+| 0.987654      | .1f           | 1.0                  |
+| 0.987654      | .2f           | 0.99                 |
+| 0.987654      | .3f           | 0.988                |
+
+### Rounded
+
+| Input     | format_number | output      |
+| --------- | ------------- | ----------- |
+| 2000      | r             | 2000.00     |
+| 2000.0301 | r             | 2000.03     |
+| 0.00012   | r             | 0.000120000 |
+| 0.987654  | .1r           | 1           |
+| 0.987654  | .2r           | 0.99        |
+| 0.987654  | .3r           | 0.988       |

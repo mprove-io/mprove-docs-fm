@@ -1,0 +1,31 @@
+---
+title: Chart
+---
+
+## File
+
+Each chart must be stored as **chart_name.chart** YAML file:
+
+
+```yaml
+chart: chart_name
+   
+tiles: # Chart must have exactly one tile
+# - title: 'tile title in UI'
+#   ...
+
+access_roles:
+- role
+- role
+- ...
+
+```
+
+
+## Chart
+
+| Name         | Type                                      | Default | Description                                                              |
+| ------------ | ----------------------------------------- | ------- | ------------------------------------------------------------------------ |
+| chart\*      | string                                    | -       | Chart name                                                               |
+| tiles\*      | [Tile](/top/reference/dashboard#tile) [ ] | -       | Chart tile has the same configuration as dashboard tile                  |
+| access_roles | string [ ]                                | -       | If specified, only users with the listed roles will have access to Chart |

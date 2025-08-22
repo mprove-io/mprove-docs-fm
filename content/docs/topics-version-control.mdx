@@ -1,0 +1,45 @@
+---
+title: "Version Control"
+---
+
+## Branches
+
+Project repository stores Mprove files:
+
+- [mprove.yml](/top/reference/mprove-project-config)
+- [\*.malloy](/top/reference/store)
+- [\*.store](/top/reference/store)
+- [\*.chart](/top/reference/chart)
+- [\*.report](/top/reference/report)
+- [\*.dashboard](/top/reference/dashboard)
+
+Git branches allow developers to edit files and test changes without affecting production code. When you're happy with the changes you've made, you can **commit** and **push** them to production to share the updated models with your team.
+
+<Callout type="info">
+  Users can switch between production and dev repositories (and branches!) using
+  **repo-branch** selector.
+</Callout>
+
+For each project, Mprove:
+
+- Connects to your **Remote** Github repository (recommened) or creates **Remote** repository locally on the server
+- Creates **Production** repository locally on the server that mirrors **Remote** repository content
+- Creates Personal **Dev** repository locally on the server for each project member with **FilesEditor** role
+
+## User Actions
+
+Git related actions are available on the Files page:
+
+- **Save and Validate** - Save the changes. Mprove will automatically check all files in the project repository data folder for errors.
+
+<Callout type="error">
+  If errors are found during validation, they need to be fixed so that changes
+  can be pushed to production.
+</Callout>
+
+- **Commit** - Commit changes.
+- **Push** - Deploy committed changes to production repo.
+- **Revert to last commit** - Discard saved changes that were not committed.
+- **Revert to production** - Revert all changes to the current production version.
+- **Pull from production** - Pull changes from production branch and merge them into the current branch.
+- **Merge** - Merge changes from another branch into the current branch.

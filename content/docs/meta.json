@@ -2,14 +2,24 @@
   "pages": [
     "index",
     "---Topics---",
+    "topics-version-control",
+    "topics-environments",
+    "topics-user-roles",
     "topics-access-roles",
+
+    "---Reference---",
+    "ref-store",
+    "ref-chart",
+    "ref-report",
+    "ref-dashboard",
+    "ref-format-number",
 
     "---Mprove CLI---",
     "cli-install",
     "cli-configuration",
     "commands",
 
-    "---Example---",
+    "---Docs Examples---",
     "test"
   ]
 }

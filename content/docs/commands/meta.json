@@ -3,5 +3,22 @@
   "title": "Commands",
   "description": "The CLI tool for docs automation",
   "icon": "Terminal",
-  "pages": ["version", "help", "definitions"]
+  "pages": [
+    "version",
+    "help",
+    "definitions",
+    "validate",
+    "sync",
+    "get-state",
+    "run",
+    "get-query",
+    "get-branches",
+    "create-branch",
+    "delete-branch",
+    "commit",
+    "revert",
+    "push",
+    "pull",
+    "merge"
+  ]
 }

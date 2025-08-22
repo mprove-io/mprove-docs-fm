@@ -1,0 +1,77 @@
+---
+title: sync
+---
+
+Mprove **sync** allows you to work with project files on your local machine (in your favorite IDE like VsCode).
+
+:::info
+Mprove project's Remote Repo must be of type **Git Clone** (this option can be specified when creating a new project).
+This way you can clone the Remote repo to your Local machine.
+
+For **mprove sync** to work, the current git branch in the Local repository and the branch in the Dev repository must be in the same commit.
+:::
+
+Workflow "Commit on Local":
+
+- Make changes on Local or Dev (web UI)
+- Sync changes using `mprove sync` from local command line
+- Check and fix validation errors if any
+- Commit changes on Local
+- Push changes from Local to Remote
+- Revert Dev repo to Remote (or revert Dev repo to last-commit and pull changes from Remote)
+
+Workflow "Commit on Dev":
+
+- Make changes on Local or Dev (web UI)
+- Sync changes using `mprove sync` from local command line
+- Check and fix validation errors if any
+- Commit changes on Dev
+- Push changes from Dev to Remote
+- Discard git changes on Local
+- Pull changes from the Remote to Local
+
+### Usage
+
+
+```
+➜  ~ mprove sync -h
+Synchronize files (uncommitted changes) between Local and Dev repo, validate Mprove Files for selected env
+
+━━━ Usage ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+$ mprove sync
+
+━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  --project-id #0       (required) Project Id
+  --env #0              (required) Environment
+  --local-path #0       (optional, if not specified then the current working directory is used) Absolute path of local git repository
+  --first-sync          (default false) if set, then the previous sync timestamp is ignored
+  --get-repo            (default false), show repo in output
+  --get-repo-nodes      (default false), show repo nodes in output
+  --get-errors          (default false), show validation errors in output
+  --json                (default false)
+  --debug               (default false) add debug to output
+  --env-file-path #0    (optional) Path to ".env" file
+
+━━━ Examples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Synchronize files (uncommitted changes) between Local and Dev repo, validate Mprove Files for selected env
+  $ mprove sync --project-id DXYE72ODCP5LWPWH2EXQ --env prod
+```
+
+
+### Example Output
+
+
+```
+➜  ~ mprove sync \
+--env-file-path ~/mprove/.env \
+--local-path ~/mprove-demo-p1 \
+--env prod
+
+message:               Sync completed
+validationErrorsTotal: 0
+url:                   https://cloud.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/XWZVQJLVR3NZJTBB4ZA6/branch/main/env/prod/files
+```
+

@@ -1,0 +1,46 @@
+---
+title: get-branches
+---
+
+### Usage
+
+
+```
+➜  ~ mprove get-branches -h
+Get branches
+
+━━━ Usage ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+$ mprove get-branches
+
+━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  --project-id #0       (required) Project Id
+  --repo #0             (required, "dev" or "production")
+  --json                (default false)
+  --env-file-path #0    (optional) Path to ".env" file
+
+━━━ Examples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Get Dev repo branches
+  $ mprove get-branches --project-id DXYE72ODCP5LWPWH2EXQ --repo dev
+
+Get Production repo branches
+  $ mprove get-branches --project-id DXYE72ODCP5LWPWH2EXQ --repo production
+```
+
+
+### Example Output
+
+
+```
+➜  ~ mprove get-branches \
+--env-file-path ~/mprove/.env \
+--project-id DXYE72ODCP5LWPWH2EXQ \
+--repo dev
+
+branches:
+  - b1
+  - main
+```
+

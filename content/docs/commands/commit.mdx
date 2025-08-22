@@ -1,0 +1,43 @@
+---
+title: commit
+---
+
+### Usage
+
+```
+➜  ~ mprove commit -h
+Commit changes
+
+━━━ Usage ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+$ mprove commit
+
+━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  --project-id #0        (required) Project Id
+  --repo #0              (required, "dev" or "production")
+  --branch #0            (required) Git Branch
+  --commit-message #0    (required) Commit message
+  --get-repo             (default false), show repo in output
+  --json                 (default false)
+  --env-file-path #0     (optional) Path to ".env" file
+
+━━━ Examples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Commit changes for Dev repo
+  $ mprove commit --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --commit-message ms1
+```
+
+### Example Output
+
+```
+➜  ~ mprove commit \
+--env-file-path ~/mprove/.env \
+--project-id DXYE72ODCP5LWPWH2EXQ \
+--repo dev \
+--branch main \
+--commit-message ms1
+
+message: Created commit "ms1"
+url:     https://cloud.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/XWZVQJLVR3NZJTBB4ZA6/branch/main/env/prod/files
+```

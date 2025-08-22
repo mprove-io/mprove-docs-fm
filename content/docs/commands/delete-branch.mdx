@@ -1,0 +1,46 @@
+---
+title: delete-branch
+---
+
+### Usage
+
+
+```
+➜  ~ mprove delete-branch -h
+Delete branch
+
+━━━ Usage ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+$ mprove delete-branch
+
+━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  --project-id #0       (required) Project Id
+  --repo #0             (required, "dev" or "production")
+  --branch #0           (required) Branch name
+  --json                (default false)
+  --env-file-path #0    (optional) Path to ".env" file
+
+━━━ Examples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Delete branch for Dev repo
+  $ mprove delete-branch --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch b1
+
+Delete branch for Production repo
+  $ mprove delete-branch --project-id DXYE72ODCP5LWPWH2EXQ --repo production --branch b1
+```
+
+
+### Example Output
+
+
+```
+mprove delete-branch \
+--env-file-path ~/mprove/.env \
+--project-id DXYE72ODCP5LWPWH2EXQ \
+--repo dev \
+--branch b2
+
+message: Deleted branch "b2"
+```
+

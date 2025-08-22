@@ -1,0 +1,141 @@
+---
+title: get-query
+---
+
+### Usage
+
+
+```
+➜  ~ mprove get-query -h
+Get query
+
+━━━ Usage ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+$ mprove get-query
+
+━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  --project-id #0       (required) Project Id
+  --repo #0             (required, "dev" or "production")
+  --branch #0           (required) Git Branch
+  --env #0              (required) Environment
+  --dashboard-id #0     (dashboard-id, chart-id or report-id required) Dashboard Id (name)
+  --tile-index #0       (optional) Dashboard Tile Index starting with 0
+  --chart-id #0         (dashboard-id, chart-id or report-id required) Chart Id (name)
+  --report-id #0        (dashboard-id, chart-id or report-id required) Report Id (name)
+  --row-id #0           (optional) Report Row Id
+  --timezone #0         (default "UTC") Timezone
+  --timeSpec #0         (default "days") "minutes" | "hours" | "days" | "weeks" | "months" | "quarters" | "years"
+  --timeRange #0        (default "last 5 days complete plus current") Ts Filter Expression
+  --get-sql             (default false), show query sql in output
+  --get-data            (default false), show query data in output
+  --json                (default false)
+  --env-file-path #0    (optional) Path to ".env" file
+
+━━━ Examples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Get query for Dev repo Chart
+  $ mprove get-query --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod --chart-id v1 --get-sql --get-data
+
+Get query for Dev repo Dashboard
+  $ mprove get-query --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod --dashboard-id d1 --get-sql --get-data
+
+Get query for Dev repo Report
+  $ mprove get-query --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod --report-id r1 --get-sql --get-data
+```
+
+
+### Example Output
+
+
+```
+➜  ~ mprove get-query \
+--env-file-path ~/mprove/.env \
+--project-id DXYE72ODCP5LWPWH2EXQ \
+--repo dev \
+--branch main \
+--env prod \
+--dashboard-id ec1_d1 \
+--tile-index 0 \
+--get-sql
+
+dashboard:
+  title:       Ecommerce
+  dashboardId: ec1_d1
+  url:         https://cloud.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/XWZVQJLVR3NZJTBB4ZA6/branch/main/env/prod/dashboard/ec1_d1
+  tiles:
+    -
+      title: Average Sale Price by Category
+      query:
+        connectionId:         c1_postgres
+        connectionType:       PostgreSQL
+        queryId:              7de5c76b68a74ae25738a1ff0af2a7c690f99645247ceee8838a86d3f59a168c
+        status:               Completed
+        lastRunBy:            XWZVQJLVR3NZJTBB4ZA6
+        lastRunTs:            1672232417049
+        lastCancelTs:         0
+        lastCompleteTs:       1672232419104
+        lastCompleteDuration: 2
+        lastErrorMessage:     null
+        lastErrorTs:          0
+        sql:
+          """
+            WITH
+              view__ec1_order_items__a AS (
+                SELECT
+                  sale_price as sale_price,
+                  order_item_id as order_item_id,
+                  order_id as order_id,
+                  inventory_item_id as inventory_item_id
+                FROM ecommerce.order_items
+              ),
+              view__ec1_inventory_items__e AS (
+                SELECT
+                  product_id as product_id,
+                  inventory_item_id as inventory_item_id
+                FROM ecommerce.inventory_items
+              ),
+              view__ec1_products__f AS (
+                SELECT
+                  category as category,
+                  product_id as product_id
+                FROM ecommerce.products
+              ),
+              view__ec1_orders__b AS (
+                SELECT
+                  (TIMESTAMP 'epoch' + created_at * INTERVAL '1 second') as created___timestamp,
+                  SUBSTRING(((TIMESTAMP 'epoch' + created_at * INTERVAL '1 second'))::TEXT FROM 1 FOR 10) as created___date,
+                  user_id as user_id,
+                  order_id as order_id
+                FROM ecommerce.orders
+              ),
+              view__ec1_users__c AS (
+                SELECT
+                  age as age,
+                  user_id as user_id
+                FROM ecommerce.users
+              ),
+              main AS (
+                SELECT
+                  (COALESCE(CAST((SUM(DISTINCT CAST(FLOOR(COALESCE(a.sale_price, 0)*(1000000*1.0)) AS DECIMAL(38,0)) + CAST(('x' || lpad(LEFT(MD5(CAST(a.order_item_id AS VARCHAR)),15), 16, '0'))::bit(64)::bigint AS DECIMAL(38,0))* 1.0e8 + CAST(('x' || lpad(RIGHT(MD5(CAST(a.order_item_id AS VARCHAR)),15), 16, '0'))::bit(64)::bigint AS DECIMAL(38,0))) - SUM(DISTINCT CAST(('x' || lpad(LEFT(MD5(CAST(a.order_item_id AS VARCHAR)),15), 16, '0'))::bit(64)::bigint AS DECIMAL(38,0))* 1.0e8 + CAST(('x' || lpad(RIGHT(MD5(CAST(a.order_item_id AS VARCHAR)),15), 16, '0'))::bit(64)::bigint AS DECIMAL(38,0)))) AS DOUBLE PRECISION) / CAST((1000000*1.0) AS DOUBLE PRECISION), 0) / NULLIF(COUNT(DISTINCT CASE WHEN a.sale_price IS NOT NULL THEN a.order_item_id ELSE NULL END), 0)) as a_average_sale_price,
+                  f.category as f_category
+                FROM view__ec1_order_items__a as a
+                LEFT OUTER JOIN view__ec1_inventory_items__e as e ON a.inventory_item_id = e.inventory_item_id
+                LEFT OUTER JOIN view__ec1_products__f as f ON e.product_id = f.product_id
+                LEFT OUTER JOIN view__ec1_orders__b as b ON a.order_id = b.order_id
+                LEFT OUTER JOIN view__ec1_users__c as c ON b.user_id = c.user_id
+                WHERE
+                  ('any' = 'any')
+                  AND
+                  ((b.created___timestamp >= DATE_TRUNC('year', CURRENT_TIMESTAMP) + INTERVAL '-3 year' AND b.created___timestamp < DATE_TRUNC('year', CURRENT_TIMESTAMP)))
+                GROUP BY 2
+              )
+            SELECT
+              a_average_sale_price,
+              f_category
+            FROM main
+            ORDER BY 1 DESC
+            LIMIT 500
+          """
+```
+

@@ -1,0 +1,55 @@
+---
+title: validate
+---
+
+### Usage
+
+
+```
+➜  ~ mprove validate -h
+Validate (rebuild) Mprove Files for selected env
+
+━━━ Usage ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+$ mprove validate
+
+━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  --project-id #0       (required) Project Id
+  --repo #0             (required, "dev" or "production")
+  --branch #0           (required) Git Branch
+  --env #0              (required) Environment
+  --get-errors          (default false), show validation errors in output
+  --get-repo            (default false), show repo in output
+  --json                (default false)
+  --env-file-path #0    (optional) Path to ".env" file
+
+━━━ Examples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Validate Mprove Files for Dev repo, env prod
+  $ mprove validate --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod
+
+Validate Mprove Files for Production repo, env prod
+  $ mprove validate --project-id DXYE72ODCP5LWPWH2EXQ --repo production --branch main --env prod
+```
+
+
+### Example Output
+
+
+```
+➜  ~ mprove validate \
+--env-file-path ~/mprove/.env \
+--project-id DXYE72ODCP5LWPWH2EXQ \
+--repo dev \
+--branch main \
+--env prod \
+--get-errors
+
+message:               Validation completed
+validationErrorsTotal: 0
+validationErrors:
+  (empty array)
+url:                   https://cloud.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/XWZVQJLVR3NZJTBB4ZA6/branch/main/env/prod/files
+```
+

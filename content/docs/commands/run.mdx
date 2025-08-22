@@ -1,0 +1,73 @@
+---
+title: run
+---
+
+### Usage
+
+
+```
+➜  ~ mprove run -h
+Run dashboards and charts
+
+━━━ Usage ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+$ mprove run
+
+━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  --project-id #0       (required) Project Id
+  --repo #0             (required, "dev" or "production")
+  --branch #0           (required) Git Branch
+  --env #0              (required) Environment
+  --concurrency #0      (optional) Max number of concurrent queries
+  --wait                (default false) Wait for queries completion
+  --sleep #0            (default 3) Sleep time between queries status check, seconds
+  --dashboard-ids #0    (optional) Filter dashboards to run by dashboard names, separated by comma
+  --chart-ids #0        (optional) Filter charts to run by chart names, separated by comma
+  --no-dashboards       (default false) Do not run dashboards
+  --no-charts           (default false) Do not run charts
+  --get-dashboards      (default false), show dashboards in output
+  --get-charts          (default false), show charts in output
+  --json                (default false)
+  --env-file-path #0    (optional) Path to ".env" file
+
+━━━ Examples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Run for Dev repo and wait for completion
+  $ mprove run --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod --wait --get-dashboards --get-charts
+
+Run dashboards d1 and d2 for Dev repo
+  $ mprove run --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod --no-charts --dashboard-ids d1,d2
+
+Run for Production repo
+  $ mprove run --project-id DXYE72ODCP5LWPWH2EXQ --repo production --branch main --env prod
+```
+
+
+### Example Output
+
+
+```
+➜  ~ mprove run \
+--env-file-path ~/mprove/.env \
+--project-id DXYE72ODCP5LWPWH2EXQ \
+--concurrency 2 \
+--wait \
+--repo production \
+--branch main \
+--env prod \
+--no-dashboards \
+--chart-ids 10MLKFYJPPMXZM0DD4MB,YHH678TLUMUQPHO3WMRS
+
+errorCharts: 
+  (empty array)
+errorDashboards: 
+  (empty array)
+queriesStats: 
+  started:   0
+  running:   0
+  completed: 2
+  error:     0
+  canceled:  0
+```
+

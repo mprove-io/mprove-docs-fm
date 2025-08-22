@@ -22,6 +22,9 @@ description: 'Google Analytics Reporting'
 access_roles: []
 method: POST
 request: |
+```
+
+```js
   let storeFields = $STORE_FIELDS;
   let queryOrderBy = $QUERY_ORDER_BY;
   let selectedDimensions = $QUERY_SELECTED_DIMENSIONS;
@@ -231,8 +234,13 @@ request: |
   let urlPath = `/v1beta/properties/${propertyId}:runReport`;
   //
   return { urlPath: urlPath, body: body };
+```
 
+```yaml
 response: |
+```
+
+```js
   let data = $RESPONSE_DATA;
   let storeFields = $STORE_FIELDS;
   //
@@ -336,7 +344,9 @@ response: |
   });
   //
   return newData || [];
+```
 
+```yaml
 date_range_includes_right_side: true
 
 parameters:

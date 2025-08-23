@@ -8,7 +8,8 @@
     "topics-access-roles",
 
     "---Reference---",
-    "ref-store",
+    "ref-project-config",
+    "ref-model-store",
     "ref-chart",
     "ref-report",
     "ref-dashboard",

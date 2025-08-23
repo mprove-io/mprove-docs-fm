@@ -1,6 +1,8 @@
 ---
-title: Configuration
+title: CLI Configuration
 ---
+
+# CLI Configuration
 
 Mprove CLI looks for each configuration value in the following order:
 
@@ -10,7 +12,7 @@ Mprove CLI looks for each configuration value in the following order:
 4. If not found, reads the value from `.env` file located in the current working directory.
 5. If not found, an error is shown.
 
-### Required parameters
+## Required parameters
 
 ```
 MPROVE_CLI_HOST=https://cloud.mprove.io
@@ -20,15 +22,15 @@ MPROVE_CLI_PASSWORD=pass
 
 `MPROVE_CLI_EMAIL` and `MPROVE_CLI_PASSWORD` are the standard credentials that are used when logging in
 
-### Optional parameters
+## Optional parameters
 
 ```
 MPROVE_CLI_PROJECT_ID=DXYE72ODCP5LWPWH2EXQ
 ```
 
-:::info
-Project ID can be obtained from web application URL:
-cloud.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/**DXYE72ODCP5LWPWH2EXQ**/...
-:::
+<Callout type="info">
+  Project ID can be obtained from web application URL:
+  .../org/AWNCAHWLFQTQJYCH3ZSE/project/**DXYE72ODCP5LWPWH2EXQ**/...
+</Callout>
 
 If the `--project-id` flag is specified when calling the command, then it is used instead of the configuration parameter `MPROVE_CLI_PROJECT_ID`.

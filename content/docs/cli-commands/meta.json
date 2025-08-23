@@ -1,14 +1,11 @@
 {
   "root": false,
-  "title": "Commands",
+  "title": "CLI Commands",
   "description": "The CLI tool for docs automation",
   "icon": "Terminal",
   "pages": [
-    "version",
-    "help",
-    "definitions",
-    "validate",
     "sync",
+    "validate",
     "get-state",
     "run",
     "get-query",
@@ -19,6 +16,9 @@
     "revert",
     "push",
     "pull",
-    "merge"
+    "merge",
+    "definitions",
+    "help",
+    "version"
   ]
 }

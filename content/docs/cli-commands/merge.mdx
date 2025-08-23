@@ -1,46 +1,47 @@
 ---
-title: delete-branch
+title: merge
 ---
 
-### Usage
+# Merge
 
+## Usage
 
 ```
-➜  ~ mprove delete-branch -h
-Delete branch
+➜  ~ mprove merge -h
+Merge their-branch to branch for Dev repo, validate Mprove Files for selected env
 
 ━━━ Usage ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-$ mprove delete-branch
+$ mprove merge
 
 ━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   --project-id #0       (required) Project Id
-  --repo #0             (required, "dev" or "production")
-  --branch #0           (required) Branch name
+  --branch #0           (required) Git Branch
+  --their-branch #0     (required) Their git Branch
+  --env #0              (required) Environment
+  --get-errors          (default false), show validation errors in output
+  --get-repo            (default false), show repo in output
   --json                (default false)
   --env-file-path #0    (optional) Path to ".env" file
 
 ━━━ Examples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Delete branch for Dev repo
-  $ mprove delete-branch --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch b1
-
-Delete branch for Production repo
-  $ mprove delete-branch --project-id DXYE72ODCP5LWPWH2EXQ --repo production --branch b1
+Merge their-branch to branch for Dev repo, validate Mprove Files for env prod
+  $ mprove merge --project-id DXYE72ODCP5LWPWH2EXQ --their-branch b1 --branch main --env prod
 ```
 
-
-### Example Output
-
+## Example Output
 
 ```
-mprove delete-branch \
+➜  ~ mprove merge \
 --env-file-path ~/mprove/.env \
 --project-id DXYE72ODCP5LWPWH2EXQ \
---repo dev \
---branch b2
+--their-branch main \
+--branch b1 \
+--env prod
 
-message: Deleted branch "b2"
+message:               Merged branch "main" to "b1"
+validationErrorsTotal: 0
+url:                   https://cloud.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/XWZVQJLVR3NZJTBB4ZA6/branch/b1/env/prod/files
 ```
-

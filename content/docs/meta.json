@@ -18,9 +18,6 @@
     "---Mprove CLI---",
     "cli-install",
     "cli-configuration",
-    "commands",
-
-    "---Docs Examples---",
-    "test"
+    "cli-commands"
   ]
 }

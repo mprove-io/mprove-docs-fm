@@ -2,36 +2,46 @@
 title: sync
 ---
 
-Mprove **sync** allows you to work with project files on your local machine (in your favorite IDE like VsCode).
+# Sync
 
-:::info
-Mprove project's Remote Repo must be of type **Git Clone** (this option can be specified when creating a new project).
-This way you can clone the Remote repo to your Local machine.
+Mprove **sync** allows you to sync uncommitted changes between local and dev repositories while working with project files on your local machine.
 
-For **mprove sync** to work, the current git branch in the Local repository and the branch in the Dev repository must be in the same commit.
-:::
+<Callout type="info">
+  Mprove project's Remote Repo must be of type **Git Clone** (this option can be
+  specified when creating a new project). This way you can clone the Remote repo
+  to your Local machine.
+</Callout>
 
-Workflow "Commit on Local":
+<Callout type="info">
+  For **mprove sync** to work, the current git branch in the Local repository
+  and the branch in the Dev repository must be in the same commit.
+</Callout>
 
-- Make changes on Local or Dev (web UI)
-- Sync changes using `mprove sync` from local command line
-- Check and fix validation errors if any
+## Workflows
+
+You can change your approach depending on the task.
+
+### Workflow "Commit on Local":
+
+- Make changes on Local
+- Sync changes (mprove sync)
+- Check and fix validation errors in web UI
+- Sync changes using (mprove sync)
 - Commit changes on Local
-- Push changes from Local to Remote
-- Revert Dev repo to Remote (or revert Dev repo to last-commit and pull changes from Remote)
+- Push changes from Local to Remote (git push)
+- Revert Dev repo to Remote in web UI (or revert Dev repo to last-commit and pull changes from Remote)
 
-Workflow "Commit on Dev":
+### Workflow "Commit on Dev":
 
-- Make changes on Local or Dev (web UI)
-- Sync changes using `mprove sync` from local command line
-- Check and fix validation errors if any
-- Commit changes on Dev
-- Push changes from Dev to Remote
+- Make changes on Local
+- Sync changes (mprove sync)
+- Check and fix validation errors (web UI)
+- Commit changes on Dev (web UI)
+- Push changes from Dev to Remote (web UI)
 - Discard git changes on Local
 - Pull changes from the Remote to Local
 
-### Usage
-
+## Usage
 
 ```
 ➜  ~ mprove sync -h
@@ -60,9 +70,7 @@ Synchronize files (uncommitted changes) between Local and Dev repo, validate Mpr
   $ mprove sync --project-id DXYE72ODCP5LWPWH2EXQ --env prod
 ```
 
-
-### Example Output
-
+## Example Output
 
 ```
 ➜  ~ mprove sync \
@@ -74,4 +82,3 @@ message:               Sync completed
 validationErrorsTotal: 0
 url:                   https://cloud.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/XWZVQJLVR3NZJTBB4ZA6/branch/main/env/prod/files
 ```
-

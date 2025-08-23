@@ -1,46 +1,51 @@
 ---
-title: get-branches
+title: push
 ---
 
-### Usage
+# Commit
+
+## Usage
 
 
 ```
-➜  ~ mprove get-branches -h
-Get branches
+➜  ~ mprove push -h
+Push committed changes from repo to Remote, validate Mprove Files for selected env
 
 ━━━ Usage ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-$ mprove get-branches
+$ mprove push
 
 ━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   --project-id #0       (required) Project Id
   --repo #0             (required, "dev" or "production")
+  --branch #0           (required) Git Branch
+  --env #0              (required) Environment
+  --get-errors          (default false), show validation errors in output
+  --get-repo            (default false), show repo in output
   --json                (default false)
   --env-file-path #0    (optional) Path to ".env" file
 
 ━━━ Examples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Get Dev repo branches
-  $ mprove get-branches --project-id DXYE72ODCP5LWPWH2EXQ --repo dev
-
-Get Production repo branches
-  $ mprove get-branches --project-id DXYE72ODCP5LWPWH2EXQ --repo production
+Push committed changes from Dev to Remote, validate Mprove Files for env prod
+  $ mprove push --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod
 ```
 
 
-### Example Output
+## Example Output
 
 
 ```
-➜  ~ mprove get-branches \
+➜  ~ mprove push \
 --env-file-path ~/mprove/.env \
 --project-id DXYE72ODCP5LWPWH2EXQ \
---repo dev
+--repo dev \
+--branch b1 \
+--env prod
 
-branches:
-  - b1
-  - main
+message:               Pushed changes to Remote
+validationErrorsTotal: 0
+url:                   https://cloud.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/XWZVQJLVR3NZJTBB4ZA6/branch/b1/env/prod/files
 ```
 

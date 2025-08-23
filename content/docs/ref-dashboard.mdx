@@ -2,79 +2,73 @@
 title: Dashboard
 ---
 
-## File
+# Dashboard
 
 Each dashboard must be stored as **dashboard_name.dashboard** YAML file:
 
-```yaml
-dashboard: dashboard_name
-title: '...'
-description: '...'
-parameters:
-- filter: f1
-  label: '...'
-  description: '...'
-  result: string
-  suggest_model_dimension: model_name.join_alias.field_name
-  conditions:
-  - 'filter expression'
-
-tiles:
-- title: '...'
-  description: '...'
-  model: model_name
-  select:
-  - alias.field_name
-  - alias.field_name
-  - ...
+```yaml lineNumbers
+  dashboard: dashboard_name
+  title: ''
+  description: ''
   parameters:
-  - apply_to: alias.field_name
-    listen: f1
-
-  - apply_to: alias.field_name
+  - filter: f1
+    label: 'label'
+    description: ''
+    result: string
+    suggest_model_dimension: model_name.join_alias.field_name
     conditions:
     - 'filter expression'
-  sorts: alias.field_name desc, alias.field_name, ...
-  limit: 500
-  type: chart_type
-  data:
-    x_field: alias.field_name
-    y_fields:
-    - alias.field_name
-    - alias.field_name
-    - ...
-    multi_field: alias.field_name
-    size_field: alias.field_name
-    hide_columns:
-    - alias.field_name
-    - alias.field_name
-    - ...
-  options:
-    x_axis:
-      scale: false
-    y_axis:
-    - scale: false
-    - scale: false
-    series:
-    - data_field: alias.field_name
-      y_axis_index: 0
-      type: chart_type
-  plate:
-    plate_width: 8
-    plate_height: 12
-    plate_x: 0
-    plate_y: 0
 
-- ...
+  tiles:
+  - title: 'tile title'
+    description: ''
+    model: model_name
+    select:
+    - alias.field_name
+    - alias.field_name
+    parameters:
+    - apply_to: alias.field_name
+      listen: f1
+    - apply_to: alias.field_name
+      conditions:
+      - 'filter expression'
+    sorts: alias.field_name desc, alias.field_name, ...
+    limit: 500
+    type: chart_type
+    data:
+      x_field: alias.field_name
+      y_fields:
+      - alias.field_name
+      - alias.field_name
+      multi_field: alias.field_name
+      size_field: alias.field_name
+      hide_columns:
+      - alias.field_name
+      - alias.field_name
+    options:
+      x_axis:
+        scale: false
+      y_axis:
+      - scale: false
+      - scale: false
+      series:
+      - data_field: alias.field_name
+        y_axis_index: 0
+        type: chart_type
+    plate:
+      plate_width: 8
+      plate_height: 12
+      plate_x: 0
+      plate_y: 0
 
-access_roles:
-- role
-- role
-- ...
-
+  access_roles:
+  - role
+  - role
 ```
 
-## Dashboard
+## Reference
+
+### Dashboard
 
 | Name         | Type                                                   | Default | Description                                                                  |
 | ------------ | ------------------------------------------------------ | ------- | ---------------------------------------------------------------------------- |
@@ -85,7 +79,7 @@ access_roles:
 | tiles\*      | [Tile](/top/reference/dashboard#tile) [ ]              | -       | Begin a section of tiles                                                     |
 | access_roles | string [ ]                                             | -       | If specified, only users with the listed roles will have access to Dashboard |
 
-## Tile
+### Tile
 
 | Name        | Type                                  | Default | Description                                                                                 |
 | ----------- | ------------------------------------- | ------- | ------------------------------------------------------------------------------------------- |
@@ -101,7 +95,7 @@ access_roles:
 | data        | [Tile Data](#tile-data)               | -       |                                                                                             |
 | options     | [Tile Options](#tile-options)         | -       |                                                                                             |
 
-## Tile Parameter
+### Tile Parameter
 
 Tile parameter must have **_listen_**, **_conditions_** or **_fractions_**.
 
@@ -112,7 +106,7 @@ Tile parameter must have **_listen_**, **_conditions_** or **_fractions_**.
 | conditions | string [ ]                                                        | -       | (for parameters mapped to Model) List of filter expressions         |
 | fractions  | [Fraction](/top/reference/fields-and-filters/filter#fraction) [ ] | -       | (for parameters mapped to Store) List of fractions                  |
 
-## Tile Data
+### Tile Data
 
 | Name         | Type       | Default | Description                                                                                    |
 | ------------ | ---------- | ------- | ---------------------------------------------------------------------------------------------- |
@@ -122,7 +116,7 @@ Tile parameter must have **_listen_**, **_conditions_** or **_fractions_**.
 | size_field   | string     | -       | One of selected fields to set size of data point for scatter chart                             |
 | hide_columns | string [ ] | -       | One or more of selected fields to hide table columns on chart                                  |
 
-## Tile Options
+### Tile Options
 
 | Name   | Type                                                  | Default | Description |
 | ------ | ----------------------------------------------------- | ------- | ----------- |
@@ -130,19 +124,19 @@ Tile parameter must have **_listen_**, **_conditions_** or **_fractions_**.
 | y_axis | [Options Y Axis Element](#options-y-axis-element) [ ] | -       |             |
 | series | [Options Series Element](#options-series-element) [ ] | -       |             |
 
-## Options X Axis
+### Options X Axis
 
 | Name  | Type    | Default | Description                                                              |
 | ----- | ------- | ------- | ------------------------------------------------------------------------ |
 | scale | boolean | false   | "false" to start X Axis from Zero, "true" to start X Axis from Min value |
 
-## Options Y Axis Element
+### Options Y Axis Element
 
 | Name  | Type    | Default | Description                                                              |
 | ----- | ------- | ------- | ------------------------------------------------------------------------ |
 | scale | boolean | false   | "false" to start Y Axis from Zero, "true" to start Y Axis from Min value |
 
-## Options Series Element
+### Options Series Element
 
 | Name            | Type    | Default | Description                                                       |
 | --------------- | ------- | ------- | ----------------------------------------------------------------- |
@@ -151,7 +145,7 @@ Tile parameter must have **_listen_**, **_conditions_** or **_fractions_**.
 | y_axis_index    | integer | 0       | 0 (Y Axis Left) or 1 (Y Axis Right)                               |
 | type            | enum    | -       | <ul><li>line</li><li>bar</li></ul>                                |
 
-## Tile Plate
+### Tile Plate
 
 For dashboard only
 

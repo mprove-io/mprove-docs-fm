@@ -2,18 +2,23 @@
 title: Format Number
 ---
 
+import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
+import { formatNumberYaml } from "@/content/parts/format-number-yaml";
+
 # Format Number
 
 The goal of **format_number** parameter is to help display numbers in a human-readable form.
 
-```yml lineNumbers
-fields: #begin of fields section (inside View or Model)
-  - dimension: price
-    format_number: "$,.2f" # 1057.1258 >> $1 057.13
-    currency_prefix: $
-    currency_suffix: ""
-    sql: product_price
-```
+<DynamicCodeBlock
+  lang="yaml"
+  code={formatNumberYaml}
+  options={{
+    themes: {
+      light: "catppuccin-latte",
+      dark: "rose-pine",
+    },
+  }}
+/>
 
 ## Syntax
 
@@ -38,7 +43,7 @@ The **width** defines the minimum field width in characters. If not specified, t
 
 | Input | format_number | output        | description                                      |
 | ----- | ------------- | ------------- | ------------------------------------------------ |
-| 5     | B\<7           | 5BBBBBB       | set width to 7 and fill empty characters with B  |
+| 5     | B\<7          | 5BBBBBB       | set width to 7 and fill empty characters with B  |
 | 5     | \*^7          | \*\*\*5\*\*\* | set width to 7 and fill empty characters with \* |
 | 5     | A>7           | AAAAAA5       | set width to 7 and fill empty characters with A  |
 

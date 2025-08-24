@@ -2,21 +2,23 @@
 title: Project Config
 ---
 
+import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
+import { projectConfigYaml } from "@/content/parts/project-config-yaml";
+
 # Project Config
 
 Each project must have <strong>mprove.yml</strong> config file:
 
-```yml lineNumbers
-mprove_dir: ./
-case_sensitive_string_filters: false
-simplify_safe_aggregates: true
-week_start: Monday
-allow_timezones: true
-default_timezone: UTC
-format_number: ",.0f"
-currency_prefix: $
-currency_suffix: ""
-```
+<DynamicCodeBlock
+  lang="yaml"
+  code={projectConfigYaml}
+  options={{
+    themes: {
+      light: "catppuccin-latte",
+      dark: "rose-pine",
+    },
+  }}
+/>
 
 ## Reference
 

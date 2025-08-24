@@ -1,0 +1,9 @@
+export const projectConfigYaml = `mprove_dir: ./
+case_sensitive_string_filters: false
+simplify_safe_aggregates: true
+week_start: Monday
+allow_timezones: true
+default_timezone: UTC
+format_number: ",.0f"
+currency_prefix: $
+currency_suffix: ""`

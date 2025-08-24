@@ -2,21 +2,23 @@
 title: Chart
 ---
 
+import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
+import { chartYaml } from "@/content/parts/chart-yaml";
+
 # Chart
 
 Each chart must be stored as **chart_name.chart** YAML file:
 
-```yml lineNumbers
-chart: chart_name
-   
-tiles: # Chart must have exactly one tile
-# - title: 'tile title'
-#   ...
-
-access_roles:
-- role
-- role
-```
+<DynamicCodeBlock
+  lang="yaml"
+  code={chartYaml}
+  options={{
+    themes: {
+      light: "catppuccin-latte",
+      dark: "rose-pine",
+    },
+  }}
+/>
 
 ## Reference
 

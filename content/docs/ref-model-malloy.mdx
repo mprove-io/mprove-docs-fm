@@ -4,11 +4,7 @@ title: Model - Malloy
 
 # Model - Malloy
 
-// import { DynamicCodeBlock } from 'fumadocs-ui/components/dynamic-codeblock';
-
-{/* <DynamicCodeBlock lang="ts" code='console.log("Hello World")' /> */}
-
-```malloy lineNumbers
+```malloy
 import './tables/c1_order_items_tx.malloy';
 import './tables/c1_orders_tx.malloy';
 import './tables/c1_users_tx.malloy';
@@ -33,7 +29,6 @@ source: c1_order_items is c1_order_items_tx extend {
   measure: profit_margin is total_profit / total_sale_price
 }
 ```
-
 
 ## Chart
 

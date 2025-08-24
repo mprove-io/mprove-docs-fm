@@ -1,20 +1,19 @@
-'use client';
-import { CodeBlock } from './codeblock';
-import { type CodeBlockProps, Pre } from './codeblock';
+"use client";
+import { CodeBlock, type CodeBlockProps, Pre } from "./codeblock";
 import type {
   HighlightOptions,
   HighlightOptionsCommon,
   HighlightOptionsThemes,
-} from 'fumadocs-core/highlight';
-import { useShiki } from 'fumadocs-core/highlight/client';
-import { cn } from '@/lib/cn';
+} from "fumadocs-core/highlight";
+import { useShiki } from "fumadocs-core/highlight/client";
+import { cn } from "@/lib/cn";
 import {
   type ComponentProps,
   createContext,
   type FC,
   Suspense,
   use,
-} from 'react';
+} from "react";
 
 export interface DynamicCodeblockProps {
   lang: string;
@@ -31,19 +30,19 @@ export interface DynamicCodeblockProps {
    * @defaultValue true
    */
   wrapInSuspense?: boolean;
-  options?: Omit<HighlightOptionsCommon, 'lang'> & HighlightOptionsThemes;
+  options?: Omit<HighlightOptionsCommon, "lang"> & HighlightOptionsThemes;
 }
 
 const PropsContext = createContext<CodeBlockProps | undefined>(undefined);
 
-function DefaultPre(props: ComponentProps<'pre'>) {
+function DefaultPre(props: ComponentProps<"pre">) {
   const extraProps = use(PropsContext);
 
   return (
     <CodeBlock
       {...props}
       {...extraProps}
-      className={cn('my-0', props.className, extraProps?.className)}
+      className={cn("my-0", props.className, extraProps?.className)}
     >
       <Pre>{props.children}</Pre>
     </CodeBlock>
@@ -86,9 +85,9 @@ function Placeholder({
   components = {},
 }: {
   code: string;
-  components: HighlightOptions['components'];
+  components: HighlightOptions["components"];
 }) {
-  const { pre: Pre = 'pre', code: Code = 'code' } = components as Record<
+  const { pre: Pre = "pre", code: Code = "code" } = components as Record<
     string,
     FC
   >;
@@ -96,7 +95,7 @@ function Placeholder({
   return (
     <Pre>
       <Code>
-        {code.split('\n').map((line, i) => (
+        {code.split("\n").map((line, i) => (
           <span key={i} className="line">
             {line}
           </span>

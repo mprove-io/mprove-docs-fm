@@ -6,23 +6,33 @@ title: Environments
 
 Each project has **prod** environment by default. All project members have access to it.
 
+<Callout type="info" title="Creating additional environments is optional">
+  Creating additional environments can be useful for companies that have test
+  environments (test databases with the same schema as main database).
+</Callout>
+
 A project administrator can create additional environments and give a project member access to that environment.
+
+## Environment Connections
 
 Each connection is tied to one environment.
 
-<Callout type="info" title="Connection names are not unique">
-  Two connections can have the same name but still belong to different
-  environments.
+<Callout type="info">
+  Connection names are not unique across environments.
 </Callout>
 
-The Model refers to a connection through the connection name.
+Two or more connections can have the same name but belong to different
+environments.
 
-The user selects an environment via the UI.
+This way, mprove Models can refer to the same connection name in
+project files.
 
-SQL queries go through connections tied to the selected Environment.
+Analysts can switch between environments in the UI to test their models.
 
-## Environment variables
+## Environment Variables
 
-If you need to modify the SQL query itself for a specific environment, then you can use Environment Variables.
+<Callout type="warn">Environment variables are not implemented yet.</Callout>
 
-To do this, a user with access to the Environment can create an Environment Variables via the UI. And then use [reference](/top/reference/reference-operator) in View files (in `table` or `derived_table` parameters).
+The basic need for environment variables is solved by using connections that belong to different environments.
+
+If you need environment variables that will change the content of models (for example, table names in models), please let us know (GitHub Issues).

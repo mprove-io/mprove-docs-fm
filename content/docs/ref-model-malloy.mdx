@@ -4,7 +4,7 @@ title: Model - Malloy
 
 # Model - Malloy
 
-```malloy
+```malloy title="c1_order_items.malloy"
 import './tables/c1_order_items_tx.malloy';
 import './tables/c1_orders_tx.malloy';
 import './tables/c1_users_tx.malloy';
@@ -30,11 +30,51 @@ source: c1_order_items is c1_order_items_tx extend {
 }
 ```
 
+```malloy title="tables/c1_orders_tx.malloy"
+##! experimental{sql_functions}
+
+source: c1_orders_table is c1_postgres.table('ecommerce.orders') extend {
+  rename:
+    _status is status
+    _created_at is created_at
+    _user_id is user_id
+}
+
+source: c1_orders_tx is c1_orders_table extend {
+  primary_key: order_id
+  rename: status is _status
+
+  #(mprove) build_metrics field_group="Created at"
+  dimension:
+    created_at_ts is sql_timestamp(""" TIMESTAMP 'epoch' + ${created_at_epoch} * INTERVAL '1 second' """)
+    created_at_day is created_at_ts.day
+    created_at_week is created_at_ts.week
+    created_at_month is created_at_ts.month
+    created_at_quarter is created_at_ts.quarter
+    created_at_year is created_at_ts.year
+    created_at_hour is created_at_ts.hour
+    created_at_minute is created_at_ts.minute
+    created_at_second is created_at_ts.second
+
+  rename: created_at_epoch is _created_at
+  dimension: created_at_date is created_at_ts::date
+  rename: user_id is _user_id
+  measure: orders_count is count()
+}
+```
+
 ## Reference
 
-### Malloy Source (mprove) Tags
+### Source (mprove) Tags
 
-| Name         | Type       | Default | Description                                                                     |
-| ------------ | ---------- | ------- | ------------------------------------------------------------------------------- |
-| model        | tag        | -       | If specified, malloy source will be available as mprove Model                   |
-| access_roles | string [ ] | -       | If specified, only users with the listed roles will have access to mprove Model |
+| Name         | Type     | Default | Description                                                                                                                                              |
+| ------------ | -------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| model        | tag      | -       | If specified, malloy Source will be available for exploration as mprove Model.                                                                           |
+| access_roles | string[] | -       | Only users with the specified roles will be able to explore the model. If `access_roles` tag is not specified, all project users will be able to explore the model. |
+
+### Dimension (mprove) Tags
+
+| Name          | Type     | Default | Description                                                                                                      |
+| ------------- | -------- | ------- | ---------------------------------------------------------------------------------------------------------------- |
+| build_metrics | tag      | -       | Metrics will be created for each time based dimension with `build_metrics` tag and all measures of mprove Model. |
+| field_group   | string[] | -       | Fields will be added to a group in the web UI (model fields tree).                                               |

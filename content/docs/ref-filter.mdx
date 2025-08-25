@@ -1,0 +1,65 @@
+---
+title: Filter
+---
+
+import { DynamicCodeBlock } from "@/components/dynamic-codeblock";
+import { filterYaml } from "@/content/docs/parts/filter-yaml";
+
+# Filter
+
+Parameters can be a part of [Report](/docs/ref-report), [Dashboard](/docs/ref-dashboard) or [Store](/docs/ref-model-store).
+
+The store parameters reference and example is available on the [Store](/docs/ref-model-store) page.
+
+One dashboard parameter can be applied to several tiles at the same time.
+A tile parameter is only affected by a dashboard parameter if tile parameter has a **listen** pointing to dashboard parameter.
+
+One report parameter can be applied to several rows at the same time.
+A row parameter is only affected by a report parameter if the row parameter has a **listen** pointing to report parameter.
+
+
+<DynamicCodeBlock
+  lang="yaml"
+  code={filterYaml}
+  options={{
+    themes: {
+      light: "catppuccin-latte",
+      dark: "rose-pine",
+    },
+  }}
+/>
+
+## Reference
+
+### Filter
+
+| Name                    | Type                      | Default | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ----------------------- | ------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| filter\*                | string                    | -       | Filter name                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| label                   | string                    | -       | Override filter name in UI                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| description             | string                    | -       | Filter description in UI                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| result                  | enum                      | -       | <div>The `result` of the filter must be the same as the `result` of the mapped Model field</div><br/><div>To filter dimensions, measures and calculations of `type` string or number:</div><ul><li>**string**</li><li>**number**</li></ul><div>To filter dimensions of `type` yesno_is_true:</div><ul><li>**yesno**</li></ul><div>To filter dimensions based on the corresponding [Timeframe](/top/reference/fields/time#timeframes):</div><ul><li>**day_of_week**</li><li>**day_of_week_index**</li><li>**month_name**</li><li>**quarter_of_year**</li><li>**ts**</li><li>**yesno**</li></ul> |
+| store_model             | string                    | -       | Store name with "store_model\_" prefix                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| store_result            | string                    | -       | Store result name                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| store_filter            | string                    | -       | Store filter name                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| suggest_model_dimension | string                    | -       | (for "string" result of a Model) Suggest values ​​from the specified dimension for the filter if the user selects an "is equal to" or "is not equal to" filter expression                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| conditions              | string [ ]                | -       | (for parameters mapped to Model Fields and Filters) List of filter expressions that will be applied to this filter                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| fractions               | [Fraction](#fraction) [ ] | -       | (for parameters mapped to Store Fields and Filters) Begin a section of fractions                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+
+### Fraction
+
+| Name     | Type                                      | Default | Description                          |
+| -------- | ----------------------------------------- | ------- | ------------------------------------ |
+| logic    | enum                                      | -       | <ul><li>OR</li><li>AND_NOT</li></ul> |
+| type     | string                                    | -       | Store result type                    |
+| controls | [Fraction Control](#fraction-control) [ ] | -       | Begin a section of controls          |
+
+### Fraction Control
+
+| Name        | Type                    | Default | Description              |
+| ----------- | ----------------------- | ------- | ------------------------ |
+| input       | string                  | -       | Input control name       |
+| switch      | string                  | -       | Switch control name      |
+| selector    | string                  | -       | Selector control name    |
+| date_picker | string                  | -       | Date_picker control name |
+| value       | string, number, boolean | -       | Value                    |

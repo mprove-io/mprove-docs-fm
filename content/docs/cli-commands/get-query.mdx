@@ -79,61 +79,6 @@ dashboard:
         lastErrorTs:          0
         sql:
           """
-            WITH
-              view__ec1_order_items__a AS (
-                SELECT
-                  sale_price as sale_price,
-                  order_item_id as order_item_id,
-                  order_id as order_id,
-                  inventory_item_id as inventory_item_id
-                FROM ecommerce.order_items
-              ),
-              view__ec1_inventory_items__e AS (
-                SELECT
-                  product_id as product_id,
-                  inventory_item_id as inventory_item_id
-                FROM ecommerce.inventory_items
-              ),
-              view__ec1_products__f AS (
-                SELECT
-                  category as category,
-                  product_id as product_id
-                FROM ecommerce.products
-              ),
-              view__ec1_orders__b AS (
-                SELECT
-                  (TIMESTAMP 'epoch' + created_at * INTERVAL '1 second') as created___timestamp,
-                  SUBSTRING(((TIMESTAMP 'epoch' + created_at * INTERVAL '1 second'))::TEXT FROM 1 FOR 10) as created___date,
-                  user_id as user_id,
-                  order_id as order_id
-                FROM ecommerce.orders
-              ),
-              view__ec1_users__c AS (
-                SELECT
-                  age as age,
-                  user_id as user_id
-                FROM ecommerce.users
-              ),
-              main AS (
-                SELECT
-                  (COALESCE(CAST((SUM(DISTINCT CAST(FLOOR(COALESCE(a.sale_price, 0)*(1000000*1.0)) AS DECIMAL(38,0)) + CAST(('x' || lpad(LEFT(MD5(CAST(a.order_item_id AS VARCHAR)),15), 16, '0'))::bit(64)::bigint AS DECIMAL(38,0))* 1.0e8 + CAST(('x' || lpad(RIGHT(MD5(CAST(a.order_item_id AS VARCHAR)),15), 16, '0'))::bit(64)::bigint AS DECIMAL(38,0))) - SUM(DISTINCT CAST(('x' || lpad(LEFT(MD5(CAST(a.order_item_id AS VARCHAR)),15), 16, '0'))::bit(64)::bigint AS DECIMAL(38,0))* 1.0e8 + CAST(('x' || lpad(RIGHT(MD5(CAST(a.order_item_id AS VARCHAR)),15), 16, '0'))::bit(64)::bigint AS DECIMAL(38,0)))) AS DOUBLE PRECISION) / CAST((1000000*1.0) AS DOUBLE PRECISION), 0) / NULLIF(COUNT(DISTINCT CASE WHEN a.sale_price IS NOT NULL THEN a.order_item_id ELSE NULL END), 0)) as a_average_sale_price,
-                  f.category as f_category
-                FROM view__ec1_order_items__a as a
-                LEFT OUTER JOIN view__ec1_inventory_items__e as e ON a.inventory_item_id = e.inventory_item_id
-                LEFT OUTER JOIN view__ec1_products__f as f ON e.product_id = f.product_id
-                LEFT OUTER JOIN view__ec1_orders__b as b ON a.order_id = b.order_id
-                LEFT OUTER JOIN view__ec1_users__c as c ON b.user_id = c.user_id
-                WHERE
-                  ('any' = 'any')
-                  AND
-                  ((b.created___timestamp >= DATE_TRUNC('year', CURRENT_TIMESTAMP) + INTERVAL '-3 year' AND b.created___timestamp < DATE_TRUNC('year', CURRENT_TIMESTAMP)))
-                GROUP BY 2
-              )
-            SELECT
-              a_average_sale_price,
-              f_category
-            FROM main
-            ORDER BY 1 DESC
-            LIMIT 500
+            <sql query>
           """
 ```

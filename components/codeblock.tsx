@@ -91,8 +91,8 @@ export function CodeBlock({
   const areaRef = useRef<HTMLDivElement>(null);
   allowCopy ??= !isTab;
   const bg = cn(
-    // 'bg-fd-secondary',
-    'bg-stone-50',
+    'bg-fd-secondary',
+    // 'bg-stone-50',
     keepBackground && 'bg-(--shiki-light-bg) dark:bg-(--shiki-dark-bg)',
   );
 

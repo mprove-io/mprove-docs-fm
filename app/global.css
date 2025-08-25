@@ -1,3 +1,15 @@
 @import 'tailwindcss';
 @import 'fumadocs-ui/css/vitepress.css';
 @import 'fumadocs-ui/css/preset.css';
+
+.prose a {
+  @apply no-underline;
+}
+
+.bg-fd-secondary {
+  @apply bg-stone-50 dark:bg-[#161618];
+}
+
+/* body {
+  @apply bg-white dark:bg-[#1a1a1e];
+} */

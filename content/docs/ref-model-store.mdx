@@ -70,51 +70,51 @@ Each Store must be stored as **store_name.store** YAML file:
 
 ### Store
 
-| Name                             | Type                                                  | Default | Description                                                                                                                                                                                      |
-| -------------------------------- | ----------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| store\*                          | string                                                | -       | Store name                                                                                                                                                                                       |
-| connection\*                     | string                                                | -       | Connection name                                                                                                                                                                                  |
-| preset                           | string                                                | -       | <span>When you specify a preset, all missing definitions in the current store will be set to the same values ​​as in the preset. Available presets:</span><ul><li>**google_analytics**</li></ul> |
-| label                            | string                                                | -       | Store label in UI                                                                                                                                                                                |
-| description                      | string                                                | -       | Store description in UI                                                                                                                                                                          |
-| access_roles                     | string [ ]                                            | -       | If specified, only users with the listed roles will have access to Store Model                                                                                                                   |
-| method\*                         | enum                                                  | -       | <span>Request method:</span><ul><li>**POST** </li><li>**GET** (does not have a payload)</li></ul>                                                                                                |
-| request\*                        | string                                                | -       | JavaScript function to build Request JSON payload body and URL path. Must return \{ urlPath: string, body: any \};                                                                               |
-| response\*                       | string                                                | -       | JavaScript function to convert Response payload data into the required Mprove format                                                                                                             |
-| date_range_includes_right_side\* | boolean                                               | -       | Specify whether the API time filter includes the right range boundary                                                                                                                            |
-| parameters                       | [Store Filter](#store-filter) [ ]                     | -       | Begin a section of store parameters                                                                                                                                                              |
-| results\*                        | [Store Result](#store-result) [ ]                     | -       | Begin a section of store results                                                                                                                                                                 |
-| field_groups\*                   | [Store Field Group](#store-field-group) [ ]           | -       | Begin a section of store field groups                                                                                                                                                            |
-| field_time_groups                | [Store Field Time Group](#store-field-time-group) [ ] | -       | Begin a section of store field time groups                                                                                                                                                       |
-| build_metrics                    | [Store Build Metric](#store-build-metric) [ ]         | -       | Begin a section of store BuildMetrics                                                                                                                                                            |
-| fields\*                         | [Store Field](#store-field) [ ]                       | -       | Begin a section of store fields                                                                                                                                                                  |
+| Name                             | Type                                                 | Default | Description                                                                                                                                                                                      |
+| -------------------------------- | ---------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| store\*                          | string                                               | -       | Store name                                                                                                                                                                                       |
+| connection\*                     | string                                               | -       | Connection name                                                                                                                                                                                  |
+| preset                           | string                                               | -       | <span>When you specify a preset, all missing definitions in the current store will be set to the same values ​​as in the preset. Available presets:</span><ul><li>**google_analytics**</li></ul> |
+| label                            | string                                               | -       | Store label in UI                                                                                                                                                                                |
+| description                      | string                                               | -       | Store description in UI                                                                                                                                                                          |
+| access_roles                     | string []                                            | -       | If specified, only users with the listed roles will have access to Store Model                                                                                                                   |
+| method\*                         | enum                                                 | -       | <span>Request method:</span><ul><li>**POST** </li><li>**GET** (does not have a payload)</li></ul>                                                                                                |
+| request\*                        | string                                               | -       | JavaScript function to build Request JSON payload body and URL path. Must return \{ urlPath: string, body: any \};                                                                               |
+| response\*                       | string                                               | -       | JavaScript function to convert Response payload data into the required Mprove format                                                                                                             |
+| date_range_includes_right_side\* | boolean                                              | -       | Specify whether the API time filter includes the right range boundary                                                                                                                            |
+| parameters                       | [Store Filter](#store-filter) []                     | -       | Begin a section of store parameters                                                                                                                                                              |
+| results\*                        | [Store Result](#store-result) []                     | -       | Begin a section of store results                                                                                                                                                                 |
+| field_groups\*                   | [Store Field Group](#store-field-group) []           | -       | Begin a section of store field groups                                                                                                                                                            |
+| field_time_groups                | [Store Field Time Group](#store-field-time-group) [] | -       | Begin a section of store field time groups                                                                                                                                                       |
+| build_metrics                    | [Store Build Metric](#store-build-metric) []         | -       | Begin a section of store BuildMetrics                                                                                                                                                            |
+| fields\*                         | [Store Field](#store-field) []                       | -       | Begin a section of store fields                                                                                                                                                                  |
 
 ### Store Filter
 
-| Name              | Type                                                                              | Default | Description                |
-| ----------------- | --------------------------------------------------------------------------------- | ------- | -------------------------- |
-| filter\*          | string                                                                            | -       | Filter name                |
-| label             | string                                                                            | -       | Override filter name in UI |
-| description       | string                                                                            | -       | Filter description in UI   |
-| max_fractions     | number                                                                            | -       | Max number of fractions    |
-| required          | boolean                                                                           | -       | Always select filter       |
-| fraction_controls | [Fraction Control](/top/reference/fields-and-filters/filter#fraction-control) [ ] | -       | List of fraction controls  |
+| Name              | Type                                                         | Default | Description                |
+| ----------------- | ------------------------------------------------------------ | ------- | -------------------------- |
+| filter\*          | string                                                       | -       | Filter name                |
+| label             | string                                                       | -       | Override filter name in UI |
+| description       | string                                                       | -       | Filter description in UI   |
+| max_fractions     | number                                                       | -       | Max number of fractions    |
+| required          | boolean                                                      | -       | Always select filter       |
+| fraction_controls | [Fraction Control](/docs/ref-parameters#fraction-control) [] | -       | List of fraction controls  |
 
 ### Store Result
 
-| Name              | Type                                              | Default | Description                   |
-| ----------------- | ------------------------------------------------- | ------- | ----------------------------- |
-| result\*          | string                                            | -       | Result name                   |
-| fractions_types\* | [Result Fraction Type](#result-fraction-type) [ ] | -       | List of result fraction types |
+| Name              | Type                                             | Default | Description                   |
+| ----------------- | ------------------------------------------------ | ------- | ----------------------------- |
+| result\*          | string                                           | -       | Result name                   |
+| fractions_types\* | [Result Fraction Type](#result-fraction-type) [] | -       | List of result fraction types |
 
 ### Result Fraction Type
 
-| Name     | Type                                                                              | Default | Description               |
-| -------- | --------------------------------------------------------------------------------- | ------- | ------------------------- |
-| type\*   | string                                                                            | -       | Type name                 |
-| label    | string                                                                            | -       | Override type name in UI  |
-| meta     | any                                                                               | -       | Custom metadata           |
-| controls | [Fraction Control](/top/reference/fields-and-filters/filter#fraction-control) [ ] | -       | List of fraction controls |
+| Name     | Type                                                                             | Default | Description               |
+| -------- | -------------------------------------------------------------------------------- | ------- | ------------------------- |
+| type\*   | string                                                                           | -       | Type name                 |
+| label    | string                                                                           | -       | Override type name in UI  |
+| meta     | any                                                                              | -       | Custom metadata           |
+| controls | [Fraction Control](/docs/ref-parameters#fraction-control) [] | -       | List of fraction controls |
 
 ### Store Field Group
 
@@ -151,6 +151,6 @@ Each Store must be stored as **store_name.store** YAML file:
 | detail          | enum    | -       | <ul><li>years</li><li>quarters</li><li>months</li><li>weeksMonday</li><li>weeksSunday</li><li>days</li><li>hours</li><li>minutes</li><li>timestamps</li></ul> |
 | required        | boolean | -       | Always select field                                                                                                                                           |
 | meta            | any     | -       | Custom metadata                                                                                                                                               |
-| format_number   | string  | -       | [Format Number](/docs/ref-format-number)                                                                                                                 |
-| currency_prefix | string  | -       | [Format Number - Symbol](/docs/ref-format-number#symbol)                                                                                                 |
-| currency_suffix | string  | -       | [Format Number - Symbol](/docs/ref-format-number#symbol)                                                                                                 |
+| format_number   | string  | -       | [Format Number](/docs/ref-format-number)                                                                                                                      |
+| currency_prefix | string  | -       | [Format Number - Symbol](/docs/ref-format-number#symbol)                                                                                                      |
+| currency_suffix | string  | -       | [Format Number - Symbol](/docs/ref-format-number#symbol)                                                                                                      |

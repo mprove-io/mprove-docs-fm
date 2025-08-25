@@ -1,6 +1,7 @@
-export const filterYaml = `
-# Report, Dashboard
+export const parametersFilterYaml = `
+# Report or Dashboard
 parameters: 
+# this filter can be listened by tiles or rows based on Malloy models
 - filter: filter_name
   label: '...'
   description: '...' 
@@ -9,9 +10,10 @@ parameters:
   conditions:
   - 'filter expression'
 
+# this filter can be listened by tiles or rows based on specified Store model
 - filter: filter_name
   store_model: store_model_name
-  store_result: store_result_name
+  store_result: store_result_name # filter can be mapped to fields that have specified result
   fractions:
   - logic: OR
     type: contains
@@ -19,9 +21,10 @@ parameters:
     - input: value_input
       value: a
 
+# this filter can be listened by tiles or rows based on specified Store model
 - filter: filter_name
   store_model: store_model_name
-  store_filter: store_filter_name
+  store_filter: store_filter_name # filter can be mapped to specified store filter
   fractions:
   - controls:
     - selector: ga_property

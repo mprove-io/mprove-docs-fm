@@ -92,7 +92,7 @@ export function CodeBlock({
   allowCopy ??= !isTab;
   const bg = cn(
     'bg-fd-secondary',
-    // 'bg-stone-50',
+    // 'bg-stone-50', // check light and dark
     keepBackground && 'bg-(--shiki-light-bg) dark:bg-(--shiki-dark-bg)',
   );
 

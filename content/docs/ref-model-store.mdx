@@ -82,12 +82,12 @@ Each Store must be stored as **store_name.store** YAML file:
 | request\*                        | string                                               | -       | JavaScript function to build Request JSON payload body and URL path. Must return \{ urlPath: string, body: any \};                                                                               |
 | response\*                       | string                                               | -       | JavaScript function to convert Response payload data into the required Mprove format                                                                                                             |
 | date_range_includes_right_side\* | boolean                                              | -       | Specify whether the API time filter includes the right range boundary                                                                                                                            |
-| parameters                       | [Store Filter](#store-filter) []                     | -       | Begin a section of store parameters                                                                                                                                                              |
-| results\*                        | [Store Result](#store-result) []                     | -       | Begin a section of store results                                                                                                                                                                 |
-| field_groups\*                   | [Store Field Group](#store-field-group) []           | -       | Begin a section of store field groups                                                                                                                                                            |
-| field_time_groups                | [Store Field Time Group](#store-field-time-group) [] | -       | Begin a section of store field time groups                                                                                                                                                       |
-| build_metrics                    | [Store Build Metric](#store-build-metric) []         | -       | Begin a section of store BuildMetrics                                                                                                                                                            |
-| fields\*                         | [Store Field](#store-field) []                       | -       | Begin a section of store fields                                                                                                                                                                  |
+| parameters                       | [Store Filter []](#store-filter)                     | -       | Begin a section of store parameters                                                                                                                                                              |
+| results\*                        | [Store Result []](#store-result)                     | -       | Begin a section of store results                                                                                                                                                                 |
+| field_groups\*                   | [Store Field Group []](#store-field-group)           | -       | Begin a section of store field groups                                                                                                                                                            |
+| field_time_groups                | [Store Field Time Group []](#store-field-time-group) | -       | Begin a section of store field time groups                                                                                                                                                       |
+| build_metrics                    | [Store Build Metric []](#store-build-metric)         | -       | Begin a section of store BuildMetrics                                                                                                                                                            |
+| fields\*                         | [Store Field []](#store-field)                       | -       | Begin a section of store fields                                                                                                                                                                  |
 
 ### Store Filter
 
@@ -98,14 +98,14 @@ Each Store must be stored as **store_name.store** YAML file:
 | description       | string                                                       | -       | Filter description in UI   |
 | max_fractions     | number                                                       | -       | Max number of fractions    |
 | required          | boolean                                                      | -       | Always select filter       |
-| fraction_controls | [Fraction Control](/docs/ref-parameters#fraction-control) [] | -       | List of fraction controls  |
+| fraction_controls | [Fraction Control []](/docs/ref-parameters#fraction-control) | -       | List of fraction controls  |
 
 ### Store Result
 
 | Name              | Type                                             | Default | Description                   |
 | ----------------- | ------------------------------------------------ | ------- | ----------------------------- |
 | result\*          | string                                           | -       | Result name                   |
-| fractions_types\* | [Result Fraction Type](#result-fraction-type) [] | -       | List of result fraction types |
+| fractions_types\* | [Result Fraction Type []](#result-fraction-type) | -       | List of result fraction types |
 
 ### Result Fraction Type
 
@@ -114,7 +114,7 @@ Each Store must be stored as **store_name.store** YAML file:
 | type\*   | string                                                                           | -       | Type name                 |
 | label    | string                                                                           | -       | Override type name in UI  |
 | meta     | any                                                                              | -       | Custom metadata           |
-| controls | [Fraction Control](/docs/ref-parameters#fraction-control) [] | -       | List of fraction controls |
+| controls | [Fraction Control []](/docs/ref-parameters#fraction-control) | -       | List of fraction controls |
 
 ### Store Field Group
 

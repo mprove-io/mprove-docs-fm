@@ -41,7 +41,7 @@ Each dashboard must be stored as **dashboard_name.dashboard** YAML file:
 | description | string                               | -       | Tile description in UI                                                                      |
 | model\*     | string                               | -       | Model name                                                                                  |
 | select\*    | string []                            | -       | List of selected fields                                                                     |
-| parameters  | [Tile Parameter](#tile-parameter) [] | -       | Begin a section of tile parameters                                                          |
+| parameters  | [Tile Parameter []](#tile-parameter) | -       | Begin a section of tile parameters                                                          |
 | sorts       | string                               | -       | A way to sort data                                                                          |
 | limit       | number                               | 500     | Limit the number of rows                                                                    |
 | type\*      | enum                                 | -       | <ul><li>table</li><li>line</li><li>scatter</li><li>bar</li><li>single</li><li>pie</li></ul> |
@@ -58,7 +58,7 @@ Tile parameter must have **_listen_**, **_conditions_** or **_fractions_**.
 | apply_to\* | string                                       | -       | Field or Filter name                                                |
 | listen     | string                                       | -       | (only for dashboard tiles) Specify dashboard parameter to listen to |
 | conditions | string []                                    | -       | (for parameters mapped to Model) List of filter expressions         |
-| fractions  | [Fraction](/docs/ref-parameters#fraction) [] | -       | (for parameters mapped to Store) List of fractions                  |
+| fractions  | [Fraction []](/docs/ref-parameters#fraction) | -       | (for parameters mapped to Store) List of fractions                  |
 
 ### Tile Data
 
@@ -75,8 +75,8 @@ Tile parameter must have **_listen_**, **_conditions_** or **_fractions_**.
 | Name   | Type                                                 | Default | Description |
 | ------ | ---------------------------------------------------- | ------- | ----------- |
 | x_axis | [Options X Axis](#options-x-axis)                    | -       |             |
-| y_axis | [Options Y Axis Element](#options-y-axis-element) [] | -       |             |
-| series | [Options Series Element](#options-series-element) [] | -       |             |
+| y_axis | [Options Y Axis Element []](#options-y-axis-element) | -       |             |
+| series | [Options Series Element []](#options-series-element)| -       |             |
 
 ### Options X Axis
 

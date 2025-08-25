@@ -1,12 +1,12 @@
 {
   "pages": [
     "index",
-    "---Topics---",
-    "topics-version-control",
-    "topics-environments",
-    "topics-connections",
-    "topics-user-roles",
-    "topics-access-roles",
+    "quickstart",
+    "version-control",
+    "environments",
+    "connections",
+    "user-roles",
+    "access-roles",
 
     "---Reference---",
     "ref-project-config",
@@ -16,6 +16,7 @@
     "ref-report",
     "ref-dashboard",
     "ref-parameters",
+    "ref-filter-conditions",
     "ref-format-number",
 
     "---Mprove CLI---",

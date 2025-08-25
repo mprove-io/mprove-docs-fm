@@ -4,9 +4,11 @@ title: User Roles
 
 # User Roles
 
-Users can create new organizations.
+## Organization Level Roles
 
-## Organization Owner
+### Organization Owner
+
+Mprove users can create new organizations.
 
 The creator of the organization is given **Organization Owner** role.
 
@@ -25,7 +27,7 @@ To add or remove users in your organization, use "Project Team" page.
 
 </Callout>
 
-## Project Member Roles
+## Project Level Roles
 
 Project member can have one or more predefined roles:
 
@@ -36,13 +38,13 @@ Project member can have one or more predefined roles:
 
 ### Base
 
-Any project member has **Base** role and can do the following:
+Any project member has a **Base** role that allow them to:
 
 - View reports
 - View charts
 - View dashboards
 - View files
-- Switch between branches of production repository
+- Switch between branches of Production repository
 
 ### Explorer
 
@@ -52,20 +54,17 @@ Users with **Explorer** role can do the following:
 - Create reports, charts and dashboards
 - Save changes to reports, charts and dashboards **_if they are their authors_**
 
-{/* <Callout type="info">
-  You can remove **Explorer** role for those users who only need to see
-  predefined reports, charts and dashboards
-</Callout> */}
-
 ### Files Editor
 
 Users with **Files Editor** role can do the following:
 
 - Edit files
 - Save changes to any reports, charts and dashboards
-- Add and remove project environment variables
-- Switch between branches of dev and production repositories
-- Perform .git related actions
+  {/* - Add and remove project environment variables */}
+- Switch between Dev and Production repositories
+- Switch between branches of Production repository
+- Switch between branches of Dev repository
+- Perform [.git related user actions](/docs/topics-version-control#user-actions)
 
 ### Project Admin
 

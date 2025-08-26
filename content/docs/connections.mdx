@@ -1,5 +1,56 @@
 ---
-title: Connections (TODO)
+title: Connections
 ---
 
+import { DynamicCodeBlock } from "@/components/dynamic-codeblock";
+import { googleAnalyticsYaml } from "@/content/docs/parts/google-analytics-yaml";
+
 # Connections
+
+## SQL data sources
+
+Malloy connection types:
+
+- PostgreSQL
+
+## API data sources
+
+The API connection is universal and can work with different API providers.
+Logic for creating a request and transforming a response must be defined in the Store file.
+
+Store connection types:
+
+- API
+- Google API
+
+### API
+
+For each query, the API connection does a single request to the data source.
+
+### Google API
+
+Google API connection does 2 requests:
+
+- Auth request to get credentials
+- Data request (query)
+
+## API Store Presets
+
+Presets are reusable Store file templates for API data sources.
+
+Mprove has a [Store preset for Google Analytics](https://github.com/mprove-io/mprove/blob/master/apps/blockml/src/presets/google_analytics.store.preset).
+
+Minimal Store file that uses the preset looks like this.
+
+<DynamicCodeBlock
+  lang="yaml"
+  code={googleAnalyticsYaml}
+  options={{
+    themes: {
+      light: "catppuccin-latte",
+      dark: "rose-pine",
+    },
+  }}
+/>
+
+Additional parameters specified in the Store file will override those taken from the preset.

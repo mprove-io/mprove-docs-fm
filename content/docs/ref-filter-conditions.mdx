@@ -4,6 +4,7 @@ title: Filter Conditions
 
 import { DynamicCodeBlock } from "@/components/dynamic-codeblock";
 import { filterConditionsStringYaml } from "@/content/docs/parts/filter-conditions-string-yaml";
+import { filterConditionsNumberYaml } from "@/content/docs/parts/filter-conditions-number-yaml";
 
 # Filter Conditions
 
@@ -33,6 +34,21 @@ Multiple expressions of string filter can only be separated by the "," character
 />
 
 ### Number
+
+Multiple non-negated expressions of number filter can only be separated by the "or", otherwise they must be specified as separate array elements.
+
+Multiple negated expressions of number filter can only be separated by the "and", otherwise they must be specified as separate array elements.
+
+<DynamicCodeBlock
+  lang="yaml"
+  code={filterConditionsNumberYaml}
+  options={{
+    themes: {
+      light: "catppuccin-latte",
+      dark: "rose-pine",
+    },
+  }}
+/>
 
 ### Boolean
 

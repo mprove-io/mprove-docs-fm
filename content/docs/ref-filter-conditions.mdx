@@ -1,5 +1,41 @@
 ---
-title: Filter Conditions (TODO)
+title: Filter Conditions
 ---
 
+import { DynamicCodeBlock } from "@/components/dynamic-codeblock";
+import { filterConditionsStringYaml } from "@/content/docs/parts/filter-conditions-string-yaml";
+
 # Filter Conditions
+
+Filter conditions is an array of [Malloy Filter Expressions](https://docs.malloydata.dev/documentation/language/filter-expressions).
+
+In Mprove:
+
+- All non-negated expressions in the array are combined with "OR"
+- All negated expressions in the array are combined with "AND"
+- Negated and non-negated expressions cannot be mixed in a single element of the conditions array (they must be split into separate elements of the conditions array)
+
+## Examples
+
+### String
+
+Multiple expressions of string filter can only be separated by the "," character, otherwise they must be specified as separate array elements.
+
+<DynamicCodeBlock
+  lang="yaml"
+  code={filterConditionsStringYaml}
+  options={{
+    themes: {
+      light: "catppuccin-latte",
+      dark: "rose-pine",
+    },
+  }}
+/>
+
+### Number
+
+### Boolean
+
+### Date
+
+### Timestamp

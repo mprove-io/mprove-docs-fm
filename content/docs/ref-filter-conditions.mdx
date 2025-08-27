@@ -5,6 +5,7 @@ title: Filter Conditions
 import { DynamicCodeBlock } from "@/components/dynamic-codeblock";
 import { filterConditionsStringYaml } from "@/content/docs/parts/filter-conditions-string-yaml";
 import { filterConditionsNumberYaml } from "@/content/docs/parts/filter-conditions-number-yaml";
+import { filterConditionsBooleanYaml } from "@/content/docs/parts/filter-conditions-boolean-yaml";
 
 # Filter Conditions
 
@@ -52,6 +53,19 @@ Multiple negated expressions of number filter can only be separated by the "and"
 
 ### Boolean
 
-### Date
+<DynamicCodeBlock
+  lang="yaml"
+  code={filterConditionsBooleanYaml}
+  options={{
+    themes: {
+      light: "catppuccin-latte",
+      dark: "rose-pine",
+    },
+  }}
+/>
 
 ### Timestamp
+
+### Date
+
+

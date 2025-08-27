@@ -1,5 +1,113 @@
 ---
-title: Quickstart (TODO)
+title: Quickstart
 ---
 
 # Quickstart
+
+The free and easy way to get started with Mprove is to use Mprove Cloud.
+
+To self host Open Source version use [README.md](https://github.com/mprove-io/mprove/blob/master/README.md)
+
+### Sign Up
+
+You can sign up for Mprove Cloud by clicking the "SignUp" button on https://mprove.io.
+
+After that, you will be able to log in at https://cloud.mprove.io.
+
+### Explore Demo Project (optional)
+
+After successful registration you will be added as a project member to the "P1" project of the "Demo" organization.
+
+You can play with Demo data, including Models, Charts, Reports and Dashboards.
+
+Switch to Dev repository in nabvar to be able to edit files.
+
+<Callout>
+  Demo organization's project has some limitations. Therefore, when performing
+  some actions, you may see the message "Restricted Project". To work without
+  such restrictions, you need to create a new Organization and Project.
+</Callout>
+
+### Create Organization
+
+To create a new organization, click the org selector in navbar and click the **New Org** button. Enter your organization name and click **Create**.
+
+### Create Project
+
+To create a new project, first select your organization in navbar.
+
+Click the project selector in navbar and click the **New Project** button.
+
+Enter your project name and click **Create**.
+
+### Add Connection
+
+To create a new database connection, first select your project in navbar.
+
+Click the project gear icon in navbar and click the **Connections** button.
+
+On the Project Connections page, click the **New Connection** button.
+
+Enter your connection details and click **Create**.
+
+### Switch to Dev Repo
+
+Click the **repoName-branchName** selector in navbar and select **dev-username/main** branch.
+
+### Create Malloy source file
+
+On the Files page, click the **New File** button.
+
+Enter file name ending with ".malloy" extension and click **Create**.
+
+Edit the file to contain a valid Malloy Source pointing to a table in your database.
+
+Add "**#(mprove) model**" tag to source.
+
+Click **Save and Validate**.
+
+Fix validation errors (if any).
+
+### Explore model in UI
+
+On the Models page, click on the model selector and select the model you created.
+
+Click the **Schema** tab.
+
+Select the dimension of your choice and measure.
+
+Save the draft chart as a new chart file.
+
+<Callout type="warn" title="Save your drafts as files for later use">
+
+All charts, reports, and dashboards in Draft status are deleted during the repository validation process.
+
+If you save a draft as a file, it is no longer a draft and will not be deleted during the repository validation process.
+
+Repository validation process is triggered whenever a user manually edits files in their Dev repository or performs Git-related actions in either the Dev or Production repository.
+
+For example, when a user with the FileEditor role pushes new changes to the Production repository, this Git-related action deletes all drafts for all users in the Production repository.
+
+Keep this in mind when planning how often to push changes to production.
+
+</Callout>
+
+### Commit changes
+
+On the Files page, review the changes that need to be committed.
+
+Click **Commit** button.
+
+Enter a commit message (optional) and click **Commit**.
+
+### Push changes to Production
+
+On the Files page, review the changes that need to be Pushed to Production.
+
+Click **Push to Production** button.
+
+### Switch to Production Repo
+
+Click the **repoName-branchName** selector in navbar and select **production/main** branch.
+
+Check that the chart you created is visible on the Models page in the Charts section.

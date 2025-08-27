@@ -1,5 +1,5 @@
 export const filterConditionsStringYaml = `apply_to: field_path
-conditions:     ### SQL ###
+conditions:     ### PostgreSQL ###
 - f\`a%z\`        # OR field LIKE 'a%z'
 - f\`-FOO-\`      # OR field = 'FOO'
 - f\`%FOO%\`      # OR field LIKE '%FOO%'

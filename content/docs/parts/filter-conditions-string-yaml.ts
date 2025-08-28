@@ -1,4 +1,4 @@
-export const filterConditionsStringYaml = `apply_to: field_path
+export const filterConditionsStringYaml = `apply_to: string_field_path
 conditions:         ### PostgreSQL ###
 - f\`\`               # true // the same as no filter
 

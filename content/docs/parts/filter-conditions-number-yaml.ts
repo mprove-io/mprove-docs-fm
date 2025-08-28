@@ -1,4 +1,4 @@
-export const filterConditionsNumberYaml = `apply_to: field_path
+export const filterConditionsNumberYaml = `apply_to: number_field_path
 conditions:         ### PostgreSQL ###
 - f\`\`               # true // the same as no filter
 

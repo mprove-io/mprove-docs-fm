@@ -6,8 +6,11 @@ import { DynamicCodeBlock } from "@/components/dynamic-codeblock";
 import { filterConditionsStringYaml } from "@/content/docs/parts/filter-conditions-string-yaml";
 import { filterConditionsNumberYaml } from "@/content/docs/parts/filter-conditions-number-yaml";
 import { filterConditionsBooleanYaml } from "@/content/docs/parts/filter-conditions-boolean-yaml";
+import { filterConditionsTimestampYaml } from "@/content/docs/parts/filter-conditions-timestamp-yaml";
 
 # Filter Conditions
+
+Filter conditions can be applied to fields of Malloy models.
 
 Filter conditions is an array of [Malloy Filter Expressions](https://docs.malloydata.dev/documentation/language/filter-expressions).
 
@@ -64,8 +67,19 @@ Multiple negated expressions of number filter can only be separated by the "and"
   }}
 />
 
-### Timestamp
+### Timestamp or Date
 
-### Date
+Multiple non-negated expressions of time filter can only be separated by the "or", otherwise they must be specified as separate array elements.
 
+Multiple negated expressions of time filter can only be separated by the "and", otherwise they must be specified as separate array elements.
 
+<DynamicCodeBlock
+  lang="yaml"
+  code={filterConditionsTimestampYaml}
+  options={{
+    themes: {
+      light: "catppuccin-latte",
+      dark: "rose-pine",
+    },
+  }}
+/>

@@ -3,15 +3,57 @@ title: Format Number
 ---
 
 import { DynamicCodeBlock } from "@/components/dynamic-codeblock";
-import { formatNumberYaml } from "@/content/docs/parts/format-number-yaml";
+import { formatNumberStoreFieldsYaml } from "@/content/docs/parts/format-number-store-fields-yaml";
 
 # Format Number
 
-The goal of **format_number** parameter is to help display numbers in a human-readable form.
+The goal of formatting numbers is to help display numbers in a human-readable form.
+
+There are two ways of formatting numbers in Mprove:
+
+- SSF
+- D3-format (recommended)
+
+## SSF
+
+[SSF](https://docs.sheetjs.com/docs/constellation/ssf/) can be used in [Field-Level Formatting & Rendering Tags](https://github.com/malloydata/malloy/blob/main/packages/malloy-render/docs/renderer_tags_overview.md#field-level-formatting--rendering-tags) of [Malloy Sources](/docs/ref-model-malloy-source).
+
+## D3-format
+
+[D3-format](https://d3js.org/d3-format#d3-format) can be used in [Project Config](/docs/ref-project-config#project), [Store Fields](/docs/ref-model-store#store-field), [Report Rows](/docs/ref-report#row) and [Malloy Sources](/docs/ref-model-malloy-source).
+
+To use D3-format in Mprove there are 3 parameters:
+
+- `format_number`
+- `currency_prefix`
+- `currency_suffix`
+
+Example of D3-format usage in Malloy Sources:
+
+```malloy title="c1_order_items.malloy"
+#(mprove) model
+source: c1_order_items is c1_order_items_tx extend {
+
+  -- 1057.1258 >> $1,057.13
+  #(mprove) format_number='$,.2f' currency_prefix='$' currency_suffix=''
+  measure: total_profit is total_sale_price - inventory_items.total_actual_cost
+
+  -- 0.25 >> 25%
+  #(mprove) format_number='.2p'
+  measure: profit_margin is total_profit / total_sale_price
+}
+```
+
+<Callout>
+  If both SSF and D3-Format are specified for a Malloy field, D3-Format will
+  take precedence.
+</Callout>
+
+Example of D3-format usage in Store Fields:
 
 <DynamicCodeBlock
   lang="yaml"
-  code={formatNumberYaml}
+  code={formatNumberStoreFieldsYaml}
   options={{
     themes: {
       light: "catppuccin-latte",
@@ -20,7 +62,7 @@ The goal of **format_number** parameter is to help display numbers in a human-re
   }}
 />
 
-## Syntax
+### Syntax
 
 Fields with `result: number` (implicitly or explicitly set) can accept **format_number** using special syntax of [D3-format](https://github.com/d3/d3-format):
 
@@ -28,7 +70,7 @@ Fields with `result: number` (implicitly or explicitly set) can accept **format_
 
 If options are specified, they must preserve its order.
 
-## Fill, Align, Width
+### Fill, Align, Width
 
 The **align** can be:
 
@@ -47,7 +89,7 @@ The **width** defines the minimum field width in characters. If not specified, t
 | 5     | \*^7          | \*\*\*5\*\*\* | set width to 7 and fill empty characters with \* |
 | 5     | A>7           | AAAAAA5       | set width to 7 and fill empty characters with A  |
 
-## Sign
+### Sign
 
 The **sign** can be:
 
@@ -66,7 +108,7 @@ The **sign** can be:
 | 5     | (             | 5      |
 | -5    | (             | (5)    |
 
-## Symbol
+### Symbol
 
 The **symbol** can be:
 
@@ -88,7 +130,7 @@ The **symbol** can be:
 | 100   | #o            | 0o144     |                                                                                        |
 | 100   | #x            | 0x64      |                                                                                        |
 
-## Zero
+### Zero
 
 The zero `0` option enables zero-padding; this implicitly sets fill to `0`.
 
@@ -100,7 +142,7 @@ The zero `0` option enables zero-padding; this implicitly sets fill to `0`.
 | 123       | 07            | 0000123   |
 | 123456789 | 07            | 123456789 |
 
-## Comma
+### Comma
 
 The comma `,` option enables the use of a group separator for thousands.
 
@@ -112,7 +154,7 @@ The comma `,` option enables the use of a group separator for thousands.
 | -57023.55 | ,             | -57,023.55 |
 | 705       | ,             | 705        |
 
-## Precision and Type
+### Precision and Type
 
 The available type values are:
 
@@ -136,7 +178,7 @@ For the `g`, `n` and ` ` (none) types, decimal notation is used if the resulting
 
 `[[fill]align][sign][symbol][0][width][,][.precision][type]`
 
-### Exponential
+#### Exponential
 
 | Input    | format_number | output      |
 | -------- | ------------- | ----------- |
@@ -144,7 +186,7 @@ For the `g`, `n` and ` ` (none) types, decimal notation is used if the resulting
 | 20003010 | e             | 2.000301e+7 |
 | 0.000001 | e             | 1.000000e-6 |
 
-### Integer
+#### Integer
 
 | Input  | format_number | output |
 | ------ | ------------- | ------ |
@@ -152,7 +194,7 @@ For the `g`, `n` and ` ` (none) types, decimal notation is used if the resulting
 | 1000.5 | d             | 1001   |
 | -1.12  | d             | -1     |
 
-### Percentage
+#### Percentage
 
 | Input | format_number | output      |
 | ----- | ------------- | ----------- |
@@ -167,7 +209,7 @@ For the `g`, `n` and ` ` (none) types, decimal notation is used if the resulting
 | -0.12 | p             | -12.0000%   |
 | 0.25  | .3p           | 25.0%       |
 
-### Scientific
+#### Scientific
 
 | Input    | format_number | output   |
 | -------- | ------------- | -------- |
@@ -177,7 +219,7 @@ For the `g`, `n` and ` ` (none) types, decimal notation is used if the resulting
 | 1000     | s             | 1.00000k |
 | 1000000  | s             | 1.00000M |
 
-### Binary
+#### Binary
 
 | Input | format_number | output      |
 | ----- | ------------- | ----------- |
@@ -186,7 +228,7 @@ For the `g`, `n` and ` ` (none) types, decimal notation is used if the resulting
 | 16    | b             | 10000       |
 | 2012  | b             | 11111011100 |
 
-### Octal
+#### Octal
 
 | Input | format_number | output |
 | ----- | ------------- | ------ |
@@ -195,7 +237,7 @@ For the `g`, `n` and ` ` (none) types, decimal notation is used if the resulting
 | 16    | o             | 20     |
 | 2012  | o             | 3734   |
 
-### Hexadecimal
+#### Hexadecimal
 
 | Input | format_number | output |
 | ----- | ------------- | ------ |
@@ -204,7 +246,7 @@ For the `g`, `n` and ` ` (none) types, decimal notation is used if the resulting
 | 17    | X             | 11     |
 | 2012  | X             | 7DC    |
 
-### General
+#### General
 
 | Input         | format_number | output      |
 | ------------- | ------------- | ----------- |
@@ -216,7 +258,7 @@ For the `g`, `n` and ` ` (none) types, decimal notation is used if the resulting
 | 0.987654      | .2g           | 0.99        |
 | 0.987654      | .3g           | 0.988       |
 
-### None
+#### None
 
 | Input         | format_number | output    |
 | ------------- | ------------- | --------- |
@@ -228,7 +270,7 @@ For the `g`, `n` and ` ` (none) types, decimal notation is used if the resulting
 | 0.987654      | .2            | 0.99      |
 | 0.987654      | .3            | 0.988     |
 
-### Fixed
+#### Fixed
 
 | Input         | format_number | output               |
 | ------------- | ------------- | -------------------- |
@@ -240,7 +282,7 @@ For the `g`, `n` and ` ` (none) types, decimal notation is used if the resulting
 | 0.987654      | .2f           | 0.99                 |
 | 0.987654      | .3f           | 0.988                |
 
-### Rounded
+#### Rounded
 
 | Input     | format_number | output      |
 | --------- | ------------- | ----------- |

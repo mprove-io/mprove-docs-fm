@@ -1,4 +1,4 @@
-export const formatNumberYaml = `fields: # store's fields section
+export const formatNumberStoreFieldsYaml = `fields: # store's fields section
 - dimension: price
   result: number
   format_number: "$,.2f" # 1057.1258 >> $1,057.13

@@ -23,30 +23,22 @@ source: c1_order_items is c1_order_items_tx extend {
   join_one: products is c1_products_tx on inventory_items.product_id = products.product_id
   join_one: distribution_centers is c1_distribution_centers_tx on inventory_items.distribution_center_id = distribution_centers.distribution_center_id
 
-  measure: total_profit is total_sale_price - inventory_items.total_actual_cost
-
-  # percent
-  measure: profit_margin is total_profit / total_sale_price
+  measure: 
+    total_profit is total_sale_price - inventory_items.total_actual_cost
+    profit_margin is total_profit / total_sale_price
 }
 ```
 
 ```malloy title="tables/c1_orders_tx.malloy"
 ##! experimental{sql_functions}
-
-source: c1_orders_table is c1_postgres.table('ecommerce.orders') extend {
-  rename:
-    _status is status
-    _created_at is created_at
-    _user_id is user_id
-}
+source: c1_orders_table is c1_postgres.table('ecommerce.orders') extend {}
 
 source: c1_orders_tx is c1_orders_table extend {
   primary_key: order_id
-  rename: status is _status
 
   #(mprove) build_metrics field_group="Created at"
   dimension:
-    created_at_ts is sql_timestamp(""" TIMESTAMP 'epoch' + ${created_at_epoch} * INTERVAL '1 second' """)
+    created_at_ts is sql_timestamp(""" TIMESTAMP 'epoch' + ${created_at} * INTERVAL '1 second' """)
     created_at_day is created_at_ts.day
     created_at_week is created_at_ts.week
     created_at_month is created_at_ts.month
@@ -56,9 +48,8 @@ source: c1_orders_tx is c1_orders_table extend {
     created_at_minute is created_at_ts.minute
     created_at_second is created_at_ts.second
 
-  rename: created_at_epoch is _created_at
   dimension: created_at_date is created_at_ts::date
-  rename: user_id is _user_id
+
   measure: orders_count is count()
 }
 ```

@@ -24,14 +24,14 @@ Each project must have <strong>mprove.yml</strong> config file:
 
 ### Project
 
-| Name            | Type   | Default | Description                                                                            |
-| --------------- | ------ | ------- | -------------------------------------------------------------------------------------- |
-| mprove_dir\*    | string | ./      | Relative subpath of the project repository to the folder that should be used by Mprove |
-| format_number   | string | ',.0f'  | [Format Number](/docs/ref-format-number)                                  |
-| currency_prefix | string | $       | [Format Number - Symbol](/docs/ref-format-number#symbol)                          |
-| currency_suffix | string | ''      | [Format Number - Symbol](/docs/ref-format-number#symbol)                          |
+| Name                          | Type    | Default | Description                                                                                                         |
+| ----------------------------- | ------- | ------- | ------------------------------------------------------------------------------------------------------------------- |
+| mprove_dir\*                  | string  | ./      | Relative subpath of the project repository to the folder that should be used by Mprove                              |
+| case_sensitive_string_filters | boolean | false   | (for Store Models) Specify whether string filters should be case sensitive                                          |
+| format_number                 | string  | ',.0f'  | [Format Number](/docs/ref-format-number). The default d3-format string if no overrides are specified in the fields. |
+| currency_prefix               | string  | $       | [Format Number - Symbol](/docs/ref-format-number#symbol). The default d3-format currency prefix.                    |
+| currency_suffix               | string  | ''      | [Format Number - Symbol](/docs/ref-format-number#symbol). The default d3-format currency suffix.                    |
 
-{/* | case_sensitive_string_filters | boolean | false   | Specify whether string filters should be case sensitive    | */}
 {/* | week_start                    | enum    | Monday  | <span>Start day of the week:</span><ul><li>Sunday</li><li>Monday</li></ul>  | */}
 {/* | allow_timezones  | boolean | true    | Allow users to change timezone in UI                                          | */}
 {/* | default_timezone | enum    | UTC     | Specify default timezone for UI (useful if allow_timezones is false)          | */}

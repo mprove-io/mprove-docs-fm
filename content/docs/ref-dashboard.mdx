@@ -29,9 +29,9 @@ Each dashboard must be stored as **dashboard_name.dashboard** YAML file:
 | dashboard\*  | string                                           | -       | Dashboard name                                                               |
 | title        | string                                           | -       | Dashboard title in UI                                                        |
 | description  | string                                           | -       | Dashboard description in UI                                                  |
+| access_roles | string []                                        | -       | If specified, only users with the listed roles will have access to Dashboard |
 | parameters   | [Top Filter []](/docs/ref-parameters#top-filter) | -       | Begin a section of dashboard parameters                                      |
 | tiles\*      | [Tile []](/docs/ref-dashboard#tile)              | -       | Begin a section of tiles                                                     |
-| access_roles | string []                                        | -       | If specified, only users with the listed roles will have access to Dashboard |
 
 ### Tile
 
@@ -45,20 +45,20 @@ Each dashboard must be stored as **dashboard_name.dashboard** YAML file:
 | sorts       | string                               | -       | A way to sort data                                                                          |
 | limit       | number                               | 500     | Limit the number of rows                                                                    |
 | type\*      | enum                                 | -       | <ul><li>table</li><li>line</li><li>scatter</li><li>bar</li><li>single</li><li>pie</li></ul> |
-| plate       | [Tile Plate](#tile-plate)            | -       |                                                                                             |
 | data        | [Tile Data](#tile-data)              | -       |                                                                                             |
 | options     | [Tile Options](#tile-options)        | -       |                                                                                             |
+| plate       | [Tile Plate](#tile-plate)            | -       | (only for dashboard tiles)                                                                                            |
 
 ### Tile Parameter
 
-Tile parameter must have **_listen_**, **_conditions_** or **_fractions_**.
+Tile parameter must have **listen**, **conditions** or **fractions**.
 
 | Name       | Type                                         | Default | Description                                                         |
 | ---------- | -------------------------------------------- | ------- | ------------------------------------------------------------------- |
 | apply_to\* | string                                       | -       | Field or Filter name                                                |
 | listen     | string                                       | -       | (only for dashboard tiles) Specify dashboard parameter to listen to |
-| conditions | string []                                    | -       | (for parameters mapped to Model) List of filter expressions         |
-| fractions  | [Fraction []](/docs/ref-parameters#fraction) | -       | (for parameters mapped to Store) List of fractions                  |
+| conditions | string []                                    | -       | (for parameters mapped to Malloy Model) List of filter expressions         |
+| fractions  | [Fraction []](/docs/ref-parameters#fraction) | -       | (for parameters mapped to Store Model) List of fractions                  |
 
 ### Tile Data
 
@@ -68,7 +68,6 @@ Tile parameter must have **_listen_**, **_conditions_** or **_fractions_**.
 | y_fields\*\* | string [] | -       | One or more of selected fields (measure or calculation) to get series data                     |
 | multi_field  | string    | -       | One of selected fields (dimension) for additional grouping of series data based on field value |
 | size_field   | string    | -       | One of selected fields to set size of data point for scatter chart                             |
-| hide_columns | string [] | -       | One or more of selected fields to hide table columns on chart                                  |
 
 ### Tile Options
 
@@ -100,8 +99,6 @@ Tile parameter must have **_listen_**, **_conditions_** or **_fractions_**.
 | type            | enum    | -       | <ul><li>line</li><li>bar</li></ul>                                |
 
 ### Tile Plate
-
-For dashboard only
 
 | Name         | Type    | Default | Description                                                              |
 | ------------ | ------- | ------- | ------------------------------------------------------------------------ |

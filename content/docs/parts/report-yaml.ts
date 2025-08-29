@@ -1,16 +1,19 @@
 export const reportYaml = `report: report_name
 title: ''
+access_roles:
+- role
+- role
 parameters:
 - filter: f1
   label: ''
   description: ''
   result: string
-  suggest_model_dimension: model_name.join_alias.field_name
+  suggest_model_dimension: model_name.field_path
   conditions:
-  - 'filter expression'
+  - f\`%a\`
 
 - filter: f2
-  store_model: store_model_google_analytics
+  store_model: ga
   store_result: string
   fractions:
   - logic: OR
@@ -20,7 +23,7 @@ parameters:
       value: a
 
 - filter: f3
-  store_model: store_model_google_analytics
+  store_model: ga
   store_filter: top_config
   fractions:
   - controls:
@@ -47,20 +50,20 @@ rows:
   currency_prefix: $
   currency_suffix: ''
   parameters: 
-  - apply_to: alias.field_name
+  - apply_to: field_path
     listen: f1
 
 - row_id: D
   type: metric
   metric: metric_id
   parameters: 
-  - apply_to: alias.field_name
+  - apply_to: field_path
     conditions:
-    - 'filter expression'
+    - f\`> 100\`
 
 - row_id: E
   type: metric
-  metric: store_model_google_analytics_screen_page_views_by_event_created_at
+  metric: ga.screen_page_views.by.event_created_at
   parameters: 
   - apply_to: city
     listen: f2
@@ -69,7 +72,7 @@ rows:
 
 - row_id: F
   type: metric
-  metric: store_model_google_analytics_screen_page_views_by_event_created_at
+  metric: ga.screen_page_views.by.event_created_at
   parameters: 
   - apply_to: city
     fractions:
@@ -97,8 +100,4 @@ options:
   series: 
   - data_row_id: C
     y_axis_index: 0
-    type: 'line'
-
-access_roles:
-- role
-- role`
+    type: 'line'`

@@ -20,37 +20,39 @@ Each Report must be stored as **report_name.report** YAML file:
   }}
 />
 
+`$METRICS_DATE_FROM` and `$METRICS_DATE_TO` are intended for use by store models. They are provided based on the time filter specified by the user on the Reports page.
+
 ## Reference
 
 ### Report
 
-| Name         | Type                                             | Default | Description                                                                       |
-| ------------ | ------------------------------------------------ | ------- | --------------------------------------------------------------------------------- |
-| report\*     | string                                           | -       | Report name                                                                       |
-| title        | string                                           | -       | Dashboard title in UI                                                             |
-| parameters   | [Top Filter []](/docs/ref-parameters#top-filter) | -       | Begin a section of report parameters                                              |
-| rows         | [Row []](#row)                                   | -       | Begin a section of rows                                                           |
-| options      | [Tile Options](/docs/ref-dashboard#tile-options) | -       | Report options schema is the same as dashboard tile options schema |
-| access_roles | string []                                        | -       | If specified, only users with the listed roles will have access to Report         |
+| Name         | Type                                             | Default | Description                                                               |
+| ------------ | ------------------------------------------------ | ------- | ------------------------------------------------------------------------- |
+| report\*     | string                                           | -       | Report name                                                               |
+| title        | string                                           | -       | Dashboard title in UI                                                     |
+| access_roles | string []                                        | -       | If specified, only users with the listed roles will have access to Report |
+| parameters   | [Top Filter []](/docs/ref-parameters#top-filter) | -       | Begin a section of report parameters                                      |
+| rows         | [Row []](#row)                                   | -       | Begin a section of rows                                                   |
+| options      | [Tile Options](/docs/ref-dashboard#tile-options) | -       | Report options schema is the same as dashboard tile options schema        |
 
 ### Row
 
-| Name            | Type                               | Default | Description                                                                                                       |
-| --------------- | ---------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------- |
-| row_id\*        | string                             | -       | Row Id                                                                                                            |
-| type\*          | enum                               | -       | <span>Row type:</span><ul><li>**metric**</li><li>**formula**</li><li>**header**</li><li>**empty**</li></ul>       |
-| metric\*\*      | string                             | -       | metric_id. Required for row type **Metric**.                                                                      |
-| formula\*\*     | string                             | -       | SQL formula for calculating row data using `$ROW_ID` references to other rows. Required for row type **Formula**. |
-| name\*\*        | string                             | -       | Row name. Required for row type **Formula** or **Header**.                                                        |
-| show_chart      | boolean                            | false   | Show row data on chart                                                                                            |
-| format_number   | string                             | -       | [Format Number](/docs/ref-format-number)                                                                          |
-| currency_prefix | string                             | -       | [Format Number - Symbol](/docs/ref-format-number#symbol)                                                          |
-| currency_suffix | string                             | -       | [Format Number - Symbol](/docs/ref-format-number#symbol)                                                          |
-| parameters      | [Row Parameter []](#row-parameter) | -       | Begin a section of row parameters                                                                                 |
+| Name            | Type                               | Default | Description                                                                                                                                            |
+| --------------- | ---------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| row_id\*        | string                             | -       | Row Id                                                                                                                                                 |
+| type\*          | enum                               | -       | <span>Row type:</span><ul><li>**metric**</li><li>**formula**</li><li>**header**</li><li>**empty**</li></ul>                                            |
+| metric\*\*      | string                             | -       | metric_id. Required for row type **Metric**.                                                                                                           |
+| formula\*\*     | string                             | -       | PostgresSQL SQL formula for calculating row data using `$ROW_ID` references to other rows (simple math operations). Required for row type **Formula**. |
+| name\*\*        | string                             | -       | Row name. Required for row type **Formula** or **Header**.                                                                                             |
+| show_chart      | boolean                            | false   | Show row data on chart                                                                                                                                 |
+| format_number   | string                             | -       | [Format Number](/docs/ref-format-number)                                                                                                               |
+| currency_prefix | string                             | -       | [Format Number - Symbol](/docs/ref-format-number#symbol)                                                                                               |
+| currency_suffix | string                             | -       | [Format Number - Symbol](/docs/ref-format-number#symbol)                                                                                               |
+| parameters      | [Row Parameter []](#row-parameter) | -       | Begin a section of row parameters                                                                                                                      |
 
 ### Row Parameter
 
-Row parameter must have **_conditions_**, **_listen_** or **_fractions_**.
+Row parameter must have **conditions**, **listen** or **fractions**.
 
 | Name       | Type                                         | Default | Description                                                 |
 | ---------- | -------------------------------------------- | ------- | ----------------------------------------------------------- |

@@ -1,41 +1,43 @@
 export const dashboardYaml = `dashboard: dashboard_name
 title: ''
 description: ''
+access_roles:
+- role
+- role
+
 parameters:
 - filter: f1
   label: 'label'
   description: ''
   result: string
-  suggest_model_dimension: model_name.join_alias.field_name
+  suggest_model_dimension: model_name.field_path
   conditions:
-  - 'filter expression'
+  - f\`%a\`
 
 tiles:
 - title: 'tile title'
   description: ''
   model: model_name
   select:
-  - alias.field_name
-  - alias.field_name
+  - field_path
+  - field_path
+  - field_path
   parameters:
-  - apply_to: alias.field_name
+  - apply_to: field_path
     listen: f1
-  - apply_to: alias.field_name
+  - apply_to: field_path
     conditions:
-    - 'filter expression'
-  sorts: alias.field_name desc, alias.field_name, ...
+    - f\`> 100\`
+  sorts: field_path desc, field_path, ...
   limit: 500
   type: chart_type
   data:
-    x_field: alias.field_name
+    x_field: field_path
     y_fields:
-    - alias.field_name
-    - alias.field_name
-    multi_field: alias.field_name
-    size_field: alias.field_name
-    hide_columns:
-    - alias.field_name
-    - alias.field_name
+    - field_path
+    - field_path
+    multi_field: field_path
+    size_field: field_path
   options:
     x_axis:
       scale: false
@@ -43,15 +45,11 @@ tiles:
     - scale: false
     - scale: false
     series:
-    - data_field: alias.field_name
+    - data_field: field_path
       y_axis_index: 0
       type: chart_type
   plate:
     plate_width: 8
     plate_height: 12
     plate_x: 0
-    plate_y: 0
-
-access_roles:
-- role
-- role`
+    plate_y: 0`

@@ -10,9 +10,13 @@ import { modelStoreFieldsYaml } from "@/content/docs/parts/model-store-fields-ya
 
 # Model - Store
 
-Store Model defines fields and logic for retrieving data via an HTTP request to any service that has a data API.
+Store Model defines fields and logic for retrieving data via an HTTP request.
 
-Provided example has been tested for Google Analytics Reporting API.
+The example provided is tested for the Google Analytics Reporting API.
+
+You can use it by creating a Store file that references a [Store Preset](/docs/connections#api-store-presets).
+
+For other sources, you need to create a full Store file without presets.
 
 Each Store must be stored as **store_name.store** YAML file:
 
@@ -27,7 +31,7 @@ Each Store must be stored as **store_name.store** YAML file:
   }}
 />
 
-## Store Fields
+### Store Fields
 
 <DynamicCodeBlock
   lang="yaml"
@@ -40,7 +44,7 @@ Each Store must be stored as **store_name.store** YAML file:
   }}
 />
 
-## Store createRequest.js
+### Store createRequest.js
 
 <DynamicCodeBlock
   lang="js"
@@ -53,7 +57,7 @@ Each Store must be stored as **store_name.store** YAML file:
   }}
 />
 
-## Store processResponse.js
+### Store processResponse.js
 
 <DynamicCodeBlock
   lang="js"
@@ -67,6 +71,23 @@ Each Store must be stored as **store_name.store** YAML file:
 />
 
 ## Reference
+
+### Store Constants
+
+These constants are provided based on [Project Config](/docs/ref-project-config#project) and UI control values set by user for a specific query.
+
+| Name                            | Type      | Default         | Description                                                                                                                                               |
+| ------------------------------- | --------- | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PROJECT_CONFIG_CASE_SENSITIVE` | boolean   | -               | Should string filter be case sensitive or not                                                                                                             |
+| `METRICS_DATE_FROM`             |           | today's date    | The start date of time range (based on the time filter on the Reports page, otherwise today's date)                                                       |
+| `METRICS_DATE_TO`               |           | tomorrow's date | The end date of time range (based on the time filter on the Reports page, otherwise tomorrow's date)                                                      |
+| `STORE_FIELDS`                  |           | -               | Store fields definitions                                                                                                                                  |
+| `QUERY_ORDER_BY`                |           | -               | Sort order                                                                                                                                                |
+| `QUERY_SELECTED_DIMENSIONS`     | string [] | -               | Dimensions selected by user                                                                                                                               |
+| `QUERY_SELECTED_MEASURES`       | string [] | -               | Measures selected by user                                                                                                                                 |
+| `QUERY_PARAMETERS`              |           | -               | Filters set by user                                                                                                                                       |
+| `QUERY_LIMIT`                   | number    | 500             | Max number of rows in response                                                                                                                            |
+| `RESPONSE_DATA`                 | any       | -               | Response data that needs to be converted into Mprove compatible format as a result of [processResponse.js](/docs/ref-model-store#store-processresponsejs) |
 
 ### Store
 
@@ -109,11 +130,11 @@ Each Store must be stored as **store_name.store** YAML file:
 
 ### Result Fraction Type
 
-| Name     | Type                                                                             | Default | Description               |
-| -------- | -------------------------------------------------------------------------------- | ------- | ------------------------- |
-| type\*   | string                                                                           | -       | Type name                 |
-| label    | string                                                                           | -       | Override type name in UI  |
-| meta     | any                                                                              | -       | Custom metadata           |
+| Name     | Type                                                         | Default | Description               |
+| -------- | ------------------------------------------------------------ | ------- | ------------------------- |
+| type\*   | string                                                       | -       | Type name                 |
+| label    | string                                                       | -       | Override type name in UI  |
+| meta     | any                                                          | -       | Custom metadata           |
 | controls | [Fraction Control []](/docs/ref-parameters#fraction-control) | -       | List of fraction controls |
 
 ### Store Field Group

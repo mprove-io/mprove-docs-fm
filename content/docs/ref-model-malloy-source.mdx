@@ -65,16 +65,16 @@ source: c1_orders_tx is c1_orders_table extend {
 
 ## Reference
 
-### Source (mprove) Tags
+### Source #(mprove) Tags
 
-| Name         | Type     | Default | Description                                                                                                                                              |
-| ------------ | -------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| model        | tag      | -       | If specified, malloy Source will be available for exploration as mprove Model.                                                                           |
-| access_roles | string[] | -       | Only users with the specified roles will be able to explore the model. If `access_roles` tag is not specified, all project users will be able to explore the model. |
+| Name         | Type   | Default | Description                                                                                                                                                                                                                  |
+| ------------ | ------ | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| model        | tag    | -       | If specified, the Malloy source will become available for exploration as an Mprove model.                                                                                                                                    |
+| access_roles | string | -       | User roles list separated by comma. If `access_roles` tag is set, only users with specified roles will be able to explore the model. If `access_roles` tag is not specified, all project users will be able to explore the model. |
 
-### Dimension (mprove) Tags
+### Dimension #(mprove) Tags
 
-| Name          | Type     | Default | Description                                                                                                      |
-| ------------- | -------- | ------- | ---------------------------------------------------------------------------------------------------------------- |
-| build_metrics | tag      | -       | Metrics will be created for each time based dimension with `build_metrics` tag and all measures of mprove Model. |
-| field_group   | string[] | -       | Fields will be added to a group in the web UI (model fields tree).                                               |
+| Name          | Type     | Default | Description                                                                                                                |
+| ------------- | -------- | ------- | -------------------------------------------------------------------------------------------------------------------------- |
+| build_metrics | tag      | -       | Mprove creates a metric for each pair of tagged time based dimensions and measure (for all measures of the malloy source). |
+| field_group   | string[] | -       | Mprove adds the tagged fields to a subgroup in the web interface (model field tree).                                       |

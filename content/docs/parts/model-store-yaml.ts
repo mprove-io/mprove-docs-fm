@@ -1,6 +1,6 @@
 export const modelStoreYaml = `store: ga
 connection: c7_google
-preset: google_analytics
+# preset: google_analytics
 label: Google Analytics
 description: 'Google Analytics Reporting'
 access_roles: []

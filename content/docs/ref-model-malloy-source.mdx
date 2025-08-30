@@ -4,6 +4,21 @@ title: Model - Malloy Source
 
 # Model - Malloy Source
 
+For SQL connections, Mprove uses [Malloy](https://www.malloydata.dev/) Sources as resusable data Models.
+
+<Callout>
+  In Malloy, the term "Model" usually refers to a file containing Malloy code.
+  
+  In Mprove, a Model is a specific [Malloy Source](https://docs.malloydata.dev/documentation/language/source).
+
+</Callout>
+
+Malloy has excellent [documentation](https://docs.malloydata.dev/documentation/).
+
+Malloy Sources are reusable. Multiple Sources and Queries can reference the same Source.
+
+To make Malloy Sources visible to Mprove - you need to add the `#(mprove) model` tag.
+
 ```malloy title="c1_order_items.malloy"
 import './tables/c1_order_items_tx.malloy';
 import './tables/c1_orders_tx.malloy';
@@ -23,7 +38,7 @@ source: c1_order_items is c1_order_items_tx extend {
   join_one: products is c1_products_tx on inventory_items.product_id = products.product_id
   join_one: distribution_centers is c1_distribution_centers_tx on inventory_items.distribution_center_id = distribution_centers.distribution_center_id
 
-  measure: 
+  measure:
     total_profit is total_sale_price - inventory_items.total_actual_cost
     profit_margin is total_profit / total_sale_price
 }
@@ -58,9 +73,9 @@ source: c1_orders_tx is c1_orders_table extend {
 
 ### Source #(mprove) Tags
 
-| Name         | Type   | Default | Description                                                                                                                                                                                                                  |
-| ------------ | ------ | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| model        | tag    | -       | If specified, the Malloy source will become available for exploration as an Mprove model.                                                                                                                                    |
+| Name         | Type   | Default | Description                                                                                                                                                                                                                       |
+| ------------ | ------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| model        | tag    | -       | If specified, the Malloy source will become available for exploration as an Mprove model.                                                                                                                                         |
 | access_roles | string | -       | User roles list separated by comma. If `access_roles` tag is set, only users with specified roles will be able to explore the model. If `access_roles` tag is not specified, all project users will be able to explore the model. |
 
 ### Dimension #(mprove) Tags

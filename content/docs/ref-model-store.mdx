@@ -6,6 +6,8 @@ import { DynamicCodeBlock } from "@/components/dynamic-codeblock";
 import { modelStoreYaml } from "@/content/docs/parts/model-store-yaml";
 import { modelStoreRequestJs } from "@/content/docs/parts/model-store-request-js";
 import { modelStoreResponseJs } from "@/content/docs/parts/model-store-response-js";
+import { storeConstantsStoreFieldsJs } from "@/content/docs/parts/store-constants-store-fields-js";
+import { storeConstantsQueryOrderByJs } from "@/content/docs/parts/store-constants-query-order-by-js";
 import { modelStoreFieldsYaml } from "@/content/docs/parts/model-store-fields-yaml";
 
 # Model - Store
@@ -74,20 +76,45 @@ Each Store must be stored as **store_name.store** YAML file:
 
 ### Store Constants
 
-These constants are provided based on [Project Config](/docs/ref-project-config#project) and UI control values set by user for a specific query.
+These constants are provided based on Store file, [Project Config](/docs/ref-project-config#project) and UI control values set by user for a specific query.
 
-| Name                            | Type      | Default         | Description                                                                                                                                               |
-| ------------------------------- | --------- | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `PROJECT_CONFIG_CASE_SENSITIVE` | boolean   | -               | Should string filter be case sensitive or not                                                                                                             |
-| `METRICS_DATE_FROM`             |           | today's date    | The start date of time range (based on the time filter on the Reports page, otherwise today's date)                                                       |
-| `METRICS_DATE_TO`               |           | tomorrow's date | The end date of time range (based on the time filter on the Reports page, otherwise tomorrow's date)                                                      |
-| `STORE_FIELDS`                  |           | -               | Store fields definitions                                                                                                                                  |
-| `QUERY_ORDER_BY`                |           | -               | Sort order                                                                                                                                                |
-| `QUERY_SELECTED_DIMENSIONS`     | string [] | -               | Dimensions selected by user                                                                                                                               |
-| `QUERY_SELECTED_MEASURES`       | string [] | -               | Measures selected by user                                                                                                                                 |
-| `QUERY_PARAMETERS`              |           | -               | Filters set by user                                                                                                                                       |
-| `QUERY_LIMIT`                   | number    | 500             | Max number of rows in response                                                                                                                            |
-| `RESPONSE_DATA`                 | any       | -               | Response data that needs to be converted into Mprove compatible format as a result of [processResponse.js](/docs/ref-model-store#store-processresponsejs) |
+| Name                            | Type            | Default         | Description                                                                                                                                               |
+| ------------------------------- | --------------- | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PROJECT_CONFIG_CASE_SENSITIVE` | boolean         | false           | Should string filter be case sensitive or not                                                                                                             |
+| `METRICS_DATE_FROM`             | YYYY-MM-DD      | today's date    | The start date of time range (based on the time filter on the Reports page, otherwise today's date)                                                       |
+| `METRICS_DATE_TO`               | YYYY-MM-DD      | tomorrow's date | The end date of time range (based on the time filter on the Reports page, otherwise tomorrow's date)                                                      |
+| `STORE_FIELDS`                  | storeField []   | -               | [STORE_FIELDS](/docs/ref-model-store#store_fields) - all store parameters and fields in a single array                                           |
+| `QUERY_ORDER_BY`                | orderByField [] | -               | [QUERY_ORDER_BY](/docs/ref-model-store#query_order_by) - fields by which the user wants to sort the data                                                                                      |
+| `QUERY_SELECTED_DIMENSIONS`     | -               | -               | Dimensions selected by user                                                                                                                               |
+| `QUERY_SELECTED_MEASURES`       | -               | -               | Measures selected by user                                                                                                                                 |
+| `QUERY_PARAMETERS`              | -               | -               | Filters set by user                                                                                                                                       |
+| `QUERY_LIMIT`                   | number          | 500             | Max number of rows in response                                                                                                                            |
+| `RESPONSE_DATA`                 | any             | -               | Response data that needs to be converted into Mprove compatible format as a result of [processResponse.js](/docs/ref-model-store#store-processresponsejs) |
+
+#### STORE_FIELDS
+
+<DynamicCodeBlock
+  lang="js"
+  code={storeConstantsStoreFieldsJs}
+  options={{
+    themes: {
+      light: "github-light",
+      dark: "github-dark",
+    },
+  }}
+/>
+#### QUERY_ORDER_BY
+
+<DynamicCodeBlock
+  lang="js"
+  code={storeConstantsQueryOrderByJs}
+  options={{
+    themes: {
+      light: "github-light",
+      dark: "github-dark",
+    },
+  }}
+/>
 
 ### Store
 

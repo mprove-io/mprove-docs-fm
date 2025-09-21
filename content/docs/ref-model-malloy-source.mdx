@@ -29,6 +29,8 @@ import './tables/c1_products_tx.malloy';
 import './tables/c1_distribution_centers_tx.malloy';
 
 #(mprove) model
+#(mprove) label="Order Items (Postgres)"
+#(mprove) top_label="Order Items"
 #(mprove) access_roles="sales, marketing"
 source: c1_order_items is c1_order_items_tx extend {
   join_one: orders is c1_orders_tx on order_id = orders.order_id
@@ -51,7 +53,7 @@ source: c1_orders_table is c1_postgres.table('ecommerce.orders') extend {}
 source: c1_orders_tx is c1_orders_table extend {
   primary_key: order_id
 
-  #(mprove) build_metrics field_group="Created at"
+  #(mprove) build_metrics field_group="Created At"
   dimension:
     created_at_ts is sql_timestamp(""" TIMESTAMP 'epoch' + ${created_at} * INTERVAL '1 second' """)
     created_at_day is created_at_ts.day
@@ -73,14 +75,16 @@ source: c1_orders_tx is c1_orders_table extend {
 
 ### Source #(mprove) Tags
 
-| Name         | Type   | Default | Description                                                                                                                                                                                                                       |
-| ------------ | ------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| model        | tag    | -       | If specified, the Malloy source will become available for exploration as an Mprove model.                                                                                                                                         |
-| access_roles | string | -       | User roles list separated by comma. If `access_roles` tag is set, only users with specified roles will be able to explore the model. If `access_roles` tag is not specified, all project users will be able to explore the model. |
+| Name         | Type | Default | Description                                                                                                                                                                                                                       |
+| ------------ | ---- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| model        | tag  | -       | If specified, the Malloy source will become available for exploration as an Mprove model.                                                                                                                                         |
+| label        | tag  | -       | Model label in UI                                                                                                                                                                                                                |
+| top_label    | tag  | -       | "from" label in Model Schema                                                                                                                                        |
+| access_roles | tag  | -       | User roles list separated by comma. If `access_roles` tag is set, only users with specified roles will be able to explore the model. If `access_roles` tag is not specified, all project users will be able to explore the model. |
 
 ### Dimension #(mprove) Tags
 
-| Name          | Type     | Default | Description                                                                                                                |
-| ------------- | -------- | ------- | -------------------------------------------------------------------------------------------------------------------------- |
-| build_metrics | tag      | -       | Mprove creates a metric for each pair of tagged time based dimensions and measure (for all measures of the malloy source). |
-| field_group   | string[] | -       | Mprove adds the tagged fields to a subgroup in the web interface (model field tree).                                       |
+| Name          | Type | Default | Description                                                                                                                |
+| ------------- | ---- | ------- | -------------------------------------------------------------------------------------------------------------------------- |
+| build_metrics | tag  | -       | Mprove creates a metric for each pair of tagged time based dimensions and measure (for all measures of the malloy source). |
+| field_group   | tag  | -       | Mprove adds the tagged fields to a subgroup in the web interface (model fields tree).                                      |

@@ -1,7 +1,4 @@
 export const chartYaml = `chart: chart_name
-access_roles:
-- role
-- role
 tiles: # Chart must have exactly one tile
 - title: 'tile title'
   description: ''

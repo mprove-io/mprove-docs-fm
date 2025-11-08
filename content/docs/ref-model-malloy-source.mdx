@@ -7,10 +7,9 @@ title: Model - Malloy Source
 For SQL connections, Mprove creates Data Models based on [Malloy Sources](https://docs.malloydata.dev/documentation/language/source).
 
 <Callout>
-  In Malloy, the term "Model" usually refers to a file containing Malloy code.
-  
   In Mprove, a "Model" is a Malloy Source that has `#(mprove) model` tag.
 
+  In Malloy, the term "Model" usually refers to a file containing Malloy code.
 </Callout>
 
 Malloy Sources are reusable. Multiple Sources and Queries can reference the same Source.
@@ -41,6 +40,8 @@ source: c1_order_items is c1_order_items_tx extend {
     profit_margin is total_profit / total_sale_price
 }
 ```
+
+Example of building metrics: 
 
 ```malloy title="tables/c1_orders_tx.malloy"
 ##! experimental{sql_functions}
@@ -74,7 +75,7 @@ source: c1_orders_tx is c1_orders_table extend {
 | model        | tag  | -       | If specified, the Malloy source will become available for exploration as an Mprove model.                                                                                                                                         |
 | access_roles | tag  | -       | User roles list separated by comma. If `access_roles` tag is set, only users with specified roles will be able to explore the model. If `access_roles` tag is not specified, all project users will be able to explore the model. |
 | label        | tag  | -       | Model label in UI                                                                                                                                                                                                                 |
-| top_label    | tag  | -       | Top node label in the Model Schema                                                                                                                                                                                                      |
+| top_label    | tag  | -       | Top node label in the Model Schema                                                                                                                                                                                                |
 
 ### Dimension #(mprove) Tags
 

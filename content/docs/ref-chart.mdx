@@ -7,6 +7,12 @@ import { chartYaml } from "@/content/docs/parts/chart-yaml";
 
 # Chart
 
+<Callout>
+  Reports, Charts, Dashboards are intended to be created and modified through the
+  user interface. The file representation is for checking errors during
+  validation.
+</Callout>
+
 Each chart must be stored as **chart_name.chart** YAML file:
 
 <DynamicCodeBlock
@@ -24,7 +30,7 @@ Each chart must be stored as **chart_name.chart** YAML file:
 
 ### Chart
 
-| Name         | Type                                | Default | Description                                                              |
-| ------------ | ----------------------------------- | ------- | ------------------------------------------------------------------------ |
-| chart\*      | string                              | -       | Chart name                                                               |
-| tiles\*      | [Tile []](/docs/ref-dashboard#tile) | -       | Chart tile has the same configuration as dashboard tile                  |
+| Name    | Type                                | Default | Description                                             |
+| ------- | ----------------------------------- | ------- | ------------------------------------------------------- |
+| chart\* | string                              | -       | Chart name                                              |
+| tiles\* | [Tile []](/docs/ref-dashboard#tile) | -       | Chart tile has the same configuration as dashboard tile |

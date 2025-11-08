@@ -7,13 +7,19 @@ import { googleAnalyticsYaml } from "@/content/docs/parts/google-analytics-yaml"
 
 # Connections
 
-## SQL data sources
+## SQL Data Sources
 
-Malloy connection types:
+Mprove connects to SQL databases that are supported by Malloy:
 
 - PostgreSQL
+- MySQL
+- Presto
+- Trino
+- SnowFlake
+- BigQuery
+- MotherDuck (DuckDb)
 
-## API data sources
+## API Data Sources
 
 The API connection is universal and can work with different API providers.
 Logic for creating a request and transforming a response must be defined in the Store file.
@@ -23,18 +29,16 @@ Store connection types:
 - API
 - Google API
 
-### API
+For **API** query, Mprove does a single request to the data source.
 
-For each query, the API connection does a single request to the data source.
-
-### Google API
-
-Google API connection does 2 requests:
+For **Google API** query, Mprove does 2 requests:
 
 - Auth request to get credentials
 - Data request (query)
 
 ## API Store Presets
+
+[Store files](/docs/ref-model-store) can work without presets.
 
 Presets are reusable Store file templates for API data sources.
 

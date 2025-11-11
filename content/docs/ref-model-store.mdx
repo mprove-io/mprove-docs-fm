@@ -12,12 +12,40 @@ import { storeConstantsSelectedDimensionsJs } from "@/content/docs/parts/store-c
 import { storeConstantsSelectedMeasuresJs } from "@/content/docs/parts/store-constants-selected-measures-js";
 import { storeConstantsQueryParametersJs } from "@/content/docs/parts/store-constants-query-parameters-js";
 import { modelStoreFieldsYaml } from "@/content/docs/parts/model-store-fields-yaml";
+import { googleAnalyticsYaml } from "@/content/docs/parts/google-analytics-yaml";
 
 # Model - Store
 
-Store Model defines fields and logic for retrieving data via an HTTP request.
+## API Store Presets
 
-The example provided is tested for the Google Analytics Reporting API. You can use it by creating a Store file that references a [Store Preset](/docs/connections#api-store-presets). For other sources, you need to create a full Store file without presets.
+Presets are reusable Store templates for API data sources.
+
+Mprove has a [Store preset for Google Analytics](https://github.com/mprove-io/mprove/blob/master/apps/blockml/src/presets/google_analytics.store.preset).
+
+Minimal Store file that uses the preset looks like this.
+
+<DynamicCodeBlock
+  lang="yaml"
+  code={googleAnalyticsYaml}
+  options={{
+    themes: {
+      light: "catppuccin-latte",
+      dark: "rose-pine",
+    },
+  }}
+/>
+
+Additional parameters specified in the Store file will override those taken from the preset.
+
+## Store Model
+
+**Store Model** defines the schema and logic for retrieving query data via an HTTP request.
+
+To use **Google Analytics** integration create a Store file that references a [Store Preset](/docs/connections#api-store-presets).
+
+For custom API data sources (when no preset is available), you need to create a full Store file.
+
+This page shows how to create a custom integration from scratch. **Google Analytics** is used as an example.
 
 Each Store must be stored as **store_name.store** YAML file:
 

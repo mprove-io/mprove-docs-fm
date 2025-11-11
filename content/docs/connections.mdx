@@ -2,9 +2,6 @@
 title: Connections
 ---
 
-import { DynamicCodeBlock } from "@/components/dynamic-codeblock";
-import { googleAnalyticsYaml } from "@/content/docs/parts/google-analytics-yaml";
-
 # Connections
 
 ## SQL Data Sources
@@ -35,26 +32,3 @@ For **Google API** query, Mprove does 2 requests:
 
 - Auth request to get credentials
 - Data request (query)
-
-## API Store Presets
-
-[Store files](/docs/ref-model-store) can work without presets.
-
-Presets are reusable Store file templates for API data sources.
-
-Mprove has a [Store preset for Google Analytics](https://github.com/mprove-io/mprove/blob/master/apps/blockml/src/presets/google_analytics.store.preset).
-
-Minimal Store file that uses the preset looks like this.
-
-<DynamicCodeBlock
-  lang="yaml"
-  code={googleAnalyticsYaml}
-  options={{
-    themes: {
-      light: "catppuccin-latte",
-      dark: "rose-pine",
-    },
-  }}
-/>
-
-Additional parameters specified in the Store file will override those taken from the preset.

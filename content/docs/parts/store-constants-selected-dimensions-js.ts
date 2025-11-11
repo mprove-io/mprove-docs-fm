@@ -3,7 +3,7 @@ export const storeConstantsSelectedDimensionsJs = `const QUERY_SELECTED_DIMENSIO
     result: 'string',
     group: 'geo',
     description: 'The city from which the user activity originated',
-    meta: { name: 'city' },
+    meta: { apiName: 'city', uiName: 'City' },
     name: 'city',
     fieldClass: 'dimension',
     label: 'City',

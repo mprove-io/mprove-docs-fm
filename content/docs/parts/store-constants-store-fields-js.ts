@@ -6,9 +6,8 @@ export const storeConstantsStoreFieldsJs = `const STORE_FIELDS = [
     fraction_controls: [
       {
         label: 'Property',
-        value: '474781769',
+        value: '123123123',
         options: [
-          { value: '474781769' },
           { value: '123123123' }
         ],
         name: 'ga_property',

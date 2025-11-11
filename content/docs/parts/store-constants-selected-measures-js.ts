@@ -4,7 +4,8 @@ export const storeConstantsSelectedMeasuresJs = `const QUERY_SELECTED_MEASURES =
     group: 'users',
     description: 'The number of distinct users who visited your site or app',
     meta: {
-      name: 'activeUsers',
+      apiName: 'activeUsers',
+      uiName: 'Active users',
       type: 'TYPE_INTEGER',
     },
     name: 'active_users',

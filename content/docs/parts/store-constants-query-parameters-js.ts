@@ -53,10 +53,9 @@ export const storeConstantsQueryParametersJs = `const QUERY_PARAMETERS = [
         controls: [
           {
             options: [
-              { value: '474781769' },
               { value: '123123123' }
             ],
-            value: '474781769',
+            value: '123123123',
             label: 'Property',
             name: 'ga_property',
             controlClass: 'selector'

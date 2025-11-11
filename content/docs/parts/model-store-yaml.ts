@@ -4,12 +4,12 @@ connection: c7_google
 label: Google Analytics
 description: 'Google Analytics Reporting'
 access_roles: []
-date_range_includes_right_side: true
 method: POST
 request: |
   <createRequest.js content>
 response: |
   <processRequest.js content>
+date_range_includes_right_side: true
 parameters:
 - filter: top_config
   required: true
@@ -17,10 +17,9 @@ parameters:
   fraction_controls:
   - selector: ga_property
     label: Property
-    value: 456456456
+    value: '123456789'
     options:
-    - value: 456456456
-    - value: 123123123
+    - value: '123456789'
   - date_picker: start_date
     label: Start Date
     value: $METRICS_DATE_FROM
@@ -127,15 +126,38 @@ results:
     - list_input: values_input
 
 field_groups:
-- group: geo
-- group: events
-- group: users
-- group: sessions
-- group: page_screens
+  - group: "attribution"
+    label: "Attribution"
+  - group: "demographics"
+    label: "Demographics"
+  - group: "ecommerce"
+    label: "Ecommerce"
+  - group: "event"
+    label: "Event"
+  - group: "geography"
+    label: "Geography"
+  - group: "other"
+    label: "Other"
+  - group: "page_screen"
+    label: "Page Screen"
+  - group: "platform_device"
+    label: "Platform Device"
+  - group: "publisher"
+    label: "Publisher"
+  - group: "revenue"
+    label: "Revenue"
+  - group: "session"
+    label: "Session"
+  - group: "traffic_source"
+    label: "Traffic Source"
+  - group: "user"
+    label: "User"
+  - group: "user_lifetime"
+    label: "User Lifetime"
 
 field_time_groups:
 - time: event_created_at
-  group: events
+  group: event
   label: 'Event Created At'
 
 build_metrics:

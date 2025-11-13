@@ -1,18 +1,20 @@
 ---
-title: Model - Malloy Source
+title: Model - Malloy
 ---
 
-# Model - Malloy Source
+# Model - Malloy
 
 For SQL connections, Mprove creates Data Models based on [Malloy Sources](https://docs.malloydata.dev/documentation/language/source).
 
 <Callout>
-In Malloy, the term “model” usually refers to a file containing Malloy code. 
-In Mprove, the term “model” refers to a Malloy source with the tag `#(mprove) model`.
+In Malloy, the term “model” usually refers to a file containing Malloy code.
 
-It is important to store malloy files containing `#(mprove) model` separately from other
-malloy elements, such as `run: ...` or `query: ...`, in order to minimize malloy compilation time.
-This file structure also improves readability and simplifies maintenance.
+In Mprove, the term “model” refers to a Malloy Source with the tag `#(mprove) model`.
+
+To minimize Malloy compilation time in Mprove, it is important to store Malloy sources
+in separate files from other Malloy elements, such as `run: ...` or `query: ...`.
+
+This file structure is also easier to maintain.
 
 </Callout>
 
@@ -45,7 +47,7 @@ source: c1_order_items is c1_order_items_tx extend {
 }
 ```
 
-Example of building metrics:
+Example of building Metrics that can be used in [Reports](/docs/ref-report):
 
 ```malloy title="tables/c1_orders_tx.malloy"
 ##! experimental{sql_functions}

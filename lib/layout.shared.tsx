@@ -1,13 +1,6 @@
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 import MproveLogo from "./mprove-logo";
 
-/**
- * Shared layout configurations
- *
- * you can customise layouts individually from:
- * Home Layout: app/(home)/layout.tsx
- * Docs Layout: app/docs/layout.tsx
- */
 export function baseOptions(): BaseLayoutProps {
   return {
     nav: {
@@ -17,7 +10,6 @@ export function baseOptions(): BaseLayoutProps {
         </>
       ),
     },
-    // see https://fumadocs.dev/docs/ui/navigation/links
     links: [],
   };
 }

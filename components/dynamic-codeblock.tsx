@@ -96,6 +96,7 @@ function Placeholder({
     <Pre>
       <Code>
         {code.split("\n").map((line, i) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey: te
           <span key={i} className="line">
             {line}
           </span>

@@ -6,7 +6,8 @@
 
 export default function MproveLogo(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg
+    // biome-ignore lint/a11y/noSvgWithoutTitle: temp
+<svg
       version="1.1"
       id="Layer_1"
       xmlns="http://www.w3.org/2000/svg"

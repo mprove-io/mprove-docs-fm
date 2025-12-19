@@ -117,9 +117,9 @@ export function CodeBlock({
           {typeof icon === 'string' ? (
             <div
               className="[&_svg]:size-3.5"
-              dangerouslySetInnerHTML={{
-                __html: icon,
-              }}
+              // dangerouslySetInnerHTML={{
+              //   __html: icon,
+              // }}
             />
           ) : (
             icon

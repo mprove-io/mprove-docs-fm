@@ -2,7 +2,6 @@
   "root": false,
   "title": "CLI Commands",
   "description": "The CLI tool for docs automation",
-  "icon": "Terminal",
   "pages": [
     "sync",
     "validate",

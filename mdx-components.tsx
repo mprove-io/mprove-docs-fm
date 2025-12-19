@@ -1,8 +1,8 @@
 import { HTMLAttributes } from "react";
 import { CodeBlock, Pre } from "./components/codeblock";
 //
-import defaultMdxComponents from 'fumadocs-ui/mdx';
-import type { MDXComponents } from 'mdx/types';
+import defaultMdxComponents from "fumadocs-ui/mdx";
+import type { MDXComponents } from "mdx/types";
 //
 // import { CodeBlock, CodeBlockProps } from "fumadocs-ui/components/codeblock";
 

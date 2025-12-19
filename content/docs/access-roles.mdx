@@ -6,9 +6,11 @@ title: Access Roles
 
 Access roles can be assigned to project members by users with **ProjectAdmin** role.
 
-Dashboards, Reports and Models (we'll refer to them as the objects) have `access_roles` parameter.
+Dashboards, Reports and Models have `access_roles` parameter:
+- Syntax for Mprove YAML - `access_roles: [sales, marketing]`
+- Syntax for Malloy model custom tags - `access_roles="sales, marketing"`
 
-If object has `access_roles: [sales, marketing]`, then only those project members who have the "sales" or "marketing" access role will be able to access this object.
+Only project members with "sales" or "marketing" access roles will be able to access these objects.
 
 If an object has no `access_roles` then any project member can access this object. This means that the object is public for all project members.
 

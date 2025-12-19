@@ -53,7 +53,7 @@ Each dashboard must be stored as **dashboard_name.dashboard** YAML file:
 | type\*      | enum                                 | -       | <ul><li>table</li><li>line</li><li>scatter</li><li>bar</li><li>single</li><li>pie</li></ul> |
 | data        | [Tile Data](#tile-data)              | -       |                                                                                             |
 | options     | [Tile Options](#tile-options)        | -       |                                                                                             |
-| plate       | [Tile Plate](#tile-plate)            | -       | (only for dashboard tiles)                                                                  |
+| plate       | [Tile Plate](#tile-plate)            | -       | `only for dashboard tiles`                                                                |
 
 ### Tile Parameter
 
@@ -62,9 +62,9 @@ Tile parameter must have **listen**, **conditions** or **fractions**.
 | Name       | Type                                         | Default | Description                                                         |
 | ---------- | -------------------------------------------- | ------- | ------------------------------------------------------------------- |
 | apply_to\* | string                                       | -       | Field or Filter name                                                |
-| listen     | string                                       | -       | (only for dashboard tiles) Specify dashboard parameter to listen to |
-| conditions | string []                                    | -       | (for parameters mapped to Malloy Model) List of filter expressions  |
-| fractions  | [Fraction []](/docs/ref-parameters#fraction) | -       | (for parameters mapped to Store Model) List of fractions            |
+| listen     | string                                       | -       | `only for dashboard tiles` <br/> Specify dashboard parameter to listen to |
+| conditions | string []                                    | -       | `for parameters mapped to Malloy Model` <br/> List of filter expressions  |
+| fractions  | [Fraction []](/docs/ref-parameters#fraction) | -       | `for parameters mapped to Store Model` <br/> List of fractions            |
 
 ### Tile Data
 
@@ -99,8 +99,8 @@ Tile parameter must have **listen**, **conditions** or **fractions**.
 
 | Name            | Type    | Default | Description                                                       |
 | --------------- | ------- | ------- | ----------------------------------------------------------------- |
-| data_field\*\*  | string  | -       | (for Dashboard or Chart tile options only) One of y_fields values |
-| data_row_id\*\* | string  | -       | (for Report's options only) One of row_ids with show_chart "true" |
+| data_field\*\*  | string  | -       | `for Dashboard or Chart tile options only` <br/> One of y_fields values |
+| data_row_id\*\* | string  | -       | `for Report's options only` <br/> One of row_ids with show_chart "true" |
 | y_axis_index    | integer | 0       | 0 (Y Axis Left) or 1 (Y Axis Right)                               |
 | type            | enum    | -       | <ul><li>line</li><li>bar</li></ul>                                |
 

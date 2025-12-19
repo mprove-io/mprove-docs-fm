@@ -2,6 +2,10 @@
 @import "fumadocs-ui/css/vitepress.css";
 @import "fumadocs-ui/css/preset.css";
 
+#nd-sidebar a {
+  transition-duration: 0ms !important; 
+}
+
 #nd-page > div > div {
   /* callout, callout warn */
   font-size: 0.95rem;

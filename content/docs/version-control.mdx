@@ -6,7 +6,7 @@ title: "Version Control"
 
 ## Dev and Production Repositories
 
-Project repositories stores Mprove files:
+Mprove files:
 
 - [mprove.yml](/docs/ref-project-config) (Project Config)
 - [\*.malloy](/docs/ref-model-malloy)
@@ -15,10 +15,10 @@ Project repositories stores Mprove files:
 - [\*.report](/docs/ref-report)
 - [\*.dashboard](/docs/ref-dashboard)
 
-When you create a new project:
+When you create a new project, Mprove creates:
 
-- Mprove creates **Production** repository locally on the server that mirrors **Remote** repository content
-- Mprove creates Personal **Dev** repository locally on the server for each project member with **FilesEditor** role
+- **Production** repository locally on the server that mirrors **Remote** repository content
+- Personal **Dev** repository locally on the server for each project member with **FilesEditor** role
 
 Dev repositories allow users to edit files and test changes without affecting **Production** version of files.
 
@@ -46,12 +46,10 @@ Once the user is satisfied with the changes made, the user can **_commit_** and 
 
 ## Git Branches
 
-Small projects may only need to use one branch (usually called master or main).
-
-Advanced git users may work in different branches.
+Small projects may only need to use one branch (usually called master or main). Advanced git users may work in different branches.
 
 <Callout type="info">
-  Users can switch between branches using **repo-branch** selector.
+  Users can switch between branches using **repo-branch** selector in navigation bar.
 </Callout>
 
 ## User Actions
@@ -60,9 +58,8 @@ Git related actions are available on the Files page:
 
 - **Save and Validate** - Save the changes. Mprove will automatically check all files in the project repository data folder for errors.
 
-<Callout type="error">
-  If errors are found during validation, they need to be fixed so that changes
-  can be pushed to production.
+<Callout type="warn">
+  If errors are found during files validation step, they need to be fixed before pushing to production.
 </Callout>
 
 - **Commit** - Commit changes in Dev repo.

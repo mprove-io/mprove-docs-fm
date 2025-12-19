@@ -10,24 +10,19 @@ A project administrator can create additional environments and give a project me
 
 <Callout type="info" title="Creating additional environments is optional">
   For example, if you have a test instance of a data warehouse, you can create a
-  test environment and run queries against it until the models are ready for
-  **prod**.
+  test environment and run queries against it.
 </Callout>
 
 ## Environment Connections
 
-Mprove models refer to connections by name.
-
-Each connection is tied to one environment.
-
-Two or more connections can have the same name but belong to different
+Mprove models refer to connections by name. Each connection is tied to one environment. Two or more connections can have the same name but belong to different
 environments.
 
 <Callout type="info">
   Connection names are not unique across environments.
 </Callout>
 
-Users can switch between environments in the UI.
+Users with **FileEditor** role can switch between environments in UI while working in their Dev repositories.
 
 ## Environment Variables
 

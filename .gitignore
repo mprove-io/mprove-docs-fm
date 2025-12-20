@@ -5,6 +5,9 @@
 !.vscode/tasks.json
 !.vscode/launch.json
 
+*.env
+.envrc
+
 # deps
 /node_modules
 
@@ -31,3 +34,4 @@ yarn-error.log*
 .env*.local
 .vercel
 next-env.d.ts
+

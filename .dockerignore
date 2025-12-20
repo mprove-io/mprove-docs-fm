@@ -1,0 +1,14 @@
+_nogit
+.git
+.next/
+.source/
+.pnpm-store/
+.vscode/
+node_modules/
+docs.Dockerfile
+next-env.d.ts
+
+.env
+.envrc
+
+**/.DS_Store

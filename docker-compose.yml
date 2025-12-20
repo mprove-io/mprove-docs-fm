@@ -1,0 +1,8 @@
+services:
+  docs:
+    build:
+      context: ./
+      dockerfile: docs.Dockerfile
+    image: ghcr.io/mprove-io/mprove-docs:$MPROVE_DOCS_RELEASE_TAG
+    ports:
+      - 3000:3000

@@ -21,7 +21,7 @@ export default function MproveLogo(props: React.SVGProps<SVGSVGElement>) {
       <style type="text/css">
         {`
           .st0 { fill: #FFFFFF; }
-          .st2 { fill: #3451b2; }
+          .st2 { fill: #155dfc; }
         `}
       </style>
       <g>

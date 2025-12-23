@@ -26,8 +26,8 @@ $ mprove get-query
   --report-id #0        (dashboard-id, chart-id or report-id required) Report Id (name)
   --row-id #0           (optional) Report Row Id
   --timezone #0         (default "UTC") Timezone
-  --timeSpec #0         (default "days") "minutes" | "hours" | "days" | "weeks" | "months" | "quarters" | "years"
-  --timeRange #0        (default "last 5 days complete plus current") Ts Filter Expression
+  --detail #0           (default "days") "timestamps" | "seconds" | "minutes" | "hours" | "days" | "weeks" | "months" | "quarters" | "years"
+  --range #0            (default "f`last 5 days`") Ts Filter Expression
   --get-sql             (default false), show query sql in output
   --get-data            (default false), show query data in output
   --json                (default false)
@@ -58,25 +58,24 @@ Get query for Dev repo Report
 --tile-index 0 \
 --get-sql
 
-dashboard:
-  title:       Ecommerce
-  dashboardId: ec1_d1
-  url:         https://cloud.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/XWZVQJLVR3NZJTBB4ZA6/branch/main/env/prod/dashboard/ec1_d1
-  tiles:
-    -
+dashboard: 
+  title:       Ecom
+  dashboardId: TDEXWBE5PI2X17CJCFKC
+  url:         https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/UPXRRK83O347QLFNDX4H/branch/main/env/prod/dashboard/TDEXWBE5PI2X17CJCFKC?timezone=UTC
+  tiles: 
+    - 
       title: Average Sale Price by Category
-      query:
+      query: 
         connectionId:         c1_postgres
         connectionType:       PostgreSQL
-        queryId:              7de5c76b68a74ae25738a1ff0af2a7c690f99645247ceee8838a86d3f59a168c
+        queryId:              c5ad3abf96a15da1d7f7bae0ca9f7ca92388265fa9d56388f3fbbc890c7aaabf
         status:               Completed
-        lastRunBy:            XWZVQJLVR3NZJTBB4ZA6
-        lastRunTs:            1672232417049
-        lastCancelTs:         0
-        lastCompleteTs:       1672232419104
-        lastCompleteDuration: 2
-        lastErrorMessage:     null
-        lastErrorTs:          0
+        lastRunBy:            UPXRRK83O347QLFNDX4H
+        lastRunTs:            1765907902094
+        lastCancelTs:         null
+        lastCompleteTs:       1765907902712
+        lastCompleteDuration: 0
+        lastErrorTs:          null
         sql:
           """
             <sql query>

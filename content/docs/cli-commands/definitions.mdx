@@ -31,95 +31,95 @@ Print the CLI definitions
 ...
   path:        mprove get-query
   usage:       mprove get-query
-  description:
+  description: 
     """
       Get query
-
+      
     """
-  examples:
-    -
-      -
+  examples: 
+    - 
+      - 
         """
           Get query for Dev repo Chart
-
+          
         """
       - mprove get-query --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod --chart-id v1 --get-sql --get-data
-    -
-      -
+    - 
+      - 
         """
           Get query for Dev repo Dashboard
-
+          
         """
       - mprove get-query --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod --dashboard-id d1 --get-sql --get-data
-    -
-      -
+    - 
+      - 
         """
           Get query for Dev repo Report
-
+          
         """
       - mprove get-query --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod --report-id r1 --get-sql --get-data
-  options:
-    -
+  options: 
+    - 
       definition:  --project-id #0
       description: (required) Project Id
       required:    false
-    -
+    - 
       definition:  --repo #0
       description: (required, "dev" or "production")
       required:    true
-    -
+    - 
       definition:  --branch #0
       description: (required) Git Branch
       required:    true
-    -
+    - 
       definition:  --env #0
       description: (required) Environment
       required:    true
-    -
+    - 
       definition:  --dashboard-id #0
       description: (dashboard-id, chart-id or report-id required) Dashboard Id (name)
       required:    false
-    -
+    - 
       definition:  --tile-index #0
       description: (optional) Dashboard Tile Index starting with 0
       required:    false
-    -
+    - 
       definition:  --chart-id #0
       description: (dashboard-id, chart-id or report-id required) Chart Id (name)
       required:    false
-    -
+    - 
       definition:  --report-id #0
       description: (dashboard-id, chart-id or report-id required) Report Id (name)
       required:    false
-    -
+    - 
       definition:  --row-id #0
       description: (optional) Report Row Id
       required:    false
-    -
+    - 
       definition:  --timezone #0
       description: (default "UTC") Timezone
       required:    false
-    -
-      definition:  --timeSpec #0
-      description: (default "days") "minutes" | "hours" | "days" | "weeks" | "months" | "quarters" | "years"
+    - 
+      definition:  --detail #0
+      description: (default "days") "timestamps" | "seconds" | "minutes" | "hours" | "days" | "weeks" | "months" | "quarters" | "years"
       required:    false
-    -
-      definition:  --timeRange #0
-      description: (default "last 5 days complete plus current") Ts Filter Expression
+    - 
+      definition:  --range #0
+      description: (default "f`last 5 days`") Ts Filter Expression
       required:    false
-    -
+    - 
       definition:  --get-sql
       description: (default false), show query sql in output
       required:    false
-    -
+    - 
       definition:  --get-data
       description: (default false), show query data in output
       required:    false
-    -
+    - 
       definition:  --json
       description: (default false)
       required:    false
-    -
+    - 
       definition:  --env-file-path #0
       description: (optional) Path to ".env" file
       required:    false

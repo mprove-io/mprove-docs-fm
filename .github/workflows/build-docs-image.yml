@@ -49,7 +49,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: setup-docker/docs.Dockerfile
+          file: docs.Dockerfile
           platforms: linux/amd64
           push: true
           cache-from: type=gha,scope=docs-repo-docker-cache-amd64
@@ -84,7 +84,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: setup-docker/docs.Dockerfile
+          file: docs.Dockerfile
           platforms: linux/arm64
           push: true
           cache-from: type=gha,scope=docs-repo-docker-cache-arm64

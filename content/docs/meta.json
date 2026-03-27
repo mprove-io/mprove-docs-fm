@@ -22,8 +22,8 @@
     "---Mprove CLI---",
     "cli-install",
     "cli-configuration",
-    "cli-basic",
     "cli-main",
-    "cli-git"
+    "cli-git",
+    "cli-basic"
   ]
 }

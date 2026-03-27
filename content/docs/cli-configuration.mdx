@@ -4,31 +4,28 @@ title: CLI Configuration
 
 # CLI Configuration
 
-Mprove CLI looks for each configuration value in the following order:
+Mprove CLI searches for each configuration parameter in the following order:
 
-1. Reads argument from current command invocation (only for `--project-id`)
-2. If not found, reads the value from process environment variable
-3. If not found, reads the value from file specified with `--env-file-path`
-4. If not found, reads the value from `.env` file located in the current working directory.
+1. current command invocation (only for `--project-id`)
+2. process environment variable
+3. file specified with `--env-file-path`
+4. `.env` file located in the current working directory.
 5. If not found, an error is shown.
 
-## Required parameters
+## Parameters
 
 ```
+MPROVE_CLI_API_KEY=PK-...
 MPROVE_CLI_HOST=https://app.mprove.io
-MPROVE_CLI_EMAIL=user@example.com
-MPROVE_CLI_PASSWORD=pass
-```
-
-`MPROVE_CLI_EMAIL` and `MPROVE_CLI_PASSWORD` are the standard credentials that are used when logging in
-
-## Optional parameters
-
-```
 MPROVE_CLI_PROJECT_ID=DXYE72ODCP5LWPWH2EXQ
 ```
 
-If the `--project-id` flag is specified when calling the command, then it is used instead of the configuration parameter `MPROVE_CLI_PROJECT_ID`.
+`MPROVE_CLI_API_KEY` is a personal access api key (can be generated on user profile page)
+
+
+`MPROVE_CLI_PROJECT_ID` is optional and can be used instead of `--project-id` 
+
+If the `--project-id` is specified for command, it takes precedence over `MPROVE_CLI_PROJECT_ID`
 
 <Callout type="info">
   Project ID can be obtained from web application URL:

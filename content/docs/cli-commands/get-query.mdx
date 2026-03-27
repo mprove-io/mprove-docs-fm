@@ -17,7 +17,7 @@ $ mprove get-query
 ━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   --project-id #0       (required) Project Id
-  --repo #0             (required, "dev" or "production")
+  --repo #0             (required, "dev", "production" or "session")
   --branch #0           (required) Git Branch
   --env #0              (required) Environment
   --dashboard-id #0     (dashboard-id, chart-id or report-id required) Dashboard Id (name)
@@ -26,8 +26,9 @@ $ mprove get-query
   --report-id #0        (dashboard-id, chart-id or report-id required) Report Id (name)
   --row-id #0           (optional) Report Row Id
   --timezone #0         (default "UTC") Timezone
-  --detail #0           (default "days") "timestamps" | "seconds" | "minutes" | "hours" | "days" | "weeks" | "months" | "quarters" | "years"
-  --range #0            (default "f`last 5 days`") Ts Filter Expression
+  --detail #0           (default "days") for Report -  "timestamps" | "seconds" | "minutes" | "hours" | "days" | "weeks" | "months" | "quarters" | "years"
+  --range #0            (default "f`last 5 days`") for Report - Ts Filter Expression
+  --get-malloy          (default false), show malloy query in output
   --get-sql             (default false), show query sql in output
   --get-data            (default false), show query data in output
   --json                (default false)
@@ -35,33 +36,34 @@ $ mprove get-query
 
 ━━━ Examples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Get query for Dev repo Chart
-  $ mprove get-query --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod --chart-id v1 --get-sql --get-data
+Get Query for Chart
+  $ mprove get-query --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod --chart-id v1 --get-malloy --get-sql --get-data
 
-Get query for Dev repo Dashboard
-  $ mprove get-query --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod --dashboard-id d1 --get-sql --get-data
+Get Query for Dashboard
+  $ mprove get-query --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod --dashboard-id d1 --get-malloy --get-sql --get-data
 
-Get query for Dev repo Report
-  $ mprove get-query --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod --report-id r1 --get-sql --get-data
+Get Query for Report
+  $ mprove get-query --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod --report-id r1 --get-malloy --get-sql --get-data
 ```
 
 ## Example Output
 
 ```
-➜  ~ mprove get-query \
---env-file-path ~/mprove/.env \
+➜  ~ mprove get-query \ 
+--env-file-path /mprove/.env \
 --project-id DXYE72ODCP5LWPWH2EXQ \
 --repo dev \
 --branch main \
 --env prod \
---dashboard-id ec1_d1 \
+--dashboard-id TDEXWBE5PI2X17CJCFKC \
 --tile-index 0 \
---get-sql
+--get-sql \
+--get-malloy
 
 dashboard: 
   title:       Ecom
   dashboardId: TDEXWBE5PI2X17CJCFKC
-  url:         https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/UPXRRK83O347QLFNDX4H/branch/main/env/prod/dashboard/TDEXWBE5PI2X17CJCFKC?timezone=UTC
+  url:         https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/UPXRRK83O347QLFNDX4H/branch/main/env/prod/dashboards/dashboard/TDEXWBE5PI2X17CJCFKC?timezone=UTC
   tiles: 
     - 
       title: Average Sale Price by Category
@@ -76,6 +78,10 @@ dashboard:
         lastCompleteTs:       1765907902712
         lastCompleteDuration: 0
         lastErrorTs:          null
+        malloy:
+          """
+            <malloy query>
+          """
         sql:
           """
             <sql query>

@@ -8,7 +8,7 @@ title: run
 
 ```
 ➜  ~ mprove run -h
-Run dashboards and charts
+Run dashboards, charts, and reports
 
 ━━━ Usage ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -17,7 +17,7 @@ $ mprove run
 ━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   --project-id #0       (required) Project Id
-  --repo #0             (required, "dev" or "production")
+  --repo #0             (required, "dev", "production" or "session")
   --branch #0           (required) Git Branch
   --env #0              (required) Environment
   --concurrency #0      (optional) Max number of concurrent queries
@@ -29,6 +29,9 @@ $ mprove run
   --no-charts           (default false) Do not run charts
   --get-dashboards      (default false), show dashboards in output
   --get-charts          (default false), show charts in output
+  --report-ids #0       (optional) Filter reports to run by report names, separated by comma
+  --no-reports          (default false) Do not run reports
+  --get-reports         (default false), show reports in output
   --json                (default false)
   --env-file-path #0    (optional) Path to ".env" file
 
@@ -47,8 +50,8 @@ Run for Production repo
 ## Example Output
 
 ```
-➜  ~ mprove run \
---env-file-path ~/mprove/.env \
+➜  ~ mprove run \ 
+--env-file-path /mprove/.env \
 --project-id DXYE72ODCP5LWPWH2EXQ \
 --concurrency 2 \
 --wait \
@@ -58,9 +61,17 @@ Run for Production repo
 --no-dashboards \
 --chart-ids QT8UY0Z1PR3YKP2M2KK9,W5LMN2TZJUKJ5EC5MK99
 
+charts: 
+  (empty array)
+dashboards: 
+  (empty array)
+reports: 
+  (empty array)
 errorCharts: 
   (empty array)
 errorDashboards: 
+  (empty array)
+errorReports: 
   (empty array)
 queriesStats: 
   started:   0

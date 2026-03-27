@@ -17,7 +17,7 @@ $ mprove get-state
 ━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   --project-id #0       (required) Project Id
-  --repo #0             (required, "dev" or "production")
+  --repo #0             (required, "dev", "production" or "session")
   --branch #0           (required) Git Branch
   --env #0              (required) Environment
   --get-errors          (default false), show validation errors in output
@@ -55,83 +55,76 @@ Get Production repo state
 --get-models \
 --get-repo
 
+needValidate:          false
+structId:              GPW31AVUWSD2FZAVSJAW
 validationErrorsTotal: 0
 modelsTotal:           2
-dashboardsTotal:       1
-chartsTotal:           10
-needValidate:          false
-structId:              EXQ0Q3DUSQAO0Q9G0YPI
-charts: 
-  - 
-    chartId: 3RSWC67J95AJU09HWYEY
-    url:     https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/UPXRRK83O347QLFNDX4H/branch/main/env/prod/charts?search=3RSWC67J95AJU09HWYEY&timezone=UTC
-  - 
-    chartId: 4V3KWMRA9MSH21EQZCJQ
-    url:     https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/UPXRRK83O347QLFNDX4H/branch/main/env/prod/charts?search=4V3KWMRA9MSH21EQZCJQ&timezone=UTC
-  - 
-    chartId: BSANVXV135J7MF4YX32G
-    url:     https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/UPXRRK83O347QLFNDX4H/branch/main/env/prod/charts?search=BSANVXV135J7MF4YX32G&timezone=UTC
-  - 
-    chartId: C3ENGIP2LC00GUFMP333
-    url:     https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/UPXRRK83O347QLFNDX4H/branch/main/env/prod/charts?search=C3ENGIP2LC00GUFMP333&timezone=UTC
-  - 
-    chartId: HV8GQUR4SX8U2X8BQGE7
-    url:     https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/UPXRRK83O347QLFNDX4H/branch/main/env/prod/charts?search=HV8GQUR4SX8U2X8BQGE7&timezone=UTC
-  - 
-    chartId: J2N27XS541NR4SNQON8Y
-    url:     https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/UPXRRK83O347QLFNDX4H/branch/main/env/prod/charts?search=J2N27XS541NR4SNQON8Y&timezone=UTC
-  - 
-    chartId: QT8UY0Z1PR3YKP2M2KK9
-    url:     https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/UPXRRK83O347QLFNDX4H/branch/main/env/prod/charts?search=QT8UY0Z1PR3YKP2M2KK9&timezone=UTC
-  - 
-    chartId: W5LMN2TZJUKJ5EC5MK99
-    url:     https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/UPXRRK83O347QLFNDX4H/branch/main/env/prod/charts?search=W5LMN2TZJUKJ5EC5MK99&timezone=UTC
-  - 
-    chartId: WTZRH1G2EB0UEJ3F5GXK
-    url:     https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/UPXRRK83O347QLFNDX4H/branch/main/env/prod/charts?search=WTZRH1G2EB0UEJ3F5GXK&timezone=UTC
-  - 
-    chartId: TAI7K0TBZJ7YN4PM302A
-    url:     https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/UPXRRK83O347QLFNDX4H/branch/main/env/prod/charts?search=TAI7K0TBZJ7YN4PM302A&timezone=UTC
-reports: 
-  - 
-    reportId: 0ZN4W4XE9LQ7TSF5DQYC
-    url:      https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/UPXRRK83O347QLFNDX4H/branch/main/env/prod/reports/report/0ZN4W4XE9LQ7TSF5DQYC?timezone=UTC&timeSpec=days&timeRange=f`last_5_days`
-  - 
-    reportId: IEWZFR718VMKXXIHDV5J
-    url:      https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/UPXRRK83O347QLFNDX4H/branch/main/env/prod/reports/report/IEWZFR718VMKXXIHDV5J?timezone=UTC&timeSpec=days&timeRange=f`last_5_days`
-  - 
-    reportId: P5RZLWBKTGBY8J0X5ZIB
-    url:      https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/UPXRRK83O347QLFNDX4H/branch/main/env/prod/reports/report/P5RZLWBKTGBY8J0X5ZIB?timezone=UTC&timeSpec=days&timeRange=f`last_5_days`
-  - 
-    reportId: HU5OFI4NPP27SZPM92BK
-    url:      https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/UPXRRK83O347QLFNDX4H/branch/main/env/prod/reports/report/HU5OFI4NPP27SZPM92BK?timezone=UTC&timeSpec=days&timeRange=f`last_5_days`
-  - 
-    reportId: C0H2DVZKH0WBMHQBF9QY
-    url:      https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/UPXRRK83O347QLFNDX4H/branch/main/env/prod/reports/report/C0H2DVZKH0WBMHQBF9QY?timezone=UTC&timeSpec=days&timeRange=f`last_5_days`
-  - 
-    reportId: YG2PG1EA5IRXBRWPTS1L
-    url:      https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/UPXRRK83O347QLFNDX4H/branch/main/env/prod/reports/report/YG2PG1EA5IRXBRWPTS1L?timezone=UTC&timeSpec=days&timeRange=f`last_5_days`
-  - 
-    reportId: 0JDX1JF03IVGGJXKQBI7
-    url:      https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/UPXRRK83O347QLFNDX4H/branch/main/env/prod/reports/report/0JDX1JF03IVGGJXKQBI7?timezone=UTC&timeSpec=days&timeRange=f`last_5_days`
-dashboards: 
-  - 
-    dashboardId: TDEXWBE5PI2X17CJCFKC
-    url:         https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/UPXRRK83O347QLFNDX4H/branch/main/env/prod/dashboard/TDEXWBE5PI2X17CJCFKC?timezone=UTC
-models: 
-  - 
-    modelId: c5_flights
-    url:     https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/UPXRRK83O347QLFNDX4H/branch/main/env/prod/model/c5_flights/mconfig/empty/query/empty
+chartsTotal:           9
+dashboardsTotal:       2
+reportsTotal:          3
+builderUrl:            https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/T2SQOCM8KK2QMRYYH75N/branch/main/env/prod/builder
+validationErrors: 
+  (empty array)
+modelItems: 
   - 
     modelId: c1_order_items
-    url:     https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/UPXRRK83O347QLFNDX4H/branch/main/env/prod/model/c1_order_items/mconfig/empty/query/empty
+    url:     https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/T2SQOCM8KK2QMRYYH75N/branch/main/env/prod/models/model/c1_order_items/chart/new?timezone=UTC
+  - 
+    modelId: c6_order_items
+    url:     https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/T2SQOCM8KK2QMRYYH75N/branch/main/env/prod/models/model/c6_order_items/chart/new?timezone=UTC
+chartItems: 
+  - 
+    chartId: 3RSWC67J95AJU09HWYEY
+    url:     https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/T2SQOCM8KK2QMRYYH75N/branch/main/env/prod/models/model/c1_order_items/chart/3RSWC67J95AJU09HWYEY?timezone=UTC
+  - 
+    chartId: 4V3KWMRA9MSH21EQZCJQ
+    url:     https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/T2SQOCM8KK2QMRYYH75N/branch/main/env/prod/models/model/c1_order_items/chart/4V3KWMRA9MSH21EQZCJQ?timezone=UTC
+  - 
+    chartId: BSANVXV135J7MF4YX32G
+    url:     https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/T2SQOCM8KK2QMRYYH75N/branch/main/env/prod/models/model/c1_order_items/chart/BSANVXV135J7MF4YX32G?timezone=UTC
+  - 
+    chartId: C3ENGIP2LC00GUFMP333
+    url:     https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/T2SQOCM8KK2QMRYYH75N/branch/main/env/prod/models/model/c1_order_items/chart/C3ENGIP2LC00GUFMP333?timezone=UTC
+  - 
+    chartId: HV8GQUR4SX8U2X8BQGE7
+    url:     https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/T2SQOCM8KK2QMRYYH75N/branch/main/env/prod/models/model/c1_order_items/chart/HV8GQUR4SX8U2X8BQGE7?timezone=UTC
+  - 
+    chartId: J2N27XS541NR4SNQON8Y
+    url:     https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/T2SQOCM8KK2QMRYYH75N/branch/main/env/prod/models/model/c1_order_items/chart/J2N27XS541NR4SNQON8Y?timezone=UTC
+  - 
+    chartId: QT8UY0Z1PR3YKP2M2KK9
+    url:     https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/T2SQOCM8KK2QMRYYH75N/branch/main/env/prod/models/model/c1_order_items/chart/QT8UY0Z1PR3YKP2M2KK9?timezone=UTC
+  - 
+    chartId: W5LMN2TZJUKJ5EC5MK99
+    url:     https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/T2SQOCM8KK2QMRYYH75N/branch/main/env/prod/models/model/c1_order_items/chart/W5LMN2TZJUKJ5EC5MK99?timezone=UTC
+  - 
+    chartId: WTZRH1G2EB0UEJ3F5GXK
+    url:     https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/T2SQOCM8KK2QMRYYH75N/branch/main/env/prod/models/model/c1_order_items/chart/WTZRH1G2EB0UEJ3F5GXK?timezone=UTC
+dashboardItems: 
+  - 
+    dashboardId: TDEXWBE5PI2X17CJCFKC
+    url:         https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/T2SQOCM8KK2QMRYYH75N/branch/main/env/prod/dashboards/dashboard/TDEXWBE5PI2X17CJCFKC?timezone=UTC
+  - 
+    dashboardId: U8CHNSQKS26SMT10VIXQ
+    url:         https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/T2SQOCM8KK2QMRYYH75N/branch/main/env/prod/dashboards/dashboard/U8CHNSQKS26SMT10VIXQ?timezone=UTC
+reportItems: 
+  - 
+    reportId: 0ZN4W4XE9LQ7TSF5DQYC
+    url:      https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/T2SQOCM8KK2QMRYYH75N/branch/main/env/prod/reports/report/0ZN4W4XE9LQ7TSF5DQYC?timezone=UTC&timeSpec=days&timeRange=f`last_5_days`
+  - 
+    reportId: IEWZFR718VMKXXIHDV5J
+    url:      https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/T2SQOCM8KK2QMRYYH75N/branch/main/env/prod/reports/report/IEWZFR718VMKXXIHDV5J?timezone=UTC&timeSpec=days&timeRange=f`last_5_days`
+  - 
+    reportId: 0JDX1JF03IVGGJXKQBI7
+    url:      https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/T2SQOCM8KK2QMRYYH75N/branch/main/env/prod/reports/report/0JDX1JF03IVGGJXKQBI7?timezone=UTC&timeSpec=days&timeRange=f`last_5_days`
+metricItems: 
+  (empty array)
 repo: 
   orgId:           AWNCAHWLFQTQJYCH3ZSE
   projectId:       DXYE72ODCP5LWPWH2EXQ
-  repoId:          UPXRRK83O347QLFNDX4H
+  repoId:          T2SQOCM8KK2QMRYYH75N
   repoStatus:      NeedCommit
   currentBranchId: main
   conflicts: 
     (empty array)
-filesUrl:              https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/UPXRRK83O347QLFNDX4H/branch/main/env/prod/files
 ```

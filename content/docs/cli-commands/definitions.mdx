@@ -65,7 +65,7 @@ Print the CLI definitions
       required:    false
     - 
       definition:  --repo #0
-      description: (required, "dev" or "production")
+      description: (required, "dev", "production" or "session")
       required:    true
     - 
       definition:  --branch #0
@@ -106,6 +106,10 @@ Print the CLI definitions
     - 
       definition:  --range #0
       description: (default "f`last 5 days`") Ts Filter Expression
+      required:    false
+    - 
+      definition:  --get-malloy
+      description: (default false), show malloy query in output
       required:    false
     - 
       definition:  --get-sql

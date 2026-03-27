@@ -40,24 +40,24 @@ Print the CLI definitions
     - 
       - 
         """
-          Get query for Dev repo Chart
+          Get Query for Chart
           
         """
-      - mprove get-query --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod --chart-id v1 --get-sql --get-data
+      - mprove get-query --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod --chart-id v1 --get-malloy --get-sql --get-data
     - 
       - 
         """
-          Get query for Dev repo Dashboard
+          Get Query for Dashboard
           
         """
-      - mprove get-query --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod --dashboard-id d1 --get-sql --get-data
+      - mprove get-query --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod --dashboard-id d1 --get-malloy --get-sql --get-data
     - 
       - 
         """
-          Get query for Dev repo Report
+          Get Query for Report
           
         """
-      - mprove get-query --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod --report-id r1 --get-sql --get-data
+      - mprove get-query --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod --report-id r1 --get-malloy --get-sql --get-data
   options: 
     - 
       definition:  --project-id #0
@@ -101,11 +101,11 @@ Print the CLI definitions
       required:    false
     - 
       definition:  --detail #0
-      description: (default "days") "timestamps" | "seconds" | "minutes" | "hours" | "days" | "weeks" | "months" | "quarters" | "years"
+      description: (default "days") for Report -  "timestamps" | "seconds" | "minutes" | "hours" | "days" | "weeks" | "months" | "quarters" | "years"
       required:    false
     - 
       definition:  --range #0
-      description: (default "f`last 5 days`") Ts Filter Expression
+      description: (default "f`last 5 days`") for Report - Ts Filter Expression
       required:    false
     - 
       definition:  --get-malloy

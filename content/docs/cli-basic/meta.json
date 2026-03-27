@@ -1,0 +1,9 @@
+{
+  "root": false,
+  "title": "CLI Basic",
+  "pages": [
+    "definitions",
+    "help",
+    "version"
+  ]
+}

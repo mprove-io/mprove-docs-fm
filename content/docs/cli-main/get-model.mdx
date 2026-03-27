@@ -1,0 +1,48 @@
+---
+title: get-model
+---
+
+# Get Model
+
+## Usage
+
+```
+➜  ~ mprove get-model -h
+Get a model definition including its fields
+
+━━━ Usage ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+$ mprove get-model
+
+━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  --project-id #0       (required) Project Id
+  --repo #0             (required, "dev", "production" or "session")
+  --branch #0           (required) Git Branch
+  --env #0              (required) Environment
+  --model-id #0         (required) Model Id
+  --json                (default false)
+  --env-file-path #0    (optional) Path to ".env" file
+
+━━━ Examples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Get model for Dev repo
+  $ mprove get-model --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod --model-id my_model
+
+Get model for Production repo
+  $ mprove get-model --project-id DXYE72ODCP5LWPWH2EXQ --repo production --branch main --env prod --model-id my_model
+```
+
+## Example Output
+
+```
+➜  ~ mprove get-model \
+--env-file-path /mprove/.env \
+--project-id DXYE72ODCP5LWPWH2EXQ \
+--repo dev \
+--branch main \
+--env prod \
+--model-id c1_order_item
+
+<model>
+```

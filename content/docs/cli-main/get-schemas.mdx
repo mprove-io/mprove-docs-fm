@@ -1,0 +1,88 @@
+---
+title: get-schemas
+---
+
+# Get Schemas
+
+## Usage
+
+```
+➜  ~ mprove get-schemas -h
+Fetch database schemas (tables, columns, relationships, indexes) for project connections
+
+━━━ Usage ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+$ mprove get-schemas
+
+━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  --project-id #0       (required) Project Id
+  --repo #0             (required, "dev", "production" or "session")
+  --branch #0           (required) Git Branch
+  --env #0              (required) Environment
+  --refresh             (default false) Refresh schemas from database
+  --json                (default false)
+  --env-file-path #0    (optional) Path to ".env" file
+
+━━━ Examples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Get schemas for Dev repo with refresh
+  $ mprove get-schemas --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod --refresh
+
+Get schemas for Production repo
+  $ mprove get-schemas --project-id DXYE72ODCP5LWPWH2EXQ --repo production --branch main --env prod
+```
+
+## Example Output
+
+```
+➜  ~ mprove get-schemas \
+--env-file-path /mprove/.env \
+--project-id DXYE72ODCP5LWPWH2EXQ \
+--repo dev \
+--branch main \
+--env prod  
+
+combinedSchemaItems: 
+  - 
+    connectionId:    c1_postgres
+    schemas: 
+      - 
+        schemaName:  ecommerce
+        description: c1_postgres ecommerce schema description...
+        tables: 
+          - 
+            tableName: distribution_centers
+            tableType: BASE TABLE
+            columns: 
+              - 
+                columnName:   distribution_center_id
+                dataType:     text
+                isNullable:   true
+                isPrimaryKey: false
+                isUnique:     true
+                foreignKeys: 
+                  (empty array)
+                references: 
+                  - 
+                    relationshipType:     one_to_many
+                    isForeignKey:         false
+                    referencedTableName:  inventory_items
+                    referencedColumnName: distribution_center_id
+              - 
+                columnName:   name
+                dataType:     text
+                isNullable:   true
+                isPrimaryKey: false
+                isUnique:     false
+                foreignKeys: 
+                  (empty array)
+            indexes: 
+              - 
+                indexName:    distribution_centers_pkey
+                indexColumns: 
+                  - distribution_center_id
+                isUnique:     true
+                isPrimaryKey: false
+          - ...
+```

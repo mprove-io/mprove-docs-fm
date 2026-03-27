@@ -1,0 +1,14 @@
+{
+  "root": false,
+  "title": "CLI Main",
+  "pages": [
+    "sync",
+    "validate",
+    "get-state",
+    "run",
+    "get-query",
+    "get-model",
+    "get-schemas",
+    "get-sample"
+  ]
+}

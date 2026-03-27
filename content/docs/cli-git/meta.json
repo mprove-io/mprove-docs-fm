@@ -1,0 +1,14 @@
+{
+  "root": false,
+  "title": "CLI Git",
+  "pages": [
+    "commit",
+    "get-branches",
+    "create-branch",
+    "delete-branch",
+    "revert",
+    "push",
+    "pull",
+    "merge"
+  ]
+}

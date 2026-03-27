@@ -1,0 +1,72 @@
+---
+title: get-sample
+---
+
+# Get Sample
+
+## Usage
+
+```
+➜  ~ mprove get-sample -h
+Fetch sample data rows from a database table or column for a project connection
+
+━━━ Usage ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+$ mprove get-sample
+
+━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  --project-id #0       (required) Project Id
+  --env #0              (required) Environment
+  --connection-id #0    (required) Connection Id
+  --schema #0           (required) Schema Name
+  --table #0            (required) Table Name
+  --column #0           (optional) Column Name
+  --offset #0           (optional) Offset for pagination
+  --json                (default false)
+  --env-file-path #0    (optional) Path to ".env" file
+
+━━━ Examples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Get sample data from a table
+  $ mprove get-sample --project-id DXYE72ODCP5LWPWH2EXQ --env prod --connection-id c1_postgres --schema public --table users
+
+Get sample data from a specific column with offset
+  $ mprove get-sample --project-id DXYE72ODCP5LWPWH2EXQ --env prod --connection-id c1_postgres --schema public --table users --column user_id --offset 10
+```
+
+## Example Output
+
+```
+➜  ~ mprove get-sample \
+--env-file-path /mprove/.env \
+--project-id DXYE72ODCP5LWPWH2EXQ \
+--env prod \
+--connection-id c1_postgres \
+--schema ecommerce \
+--table orders
+
+columnNames: 
+  - order_id
+  - user_id
+  - created_at
+  - status
+rows: 
+  - 
+    - WU55UBH7UL1CZE8APNZB
+    - NR4JAB4CGO877R76EYTQ
+    - 1310402991
+    - complete
+  - 
+    - QGG0LM3GN8SNOW7Y19P8
+    - L3VM4RI4HQRIM57DR12D
+    - 1468018536
+    - complete
+  - 
+    - 0GR1QY6R6KW2BGGNXMN0
+    - ESWJIZO4UH6V3XPTZNFB
+    - 1835277083
+    - complete
+  -
+    ...
+```

@@ -21,6 +21,7 @@ $ mprove get-model
   --branch #0           (required) Git Branch
   --env #0              (required) Environment
   --model-id #0         (required) Model Id
+  --get-malloy          (default false), show malloyModelDef in output
   --json                (default false)
   --env-file-path #0    (optional) Path to ".env" file
 
@@ -42,7 +43,257 @@ Get model for Production repo
 --repo dev \
 --branch main \
 --env prod \
---model-id c1_order_item
+--model-id c1_order_item \
+--get-malloy
 
-<model>
+needValidate: false
+model: 
+  structId:                   TEFIHUCIHR3Z287DVRKT
+  modelId:                    c1_order_items
+  type:                       Malloy
+  malloyModelDef:             <malloy-model-def>
+  source:                     c1_order_items
+  hasAccess:                  true
+  connectionId:               c1_postgres
+  connectionType:             PostgreSQL
+  filePath:                   DXYE72ODCP5LWPWH2EXQ/data/c1_postgres/models/c1_order_items.malloy
+  fileText: 
+    """
+      ##! experimental{sql_functions}
+      
+      import './tables/c1_order_items_tx.malloy';
+      import './tables/c1_orders_tx.malloy';
+      import './tables/c1_users_tx.malloy';
+      import './tables/c1_user_order_facts_tx.malloy';
+      import './tables/c1_inventory_items_tx.malloy';
+      import './tables/c1_products_tx.malloy';
+      import './tables/c1_distribution_centers_tx.malloy';
+      
+      #(mprove) model
+      #(mprove) label="Order Items"
+      #(mprove) top_label="Order Items"
+      source: c1_order_items is c1_order_items_tx extend {
+        join_one: orders is c1_orders_tx on order_id = orders.order_id
+        join_one: users is c1_users_tx on orders.user_id = users.user_id
+        join_one: user_order_facts is c1_user_order_facts_tx on users.user_id = user_order_facts.user_id
+        join_one: inventory_items is c1_inventory_items_tx on inventory_item_id = inventory_items.inventory_item_id
+        join_one: products is c1_products_tx on inventory_items.product_id = products.product_id
+        join_one: distribution_centers is c1_distribution_centers_tx on inventory_items.distribution_center_id = distribution_centers.distribution_center_id
+      
+        measure: 
+          #(mprove) format_number='$,.0f'
+          total_profit is total_sale_price - inventory_items.total_actual_cost
+          #(mprove) format_number='.2%'
+          # percent
+          profit_margin is total_profit / total_sale_price
+      }
+    """
+  dateRangeIncludesRightSide: false
+  accessRoles: 
+    (empty array)
+  label:                      Order Items
+  fields: 
+    - 
+      id:                    order_item_id
+      malloyFieldName:       order_item_id
+      malloyFieldPath: 
+        (empty array)
+      malloyTags: 
+        (empty array)
+      mproveTags: 
+        (empty array)
+      hidden:                false
+      required:              false
+      label:                 Order Item Id
+      fieldClass:            dimension
+      result:                string
+      buildMetrics:          false
+      sqlName:               order_item_id
+      topId:                 mf
+      topLabel:              Order Items
+      suggestModelDimension: c1_order_items.order_item_id
+
+    ...
+    
+    - 
+      id:                    orders.order_id
+      malloyFieldName:       order_id
+      malloyFieldPath: 
+        - orders
+      malloyTags: 
+        (empty array)
+      mproveTags: 
+        (empty array)
+      hidden:                false
+      required:              false
+      label:                 Order Id
+      fieldClass:            dimension
+      result:                string
+      buildMetrics:          false
+      sqlName:               orders__order_id
+      topId:                 orders
+      topLabel:              Orders
+      suggestModelDimension: c1_order_items.orders.order_id
+    
+    ...
+
+    - 
+      id:              orders.created_at_week
+      malloyFieldName: created_at_week
+      malloyFieldPath: 
+        - orders
+      malloyTags: 
+        (empty array)
+      mproveTags: 
+        - 
+          key:   field_group
+          value: Created At
+        - 
+          key: build_metrics
+      hidden:          false
+      required:        false
+      label:           Created at Week
+      fieldClass:      dimension
+      result:          ts
+      buildMetrics:    true
+      timeframe:       week
+      sqlName:         orders__created_at_week
+      topId:           orders
+      topLabel:        Orders
+    
+    ...
+
+    - 
+      id:              users.users_count
+      malloyFieldName: users_count
+      malloyFieldPath: 
+        - users
+      malloyTags: 
+        (empty array)
+      mproveTags: 
+        (empty array)
+      hidden:          false
+      required:        false
+      label:           Users Count
+      fieldClass:      measure
+      result:          number
+      buildMetrics:    false
+      sqlName:         users__users_count
+      topId:           users
+      topLabel:        Users
+
+    ...
+
+    - 
+      id:              users.female_count
+      malloyFieldName: female_count
+      malloyFieldPath: 
+        - users
+      malloyTags: 
+        (empty array)
+      mproveTags: 
+        (empty array)
+      hidden:          false
+      required:        false
+      label:           Female Count
+      fieldClass:      measure
+      result:          number
+      buildMetrics:    false
+      sqlName:         users__female_count
+      topId:           users
+      topLabel:        Users
+
+    ...
+
+  nodes: 
+    - 
+      id:        mf
+      label:     Order Items
+      hidden:    false
+      required:  false
+      isField:   false
+      children: 
+        - 
+          id:        mf.measures
+          label:     Measures
+          hidden:    false
+          required:  false
+          isField:   false
+          children: 
+            (empty array)
+          nodeClass: info
+        - 
+          id:            average_sale_price
+          label:         Average Sale Price
+          hidden:        false
+          required:      false
+          isField:       true
+          children: 
+            (empty array)
+          fieldFileName: c1_order_items.malloy
+          fieldFilePath: DXYE72ODCP5LWPWH2EXQ/data/c1_postgres/models/tables/c1_order_items_tx.malloy
+          fieldResult:   number
+          fieldLineNum:  14
+          nodeClass:     measure
+        
+        ...
+            
+        - 
+          id:        mf.dimensions
+          label:     Dimensions
+          hidden:    false
+          required:  false
+          isField:   false
+          children: 
+            (empty array)
+          nodeClass: info
+        - 
+          id:            inventory_item_id
+          label:         Inventory Item Id
+          hidden:        false
+          required:      false
+          isField:       true
+          children: 
+            (empty array)
+          fieldFileName: c1_order_items.malloy
+          fieldFilePath: DXYE72ODCP5LWPWH2EXQ/data/c1_postgres/models/tables/c1_order_items_tx.malloy
+          fieldResult:   string
+          fieldLineNum:  3
+          nodeClass:     dimension
+        ...
+      nodeClass: join
+
+      ...
+
+    - 
+      id:        orders
+      label:     Orders
+      hidden:    false
+      required:  false
+      isField:   false
+      children: 
+        - 
+          id:        orders.measures
+          label:     Measures
+          hidden:    false
+          required:  false
+          isField:   false
+          children: 
+            (empty array)
+          nodeClass: info
+        - 
+          id:            orders.orders_count
+          label:         Orders Count
+          hidden:        false
+          required:      false
+          isField:       true
+          children: 
+            (empty array)
+          fieldFileName: c1_order_items.malloy
+          fieldFilePath: DXYE72ODCP5LWPWH2EXQ/data/c1_postgres/models/tables/c1_orders_tx.malloy
+          fieldResult:   number
+          fieldLineNum:  9
+          nodeClass:     measure
+      nodeClass: join
+  serverTs:                   1774672238371
 ```

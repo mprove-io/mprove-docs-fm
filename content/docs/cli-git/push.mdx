@@ -18,7 +18,7 @@ $ mprove push
 ━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   --project-id #0       (required) Project Id
-  --repo #0             (required, "dev", "production" or "session")
+  --repo-type #0             (required, "dev", "production" or "session")
   --branch #0           (required) Git Branch
   --env #0              (required) Environment
   --get-errors          (default false), show validation errors in output
@@ -29,7 +29,7 @@ $ mprove push
 ━━━ Examples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Push committed changes from Dev to Remote, validate Mprove Files for env prod
-  $ mprove push --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod
+  $ mprove push --project-id DXYE72ODCP5LWPWH2EXQ --repo-type dev --branch main --env prod
 ```
 
 
@@ -40,7 +40,7 @@ Push committed changes from Dev to Remote, validate Mprove Files for env prod
 ➜  ~ mprove push \
 --env-file-path ~/mprove/.env \
 --project-id DXYE72ODCP5LWPWH2EXQ \
---repo dev \
+--repo-type dev \
 --branch b1 \
 --env prod
 

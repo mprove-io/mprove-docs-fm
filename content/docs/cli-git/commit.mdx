@@ -17,7 +17,7 @@ $ mprove commit
 ━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   --project-id #0        (required) Project Id
-  --repo #0              (required, "dev", "production" or "session")
+  --repo-type #0              (required, "dev", "production" or "session")
   --branch #0            (required) Git Branch
   --commit-message #0    (required) Commit message
   --get-repo             (default false), show repo in output
@@ -27,7 +27,7 @@ $ mprove commit
 ━━━ Examples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Commit changes for Dev repo
-  $ mprove commit --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --commit-message ms1
+  $ mprove commit --project-id DXYE72ODCP5LWPWH2EXQ --repo-type dev --branch main --commit-message ms1
 ```
 
 ## Example Output
@@ -36,7 +36,7 @@ Commit changes for Dev repo
 ➜  ~ mprove commit \
 --env-file-path ~/mprove/.env \
 --project-id DXYE72ODCP5LWPWH2EXQ \
---repo dev \
+--repo-type dev \
 --branch main \
 --commit-message ms1
 

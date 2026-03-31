@@ -17,7 +17,7 @@ $ mprove run
 ━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   --project-id #0       (required) Project Id
-  --repo #0             (required, "dev", "production" or "session")
+  --repo-type #0             (required, "dev", "production" or "session")
   --branch #0           (required) Git Branch
   --env #0              (required) Environment
   --concurrency #0      (optional) Max number of concurrent queries
@@ -38,13 +38,13 @@ $ mprove run
 ━━━ Examples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Run for Dev repo and wait for completion
-  $ mprove run --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod --wait --get-dashboards --get-charts
+  $ mprove run --project-id DXYE72ODCP5LWPWH2EXQ --repo-type dev --branch main --env prod --wait --get-dashboards --get-charts
 
 Run dashboards d1 and d2 for Dev repo
-  $ mprove run --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod --no-charts --dashboard-ids d1,d2
+  $ mprove run --project-id DXYE72ODCP5LWPWH2EXQ --repo-type dev --branch main --env prod --no-charts --dashboard-ids d1,d2
 
 Run for Production repo
-  $ mprove run --project-id DXYE72ODCP5LWPWH2EXQ --repo production --branch main --env prod
+  $ mprove run --project-id DXYE72ODCP5LWPWH2EXQ --repo-type production --branch main --env prod
 ```
 
 ## Example Output
@@ -55,7 +55,7 @@ Run for Production repo
 --project-id DXYE72ODCP5LWPWH2EXQ \
 --concurrency 2 \
 --wait \
---repo production \
+--repo-type production \
 --branch main \
 --env prod \
 --no-dashboards \

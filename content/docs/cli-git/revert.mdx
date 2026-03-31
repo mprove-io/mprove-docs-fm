@@ -18,7 +18,7 @@ $ mprove revert
 
   --to #0               (required, "last-commit" or "remote")
   --project-id #0       (required) Project Id
-  --repo #0             (required, "dev", "production" or "session")
+  --repo-type #0             (required, "dev", "production" or "session")
   --branch #0           (required) Git Branch
   --env #0              (required) Environment
   --get-errors          (default false), show validation errors in output
@@ -29,10 +29,10 @@ $ mprove revert
 ━━━ Examples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Revert Dev repo to the state of a last commit, validate Mprove Files for env prod
-  $ mprove revert --to last-commit --project-id DXYE72ODCP5LWPWH2EXQ --repo dev --branch main --env prod
+  $ mprove revert --to last-commit --project-id DXYE72ODCP5LWPWH2EXQ --repo-type dev --branch main --env prod
 
 Revert Production repo to the state of Remote repo, validate Mprove Files for env prod
-  $ mprove revert --to remote --project-id DXYE72ODCP5LWPWH2EXQ --repo production --branch main --env prod
+  $ mprove revert --to remote --project-id DXYE72ODCP5LWPWH2EXQ --repo-type production --branch main --env prod
 ```
 
 ## Example Output
@@ -42,7 +42,7 @@ Revert Production repo to the state of Remote repo, validate Mprove Files for en
 --to remote \
 --env-file-path ~/mprove/.env \
 --project-id DXYE72ODCP5LWPWH2EXQ \
---repo dev \
+--repo-type dev \
 --branch main \
 --env prod
 

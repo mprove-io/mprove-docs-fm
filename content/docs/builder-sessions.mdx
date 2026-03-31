@@ -1,0 +1,83 @@
+---
+title: Builder Sessions
+---
+
+# Builder Sessions
+
+Builder is a lightweight IDE section of Mprove UI.
+
+Users with File Editor can browse, edit and validate mprove and malloy files.
+
+There are two types of Builder AI sessions:
+
+- Explorer Session
+- Editor Session
+
+## Explorer Session (Under development)
+
+Explorer AI agent can answer user questions by creating draft charts, reports and dashboards.
+
+## Editor Session (Beta)
+
+Editor is an AI session that runs in a sandbox (e2b provider).
+
+It takes 10 to 20 seconds for session initial activation time (starting sandbox, pulling user project repo and starting a server).
+It is planned to reduce this time significantly.
+
+After session is activated, there is a safe pause logic in place to save sandbox resources when session is 5 min+ idle.
+To resume a paused session (sandbox) you need to send a new message to session agent. Unpause (resume) is fast.
+Session state is preserved on pause/resume.
+
+Editor session is powered by open source OpenCode Server with default agents (build/plan + subagents).
+You can create and customize project's local opencode config.
+
+To sync uncommitted changes between sandbox repo and mprove server's session repo - AI agent can use "mprove sync" command.
+
+### Instructions
+
+Global instructions are merged with your project local instruction files (see opencode docs).
+
+- [mprove-instructions.md](https://github.com/mprove-io/mprove/blob/master/skills/mprove-instructions.md)
+
+### Skills
+
+Skills that can be loaded by AI agent:
+
+- [mprove-basic](https://github.com/mprove-io/mprove/blob/master/skills/mprove-basic/SKILL.md)
+- [mprove-project-structure](https://github.com/mprove-io/mprove/blob/master/skills/mprove-project-structure/SKILL.md)
+- [mprove-dwh-schemas](https://github.com/mprove-io/mprove/blob/master/skills/mprove-dwh-schemas/SKILL.md)
+- [mprove-editor-query](https://github.com/mprove-io/mprove/blob/master/skills/mprove-editor-query/SKILL.md)
+
+### MCP tools
+
+Available Mprove MCP tools:
+
+- get-state
+- get-schemas
+- get-sample
+- get-model
+- get-query
+- run
+- validate
+
+### Preinstalled
+
+- mprove cli (only "mprove sync" is needed, other useful commands have corresponding mcp tools)
+- mprove docs repo
+- malloy docs repo
+
+### Credentials
+
+Credentials that are provided to sandbox by default:
+
+- LLM Provider Api Key, that is set for current project and match selected model
+- MPROVE_CLI_API_KEY that is scoped to current session
+
+### Capabilities
+
+Current capabilities:
+
+- setup mprove project
+- add metadata to dwh schemas
+- build mprove models based on malloy sources
+- build mprove charts, reports, dashboards that are not drafts (using mprove docs)

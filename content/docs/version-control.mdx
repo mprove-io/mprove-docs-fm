@@ -4,7 +4,7 @@ title: "Version Control"
 
 # Version Control
 
-## Dev and Production Repositories
+## Dev, Production and Session Repositories
 
 Mprove files:
 
@@ -15,10 +15,11 @@ Mprove files:
 - [\*.report](/docs/ref-report)
 - [\*.dashboard](/docs/ref-dashboard)
 
-When you create a new project, Mprove creates:
+Each project has 3 types of repositories that are local to mprove server:
 
-- **Production** repository locally on the server that mirrors **Remote** repository content
-- Personal **Dev** repository locally on the server for each project member with **FilesEditor** role
+- **Production** - repository that mirrors **Remote** repository content
+- **Dev** - personal repository for each project member with **FilesEditor** role
+- **Session** - separate repository for each session of type Editor
 
 Dev repositories allow users to edit files and test changes without affecting **Production** version of files.
 

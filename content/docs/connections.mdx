@@ -13,6 +13,7 @@ Mprove connects to SQL databases that are supported by Malloy:
 - Presto / Trino
 - SnowFlake
 - BigQuery
+- DataBricks
 - MotherDuck (DuckDb)
 
 ## API Data Sources
@@ -31,3 +32,13 @@ For **Google API** query, Mprove does 2 requests:
 
 - Auth request to get credentials
 - Data request (query)
+
+## Internal Host and Internal Port Connection Parameters
+
+Some connection types have optional internal host and internal port parameters.
+
+If you provide connection credentials to an external sandbox provider, it will use 
+the host and port that are not internal, because the sandbox is not on a local network with the mprove server.
+
+If the mprove server has an internal host and internal port specified for a connection, it will use them 
+instead of the host/port. This removes an extra network hop from the mprove server to the DWH.

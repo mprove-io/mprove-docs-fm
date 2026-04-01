@@ -2,6 +2,7 @@
   "pages": [
     "index",
     "quickstart",
+    "dwh-schema",
     "version-control",
     "builder-sessions",
     "connections",

@@ -1,0 +1,99 @@
+---
+title: DWH Schema
+---
+
+import { DynamicCodeBlock } from "@/components/dynamic-codeblock";
+import { extraSchemaYaml } from "@/content/docs/parts/extra-schema-yaml";
+
+# DWH Schema
+
+There are three types of Schemas in Mprove:
+
+- **Raw schemas** are fetched automatically from SQL connections - tables, columns, data types, foreign keys, and indexes.
+- **Extra schemas** are YAML files with extra metadata - descriptions, examples, and relationship type.
+- **Combined schemas** merge Raw and Extra schemas. They are useful for LLMs and humans to build Malloy semantic models.
+
+<Callout type="info" title="Viewing Combined Schemas">
+User can see combined schemas in UI and explore Relationships Graph.
+
+LLM can use MCP tool.
+
+There is also `get-schemas` mprove CLI command.
+
+</Callout>
+
+Raw schemas are cached. User must click "Refresh" button in UI to refresh a raw schema cache. Raw schema cache is not refreshed on page load.
+
+Mprove validates (rebuilds) all files on every file save in UI or repo sync through CLI.
+During validation a raw cache is provided for Malloy compilation in a compatible format.
+This way Malloy does not need to fetch data from db. It improves Malloy compilation time significantly, because Malloy fetches data from db on a per table basis. The only exception is when Malloy needs to sample data (some SnowFlake datatypes).
+
+## File Format
+
+Each schema must be stored as **connection_name.schema_name.schema** YAML file:
+
+<DynamicCodeBlock
+  lang="yaml"
+  code={extraSchemaYaml}
+  options={{
+    themes: {
+      light: "catppuccin-latte",
+      dark: "rose-pine",
+    },
+  }}
+/>
+
+## Reference
+
+### Schema
+
+| Name        | Type               | Required | Description                                              |
+| ----------- | ------------------ | -------- | -------------------------------------------------------- |
+| schema      | string             | yes      | Connection and schema name in `connection.schema` format |
+| description | string             | no       | Human-readable description of the database schema        |
+| tables      | [Table []](#table) | yes      | List of table definitions                                |
+
+### Table
+
+| Name        | Type                 | Required | Description                                |
+| ----------- | -------------------- | -------- | ------------------------------------------ |
+| table       | string               | yes      | Table name                                 |
+| description | string               | no       | Business-oriented description of the table |
+| columns     | [Column []](#column) | no       | List of column definitions                 |
+
+### Column
+
+| Name          | Type                             | Required | Description                            |
+| ------------- | -------------------------------- | -------- | -------------------------------------- |
+| column        | string                           | yes      | Column name                            |
+| description   | string                           | no       | What this column represents            |
+| example       | string                           | no       | A realistic sample value               |
+| relationships | [Relationship []](#relationship) | no       | List of relationships to other columns |
+
+### Relationship
+
+| Name      | Type   | Required | Description                                                          |
+| --------- | ------ | -------- | -------------------------------------------------------------------- |
+| to        | string | yes      | Target in `table.column` format (exactly one dot)                    |
+| type      | enum   | yes      | `one_to_one`, `one_to_many`, `many_to_one`, `many_to_many`           |
+| to_schema | string | no       | For cross-schema relationships: `connection_name.schema_name` format |
+
+## Relationship Rules
+
+Defining one side is sufficient (no need to define both sides).
+
+**Preferred convention:** Define `many_to_one` on the "many" side pointing to the "one" side.
+
+**Mirror consistency:** If you define both sides of a relationship (e.g., A->B and B->A), the types must be consistent mirrors:
+
+| Side A         | Side B         |
+| -------------- | -------------- |
+| `many_to_one`  | `one_to_many`  |
+| `one_to_one`   | `one_to_one`   |
+| `many_to_many` | `many_to_many` |
+
+**No duplicates:** A column cannot have two relationships with the same `to` and `to_schema` values.
+
+**Cross-schema:** Use `to_schema` to reference a table in a different schema on the same connection. See the `customer_id` column in the example above. Cross-connection relationships are not supported.
+
+**Partial coverage:** You do not need to define every table or column. You should include tables and columns that have relationships. Also include those columns where you want to add descriptions or examples. Omitted columns still appear in the combined schema with their raw metadata.

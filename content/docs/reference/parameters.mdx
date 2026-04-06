@@ -13,15 +13,15 @@ import { parametersFilterYaml } from "@/content/docs/parts/parameters-filter-yam
   validation.
 </Callout>
 
-Parameters can be a part of [Report](/docs/ref-report), [Dashboard](/docs/ref-dashboard) or [Store](/docs/ref-model-store) files.
+Parameters can be a part of [Report](/docs/reference/report), [Dashboard](/docs/reference/dashboard) or [Store](/docs/reference/model-store) files.
 
-Store parameters schema is an array of [Store Filters](/docs/ref-model-store#store-filter).
+Store parameters schema is an array of [Store Filters](/docs/reference/model-store#store-filter).
 
-Dashboard and Report parameters schema is an array of [Top Filters](/docs/ref-parameters#top-filter).
+Dashboard and Report parameters schema is an array of [Top Filters](/docs/reference/parameters#top-filter).
 
-Dashboard tile parameters schema is an array of [Tile Parameter](/docs/ref-dashboard#tile-parameter).
+Dashboard tile parameters schema is an array of [Tile Parameter](/docs/reference/dashboard#tile-parameter).
 
-Report row parameters schema is an array of [Row Parameter](/docs/ref-report#row-parameter).
+Report row parameters schema is an array of [Row Parameter](/docs/reference/report#row-parameter).
 
 One dashboard parameter can be applied to several tiles at the same time.
 A tile parameter is only affected by a dashboard parameter if tile parameter has a **listen** pointing to dashboard parameter.
@@ -63,7 +63,7 @@ A row parameter is only affected by a report parameter if the row parameter has 
 | -------- | ------------------------------------------------------------ | ------- | ------------------------------------ |
 | logic    | enum                                                         | -       | <ul><li>OR</li><li>AND_NOT</li></ul> |
 | type     | string                                                       | -       | Store result type                    |
-| controls | [Fraction Control []](/docs/ref-parameters#fraction-control) | -       | Begin a section of controls          |
+| controls | [Fraction Control []](/docs/reference/parameters#fraction-control) | -       | Begin a section of controls          |
 
 ### Fraction Control
 

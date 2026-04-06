@@ -9,7 +9,7 @@ Editor Session runs in a sandbox ([E2B](https://e2b.dev/) provider).
 It is powered by open source [OpenCode](https://opencode.ai/) Server with default agents (build/plan + subagents).
 You can use your own [opencode config](https://opencode.ai/docs/config/) (project's local).
 
-AI agent uses [mprove sync](/docs/cli-main/sync) CLI command to sync uncommitted changes between sandbox repo and mprove server.
+AI agent uses [mprove sync](/docs/mprove-cli/cli-main/sync) CLI command to sync uncommitted changes between sandbox repo and mprove server.
 
 ## Notes
 
@@ -36,9 +36,9 @@ Session state is preserved on pause/resume.
 - node 24.14.0
 - brew, curl, git, ripgrep, openssh-client, ca-certificates
 - opencode
-- [opencode global config](https://github.com/mprove-io/mprove/blob/master/skills/opencode-global-config.json) with [mprove-mcp](ai-mcp-server) configured
-- [mprove skills](/docs/ai-skills)
-- [mprove cli](/docs/cli-install) (only "mprove sync" is needed, other useful commands have corresponding mcp tools)
+- [opencode global config](https://github.com/mprove-io/mprove/blob/master/skills/opencode-global-config.json) with [mprove-mcp](docs/builder/mcp-server) configured
+- [mprove skills](/docs/builder/skills)
+- [mprove cli](/docs/mprove-cli/cli-install) (only "mprove sync" is needed, other useful commands have corresponding mcp tools)
 - mprove docs repository
 - malloy docs repository
 

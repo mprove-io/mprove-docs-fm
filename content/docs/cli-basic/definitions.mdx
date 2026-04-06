@@ -29,35 +29,35 @@ Print the CLI definitions
 ```
 ➜  ~ mprove definitions
 ...
-  path:        mprove get-query
-  usage:       mprove get-query
+  path:        mprove get-query-info
+  usage:       mprove get-query-info
   description: 
     """
-      Get query
+      Get query info
       
     """
   examples: 
     - 
       - 
         """
-          Get Query for Chart
+          Get Query Info for Chart
           
         """
-      - mprove get-query --project-id DXYE72ODCP5LWPWH2EXQ --repo-type dev --branch main --env prod --chart-id v1 --get-malloy --get-sql --get-data
+      - mprove get-query-info --project-id DXYE72ODCP5LWPWH2EXQ --repo-type dev --branch main --env prod --chart-id v1 --get-malloy --get-sql --get-data
     - 
       - 
         """
-          Get Query for Dashboard
+          Get Query Info for Dashboard
           
         """
-      - mprove get-query --project-id DXYE72ODCP5LWPWH2EXQ --repo-type dev --branch main --env prod --dashboard-id d1 --get-malloy --get-sql --get-data
+      - mprove get-query-info --project-id DXYE72ODCP5LWPWH2EXQ --repo-type dev --branch main --env prod --dashboard-id d1 --get-malloy --get-sql --get-data
     - 
       - 
         """
-          Get Query for Report
+          Get Query Info for Report
           
         """
-      - mprove get-query --project-id DXYE72ODCP5LWPWH2EXQ --repo-type dev --branch main --env prod --report-id r1 --get-malloy --get-sql --get-data
+      - mprove get-query-info --project-id DXYE72ODCP5LWPWH2EXQ --repo-type dev --branch main --env prod --report-id r1 --get-malloy --get-sql --get-data
   options: 
     - 
       definition:  --project-id #0

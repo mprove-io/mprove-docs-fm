@@ -17,7 +17,7 @@ $ mprove validate
 ━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   --project-id #0       (required) Project Id
-  --repo-type #0             (required, "dev", "production" or "session")
+  --repo-type #0        (required, "dev", "production" or "session")
   --branch #0           (required) Git Branch
   --env #0              (required) Environment
   --json                (default false)
@@ -36,12 +36,11 @@ Validate Mprove Files for Production repo, env prod
 
 ```
 ➜  ~ mprove validate \
---env-file-path ~/mprove/.env \
+--env-file-path /mprove/.env \
 --project-id DXYE72ODCP5LWPWH2EXQ \
 --repo-type dev \
 --branch main \
---env prod \
---get-errors
+--env prod
 
 needValidate:          false
 validationErrorsTotal: 0

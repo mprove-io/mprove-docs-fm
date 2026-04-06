@@ -3,12 +3,12 @@
   "title": "CLI Main",
   "pages": [
     "sync",
-    "validate",
-    "get-state",
-    "run",
-    "get-query",
-    "get-model",
     "get-schemas",
-    "get-sample"
+    "get-sample",
+    "get-state",
+    "get-model",
+    "get-query-info",
+    "run",
+    "validate"
   ]
 }

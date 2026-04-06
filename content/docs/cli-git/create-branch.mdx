@@ -17,7 +17,7 @@ $ mprove create-branch
 ━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   --project-id #0       (required) Project Id
-  --repo-type #0             (required, "dev", "production" or "session")
+  --repo-type #0        (required, "dev", "production" or "session")
   --new-branch #0       (required) New Branch name
   --from-branch #0      (required) From Branch name
   --json                (default false)
@@ -36,7 +36,7 @@ Create branch for Production repo
 
 ```
 mprove create-branch \
---env-file-path ~/mprove/.env \
+--env-file-path /mprove/.env \
 --project-id DXYE72ODCP5LWPWH2EXQ \
 --repo-type dev \
 --new-branch b2 \

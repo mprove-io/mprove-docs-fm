@@ -2,8 +2,8 @@
   "root": false,
   "title": "CLI Basic",
   "pages": [
+    "version",
     "definitions",
-    "help",
-    "version"
+    "help"
   ]
 }

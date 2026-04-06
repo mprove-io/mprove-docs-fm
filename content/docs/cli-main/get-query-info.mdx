@@ -1,23 +1,23 @@
 ---
-title: get-query
+title: get-query-info
 ---
 
-# Get Query
+# Get Query Info
 
 ## Usage
 
 ```
-➜  ~ mprove get-query -h
-Get query
+➜  ~ mprove get-query-info -h
+Get query info
 
 ━━━ Usage ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-$ mprove get-query
+$ mprove get-query-info
 
 ━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   --project-id #0       (required) Project Id
-  --repo-type #0             (required, "dev", "production" or "session")
+  --repo-type #0        (required, "dev", "production" or "session")
   --branch #0           (required) Git Branch
   --env #0              (required) Environment
   --dashboard-id #0     (dashboard-id, chart-id or report-id required) Dashboard Id (name)
@@ -36,20 +36,20 @@ $ mprove get-query
 
 ━━━ Examples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Get Query for Chart
-  $ mprove get-query --project-id DXYE72ODCP5LWPWH2EXQ --repo-type dev --branch main --env prod --chart-id v1 --get-malloy --get-sql --get-data
+Get Query Info for Chart
+  $ mprove get-query-info --project-id DXYE72ODCP5LWPWH2EXQ --repo-type dev --branch main --env prod --chart-id v1 --get-malloy --get-sql --get-data
 
-Get Query for Dashboard
-  $ mprove get-query --project-id DXYE72ODCP5LWPWH2EXQ --repo-type dev --branch main --env prod --dashboard-id d1 --get-malloy --get-sql --get-data
+Get Query Info for Dashboard
+  $ mprove get-query-info --project-id DXYE72ODCP5LWPWH2EXQ --repo-type dev --branch main --env prod --dashboard-id d1 --get-malloy --get-sql --get-data
 
-Get Query for Report
-  $ mprove get-query --project-id DXYE72ODCP5LWPWH2EXQ --repo-type dev --branch main --env prod --report-id r1 --get-malloy --get-sql --get-data
+Get Query Info for Report
+  $ mprove get-query-info --project-id DXYE72ODCP5LWPWH2EXQ --repo-type dev --branch main --env prod --report-id r1 --get-malloy --get-sql --get-data
 ```
 
 ## Example Output
 
 ```
-➜  ~ mprove get-query \ 
+➜  ~ mprove get-query-info \
 --env-file-path /mprove/.env \
 --project-id DXYE72ODCP5LWPWH2EXQ \
 --repo-type dev \

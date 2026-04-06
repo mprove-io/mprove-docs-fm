@@ -17,7 +17,7 @@ $ mprove pull
 ━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   --project-id #0       (required) Project Id
-  --repo-type #0             (required, "dev", "production" or "session")
+  --repo-type #0        (required, "dev", "production" or "session")
   --branch #0           (required) Git Branch
   --env #0              (required) Environment
   --get-errors          (default false), show validation errors in output
@@ -38,7 +38,7 @@ Pull committed changes from Remote to Production repo, validate Mprove Files for
 
 ```
 ➜  ~ mprove pull \
---env-file-path ~/mprove/.env \
+--env-file-path /mprove/.env \
 --project-id DXYE72ODCP5LWPWH2EXQ \
 --repo-type dev \
 --branch main \

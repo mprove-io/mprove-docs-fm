@@ -17,7 +17,7 @@ $ mprove delete-branch
 ━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   --project-id #0       (required) Project Id
-  --repo-type #0             (required, "dev", "production" or "session")
+  --repo-type #0        (required, "dev", "production" or "session")
   --branch #0           (required) Branch name
   --json                (default false)
   --env-file-path #0    (optional) Path to ".env" file
@@ -35,7 +35,7 @@ Delete branch for Production repo
 
 ```
 mprove delete-branch \
---env-file-path ~/mprove/.env \
+--env-file-path /mprove/.env \
 --project-id DXYE72ODCP5LWPWH2EXQ \
 --repo-type dev \
 --branch b2

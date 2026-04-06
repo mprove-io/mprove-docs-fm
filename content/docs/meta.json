@@ -4,11 +4,17 @@
     "quickstart",
     "dwh-schema",
     "version-control",
-    "ai-agent-sessions",
     "connections",
     "environments",
     "user-roles",
     "access-roles",
+    
+    "---AI---",
+    "ai-builder",
+    "ai-editor-session",
+    "ai-mcp-server",
+    "ai-skills",
+    "ai-openai-codex-setup",
 
     "---Reference---",
     "ref-project-config",

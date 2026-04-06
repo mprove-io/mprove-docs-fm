@@ -1,0 +1,38 @@
+---
+title: MCP Server
+---
+
+# Mprove MCP Server
+
+## Configuration
+
+Configuration may vary based on your IDE
+```json
+  "mcp": {
+    "mprove-mcp": {
+      "type": "remote",
+      "url": "{env:MPROVE_CLI_HOST}/api/mcp",
+      "enabled": true,
+      "headers": {
+        "Authorization": "Bearer {env:MPROVE_CLI_API_KEY}"
+      },
+      "oauth": false
+    }
+  }
+```
+
+## Available Tools
+
+- get-connections-list
+- get-schemas
+- get-sample
+- get-state
+- get-model
+- get-query-info
+- run
+- validate
+- download-skills
+
+
+
+

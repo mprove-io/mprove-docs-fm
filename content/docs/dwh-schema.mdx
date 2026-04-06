@@ -14,7 +14,7 @@ There are three types of Schemas in Mprove:
 - **Combined schemas** merge Raw and Extra schemas. They are useful for LLMs and humans to build Malloy semantic models.
 
 <Callout type="info" title="Viewing Combined Schemas">
-User can see combined schemas in UI and explore Relationships Graph.
+User see combined schemas in UI and explore Relationships Graph.
 
 LLM can use MCP tool.
 
@@ -22,11 +22,13 @@ There is also `get-schemas` mprove CLI command.
 
 </Callout>
 
-Raw schemas are cached. User must click "Refresh" button in UI to refresh a raw schema cache. Raw schema cache is not refreshed on page load.
+Raw schemas are cached. User must click "Refresh" button in UI to refresh a raw schema cache when db schema changes. Raw schema cache is not refreshed on page load.
 
 Mprove validates (rebuilds) all files on every file save in UI or repo sync through CLI.
 During validation a raw cache is provided for Malloy compilation in a compatible format.
-This way Malloy does not need to fetch data from db. It improves Malloy compilation time significantly, because Malloy fetches data from db on a per table basis. The only exception is when Malloy needs to sample data (some SnowFlake datatypes).
+This way Malloy does not need to fetch schema from db. It improves compilation time.
+
+Without a cache, Malloy retrieves the schema for each table separately. Even with a cache, in some cases, Malloy needs to sample data (some SnowFlake data types) to determine the data structure.
 
 ## File Format
 

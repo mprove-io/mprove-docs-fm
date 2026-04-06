@@ -1,0 +1,60 @@
+---
+title: Editor Session
+---
+
+# Editor Session
+
+Editor Session runs in a sandbox ([E2B](https://e2b.dev/) provider).
+
+It is powered by open source [OpenCode](https://opencode.ai/) Server with default agents (build/plan + subagents).
+You can use your own [opencode config](https://opencode.ai/docs/config/) (project's local).
+
+AI agent uses [mprove sync](/docs/cli-main/sync) CLI command to sync uncommitted changes between sandbox repo and mprove server.
+
+## Notes
+
+Each Editor Session runs in its own sandbox.
+
+It takes 10 to 20 seconds for session initial activation time (starting sandbox, pulling user project git repo and starting an opencode server).
+It is planned to reduce this time significantly.
+
+After session is activated, there is a safe pause logic in place to save sandbox resources when session is 5 min+ idle.
+To resume a paused session (sandbox) you need to send a new message. Unpause (resume) is fast.
+Session state is preserved on pause/resume.
+
+## Capabilities
+
+- Setup mprove project
+- Add metadata to dwh schemas
+- Build mprove models
+- Build reports (non-draft)
+- Build charts (non-draft)
+- Build dashboards (non-draft)
+
+## E2B Sandbox Template
+
+- node 24.14.0
+- brew, curl, git, ripgrep, openssh-client, ca-certificates
+- opencode
+- [opencode global config](https://github.com/mprove-io/mprove/blob/master/skills/opencode-global-config.json) with [mprove-mcp](ai-mcp-server) configured
+- [mprove skills](/docs/ai-skills)
+- [mprove cli](/docs/cli-install) (only "mprove sync" is needed, other useful commands have corresponding mcp tools)
+- mprove docs repository
+- malloy docs repository
+
+## Credentials
+
+Credentials that are provided to sandbox during session activation: 
+
+- LLM provider api key for selected session Model (see project settings API keys)
+- `MPROVE_CLI_API_KEY` (has access to mprove session repo branch and session env connections)
+- `MPROVE_CLI_PROJECT_ID`
+- `MPROVE_CLI_HOST`
+
+## Global Instructions
+
+These global instructions are merged with your project local instruction files. See [opencode docs](https://opencode.ai/docs/rules/).
+
+- [mprove-instructions.md](https://github.com/mprove-io/mprove/blob/master/skills/mprove-instructions.md)
+
+

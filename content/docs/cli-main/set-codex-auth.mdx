@@ -1,0 +1,41 @@
+---
+title: set-codex-auth
+---
+
+# Set Codex Auth
+
+## Usage
+
+```
+➜  ~ mprove set-codex-auth -h
+Set Codex auth from local opencode auth.json file
+
+━━━ Usage ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+$ mprove set-codex-auth
+
+━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  --auth-file-path #0    (optional) Path to opencode auth.json file, defaults to ~/.local/share/opencode/auth.json
+  --json                 (default false)
+  --env-file-path #0     (optional) Path to ".env" file
+
+━━━ Examples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Set Codex auth using default auth.json location
+  $ mprove set-codex-auth
+
+Set Codex auth using custom auth.json path
+  $ mprove set-codex-auth --auth-file-path /path/to/auth.json
+```
+
+## Example Output
+
+```
+➜  ~ mprove set-codex-auth \
+--env-file-path /mprove/.env
+
+isCodexAuthSet:     true
+codexAuthUpdateTs:  1775450169830
+codexAuthExpiresTs: 1775991994649
+```

@@ -3,12 +3,15 @@
   "title": "CLI Main",
   "pages": [
     "sync",
+    "get-connections-list",
     "get-schemas",
     "get-sample",
     "get-state",
     "get-model",
     "get-query-info",
     "run",
-    "validate"
+    "validate",
+    "set-codex-auth",
+    "download-skills"
   ]
 }

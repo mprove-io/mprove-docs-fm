@@ -1,0 +1,47 @@
+---
+title: get-connections-list
+---
+
+# Get Connections List
+
+## Usage
+
+```
+➜  ~ mprove get-connections-list -h
+Get project connections
+
+━━━ Usage ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+$ mprove get-connections-list
+
+━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  --project-id #0       (required) Project Id
+  --env #0              (required) Environment
+  --json                (default false)
+  --env-file-path #0    (optional) Path to ".env" file
+
+━━━ Examples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Get connections for prod environment
+  $ mprove get-connections-list --project-id DXYE72ODCP5LWPWH2EXQ --env prod
+
+Get connections as JSON
+  $ mprove get-connections-list --project-id DXYE72ODCP5LWPWH2EXQ --env prod --json
+```
+
+## Example Output
+
+```
+➜  ~ mprove get-connections-list \
+--env-file-path /mprove/.env \
+--env prod
+
+connectionItems: 
+  - 
+    connectionId: c6_mysql
+    type:         MySQL
+  - 
+    connectionId: c1_postgres
+    type:         PostgreSQL
+```

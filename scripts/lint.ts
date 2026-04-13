@@ -5,7 +5,7 @@ import {
   validateFiles,
 } from 'next-validate-link';
 import type { InferPageType } from 'fumadocs-core/source';
-import { source } from '@/lib/source';
+import { isMdxPageData, source } from '@/lib/source';
 
 async function checkLinks() {
   const scanned = await scanURLs({
@@ -40,24 +40,36 @@ async function checkLinks() {
 }
 
 function getHeadings({ data }: InferPageType<typeof source>): string[] {
+  if (!isMdxPageData(data)) {
+    return [];
+  }
+
   if (!data.toc) {
     return []; 
   }
 
-  return data.toc.map((item) => item.url.slice(1));
+  return data.toc.map((item: { url: string }) => item.url.slice(1));
 }
 
 function getFiles() {
   const promises = source.getPages().map(
-    async (page): Promise<FileObject> => ({
-      path: page.absolutePath!,
-      content: await page.data.getText('raw'),
-      url: page.url,
-      data: page.data,
-    }),
+    async (page): Promise<FileObject | null> => {
+      if (!page.absolutePath || !isMdxPageData(page.data)) {
+        return null;
+      }
+
+      return {
+        path: page.absolutePath,
+        content: await page.data.getText('raw'),
+        url: page.url,
+        data: page.data,
+      };
+    },
   );
 
-  return Promise.all(promises);
+  return Promise.all(promises).then((files) =>
+    files.filter((file): file is FileObject => file !== null),
+  );
 }
 
 void checkLinks();

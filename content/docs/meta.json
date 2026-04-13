@@ -1,6 +1,6 @@
 {
   "pages": [
-    "index",
+    "about",
     "quickstart",
     "dwh-schema",
     "version-control",
@@ -25,13 +25,6 @@
     "reference/dashboard",
     "reference/parameters",
     "reference/filter-conditions",
-    "reference/format-number",
-
-    "---Mprove CLI---",
-    "mprove-cli/cli-install",
-    "mprove-cli/cli-configuration",
-    "mprove-cli/cli-main",
-    "mprove-cli/cli-git",
-    "mprove-cli/cli-basic"
+    "reference/format-number"
   ]
 }

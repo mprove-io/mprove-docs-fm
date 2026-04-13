@@ -1,15 +1,14 @@
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
-import MproveLogo from "./mprove-logo";
+import { MobileNavTitle } from "@/components/mobile-nav-title";
 
 export function baseOptions(): BaseLayoutProps {
   return {
     nav: {
-      title: (
-        <>
-          <MproveLogo height="24"></MproveLogo> Mprove Docs
-        </>
-      ),
+      title: MobileNavTitle,
     },
     links: [],
+    searchToggle: {
+      enabled: false,
+    },
   };
 }

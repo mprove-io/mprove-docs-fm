@@ -1,0 +1,31 @@
+{
+  "title": "CLI",
+  "pages": [
+    "install-cli",
+    "configuration",
+    "---Main Commands---",
+    "main-commands/sync",
+    "main-commands/get-connections-list",
+    "main-commands/get-schemas",
+    "main-commands/get-sample",
+    "main-commands/get-state",
+    "main-commands/get-model",
+    "main-commands/get-query-info",
+    "main-commands/run",
+    "main-commands/validate",
+    "main-commands/set-codex-auth",
+    "main-commands/download-skills",
+    "main-commands/definitions",
+    "main-commands/version",
+    "main-commands/help",
+    "---Git Commands---",
+    "git-commands/commit",
+    "git-commands/get-branches",
+    "git-commands/create-branch",
+    "git-commands/delete-branch",
+    "git-commands/revert",
+    "git-commands/push",
+    "git-commands/pull",
+    "git-commands/merge"
+  ]
+}

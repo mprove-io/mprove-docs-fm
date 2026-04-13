@@ -36,8 +36,8 @@ Each dashboard must be stored as **dashboard_name.dashboard** YAML file:
 | title        | string                                           | -       | Dashboard title in UI                                                        |
 | description  | string                                           | -       | Dashboard description in UI                                                  |
 | access_roles | string []                                        | -       | If specified, only users with the listed roles will have access to Dashboard |
-| parameters   | [Top Filter []](/docs/reference/parameters#top-filter) | -       | Begin a section of dashboard parameters                                      |
-| tiles\*      | [Tile []](/docs/reference/dashboard#tile)              | -       | Begin a section of tiles                                                     |
+| parameters   | [Top Filter []](/content/docs/reference/parameters#top-filter) | -       | Begin a section of dashboard parameters                                      |
+| tiles\*      | [Tile []](/content/docs/reference/dashboard#tile)              | -       | Begin a section of tiles                                                     |
 
 ### Tile
 
@@ -64,7 +64,7 @@ Tile parameter must have **listen**, **conditions** or **fractions**.
 | apply_to\* | string                                       | -       | Field or Filter name                                                |
 | listen     | string                                       | -       | `only for dashboard tiles` <br/> Specify dashboard parameter to listen to |
 | conditions | string []                                    | -       | `for parameters mapped to Malloy Model` <br/> List of filter expressions  |
-| fractions  | [Fraction []](/docs/reference/parameters#fraction) | -       | `for parameters mapped to Store Model` <br/> List of fractions            |
+| fractions  | [Fraction []](/content/docs/reference/parameters#fraction) | -       | `for parameters mapped to Store Model` <br/> List of fractions            |
 
 ### Tile Data
 

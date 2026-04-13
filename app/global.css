@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "fumadocs-ui/css/vitepress.css";
 @import "fumadocs-ui/css/preset.css";
+@import "fumadocs-openapi/css/preset.css";
 
 #nd-sidebar a {
   transition-duration: 0ms !important; 
@@ -16,8 +17,24 @@
   font-size: 0.95rem;
 }
 
+#nd-sidebar [data-active="true"]::before {
+  content: none !important;
+}
+
+#nd-sidebar [class*="before:bg-fd-border"]::before {
+  content: none !important;
+}
+
 code {
   font-size: 0.85rem;
+}
+
+@media (min-width: 1280px) {
+  #nd-toc {
+    top: var(--fd-docs-row-2);
+    height: calc(var(--fd-docs-height) - var(--fd-docs-row-2));
+    padding-top: 1.5rem;
+  }
 }
 
 table {

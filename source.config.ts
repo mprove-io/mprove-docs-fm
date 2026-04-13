@@ -2,7 +2,7 @@ import {
   defineConfig,
   defineDocs,
   frontmatterSchema,
-  metaSchema,
+  metaSchema
 } from 'fumadocs-mdx/config';
 import { MALLOY_GRAMMAR } from './lib/grammar/malloy-grammar';
 
@@ -13,25 +13,36 @@ export const docs = defineDocs({
   docs: {
     schema: frontmatterSchema,
     postprocess: {
-      includeProcessedMarkdown: true,
-    },
+      includeProcessedMarkdown: true
+    }
   },
   meta: {
-    schema: metaSchema,
+    schema: metaSchema
+  }
+});
+
+export const cli = defineDocs({
+  dir: 'content/cli',
+  docs: {
+    schema: frontmatterSchema,
+    postprocess: {
+      includeProcessedMarkdown: true
+    }
   },
+  meta: {
+    schema: metaSchema
+  }
 });
 
 export default defineConfig({
   mdxOptions: {
     // MDX options
     rehypeCodeOptions: {
-      langs: [
-        MALLOY_GRAMMAR as any,
-      ],
+      langs: [MALLOY_GRAMMAR as any],
       themes: {
         light: 'light-plus',
         dark: 'dark-plus'
-      },
-    },
-  },
+      }
+    }
+  }
 });

@@ -1,4 +1,5 @@
 /_nogit
+/external
 .vscode/*
 !.vscode/cspell-words.txt
 !.vscode/extensions.json

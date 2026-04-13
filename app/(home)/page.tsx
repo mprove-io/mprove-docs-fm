@@ -2,7 +2,7 @@
 import { redirect } from 'next/navigation';
 
 export default function HomePage() {
-  redirect('/docs/quickstart'); 
+  redirect('/content/docs');
   
   // return (
   //   <div className="flex flex-col justify-center text-center flex-1">

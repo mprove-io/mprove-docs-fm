@@ -4,6 +4,7 @@ import { usePathname } from 'fumadocs-core/framework';
 import { DocsLayout } from 'fumadocs-ui/layouts/docs';
 import type { ReactNode } from 'react';
 import { DocsHeader } from '@/components/docs-header';
+import { OpenAPISidebarFolder } from '@/components/openapi-sidebar-folder';
 import { baseOptions } from '@/lib/layout.shared';
 
 interface DocsLayoutClientProps {
@@ -46,7 +47,13 @@ export function DocsLayoutClient({
       tree={activeTree}
       tabs={false}
       sidebar={{
-        enabled: !isUnavailableOpenAPI
+        enabled: !isUnavailableOpenAPI,
+        components:
+          section === 'openapi'
+            ? {
+                Folder: OpenAPISidebarFolder
+              }
+            : undefined
       }}
       slots={{
         header: props => (

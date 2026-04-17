@@ -7,6 +7,74 @@
   transition-duration: 0ms !important; 
 }
 
+#nd-sidebar a,
+#nd-sidebar button,
+#nd-sidebar-mobile a,
+#nd-sidebar-mobile button {
+  cursor: pointer;
+}
+
+#nd-sidebar p,
+#nd-sidebar-mobile p,
+#nd-sidebar [data-separator],
+#nd-sidebar-mobile [data-separator] {
+  cursor: default;
+  user-select: none;
+}
+
+#nd-sidebar :is(a, button) span.ms-auto,
+#nd-sidebar-mobile :is(a, button) span.ms-auto {
+  color: inherit !important;
+}
+
+#nd-sidebar :is(.text-blue-600, .text-green-600, .text-yellow-600, .text-red-600, .text-orange-600),
+#nd-sidebar-mobile :is(.text-blue-600, .text-green-600, .text-yellow-600, .text-red-600, .text-orange-600) {
+  color: inherit !important;
+}
+
+.dark #nd-sidebar :is(.dark\:text-blue-400, .dark\:text-green-400, .dark\:text-yellow-400, .dark\:text-red-400, .dark\:text-orange-400),
+.dark #nd-sidebar-mobile :is(.dark\:text-blue-400, .dark\:text-green-400, .dark\:text-yellow-400, .dark\:text-red-400, .dark\:text-orange-400) {
+  color: inherit !important;
+}
+
+#nd-sidebar :is(a, button, [role='button']):hover,
+#nd-sidebar-mobile :is(a, button, [role='button']):hover,
+#nd-sidebar [class*='hover:bg-fd-accent']:hover,
+#nd-sidebar-mobile [class*='hover:bg-fd-accent']:hover {
+  background-color: transparent !important;
+}
+
+#nd-sidebar [data-active='true']:hover,
+#nd-sidebar-mobile [data-active='true']:hover {
+  background-color: transparent !important;
+  color: var(--color-blue-600) !important;
+}
+
+#nd-sidebar [data-active='true'],
+#nd-sidebar-mobile [data-active='true'] {
+  background-color: transparent !important;
+  color: var(--color-blue-600) !important;
+}
+
+.dark #nd-sidebar [data-active='true'],
+.dark #nd-sidebar-mobile [data-active='true'],
+.dark #nd-sidebar [data-active='true']:hover,
+.dark #nd-sidebar-mobile [data-active='true']:hover {
+  color: var(--color-blue-400) !important;
+}
+
+#nd-sidebar [data-state='open'],
+#nd-sidebar [data-state='closed'],
+#nd-sidebar-mobile [data-state='open'],
+#nd-sidebar-mobile [data-state='closed'] {
+  animation: none !important;
+}
+
+#nd-sidebar [data-icon],
+#nd-sidebar-mobile [data-icon] {
+  transition: none !important;
+}
+
 #nd-page > div > div {
   /* callout, callout warn */
   font-size: 0.95rem;
@@ -15,6 +83,10 @@
 #nd-sidebar > div,
 #nd-sidebar a {
   font-size: 0.95rem;
+}
+
+#nd-sidebar p.inline-flex.items-center.gap-2 {
+  font-weight: 500;
 }
 
 #nd-sidebar [data-active="true"]::before {
@@ -85,6 +157,90 @@ table {
 
 .bg-fd-secondary {
   @apply bg-stone-50 dark:bg-[#161618];
+}
+
+/* Keep OpenAPI response accordions from visibly animating when default-opened. */
+#response-body + * [data-orientation='vertical'][data-state='open'],
+#response-body + * [data-orientation='vertical'][data-state='closed'] {
+  animation: none !important;
+}
+
+#nd-page h2#request-body,
+#nd-page h2#request-body > a,
+#nd-page h2#response-body,
+#nd-page h2#response-body > a {
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  line-height: 1.75rem !important;
+  color: hsl(240, 5%, 34%) !important;
+}
+
+.dark #nd-page h2#request-body,
+.dark #nd-page h2#request-body > a,
+.dark #nd-page h2#response-body,
+.dark #nd-page h2#response-body > a {
+  color: hsl(240, 5%, 78%) !important;
+}
+
+#nd-page h2#response-body {
+  margin-top: 1.5rem !important;
+}
+
+.openapi-request-body .text-sm.border-t,
+#nd-page h2#response-body + * .text-sm.border-t {
+  border-top: 0 !important;
+}
+
+.openapi-request-body > :not(:first-child) {
+  margin-top: 0.75rem;
+}
+
+.openapi-request-body .text-sm.border-x {
+  border-left: 0 !important;
+  border-right: 0 !important;
+}
+
+.openapi-request-body .text-sm.border-t:last-child,
+.openapi-request-body .text-sm.border-x:last-child {
+  border-bottom: 0 !important;
+}
+
+.openapi-response-examples [role='tablist'] {
+  border-bottom: 1px solid var(--color-fd-border);
+}
+
+.openapi-response-examples {
+  padding-top: 1rem;
+}
+
+.openapi-example-panel [role='region'] {
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+.openapi-example-panel figure.shiki,
+.openapi-example-panel .shiki.relative.border.shadow-sm,
+.openapi-example-panel .rounded-xl.border {
+  box-shadow: none !important;
+}
+
+#nd-page h2#response-body + * .border.px-3.py-2.rounded-lg {
+  border: 0 !important;
+  padding-left: 0 !important;
+}
+
+#nd-page h2#response-body + * [data-state='open'] > [class~='ps-4.5'],
+#nd-page h2#response-body + * [data-state='closed'] > [class~='ps-4.5'] {
+  padding-left: 0 !important;
+}
+
+/* Keep property filtering only inside the schema popup dialog. */
+#nd-page div:has(> input[data-object-search-input]) {
+  display: none;
+}
+
+[data-radix-popper-content-wrapper] div:has(> input[data-object-search-input]) {
+  display: flex;
 }
 
 /* body {

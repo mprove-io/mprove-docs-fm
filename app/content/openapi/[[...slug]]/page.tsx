@@ -15,9 +15,39 @@ interface OpenAPIPageProps {
   }>;
 }
 
+function getOpenAPIBreadcrumbLabel(page: {
+  title?: string;
+  getAPIPageProps: () => {
+    operations?: Array<{ path: string }>;
+    webhooks?: Array<{ name: string }>;
+  };
+}): string {
+  const apiPageProps = page.getAPIPageProps();
+  const firstOperation = apiPageProps.operations?.[0];
+  const firstWebhook = apiPageProps.webhooks?.[0];
+
+  if (firstOperation?.path) {
+    return firstOperation.path
+      .replace(/^\/api\/ToBackend/, '')
+      .replace(/^\/api\//, '')
+      .replace(/^\/+/, '');
+  }
+
+  if (firstWebhook?.name) {
+    return firstWebhook.name.replace(/^\/+/, '');
+  }
+
+  return page.title ?? 'OpenAPI';
+}
+
 function OpenAPIUnavailable() {
   return (
-    <DocsPage toc={[]} full>
+    <DocsPage toc={[]} full breadcrumb={{ enabled: false }}>
+      <div className='flex items-center gap-1.5 text-lg text-fd-muted-foreground'>
+        <span className='truncate text-2xl font-semibold text-fd-foreground'>
+          OpenAPI
+        </span>
+      </div>
       <div className='rounded-2xl border border-fd-border bg-fd-card px-6 py-8 text-sm text-fd-muted-foreground'>
         <h1 className='mb-3 text-2xl font-semibold text-fd-foreground'>
           OpenAPI
@@ -45,9 +75,15 @@ export default async function Page(props: OpenAPIPageProps) {
 
   const page = openapiSourceLoader.getPage(params.slug);
   if (!page || !isOpenAPIPageData(page.data)) notFound();
+  const breadcrumbLabel = getOpenAPIBreadcrumbLabel(page.data);
 
   return (
-    <DocsPage toc={page.data.toc}>
+    <DocsPage toc={page.data.toc} breadcrumb={{ enabled: false }}>
+      <div className='flex items-center gap-1.5 text-lg text-fd-muted-foreground'>
+        <span className='truncate text-2xl font-semibold text-fd-foreground'>
+          {breadcrumbLabel}
+        </span>
+      </div>
       <APIPage {...page.data.getAPIPageProps()} />
     </DocsPage>
   );

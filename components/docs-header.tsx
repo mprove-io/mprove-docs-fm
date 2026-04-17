@@ -38,6 +38,10 @@ const tabs = [
   }
 ] as const;
 
+const topLevelTabClass =
+  'inline-flex items-center justify-center border-b-2 border-transparent bg-transparent px-4 text-sm font-medium text-fd-muted-foreground transition-colors hover:bg-transparent';
+const activeTopLevelTabClass = 'border-fd-primary text-fd-primary';
+
 export function DocsHeader({
   showOpenAPI = true,
   openapiHref = '/content/openapi',
@@ -80,11 +84,9 @@ export function DocsHeader({
                 key={tab.href}
                 href={tab.href}
                 className={cn(
-                  buttonVariants({
-                    color: active ? 'secondary' : 'ghost',
-                    className: 'h-9 rounded-full px-4'
-                  }),
-                  active && 'border-fd-border text-fd-foreground'
+                  topLevelTabClass,
+                  'h-9',
+                  active && activeTopLevelTabClass
                 )}
               >
                 {tab.label}
@@ -134,12 +136,9 @@ export function DocsHeader({
                 key={tab.href}
                 href={tab.href}
                 className={cn(
-                  buttonVariants({
-                    color: active ? 'secondary' : 'ghost',
-                    className:
-                      'min-h-10 w-full justify-center rounded-xl px-4 text-center'
-                  }),
-                  active && 'border-fd-border text-fd-foreground'
+                  topLevelTabClass,
+                  'min-h-10 w-full text-center',
+                  active && activeTopLevelTabClass
                 )}
               >
                 {tab.label}

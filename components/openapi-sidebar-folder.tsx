@@ -24,7 +24,7 @@ function OpenAPISidebarFolderTrigger({
   return (
     <SidebarFolderTrigger
       className={cn(
-        'relative flex w-full flex-row items-center gap-2 rounded-lg p-2 text-start text-fd-muted-foreground wrap-anywhere transition-colors hover:bg-fd-accent/50 hover:text-fd-accent-foreground/80 hover:transition-none [&_svg]:size-4 [&_svg]:shrink-0'
+        'relative flex w-full flex-row items-center gap-2 rounded-lg p-2 text-start text-fd-muted-foreground wrap-anywhere transition-colors hover:text-fd-accent-foreground/80 hover:transition-none [&_svg]:size-4 [&_svg]:shrink-0'
       )}
       style={{
         paddingInlineStart: getItemOffset(depth - 1)

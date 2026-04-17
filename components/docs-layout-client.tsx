@@ -30,6 +30,10 @@ export function DocsLayoutClient({
       key={isUnavailableOpenAPI ? 'openapi-unavailable' : section}
       tree={tree}
       tabs={false}
+      containerProps={{
+        className:
+          'max-md:[--fd-header-height:7rem] md:[--fd-header-height:3.5rem] md:[--fd-sidebar-width:268px] xl:[--fd-toc-width:268px]'
+      }}
       sidebar={{
         enabled: !isUnavailableOpenAPI,
         components:

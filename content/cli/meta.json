@@ -13,7 +13,6 @@
     "main-commands/get-query-info",
     "main-commands/run",
     "main-commands/validate",
-    "main-commands/set-codex-auth",
     "main-commands/download-skills",
     "main-commands/definitions",
     "main-commands/version",

@@ -11,6 +11,14 @@ const config = {
       {
         source: '/content/docs/:path*.mdx',
         destination: '/llms.mdx/content/docs/:path*'
+      },
+      {
+        source: '/content/cli/:path*.mdx',
+        destination: '/llms.mdx/content/cli/:path*'
+      },
+      {
+        source: '/content/openapi/:path*.mdx',
+        destination: '/llms.mdx/content/openapi/:path*'
       }
     ];
   }

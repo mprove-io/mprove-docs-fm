@@ -6,7 +6,11 @@ import {
 } from 'fumadocs-core/source';
 import { lucideIconsPlugin } from 'fumadocs-core/source/lucide-icons';
 import { openapiPlugin, openapiSource } from 'fumadocs-openapi/server';
-import { openapi } from '@/lib/openapi';
+import { openapi, openapiDocument } from '@/lib/openapi';
+import {
+  getOpenAPIOperationFileEntries,
+  type OpenAPIOperationFileEntry
+} from '@/lib/openapi-operation-files';
 import { OPENAPI_TAG_GROUPS } from '@/lib/openapi-tag-groups';
 
 type OpenAPISource = Awaited<ReturnType<typeof openapiSource>>;
@@ -14,12 +18,37 @@ type OpenAPIPageData =
   OpenAPISource extends Source<infer Config> ? Config['pageData'] : never;
 type OpenAPIMetaData =
   OpenAPISource extends Source<infer Config> ? Config['metaData'] : never;
+type OpenAPIByPathPageData = {
+  title: string;
+  description: string;
+  _openapiByPath: true;
+};
+type OpenAPILoaderPageData = OpenAPIPageData | OpenAPIByPathPageData;
 type OpenAPIVirtualFile = OpenAPISource['files'][number];
 type OpenAPIVirtualPage = Extract<OpenAPIVirtualFile, { type: 'page' }>;
 type OpenAPIVirtualMeta = Extract<OpenAPIVirtualFile, { type: 'meta' }>;
+type OpenAPIByPathVirtualPage = {
+  type: 'page';
+  path: string;
+  data: OpenAPIByPathPageData;
+};
+export type OpenAPIByPathSection = {
+  title: string;
+  links: OpenAPIOperationFileEntry[];
+};
 
 const OPENAPI_BASE_DIR: string = '';
+const OPENAPI_BY_PATH_SLUG = 'openapi-by-path';
 const DEFAULT_OPENAPI_PAGE = '/content/openapi/data/state/GetStateController';
+export const openapiOperationFileEntries = openapi
+  ? getOpenAPIOperationFileEntries(openapiDocument)
+  : [];
+export const openapiOperationFileHrefByKey = new Map(
+  openapiOperationFileEntries.map(entry => [entry.key, entry.href])
+);
+export const openapiByPathSections = groupOpenAPIEntriesByPath(
+  openapiOperationFileEntries
+);
 
 const openapiTagGroupByTag = (() => {
   const output = new Map<string, string>();
@@ -57,6 +86,57 @@ function slugifySegment(value: string): string {
 
 function normalizeTagKey(value: string): string {
   return value.replace(/[^a-z0-9]/gi, '').toLowerCase();
+}
+
+function groupOpenAPIEntriesByPath(
+  entries: OpenAPIOperationFileEntry[]
+): OpenAPIByPathSection[] {
+  const entriesByTag = new Map<string, OpenAPIOperationFileEntry[]>();
+  const assignedEntries = new Set<OpenAPIOperationFileEntry>();
+
+  for (const entry of entries) {
+    const tag = entry.tags[0] ?? 'unknown';
+    const normalizedTag = normalizeTagKey(tag);
+
+    entriesByTag.set(normalizedTag, [
+      ...(entriesByTag.get(normalizedTag) ?? []),
+      entry
+    ]);
+  }
+
+  const sections: OpenAPIByPathSection[] = [];
+
+  for (const group of OPENAPI_TAG_GROUPS) {
+    for (const tag of group.tags) {
+      const links = entriesByTag.get(normalizeTagKey(tag));
+      if (!links?.length) continue;
+
+      for (const link of links) assignedEntries.add(link);
+
+      sections.push({
+        title: tag,
+        links: sortOpenAPIEntries(links)
+      });
+    }
+  }
+
+  const otherLinks = entries.filter(entry => !assignedEntries.has(entry));
+  if (otherLinks.length > 0) {
+    sections.push({
+      title: 'Other',
+      links: sortOpenAPIEntries(otherLinks)
+    });
+  }
+
+  return sections;
+}
+
+function sortOpenAPIEntries(entries: OpenAPIOperationFileEntry[]) {
+  return [...entries].sort(
+    (first, second) =>
+      first.path.localeCompare(second.path) ||
+      first.method.localeCompare(second.method)
+  );
 }
 
 function withOpenAPIBaseDir(path: string): string {
@@ -121,9 +201,11 @@ const openapiPages = openapi
       }
 
       return update(operationPagesSource)
-        .files(files => {
+        .files<OpenAPILoaderPageData, OpenAPIMetaData>(files => {
           const rootPages: string[] = [];
-          const nextFiles: OpenAPIVirtualFile[] = [];
+          const nextFiles: Array<
+            OpenAPIVirtualFile | OpenAPIByPathVirtualPage
+          > = [];
 
           for (const group of OPENAPI_TAG_GROUPS) {
             const groupedTagPaths: string[] = [];
@@ -258,11 +340,22 @@ const openapiPages = openapi
             data: {
               title: 'OpenAPI',
               root: true,
-              pages: rootPages
+              pages: [OPENAPI_BY_PATH_SLUG, ...rootPages]
             }
           };
 
-          nextFiles.push(rootMeta);
+          nextFiles.push(
+            {
+              type: 'page',
+              path: withOpenAPIBaseDir(`${OPENAPI_BY_PATH_SLUG}.mdx`),
+              data: {
+                title: 'OpenAPI by Path',
+                description: 'OpenAPI JSON files.',
+                _openapiByPath: true
+              }
+            },
+            rootMeta
+          );
 
           return nextFiles;
         })
@@ -274,13 +367,13 @@ export const openapiSourceLoader = openapiPages
   ? (loader({
       baseUrl: '/content/openapi',
       source: openapiPages as Source<{
-        pageData: OpenAPIPageData;
+        pageData: OpenAPILoaderPageData;
         metaData: OpenAPIMetaData;
       }>,
       plugins: [lucideIconsPlugin(), openapiPlugin()]
     }) as LoaderOutput<{
       source: {
-        pageData: OpenAPIPageData;
+        pageData: OpenAPILoaderPageData;
         metaData: OpenAPIMetaData;
       };
       i18n: undefined;
@@ -305,4 +398,15 @@ export const firstOpenAPIPage =
 
 export function isOpenAPIPageData(data: unknown): data is OpenAPIPageData {
   return typeof data === 'object' && data !== null && 'getAPIPageProps' in data;
+}
+
+export function isOpenAPIByPathPageData(
+  data: unknown
+): data is OpenAPIByPathPageData {
+  return (
+    typeof data === 'object' &&
+    data !== null &&
+    '_openapiByPath' in data &&
+    data._openapiByPath === true
+  );
 }

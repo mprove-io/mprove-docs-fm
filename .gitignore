@@ -9,7 +9,8 @@
 *.env
 .envrc
 
-.openapi-cache
+public/openapi.json
+public/openapi-paths/
 
 # deps
 /node_modules
@@ -37,4 +38,3 @@ yarn-error.log*
 .env*.local
 .vercel
 next-env.d.ts
-

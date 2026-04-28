@@ -35,7 +35,26 @@ async function getStructuredData(page: SearchPage): Promise<StructuredData> {
     if (loaded.structuredData) return loaded.structuredData;
   }
 
-  throw new Error(`Cannot build search index for page: ${page.url}`);
+  const fallbackContent = [page.data.title, page.data.description]
+    .filter(Boolean)
+    .join('\n');
+
+  if (fallbackContent) {
+    return {
+      headings: [],
+      contents: [
+        {
+          heading: undefined,
+          content: fallbackContent
+        }
+      ]
+    };
+  }
+
+  return {
+    headings: [],
+    contents: []
+  };
 }
 
 async function buildSectionIndexes({ source, tag, title }: SearchSection) {

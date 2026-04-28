@@ -1,5 +1,6 @@
 {
   "pages": [
+    "docs-for-ai",
     "about",
     "quickstart",
     "dwh-schema",

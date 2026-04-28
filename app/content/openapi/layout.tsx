@@ -1,11 +1,7 @@
 import type { ReactNode } from 'react';
 import { DocsLayoutClient } from '@/components/docs-layout-client';
-import {
-  docsTree,
-  firstCliPage,
-  firstOpenAPIPage,
-  openapiTree
-} from '@/lib/source';
+import { firstOpenAPIPage, openapiTree } from '@/lib/openapi-source';
+import { docsTree, firstCliPage } from '@/lib/source';
 
 interface OpenAPISectionLayoutProps {
   children: ReactNode;

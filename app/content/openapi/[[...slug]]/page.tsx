@@ -7,7 +7,7 @@ import {
   isOpenAPIPageData,
   openapiEnabled,
   openapiSourceLoader
-} from '@/lib/source';
+} from '@/lib/openapi-source';
 
 interface OpenAPIPageProps {
   params: Promise<{

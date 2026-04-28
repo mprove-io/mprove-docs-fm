@@ -9,6 +9,8 @@
 *.env
 .envrc
 
+.openapi-cache
+
 # deps
 /node_modules
 

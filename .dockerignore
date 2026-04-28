@@ -1,6 +1,7 @@
 _nogit
 .git
 .next/
+.openapi-cache/
 .source/
 .pnpm-store/
 .vscode/

@@ -1,15 +1,13 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import { cli, docs } from 'collections/server';
 import {
   type InferPageType,
   type LoaderOutput,
   loader,
-  type Source,
-  update
+  type Source
 } from 'fumadocs-core/source';
 import { lucideIconsPlugin } from 'fumadocs-core/source/lucide-icons';
-import { openapiPlugin, openapiSource } from 'fumadocs-openapi/server';
-import { openapi } from '@/lib/openapi';
-import { OPENAPI_TAG_GROUPS } from '@/lib/openapi-tag-groups';
 
 const docsContentSource = docs.toFumadocsSource();
 const cliContentSource = cli.toFumadocsSource();
@@ -24,266 +22,6 @@ type CliPageData =
   CliContentSource extends Source<infer Config> ? Config['pageData'] : never;
 type CliMetaData =
   CliContentSource extends Source<infer Config> ? Config['metaData'] : never;
-type OpenAPISource = Awaited<ReturnType<typeof openapiSource>>;
-type OpenAPIPageData =
-  OpenAPISource extends Source<infer Config> ? Config['pageData'] : never;
-type OpenAPIMetaData =
-  OpenAPISource extends Source<infer Config> ? Config['metaData'] : never;
-type OpenAPIVirtualFile = OpenAPISource['files'][number];
-type OpenAPIVirtualPage = Extract<OpenAPIVirtualFile, { type: 'page' }>;
-type OpenAPIVirtualMeta = Extract<OpenAPIVirtualFile, { type: 'meta' }>;
-
-const OPENAPI_BASE_DIR: string = '';
-const DEFAULT_OPENAPI_PAGE = '/content/openapi/data/state/GetStateController';
-
-const openapiTagGroupByTag = (() => {
-  const output = new Map<string, string>();
-
-  for (const group of OPENAPI_TAG_GROUPS) {
-    for (const tag of group.tags) {
-      const normalizedTag = normalizeTagKey(tag);
-
-      if (output.has(normalizedTag)) {
-        throw new Error(`OpenAPI tag "${tag}" is assigned to multiple groups.`);
-      }
-
-      output.set(normalizedTag, group.name);
-    }
-  }
-
-  return output;
-})();
-
-const openapiConfiguredTagByNormalizedTag = (() => {
-  const output = new Map<string, string>();
-
-  for (const group of OPENAPI_TAG_GROUPS) {
-    for (const tag of group.tags) {
-      output.set(normalizeTagKey(tag), tag);
-    }
-  }
-
-  return output;
-})();
-
-function slugifySegment(value: string): string {
-  return value.replace(/\s+/g, '-').toLowerCase();
-}
-
-function normalizeTagKey(value: string): string {
-  return value.replace(/[^a-z0-9]/gi, '').toLowerCase();
-}
-
-function withOpenAPIBaseDir(path: string): string {
-  return OPENAPI_BASE_DIR ? `${OPENAPI_BASE_DIR}/${path}` : path;
-}
-
-function stripOpenAPIBaseDir(path: string): string {
-  const normalizedPath = path.replace(/^\/+/, '');
-
-  return OPENAPI_BASE_DIR
-    ? normalizedPath.slice(OPENAPI_BASE_DIR.length + 1)
-    : normalizedPath;
-}
-
-const openapiPages = openapi
-  ? await (async () => {
-      const [tagPagesSource, operationPagesSource] = await Promise.all([
-        openapiSource(openapi, {
-          baseDir: OPENAPI_BASE_DIR,
-          per: 'tag'
-        }),
-        openapiSource(openapi, {
-          baseDir: OPENAPI_BASE_DIR,
-          meta: true,
-          groupBy: 'tag'
-        })
-      ]);
-
-      const tagPages = new Map<
-        string,
-        {
-          slug: string;
-          page: OpenAPIVirtualPage;
-        }
-      >();
-      const tagTitlesBySlug = new Map<string, string>();
-
-      for (const file of tagPagesSource.files) {
-        if (file.type !== 'page') continue;
-
-        const title =
-          typeof file.data.title === 'string' ? file.data.title : undefined;
-        if (!title) continue;
-        const configuredTitle =
-          openapiConfiguredTagByNormalizedTag.get(normalizeTagKey(title)) ??
-          title;
-
-        const slug = stripOpenAPIBaseDir(file.path).slice(0, -4);
-        const page: OpenAPIVirtualPage = {
-          ...file,
-          data: {
-            ...file.data,
-            title: configuredTitle
-          }
-        };
-
-        tagPages.set(configuredTitle, {
-          slug,
-          page
-        });
-        tagTitlesBySlug.set(slug, configuredTitle);
-      }
-
-      return update(operationPagesSource)
-        .files(files => {
-          const rootPages: string[] = [];
-          const nextFiles: OpenAPIVirtualFile[] = [];
-
-          for (const group of OPENAPI_TAG_GROUPS) {
-            const groupedTagPaths: string[] = [];
-
-            for (const tag of group.tags) {
-              const tagPage = tagPages.get(tag);
-              const groupSlug = slugifySegment(group.name);
-
-              if (!tagPage) {
-                const fallbackTagPage = Array.from(tagPages.entries()).find(
-                  ([title]) => normalizeTagKey(title) === normalizeTagKey(tag)
-                )?.[1];
-
-                if (fallbackTagPage) {
-                  groupedTagPaths.push(`${groupSlug}/${fallbackTagPage.slug}`);
-                  continue;
-                }
-
-                console.warn(
-                  `[openapi] Missing generated tag page for "${tag}".`
-                );
-                continue;
-              }
-
-              groupedTagPaths.push(`${groupSlug}/${tagPage.slug}`);
-            }
-
-            if (groupedTagPaths.length === 0) continue;
-
-            rootPages.push(`---${group.name}---`, ...groupedTagPaths);
-          }
-
-          for (const file of files) {
-            if (
-              file.type === 'meta' &&
-              file.path === withOpenAPIBaseDir('meta.json')
-            ) {
-              continue;
-            }
-
-            if (file.type === 'meta') {
-              const folderPath = stripOpenAPIBaseDir(file.path).slice(
-                0,
-                -'/meta.json'.length
-              );
-              const groupName = openapiTagGroupByTag.get(
-                normalizeTagKey(file.data.title ?? '')
-              );
-
-              if (!groupName) {
-                console.warn(
-                  `[openapi] Tag folder "${file.data.title ?? folderPath}" is not assigned to a sidebar group.`
-                );
-                nextFiles.push(file);
-                continue;
-              }
-
-              const groupSlug = slugifySegment(groupName);
-              const tagPage = Array.from(tagPages.entries()).find(
-                ([title]) =>
-                  normalizeTagKey(title) ===
-                  normalizeTagKey(file.data.title ?? '')
-              )?.[1];
-
-              if (!tagPage) {
-                console.warn(
-                  `[openapi] Missing generated tag page for "${file.data.title ?? folderPath}".`
-                );
-                nextFiles.push(file);
-                continue;
-              }
-
-              const movedMeta: OpenAPIVirtualMeta = {
-                ...file,
-                path: withOpenAPIBaseDir(
-                  `${groupSlug}/${folderPath}/meta.json`
-                ),
-                data: {
-                  ...file.data,
-                  title: tagPage.page.data.title
-                }
-              };
-
-              nextFiles.push(movedMeta);
-              continue;
-            }
-
-            const filePath = stripOpenAPIBaseDir(file.path);
-            const [tagSlug, ...rest] = filePath.split('/');
-            const tagTitle = tagTitlesBySlug.get(tagSlug);
-            const groupName = tagTitle
-              ? openapiTagGroupByTag.get(normalizeTagKey(tagTitle))
-              : undefined;
-
-            if (!groupName) {
-              nextFiles.push(file);
-              continue;
-            }
-
-            const groupSlug = slugifySegment(groupName);
-            nextFiles.push({
-              ...file,
-              path: withOpenAPIBaseDir(
-                `${groupSlug}/${tagSlug}/${rest.join('/')}`
-              )
-            });
-          }
-
-          for (const group of OPENAPI_TAG_GROUPS) {
-            const groupSlug = slugifySegment(group.name);
-
-            for (const tag of group.tags) {
-              const tagPage =
-                tagPages.get(tag) ??
-                Array.from(tagPages.entries()).find(
-                  ([title]) => normalizeTagKey(title) === normalizeTagKey(tag)
-                )?.[1];
-              if (!tagPage) continue;
-
-              nextFiles.push({
-                ...tagPage.page,
-                path: withOpenAPIBaseDir(
-                  `${groupSlug}/${tagPage.slug}/index.mdx`
-                )
-              });
-            }
-          }
-
-          const rootMeta: OpenAPIVirtualMeta = {
-            type: 'meta',
-            path: withOpenAPIBaseDir('meta.json'),
-            data: {
-              title: 'OpenAPI',
-              root: true,
-              pages: rootPages
-            }
-          };
-
-          nextFiles.push(rootMeta);
-
-          return nextFiles;
-        })
-        .build();
-    })()
-  : null;
 
 export const docsSource = loader({
   baseUrl: '/content/docs',
@@ -315,46 +53,11 @@ export const cliSource = loader({
   i18n: undefined;
 }>;
 
-export const openapiSourceLoader = openapiPages
-  ? (loader({
-      baseUrl: '/content/openapi',
-      source: openapiPages as Source<{
-        pageData: OpenAPIPageData;
-        metaData: OpenAPIMetaData;
-      }>,
-      plugins: [lucideIconsPlugin(), openapiPlugin()]
-    }) as LoaderOutput<{
-      source: {
-        pageData: OpenAPIPageData;
-        metaData: OpenAPIMetaData;
-      };
-      i18n: undefined;
-    }>)
-  : null;
-
 export const source = docsSource;
 export const docsTree = docsSource.pageTree;
 export const cliTree = cliSource.pageTree;
-export const openapiTree = openapiSourceLoader?.pageTree;
 
-export const openapiEnabled = Boolean(openapiSourceLoader);
-export const firstOpenAPIPage =
-  openapiSourceLoader
-    ?.getPages()
-    .find(page => page.url === DEFAULT_OPENAPI_PAGE)?.url ??
-  openapiSourceLoader
-    ?.getPages()
-    .find(
-      page =>
-        typeof page.data === 'object' &&
-        page.data !== null &&
-        'getAPIPageProps' in page.data
-    )?.url;
 export const firstCliPage = cliSource.getPages().at(0)?.url;
-
-export function isOpenAPIPageData(data: unknown): data is OpenAPIPageData {
-  return typeof data === 'object' && data !== null && 'getAPIPageProps' in data;
-}
 
 export function isMdxPageData(data: unknown): data is DocsPageData {
   return (
@@ -370,15 +73,74 @@ export async function getLLMText(page: InferPageType<typeof docsSource>) {
     return '# Documentation';
   }
 
-  let content: string;
+  const raw = await page.data.getText('raw');
+  const content = await expandDynamicCodeBlocks(raw);
 
-  try {
-    content = await page.data.getText('processed');
-  } catch {
-    content = await page.data.getText('raw');
+  return stripFrontmatter(content);
+}
+
+const importRegex =
+  /^import\s+\{\s*(?<name>\w+)\s*\}\s+from\s+["']@\/content\/docs\/parts\/(?<file>[^"']+)["'];?\s*$/gm;
+const dynamicCodeBlockRegex = /<DynamicCodeBlock\b(?<attrs>[\s\S]*?)\/>/g;
+
+async function expandDynamicCodeBlocks(content: string): Promise<string> {
+  const codeByName = new Map<string, string>();
+
+  for (const match of content.matchAll(importRegex)) {
+    const name = match.groups?.name;
+    const file = match.groups?.file;
+    if (!name || !file) continue;
+
+    const code = await readExportedTemplateLiteral(
+      path.join(process.cwd(), 'content/docs/parts', `${file}.ts`),
+      name
+    );
+
+    if (code !== undefined) codeByName.set(name, code);
   }
 
-  return `# ${page.data.title}
+  return content
+    .replace(importRegex, '')
+    .replace(
+      /^import\s+\{\s*DynamicCodeBlock\s*\}\s+from\s+["']@\/components\/dynamic-codeblock["'];?\s*$/gm,
+      ''
+    )
+    .replace(dynamicCodeBlockRegex, (value, attrs: string) => {
+      const codeName = attrs.match(/\bcode=\{(?<name>\w+)\}/)?.groups?.name;
+      if (!codeName) return value;
 
-${content}`;
+      const code = codeByName.get(codeName);
+      if (code === undefined) return value;
+
+      const lang =
+        attrs.match(/\blang=["'](?<lang>[^"']+)["']/)?.groups?.lang ?? 'txt';
+
+      return `\`\`\`${lang}\n${code.trimEnd()}\n\`\`\``;
+    })
+    .replace(/\n{3,}/g, '\n\n');
+}
+
+async function readExportedTemplateLiteral(
+  filePath: string,
+  name: string
+): Promise<string | undefined> {
+  const source = await fs.readFile(filePath, 'utf8');
+  const marker = `export const ${name} = \``;
+  const start = source.indexOf(marker);
+  if (start === -1) return undefined;
+
+  let index = start + marker.length;
+  let output = '';
+
+  while (index < source.length) {
+    const char = source[index];
+
+    if (char === '`' && source[index - 1] !== '\\') return output;
+    output += char;
+    index++;
+  }
+}
+
+function stripFrontmatter(content: string): string {
+  return content.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '').trimStart();
 }

@@ -12,10 +12,10 @@
 
     "---Builder---",
     "builder/builder",
-    "builder/editor-session",
+    "builder/editor-ai-session",
+    "builder/openai-codex-setup",
     "builder/mcp-server",
     "builder/skills",
-    "builder/openai-codex-setup",
 
     "---Reference---",
     "reference/project-config",

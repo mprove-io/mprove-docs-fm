@@ -21,7 +21,7 @@ COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
 
-RUN corepack enable pnpm && pnpm run build
+RUN mkdir -p public && corepack enable pnpm && pnpm run build
 
 FROM base AS runner
 WORKDIR /app

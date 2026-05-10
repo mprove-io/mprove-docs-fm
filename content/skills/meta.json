@@ -1,6 +1,14 @@
 {
   "title": "Skills",
   "pages": [
-    "mprove-build-chart"
+    "mprove-basic",
+    "mprove-project-structure",
+    "mprove-connection-schemas",
+    "mprove-build-malloy-model",
+    "mprove-build-store-model",
+    "mprove-build-chart",
+    "mprove-build-report",
+    "mprove-build-dashboard",
+    "mprove-query-data"
   ]
 }

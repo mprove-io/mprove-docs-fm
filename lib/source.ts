@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { cli, docs } from 'collections/server';
+import { cli, docs, skills } from 'collections/server';
 import {
   type InferPageType,
   type LoaderOutput,
@@ -11,9 +11,11 @@ import { lucideIconsPlugin } from 'fumadocs-core/source/lucide-icons';
 
 const docsContentSource = docs.toFumadocsSource();
 const cliContentSource = cli.toFumadocsSource();
+const skillsContentSource = skills.toFumadocsSource();
 
 type DocsContentSource = typeof docsContentSource;
 type CliContentSource = typeof cliContentSource;
+type SkillsContentSource = typeof skillsContentSource;
 type DocsPageData =
   DocsContentSource extends Source<infer Config> ? Config['pageData'] : never;
 type DocsMetaData =
@@ -22,6 +24,14 @@ type CliPageData =
   CliContentSource extends Source<infer Config> ? Config['pageData'] : never;
 type CliMetaData =
   CliContentSource extends Source<infer Config> ? Config['metaData'] : never;
+type SkillsPageData =
+  SkillsContentSource extends Source<infer Config>
+    ? Config['pageData']
+    : never;
+type SkillsMetaData =
+  SkillsContentSource extends Source<infer Config>
+    ? Config['metaData']
+    : never;
 
 export const docsSource = loader({
   baseUrl: '/content/docs',
@@ -53,11 +63,28 @@ export const cliSource = loader({
   i18n: undefined;
 }>;
 
+export const skillsSource = loader({
+  baseUrl: '/content/skills',
+  source: skillsContentSource as Source<{
+    pageData: SkillsPageData;
+    metaData: SkillsMetaData;
+  }>,
+  plugins: [lucideIconsPlugin()]
+}) as LoaderOutput<{
+  source: {
+    pageData: SkillsPageData;
+    metaData: SkillsMetaData;
+  };
+  i18n: undefined;
+}>;
+
 export const source = docsSource;
 export const docsTree = docsSource.pageTree;
 export const cliTree = cliSource.pageTree;
+export const skillsTree = skillsSource.pageTree;
 
 export const firstCliPage = cliSource.getPages().at(0)?.url;
+export const firstSkillsPage = skillsSource.getPages().at(0)?.url;
 
 export function isMdxPageData(data: unknown): data is DocsPageData {
   return (
@@ -77,6 +104,30 @@ export async function getLLMText(page: InferPageType<typeof docsSource>) {
   const content = await expandDynamicCodeBlocks(raw);
 
   return stripFrontmatter(content);
+}
+
+export async function getSkillText(page: InferPageType<typeof skillsSource>) {
+  if (!isSkillPageData(page.data)) {
+    return '';
+  }
+
+  const raw = await page.data.getText('raw');
+  const expanded = await expandDynamicCodeBlocks(raw);
+  const body = stripFrontmatter(expanded);
+
+  const name = page.data.title;
+  const description = page.data.description ?? '';
+
+  return `---\nname: ${name}\ndescription: ${description}\n---\n\n${body}`;
+}
+
+function isSkillPageData(data: unknown): data is SkillsPageData {
+  return (
+    typeof data === 'object' &&
+    data !== null &&
+    'body' in data &&
+    'getText' in data
+  );
 }
 
 const importRegex =

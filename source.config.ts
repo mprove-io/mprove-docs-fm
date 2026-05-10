@@ -34,6 +34,19 @@ export const cli = defineDocs({
   }
 });
 
+export const skills = defineDocs({
+  dir: 'content/skills',
+  docs: {
+    schema: frontmatterSchema,
+    postprocess: {
+      includeProcessedMarkdown: true
+    }
+  },
+  meta: {
+    schema: metaSchema
+  }
+});
+
 export default defineConfig({
   mdxOptions: {
     // MDX options

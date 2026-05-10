@@ -6,7 +6,7 @@ import { DocsHeader } from '@/components/docs-header';
 import { OpenAPISidebarFolder } from '@/components/openapi-sidebar-folder';
 import { baseOptions } from '@/lib/layout.shared';
 
-type DocsSection = 'docs' | 'cli' | 'openapi';
+type DocsSection = 'docs' | 'cli' | 'skills' | 'openapi';
 
 interface DocsLayoutClientProps {
   tree: Parameters<typeof DocsLayout>[0]['tree'];
@@ -14,6 +14,7 @@ interface DocsLayoutClientProps {
   isUnavailableOpenAPI?: boolean;
   openapiHref?: string;
   cliHref?: string;
+  skillsHref?: string;
   children: ReactNode;
 }
 
@@ -23,6 +24,7 @@ export function DocsLayoutClient({
   isUnavailableOpenAPI = false,
   openapiHref,
   cliHref,
+  skillsHref,
   children
 }: DocsLayoutClientProps) {
   return (
@@ -45,7 +47,12 @@ export function DocsLayoutClient({
       }}
       slots={{
         header: props => (
-          <DocsHeader {...props} openapiHref={openapiHref} cliHref={cliHref} />
+          <DocsHeader
+            {...props}
+            openapiHref={openapiHref}
+            cliHref={cliHref}
+            skillsHref={skillsHref}
+          />
         )
       }}
       {...baseOptions()}

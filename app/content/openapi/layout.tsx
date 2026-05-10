@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { DocsLayoutClient } from '@/components/docs-layout-client';
 import { firstOpenAPIPage, openapiTree } from '@/lib/openapi-source';
-import { docsTree, firstCliPage } from '@/lib/source';
+import { docsTree, firstCliPage, firstSkillsPage } from '@/lib/source';
 
 interface OpenAPISectionLayoutProps {
   children: ReactNode;
@@ -14,6 +14,7 @@ export default function Layout({ children }: OpenAPISectionLayoutProps) {
       tree={openapiTree ?? docsTree}
       isUnavailableOpenAPI={!openapiTree}
       cliHref={firstCliPage}
+      skillsHref={firstSkillsPage}
       openapiHref={firstOpenAPIPage}
     >
       {children}

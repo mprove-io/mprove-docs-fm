@@ -16,6 +16,7 @@ interface DocsHeaderProps extends ComponentProps<'header'> {
   showOpenAPI?: boolean;
   openapiHref?: string;
   cliHref?: string;
+  skillsHref?: string;
 }
 
 const tabs = [
@@ -32,6 +33,11 @@ const tabs = [
     match: (pathname: string) => pathname.startsWith('/content/cli')
   },
   {
+    href: '/content/skills',
+    label: 'Skills',
+    match: (pathname: string) => pathname.startsWith('/content/skills')
+  },
+  {
     href: '/content/openapi',
     label: 'OpenAPI',
     match: (pathname: string) => pathname.startsWith('/content/openapi')
@@ -46,25 +52,26 @@ export function DocsHeader({
   showOpenAPI = true,
   openapiHref = '/content/openapi',
   cliHref = '/content/cli',
+  skillsHref = '/content/skills',
   ...props
 }: DocsHeaderProps) {
   const pathname = usePathname();
   const { slots } = useDocsLayout();
+  const allTabs = tabs.map(tab => {
+    if (tab.label === 'OpenAPI') {
+      return { ...tab, href: openapiHref };
+    }
+    if (tab.label === 'CLI') {
+      return { ...tab, href: cliHref };
+    }
+    if (tab.label === 'Skills') {
+      return { ...tab, href: skillsHref };
+    }
+    return tab;
+  });
   const visibleTabs = showOpenAPI
-    ? tabs.map(tab =>
-        tab.label === 'OpenAPI'
-          ? {
-              ...tab,
-              href: openapiHref
-            }
-          : tab.label === 'CLI'
-            ? {
-                ...tab,
-                href: cliHref
-              }
-            : tab
-      )
-    : tabs.filter(tab => tab.label !== 'OpenAPI');
+    ? allTabs
+    : allTabs.filter(tab => tab.label !== 'OpenAPI');
 
   return (
     <header

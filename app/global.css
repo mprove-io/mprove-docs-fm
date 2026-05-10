@@ -4,7 +4,13 @@
 @import "fumadocs-openapi/css/preset.css";
 
 #nd-sidebar a {
-  transition-duration: 0ms !important; 
+  transition-duration: 0ms !important;
+}
+
+#nd-sidebar,
+#nd-sidebar-mobile {
+  background-color: var(--color-fd-background) !important;
+  border-right: 1px solid var(--color-fd-border) !important;
 }
 
 #nd-sidebar a,
@@ -130,11 +136,11 @@ table {
   --color-fd-muted-foreground: hsl(240, 6%, 40%);
   --color-fd-secondary: hsl(240, 6%, 97%);
   --color-fd-accent-foreground: hsl(240, 6%, 25%);
-  --color-fd-primary: hsl(221, 100%, 45%); /* hsl(226, 55%, 45%) */
+  --color-fd-primary: var(--color-blue-600);
 }
 .dark {
   --color-fd-ring: hsl(234, 100%, 83%);
-  --color-fd-primary: hsl(234, 100%, 83%);
+  --color-fd-primary: var(--color-blue-400);
   --color-fd-secondary-foreground: hsl(60, 100%, 98%);
   --color-fd-card-foreground: hsl(60, 100%, 98%);
   --color-fd-background: hsl(240, 7%, 11%);

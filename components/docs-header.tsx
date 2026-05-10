@@ -28,14 +28,14 @@ const tabs = [
       pathname.startsWith('/content/docs/')
   },
   {
-    href: '/content/cli',
-    label: 'CLI',
-    match: (pathname: string) => pathname.startsWith('/content/cli')
-  },
-  {
     href: '/content/skills',
     label: 'Skills',
     match: (pathname: string) => pathname.startsWith('/content/skills')
+  },
+  {
+    href: '/content/cli',
+    label: 'CLI',
+    match: (pathname: string) => pathname.startsWith('/content/cli')
   },
   {
     href: '/content/openapi',

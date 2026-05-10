@@ -146,20 +146,20 @@ export default async function Page(props: OpenAPIPageProps) {
 
   return (
     <DocsPage toc={page.data.toc} breadcrumb={{ enabled: false }}>
+      {operationJsonHref ? (
+        <a
+          className='text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300'
+          href={operationJsonHref}
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          .json
+        </a>
+      ) : null}
       <div className='flex flex-wrap items-center gap-x-3 gap-y-1 text-lg text-fd-muted-foreground'>
         <span className='truncate text-2xl font-semibold text-fd-foreground'>
           {breadcrumbLabel}
         </span>
-        {operationJsonHref ? (
-          <a
-            className='text-sm font-medium text-fd-muted-foreground underline underline-offset-4 hover:text-fd-foreground'
-            href={operationJsonHref}
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            .json
-          </a>
-        ) : null}
       </div>
       <APIPage {...page.data.getAPIPageProps()} />
     </DocsPage>

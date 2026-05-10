@@ -113,12 +113,7 @@ export async function getSkillText(page: InferPageType<typeof skillsSource>) {
 
   const raw = await page.data.getText('raw');
   const expanded = await expandDynamicCodeBlocks(raw);
-  const body = stripFrontmatter(expanded);
-
-  const name = page.data.title;
-  const description = page.data.description ?? '';
-
-  return `---\nname: ${name}\ndescription: ${description}\n---\n\n${body}`;
+  return stripFrontmatter(expanded);
 }
 
 function isSkillPageData(data: unknown): data is SkillsPageData {

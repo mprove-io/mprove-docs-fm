@@ -3,6 +3,7 @@ const path = require('node:path');
 
 const docsDir = path.join(process.cwd(), 'content', 'docs');
 const cliDir = path.join(process.cwd(), 'content', 'cli');
+const skillsDir = path.join(process.cwd(), 'content', 'skills');
 const outputPath = path.join(docsDir, 'docs-for-ai.mdx');
 const outputRelativePath = toPosix(path.relative(process.cwd(), outputPath));
 
@@ -13,8 +14,10 @@ async function main() {
   }
 
   const cliPages = await collectMdxPagesInDir(cliDir);
+  const skillsPages = await collectMdxPagesInDir(skillsDir);
   const docsList = formatList(docsPages.sort());
   const cliList = formatList(cliPages.sort());
+  const skillsList = formatList(skillsPages.sort());
 
   const content = `---
 title: Docs for AI
@@ -27,9 +30,13 @@ These documentation pages are available as \`.mdx\` files for AI and LLM tools.
 
 ## Docs
 
-Full LLM text file for Docs section (without CLI and OpenAPI) is available at <a href="/llms-full.txt" target="_blank" rel="noopener noreferrer">/llms-full.txt</a>.
+Full LLM text file for Docs section (without CLI, Skills and OpenAPI) is available at <a href="/llms-full.txt" target="_blank" rel="noopener noreferrer">/llms-full.txt</a>.
 
 ${docsList}
+
+## Skills
+
+${skillsList}
 
 ## CLI
 

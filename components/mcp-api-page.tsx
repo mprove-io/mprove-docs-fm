@@ -8,7 +8,7 @@ export const McpAPIPage = mcp
       content: {
         renderAPIExampleLayout: () => null,
         renderOperationLayout: (slots, _ctx, method) => (
-          <div className='min-w-0 flex-1'>
+          <div className='mcp-api-page min-w-0 flex-1'>
             {slots.description}
             <div className='openapi-request-body'>{slots.body}</div>
             {slots.responses}

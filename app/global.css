@@ -249,6 +249,44 @@ table {
   display: flex;
 }
 
+/* MCP pages: rename "Request Body" to "Input" and hide "Response Body"/"200"/media-type
+   so the response 200 description ("Output") acts as the section heading. */
+#nd-page .mcp-api-page #request-body {
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  line-height: 1.75rem !important;
+  color: hsl(240, 5%, 34%) !important;
+}
+.dark #nd-page .mcp-api-page #request-body {
+  color: hsl(240, 5%, 78%) !important;
+}
+#nd-page .mcp-api-page #request-body > * {
+  display: none !important;
+}
+#nd-page .mcp-api-page #request-body::before {
+  content: 'Input';
+}
+#nd-page .mcp-api-page #response-body {
+  display: none !important;
+}
+#nd-page .mcp-api-page #response-body + * h3 {
+  display: none !important;
+}
+#nd-page .mcp-api-page #response-body + * .prose-no-margin {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+#nd-page .mcp-api-page #response-body + * .prose-no-margin > p {
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  line-height: 1.75rem !important;
+  color: hsl(240, 5%, 34%);
+  margin: 0;
+}
+.dark #nd-page .mcp-api-page #response-body + * .prose-no-margin > p {
+  color: hsl(240, 5%, 78%);
+}
+
 /* body {
   @apply bg-white dark:bg-[#1a1a1e];
 } */

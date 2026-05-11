@@ -33,6 +33,11 @@ const tabs = [
     match: (pathname: string) => pathname.startsWith('/content/skills')
   },
   {
+    href: '/content/mcp',
+    label: 'MCP',
+    match: (pathname: string) => pathname.startsWith('/content/mcp')
+  },
+  {
     href: '/content/cli',
     label: 'CLI',
     match: (pathname: string) => pathname.startsWith('/content/cli')
@@ -41,11 +46,6 @@ const tabs = [
     href: '/content/openapi',
     label: 'OpenAPI',
     match: (pathname: string) => pathname.startsWith('/content/openapi')
-  },
-  {
-    href: '/content/mcp',
-    label: 'MCP',
-    match: (pathname: string) => pathname.startsWith('/content/mcp')
   }
 ] as const;
 

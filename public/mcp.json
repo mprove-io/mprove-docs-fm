@@ -12,50 +12,62 @@
   "tags": [
     {
       "name": "run",
+      "x-displayName": "run",
       "description": "Run dashboards, charts, and reports queries. Returns query statuses and statistics."
     },
     {
       "name": "get-state",
+      "x-displayName": "get-state",
       "description": "Get project state: models, dashboards, charts, reports, metrics, validation errors, and repo info"
     },
     {
       "name": "get-model",
+      "x-displayName": "get-model",
       "description": "Get a model definition including its fields, dimensions, measures, and access info"
     },
     {
       "name": "get-query-info",
+      "x-displayName": "get-query-info",
       "description": "Get query info for a chart, dashboard, or report. Returns query status, SQL, malloy and data."
     },
     {
       "name": "validate",
+      "x-displayName": "validate",
       "description": "Validate (rebuild) Mprove files for a project branch and environment"
     },
     {
       "name": "get-sample",
+      "x-displayName": "get-sample",
       "description": "Fetch sample data rows from a database table or column for a project connection"
     },
     {
       "name": "get-schemas",
+      "x-displayName": "get-schemas",
       "description": "Fetch database schemas (tables, columns, relationships, indexes) for project SQL connections"
     },
     {
       "name": "get-connections-list",
+      "x-displayName": "get-connections-list",
       "description": "Get connection info (type, API endpoints, header keys, OAuth scopes) for project connections"
     },
     {
       "name": "get-skills",
+      "x-displayName": "get-skills",
       "description": "Get all available mprove skills"
     },
     {
       "name": "read-docs",
+      "x-displayName": "read-docs",
       "description": "Read Mprove documentation pages sourced from https://docs.mprove.io/content/docs/docs-for-ai.mdx.\nCall with pageIds to read one or more pages in one tool call."
     },
     {
       "name": "list-docs",
+      "x-displayName": "list-docs",
       "description": "List available Mprove documentation pageIds sourced from https://docs.mprove.io/content/docs/docs-for-ai.mdx.\nPageIds can be used in read-docs tool to get page content."
     },
     {
       "name": "search-docs",
+      "x-displayName": "search-docs",
       "description": "Search Mprove documentation pages sourced from https://docs.mprove.io/content/docs/docs-for-ai.mdx.\nWhitespace-separated query terms are AND-matched (case-insensitive) across cached docs content;\nreturns matching page ids with snippet previews."
     }
   ],

@@ -59,7 +59,11 @@ function convertMcpToOpenAPI(document) {
     const tagName = tool.name;
     if (!seenTags.has(tagName)) {
       seenTags.add(tagName);
-      tags.push({ name: tagName, description: tool.description ?? '' });
+      tags.push({
+        name: tagName,
+        'x-displayName': tagName,
+        description: tool.description ?? ''
+      });
     }
 
     const inputRef = rewriteRefs(tool.input);

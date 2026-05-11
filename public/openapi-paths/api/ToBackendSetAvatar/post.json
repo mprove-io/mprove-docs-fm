@@ -1,0 +1,169 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "mprove backend",
+    "description": "",
+    "version": "12.0.11",
+    "contact": {}
+  },
+  "paths": {
+    "/api/ToBackendSetAvatar": {
+      "post": {
+        "operationId": "SetAvatarController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendSetAvatarRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendSetAvatarResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ToBackendSetAvatarRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendSetAvatarRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendSetAvatarRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendSetAvatarResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendSetAvatarResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendSetAvatarResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendSetAvatarRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendSetAvatar"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendSetAvatarRequestPayload": {
+        "type": "object",
+        "properties": {
+          "avatarBig": {
+            "type": "string",
+            "nullable": true
+          },
+          "avatarSmall": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "avatarSmall"
+        ]
+      },
+      "ToBackendSetAvatarResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendSetAvatar"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendSetAvatarResponsePayload": {
+        "type": "object",
+        "properties": {
+          "avatarSmall": {
+            "type": "string"
+          },
+          "avatarBig": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "avatarSmall",
+          "avatarBig"
+        ]
+      }
+    }
+  }
+}

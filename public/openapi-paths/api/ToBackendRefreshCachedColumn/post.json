@@ -1,0 +1,268 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "mprove backend",
+    "description": "",
+    "version": "12.0.11",
+    "contact": {}
+  },
+  "paths": {
+    "/api/ToBackendRefreshCachedColumn": {
+      "post": {
+        "operationId": "RefreshCachedColumnController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendRefreshCachedColumnRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendRefreshCachedColumnResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ToBackendRefreshCachedColumnRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendRefreshCachedColumnRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendRefreshCachedColumnRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendRefreshCachedColumnResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendRefreshCachedColumnResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendRefreshCachedColumnResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendRefreshCachedColumnRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendRefreshCachedColumn"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendRefreshCachedColumnRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "envId": {
+            "type": "string"
+          },
+          "connectionId": {
+            "type": "string"
+          },
+          "schemaName": {
+            "type": "string"
+          },
+          "tableName": {
+            "type": "string"
+          },
+          "columnName": {
+            "type": "string"
+          },
+          "refreshType": {
+            "type": "string",
+            "enum": [
+              "full",
+              "sample"
+            ]
+          },
+          "sampleSize": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "projectId",
+          "envId",
+          "connectionId",
+          "schemaName",
+          "tableName",
+          "columnName",
+          "refreshType"
+        ]
+      },
+      "ToBackendRefreshCachedColumnResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendRefreshCachedColumn"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendRefreshCachedColumnResponsePayload": {
+        "type": "object",
+        "properties": {
+          "cachedColumn": {
+            "type": "object",
+            "properties": {
+              "projectId": {
+                "type": "string"
+              },
+              "connectionId": {
+                "type": "string"
+              },
+              "envId": {
+                "type": "string"
+              },
+              "schemaName": {
+                "type": "string"
+              },
+              "tableName": {
+                "type": "string"
+              },
+              "columnName": {
+                "type": "string"
+              },
+              "requestedByUserId": {
+                "type": "string",
+                "nullable": true
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "running",
+                  "completed",
+                  "error"
+                ]
+              },
+              "errorMessage": {
+                "type": "string",
+                "nullable": true
+              },
+              "startedTs": {
+                "type": "number"
+              },
+              "completedTs": {
+                "type": "number",
+                "nullable": true
+              },
+              "completedDurationMs": {
+                "type": "number",
+                "nullable": true
+              },
+              "limit": {
+                "type": "number"
+              },
+              "sampleSize": {
+                "type": "number",
+                "nullable": true
+              },
+              "isLimitReached": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "serverTs": {
+                "type": "number"
+              },
+              "uniqueValuesCount": {
+                "type": "number",
+                "nullable": true
+              }
+            },
+            "required": [
+              "projectId",
+              "connectionId",
+              "envId",
+              "schemaName",
+              "tableName",
+              "columnName",
+              "status",
+              "startedTs",
+              "limit",
+              "serverTs"
+            ],
+            "nullable": true
+          }
+        }
+      }
+    }
+  }
+}

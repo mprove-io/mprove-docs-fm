@@ -1,0 +1,338 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "mprove backend",
+    "description": "",
+    "version": "12.0.11",
+    "contact": {}
+  },
+  "paths": {
+    "/api/ToBackendRunQueries": {
+      "post": {
+        "operationId": "RunQueriesController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendRunQueriesRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendRunQueriesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ToBackendRunQueriesRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendRunQueriesRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendRunQueriesRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendRunQueriesResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendRunQueriesResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendRunQueriesResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendRunQueriesRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendRunQueries"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendRunQueriesRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "repoId": {
+            "type": "string"
+          },
+          "branchId": {
+            "type": "string"
+          },
+          "envId": {
+            "type": "string"
+          },
+          "mconfigIds": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "poolSize": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          }
+        },
+        "required": [
+          "projectId",
+          "repoId",
+          "branchId",
+          "envId",
+          "mconfigIds"
+        ]
+      },
+      "ToBackendRunQueriesResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendRunQueries"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendRunQueriesResponsePayload": {
+        "type": "object",
+        "properties": {
+          "runningQueries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Query"
+            }
+          },
+          "startedQueryIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "runningQueries",
+          "startedQueryIds"
+        ]
+      },
+      "Query": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "envId": {
+            "type": "string"
+          },
+          "connectionId": {
+            "type": "string"
+          },
+          "connectionType": {
+            "type": "string",
+            "enum": [
+              "PostgreSQL",
+              "MySQL",
+              "SnowFlake",
+              "BigQuery",
+              "Databricks",
+              "MotherDuck",
+              "Presto",
+              "Trino",
+              "GoogleApi",
+              "Api"
+            ]
+          },
+          "queryId": {
+            "type": "string"
+          },
+          "reportId": {
+            "type": "string",
+            "nullable": true
+          },
+          "reportStructId": {
+            "type": "string",
+            "nullable": true
+          },
+          "sql": {
+            "type": "string",
+            "nullable": true
+          },
+          "apiMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "GET"
+            ],
+            "nullable": true
+          },
+          "apiUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "apiBody": {},
+          "status": {
+            "type": "string",
+            "enum": [
+              "New",
+              "Running",
+              "Canceled",
+              "Completed",
+              "Error"
+            ]
+          },
+          "data": {
+            "nullable": true
+          },
+          "lastRunBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastRunTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "lastCancelTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "lastCompleteTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "lastCompleteDuration": {
+            "type": "number",
+            "nullable": true
+          },
+          "lastErrorMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastErrorTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "queryJobId": {
+            "type": "string",
+            "nullable": true
+          },
+          "bigqueryQueryJobId": {
+            "type": "string",
+            "nullable": true
+          },
+          "bigqueryConsecutiveErrorsGetJob": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "bigqueryConsecutiveErrorsGetResults": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "serverTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "projectId",
+          "envId",
+          "connectionId",
+          "connectionType",
+          "queryId",
+          "apiBody",
+          "status",
+          "bigqueryConsecutiveErrorsGetJob",
+          "bigqueryConsecutiveErrorsGetResults",
+          "serverTs"
+        ]
+      }
+    }
+  }
+}

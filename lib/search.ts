@@ -1,5 +1,6 @@
 import type { StructuredData } from 'fumadocs-core/mdx-plugins';
 import { createSearchAPI } from 'fumadocs-core/search/server';
+import { mcpSourceLoader } from '@/lib/mcp-source';
 import { openapiSourceLoader } from '@/lib/openapi-source';
 import { cliSource, docsSource } from '@/lib/source';
 
@@ -82,6 +83,14 @@ async function buildIndexes() {
       source: openapiSourceLoader,
       tag: 'openapi',
       title: 'OpenAPI'
+    });
+  }
+
+  if (mcpSourceLoader) {
+    sections.push({
+      source: mcpSourceLoader,
+      tag: 'mcp',
+      title: 'MCP'
     });
   }
 

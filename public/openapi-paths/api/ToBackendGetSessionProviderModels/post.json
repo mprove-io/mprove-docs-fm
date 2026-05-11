@@ -1,0 +1,220 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "mprove backend",
+    "description": "",
+    "version": "12.0.11",
+    "contact": {}
+  },
+  "paths": {
+    "/api/ToBackendGetSessionProviderModels": {
+      "post": {
+        "operationId": "GetSessionProviderModelsController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendGetSessionProviderModelsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendGetSessionProviderModelsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ToBackendGetSessionProviderModelsRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetSessionProviderModelsRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetSessionProviderModelsRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetSessionProviderModelsResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetSessionProviderModelsResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetSessionProviderModelsResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetSessionProviderModelsRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendGetSessionProviderModels"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendGetSessionProviderModelsRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "sessionTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Explorer",
+                "Editor"
+              ]
+            }
+          },
+          "forceLoadFromCache": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "required": [
+          "projectId",
+          "sessionTypes"
+        ]
+      },
+      "ToBackendGetSessionProviderModelsResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendGetSessionProviderModels"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendGetSessionProviderModelsResponsePayload": {
+        "type": "object",
+        "properties": {
+          "modelsOpencode": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SessionModelApi"
+            }
+          },
+          "modelsAi": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SessionModelApi"
+            }
+          }
+        },
+        "required": [
+          "modelsOpencode",
+          "modelsAi"
+        ]
+      },
+      "SessionModelApi": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "providerId": {
+            "type": "string"
+          },
+          "providerName": {
+            "type": "string"
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "contextLimit": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "providerId",
+          "providerName"
+        ]
+      }
+    }
+  }
+}

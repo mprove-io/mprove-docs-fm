@@ -1,0 +1,1633 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "mprove backend",
+    "description": "",
+    "version": "12.0.11",
+    "contact": {}
+  },
+  "paths": {
+    "/api/ToBackendGetNav": {
+      "post": {
+        "operationId": "GetNavController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendGetNavRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendGetNavResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ToBackendGetNavRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetNavRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetNavRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetNavResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetNavResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetNavResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetNavRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendGetNav"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendGetNavRequestPayload": {
+        "type": "object",
+        "properties": {
+          "orgId": {
+            "type": "string",
+            "nullable": true
+          },
+          "projectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "getRepo": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "getRepo"
+        ]
+      },
+      "ToBackendGetNavResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendGetNav"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendGetNavResponsePayload": {
+        "type": "object",
+        "properties": {
+          "avatarSmall": {
+            "type": "string"
+          },
+          "avatarBig": {
+            "type": "string"
+          },
+          "orgId": {
+            "type": "string"
+          },
+          "orgOwnerId": {
+            "type": "string"
+          },
+          "orgName": {
+            "type": "string"
+          },
+          "projectId": {
+            "type": "string"
+          },
+          "projectName": {
+            "type": "string"
+          },
+          "projectDefaultBranch": {
+            "type": "string"
+          },
+          "repoId": {
+            "type": "string"
+          },
+          "repoType": {
+            "type": "string",
+            "enum": [
+              "production",
+              "dev",
+              "session"
+            ]
+          },
+          "branchId": {
+            "type": "string"
+          },
+          "envId": {
+            "type": "string"
+          },
+          "needValidate": {
+            "type": "boolean"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "serverNowTs": {
+            "type": "number"
+          },
+          "struct": {
+            "$ref": "#/components/schemas/StructX"
+          },
+          "userMember": {
+            "$ref": "#/components/schemas/Member"
+          },
+          "repo": {
+            "$ref": "#/components/schemas/Repo"
+          }
+        },
+        "required": [
+          "avatarSmall",
+          "avatarBig",
+          "orgId",
+          "orgOwnerId",
+          "orgName",
+          "projectId",
+          "projectName",
+          "projectDefaultBranch",
+          "repoId",
+          "repoType",
+          "branchId",
+          "envId",
+          "needValidate",
+          "user",
+          "serverNowTs",
+          "struct",
+          "userMember",
+          "repo"
+        ]
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "alias": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "isEmailVerified": {
+            "type": "boolean"
+          },
+          "ui": {
+            "$ref": "#/components/schemas/Ui"
+          },
+          "apiKeyPrefix": {
+            "type": "string",
+            "nullable": true
+          },
+          "isCodexAuthSet": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "codexAuthUpdateTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "codexAuthExpiresTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "serverTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "userId",
+          "email",
+          "alias",
+          "firstName",
+          "lastName",
+          "isEmailVerified",
+          "ui",
+          "serverTs"
+        ]
+      },
+      "StructX": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "structId": {
+            "type": "string"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BmlError"
+            }
+          },
+          "metrics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModelMetricX"
+            }
+          },
+          "presets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Preset"
+            }
+          },
+          "mproveConfig": {
+            "$ref": "#/components/schemas/MproveConfig"
+          },
+          "mproveVersion": {
+            "type": "string"
+          },
+          "serverTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "projectId",
+          "structId",
+          "errors",
+          "metrics",
+          "presets",
+          "mproveConfig",
+          "mproveVersion",
+          "serverTs"
+        ]
+      },
+      "Member": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "memberId": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "alias": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "avatarSmall": {
+            "type": "string"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isAdmin": {
+            "type": "boolean"
+          },
+          "isEditor": {
+            "type": "boolean"
+          },
+          "isExplorer": {
+            "type": "boolean"
+          },
+          "serverTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "projectId",
+          "memberId",
+          "email",
+          "alias",
+          "firstName",
+          "lastName",
+          "fullName",
+          "avatarSmall",
+          "roles",
+          "isAdmin",
+          "isEditor",
+          "isExplorer",
+          "serverTs"
+        ]
+      },
+      "Repo": {
+        "type": "object",
+        "properties": {
+          "orgId": {
+            "type": "string"
+          },
+          "projectId": {
+            "type": "string"
+          },
+          "repoId": {
+            "type": "string"
+          },
+          "currentBranchId": {
+            "type": "string"
+          },
+          "repoStatus": {
+            "type": "string",
+            "enum": [
+              "NeedCommit",
+              "NeedPull",
+              "NeedPush",
+              "Ok"
+            ]
+          },
+          "conflicts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiskFileLine"
+            }
+          },
+          "nodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiskCatalogNode"
+            }
+          },
+          "changesToCommit": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiskFileChange"
+            }
+          },
+          "changesToPush": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiskFileChange"
+            }
+          }
+        },
+        "required": [
+          "orgId",
+          "projectId",
+          "repoId",
+          "currentBranchId",
+          "repoStatus",
+          "conflicts",
+          "nodes",
+          "changesToCommit",
+          "changesToPush"
+        ]
+      },
+      "Ui": {
+        "type": "object",
+        "properties": {
+          "modelTreeLevels": {
+            "type": "string",
+            "enum": [
+              "Flat",
+              "FlatTime",
+              "Nested",
+              "NestedFlatTime"
+            ]
+          },
+          "timezone": {
+            "type": "string"
+          },
+          "timeSpec": {
+            "type": "string",
+            "enum": [
+              "timestamps",
+              "seconds",
+              "minutes",
+              "hours",
+              "days",
+              "weeks",
+              "months",
+              "quarters",
+              "years"
+            ]
+          },
+          "timeRangeFraction": {
+            "$ref": "#/components/schemas/Fraction"
+          },
+          "projectModelLinks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectModelLink"
+            }
+          },
+          "projectChartLinks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectChartLink"
+            }
+          },
+          "projectDashboardLinks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectDashboardLink"
+            }
+          },
+          "projectExplorerSessionLinks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectExplorerSessionLink"
+            },
+            "nullable": true
+          },
+          "projectReportLinks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectReportLink"
+            }
+          },
+          "permissionsAutoAcceptSessionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "newSessionPermissionsAutoAccept": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "newSessionExplorerProviderModel": {
+            "type": "string",
+            "nullable": true
+          },
+          "newSessionEditorProviderModel": {
+            "type": "string",
+            "nullable": true
+          },
+          "newSessionEditorVariant": {
+            "type": "string",
+            "nullable": true
+          },
+          "newSessionUseCodex": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "required": [
+          "modelTreeLevels",
+          "timezone",
+          "timeSpec",
+          "timeRangeFraction",
+          "projectModelLinks",
+          "projectChartLinks",
+          "projectDashboardLinks",
+          "projectReportLinks"
+        ]
+      },
+      "BmlError": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiskFileLine"
+            }
+          }
+        },
+        "required": [
+          "title",
+          "message",
+          "lines"
+        ]
+      },
+      "ModelMetricX": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string",
+            "nullable": true
+          },
+          "modelType": {
+            "type": "string",
+            "enum": [
+              "Store",
+              "Malloy"
+            ]
+          },
+          "connectionType": {
+            "type": "string",
+            "enum": [
+              "PostgreSQL",
+              "MySQL",
+              "SnowFlake",
+              "BigQuery",
+              "Databricks",
+              "MotherDuck",
+              "Presto",
+              "Trino",
+              "GoogleApi",
+              "Api"
+            ]
+          },
+          "fieldId": {
+            "type": "string"
+          },
+          "fieldClass": {
+            "type": "string",
+            "enum": [
+              "dimension",
+              "time",
+              "measure",
+              "calculation",
+              "filter",
+              "join",
+              "info"
+            ]
+          },
+          "fieldResult": {
+            "type": "string",
+            "enum": [
+              "day_of_week",
+              "day_of_week_index",
+              "month_name",
+              "quarter_of_year",
+              "ts",
+              "yesno",
+              "string",
+              "number",
+              "date",
+              "boolean",
+              "array",
+              "record",
+              "json",
+              "sql_native"
+            ],
+            "nullable": true
+          },
+          "timeFieldId": {
+            "type": "string"
+          },
+          "structId": {
+            "type": "string"
+          },
+          "filePath": {
+            "type": "string",
+            "nullable": true
+          },
+          "fieldLineNum": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Model"
+            ]
+          },
+          "metricId": {
+            "type": "string"
+          },
+          "topNode": {
+            "type": "string",
+            "nullable": true
+          },
+          "label": {
+            "type": "string",
+            "nullable": true
+          },
+          "topLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "partNodeLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "partFieldLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "partLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "timeNodeLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "timeFieldLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "timeLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "formatNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "currencyPrefix": {
+            "type": "string",
+            "nullable": true
+          },
+          "currencySuffix": {
+            "type": "string",
+            "nullable": true
+          },
+          "serverTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "hasAccessToModel": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "modelType",
+          "connectionType",
+          "fieldId",
+          "fieldClass",
+          "timeFieldId",
+          "structId",
+          "type",
+          "metricId",
+          "serverTs",
+          "hasAccessToModel"
+        ]
+      },
+      "Preset": {
+        "type": "object",
+        "properties": {
+          "presetId": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "parsedContent": {}
+        },
+        "required": [
+          "presetId",
+          "label",
+          "path",
+          "parsedContent"
+        ]
+      },
+      "MproveConfig": {
+        "type": "object",
+        "properties": {
+          "mproveDirValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "caseSensitiveStringFilters": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "weekStart": {
+            "type": "string",
+            "enum": [
+              "Sunday",
+              "Monday"
+            ],
+            "nullable": true
+          },
+          "allowTimezones": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "defaultTimezone": {
+            "type": "string",
+            "nullable": true
+          },
+          "formatNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "currencyPrefix": {
+            "type": "string",
+            "nullable": true
+          },
+          "currencySuffix": {
+            "type": "string",
+            "nullable": true
+          },
+          "thousandsSeparator": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "DiskFileLine": {
+        "type": "object",
+        "properties": {
+          "fileId": {
+            "type": "string"
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "lineNumber": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "fileId",
+          "fileName",
+          "lineNumber"
+        ]
+      },
+      "DiskCatalogNode": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "isFolder": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "fileId": {
+            "type": "string",
+            "nullable": true
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiskCatalogNode"
+            },
+            "nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "isFolder",
+          "name"
+        ]
+      },
+      "DiskFileChange": {
+        "type": "object",
+        "properties": {
+          "fileName": {
+            "type": "string"
+          },
+          "fileId": {
+            "type": "string"
+          },
+          "parentPath": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "New",
+              "Deleted",
+              "Modified",
+              "Conflicted",
+              "TypeChange",
+              "Renamed",
+              "Ignored",
+              "Unmodified",
+              "Copied",
+              "Untracked",
+              "Unreadable"
+            ]
+          },
+          "content": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "fileName",
+          "fileId",
+          "parentPath",
+          "status"
+        ]
+      },
+      "Fraction": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FractionControl"
+            },
+            "nullable": true
+          },
+          "brick": {
+            "type": "string",
+            "nullable": true
+          },
+          "parentBrick": {
+            "type": "string",
+            "nullable": true
+          },
+          "operator": {
+            "type": "string",
+            "enum": [
+              "Or",
+              "And"
+            ],
+            "nullable": true
+          },
+          "logicGroup": {
+            "type": "string",
+            "enum": [
+              "OR",
+              "AND_NOT"
+            ],
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "StoreFraction",
+              "StringIsAnyValue",
+              "StringIsEqualTo",
+              "StringStartsWith",
+              "StringEndsWith",
+              "StringContains",
+              "StringIsLike",
+              "StringIsEmpty",
+              "StringIsNull",
+              "StringIsNotEqualTo",
+              "StringDoesNotStartWith",
+              "StringDoesNotEndWith",
+              "StringDoesNotContain",
+              "StringIsNotLike",
+              "StringIsNotEmpty",
+              "StringIsNotNull",
+              "NumberIsAnyValue",
+              "NumberIsEqualTo",
+              "NumberIsGreaterThan",
+              "NumberIsGreaterThanOrEqualTo",
+              "NumberIsLessThan",
+              "NumberIsLessThanOrEqualTo",
+              "NumberIsBetween",
+              "NumberIsNull",
+              "NumberIsNotEqualTo",
+              "NumberIsNotGreaterThan",
+              "NumberIsNotGreaterThanOrEqualTo",
+              "NumberIsNotLessThan",
+              "NumberIsNotLessThanOrEqualTo",
+              "NumberIsNotBetween",
+              "NumberIsNotNull",
+              "BooleanIsAnyValue",
+              "BooleanIsTrue",
+              "BooleanIsFalse",
+              "BooleanIsTruthy",
+              "BooleanIsFalsy",
+              "BooleanIsNull",
+              "BooleanIsNotTrue",
+              "BooleanIsNotFalse",
+              "BooleanIsNotTruthy",
+              "BooleanIsNotFalsy",
+              "BooleanIsNotNull",
+              "TsIsAnyValue",
+              "TsIsInLast",
+              "TsIsOnDay",
+              "TsIsOnWeek",
+              "TsIsOnMonth",
+              "TsIsOnQuarter",
+              "TsIsOnYear",
+              "TsIsInNext",
+              "TsIsAfter",
+              "TsIsStarting",
+              "TsIsBeginFor",
+              "TsIsBetween",
+              "TsIsBefore",
+              "TsIsThrough",
+              "TsIsOnHour",
+              "TsIsOnMinute",
+              "TsIsOnTimestamp",
+              "TsIsNull",
+              "TsIsNotInLast",
+              "TsIsNotOnDay",
+              "TsIsNotOnWeek",
+              "TsIsNotOnMonth",
+              "TsIsNotOnQuarter",
+              "TsIsNotOnYear",
+              "TsIsNotInNext",
+              "TsIsNotBeginFor",
+              "TsIsNotBetween",
+              "TsIsNotOnHour",
+              "TsIsNotOnMinute",
+              "TsIsNotOnTimestamp",
+              "TsIsNotNull",
+              "DayOfWeekIsAnyValue",
+              "DayOfWeekIs",
+              "DayOfWeekIsNull",
+              "DayOfWeekIsNot",
+              "DayOfWeekIsNotNull",
+              "DayOfWeekIndexIsAnyValue",
+              "DayOfWeekIndexIsEqualTo",
+              "DayOfWeekIndexIsNull",
+              "DayOfWeekIndexIsNotEqualTo",
+              "DayOfWeekIndexIsNotNull",
+              "MonthNameIsAnyValue",
+              "MonthNameIs",
+              "MonthNameIsNull",
+              "MonthNameIsNot",
+              "MonthNameIsNotNull",
+              "QuarterOfYearIsAnyValue",
+              "QuarterOfYearIs",
+              "QuarterOfYearIsNull",
+              "QuarterOfYearIsNot",
+              "QuarterOfYearIsNotNull",
+              "TsIsBeforeRelative",
+              "TsIsAfterRelative",
+              "YesnoIsAnyValue",
+              "YesnoIs"
+            ]
+          },
+          "storeFractionSubTypeOptions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FractionSubTypeOption"
+            },
+            "nullable": true
+          },
+          "storeFractionSubType": {
+            "type": "string",
+            "nullable": true
+          },
+          "storeFractionSubTypeLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "storeFractionLogicGroupWithSubType": {
+            "type": "string",
+            "nullable": true
+          },
+          "meta": {
+            "nullable": true
+          },
+          "storeResult": {
+            "type": "string",
+            "nullable": true
+          },
+          "stringValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "numberValue1": {
+            "type": "number",
+            "nullable": true
+          },
+          "numberValue2": {
+            "type": "number",
+            "nullable": true
+          },
+          "numberValues": {
+            "type": "string",
+            "nullable": true
+          },
+          "numberBetweenOption": {
+            "type": "string",
+            "enum": [
+              "Inclusive",
+              "LeftInclusive",
+              "RightInclusive",
+              "Exclusive"
+            ],
+            "nullable": true
+          },
+          "yesnoValue": {
+            "type": "string",
+            "enum": [
+              "Yes",
+              "No"
+            ],
+            "nullable": true
+          },
+          "dayOfWeekValue": {
+            "type": "string",
+            "enum": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "nullable": true
+          },
+          "dayOfWeekIndexValues": {
+            "type": "string",
+            "nullable": true
+          },
+          "monthNameValue": {
+            "type": "string",
+            "enum": [
+              "January",
+              "February",
+              "March",
+              "April",
+              "May",
+              "June",
+              "July",
+              "August",
+              "September",
+              "October",
+              "November",
+              "December"
+            ],
+            "nullable": true
+          },
+          "quarterOfYearValue": {
+            "type": "string",
+            "enum": [
+              "q1",
+              "q2",
+              "q3",
+              "q4"
+            ],
+            "nullable": true
+          },
+          "tsDateYear": {
+            "type": "number",
+            "nullable": true
+          },
+          "tsDateQuarter": {
+            "type": "number",
+            "nullable": true
+          },
+          "tsDateMonth": {
+            "type": "number",
+            "nullable": true
+          },
+          "tsDateDay": {
+            "type": "number",
+            "nullable": true
+          },
+          "tsDateHour": {
+            "type": "number",
+            "nullable": true
+          },
+          "tsDateMinute": {
+            "type": "number",
+            "nullable": true
+          },
+          "tsDateToYear": {
+            "type": "number",
+            "nullable": true
+          },
+          "tsDateToQuarter": {
+            "type": "number",
+            "nullable": true
+          },
+          "tsDateToMonth": {
+            "type": "number",
+            "nullable": true
+          },
+          "tsDateToDay": {
+            "type": "number",
+            "nullable": true
+          },
+          "tsDateToHour": {
+            "type": "number",
+            "nullable": true
+          },
+          "tsDateToMinute": {
+            "type": "number",
+            "nullable": true
+          },
+          "tsForValue": {
+            "type": "number",
+            "nullable": true
+          },
+          "tsForUnit": {
+            "type": "string",
+            "enum": [
+              "seconds",
+              "minutes",
+              "hours",
+              "days",
+              "weeks",
+              "months",
+              "quarters",
+              "years"
+            ],
+            "nullable": true
+          },
+          "tsLastValue": {
+            "type": "number",
+            "nullable": true
+          },
+          "tsLastUnit": {
+            "type": "string",
+            "enum": [
+              "seconds",
+              "minutes",
+              "hours",
+              "days",
+              "weeks",
+              "months",
+              "quarters",
+              "years"
+            ],
+            "nullable": true
+          },
+          "tsLastCompleteOption": {
+            "type": "string",
+            "enum": [
+              "CompleteWithCurrent",
+              "CompletePlusCurrent",
+              "Complete"
+            ],
+            "nullable": true
+          },
+          "tsNextValue": {
+            "type": "number",
+            "nullable": true
+          },
+          "tsNextUnit": {
+            "type": "string",
+            "enum": [
+              "seconds",
+              "minutes",
+              "hours",
+              "days",
+              "weeks",
+              "months",
+              "quarters",
+              "years"
+            ],
+            "nullable": true
+          },
+          "tsMoment": {
+            "nullable": true
+          },
+          "tsMomentType": {
+            "type": "string",
+            "enum": [
+              "Literal",
+              "Today",
+              "Yesterday",
+              "Tomorrow",
+              "This",
+              "Last",
+              "Next",
+              "Ago",
+              "FromNow",
+              "Now",
+              "Timestamp"
+            ],
+            "nullable": true
+          },
+          "tsMomentUnit": {
+            "type": "string",
+            "enum": [
+              "second",
+              "minute",
+              "hour",
+              "day",
+              "week",
+              "month",
+              "quarter",
+              "year",
+              "monday",
+              "tuesday",
+              "wednesday",
+              "thursday",
+              "friday",
+              "saturday",
+              "sunday"
+            ],
+            "nullable": true
+          },
+          "tsTimestampValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "tsMomentAgoFromNowQuantity": {
+            "type": "number",
+            "nullable": true
+          },
+          "tsFromMoment": {
+            "nullable": true
+          },
+          "tsFromMomentType": {
+            "type": "string",
+            "enum": [
+              "Literal",
+              "Today",
+              "Yesterday",
+              "Tomorrow",
+              "This",
+              "Last",
+              "Next",
+              "Ago",
+              "FromNow",
+              "Now",
+              "Timestamp"
+            ],
+            "nullable": true
+          },
+          "tsFromMomentUnit": {
+            "type": "string",
+            "enum": [
+              "second",
+              "minute",
+              "hour",
+              "day",
+              "week",
+              "month",
+              "quarter",
+              "year",
+              "monday",
+              "tuesday",
+              "wednesday",
+              "thursday",
+              "friday",
+              "saturday",
+              "sunday"
+            ],
+            "nullable": true
+          },
+          "tsFromTimestampValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "tsFromMomentAgoFromNowQuantity": {
+            "type": "number",
+            "nullable": true
+          },
+          "tsToMoment": {
+            "nullable": true
+          },
+          "tsToMomentType": {
+            "type": "string",
+            "enum": [
+              "Literal",
+              "Today",
+              "Yesterday",
+              "Tomorrow",
+              "This",
+              "Last",
+              "Next",
+              "Ago",
+              "FromNow",
+              "Now",
+              "Timestamp"
+            ],
+            "nullable": true
+          },
+          "tsToMomentUnit": {
+            "type": "string",
+            "enum": [
+              "second",
+              "minute",
+              "hour",
+              "day",
+              "week",
+              "month",
+              "quarter",
+              "year",
+              "monday",
+              "tuesday",
+              "wednesday",
+              "thursday",
+              "friday",
+              "saturday",
+              "sunday"
+            ],
+            "nullable": true
+          },
+          "tsToTimestampValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "tsToMomentAgoFromNowQuantity": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "ProjectModelLink": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "modelId": {
+            "type": "string"
+          },
+          "navTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
+            "nullable": true
+          }
+        },
+        "required": [
+          "projectId",
+          "modelId"
+        ]
+      },
+      "ProjectChartLink": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "chartId": {
+            "type": "string"
+          },
+          "navTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
+            "nullable": true
+          }
+        },
+        "required": [
+          "projectId",
+          "chartId"
+        ]
+      },
+      "ProjectDashboardLink": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "dashboardId": {
+            "type": "string"
+          },
+          "navTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
+            "nullable": true
+          }
+        },
+        "required": [
+          "projectId",
+          "dashboardId"
+        ]
+      },
+      "ProjectExplorerSessionLink": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "sessionId": {
+            "type": "string"
+          },
+          "repoId": {
+            "type": "string"
+          },
+          "branchId": {
+            "type": "string"
+          },
+          "envId": {
+            "type": "string"
+          },
+          "tabId": {
+            "type": "string",
+            "nullable": true
+          },
+          "navTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
+            "nullable": true
+          }
+        },
+        "required": [
+          "projectId",
+          "sessionId",
+          "repoId",
+          "branchId",
+          "envId"
+        ]
+      },
+      "ProjectReportLink": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "reportId": {
+            "type": "string"
+          },
+          "navTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
+            "nullable": true
+          }
+        },
+        "required": [
+          "projectId",
+          "reportId"
+        ]
+      },
+      "FractionControl": {
+        "type": "object",
+        "properties": {
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FractionControlOption"
+            },
+            "nullable": true
+          },
+          "value": {
+            "nullable": true
+          },
+          "label": {
+            "type": "string",
+            "nullable": true
+          },
+          "required": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string"
+          },
+          "controlClass": {
+            "type": "string",
+            "enum": [
+              "list_input",
+              "input",
+              "switch",
+              "date_picker",
+              "selector"
+            ]
+          },
+          "isMetricsDate": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "required": [
+          "name",
+          "controlClass"
+        ]
+      },
+      "FractionSubTypeOption": {
+        "type": "object",
+        "properties": {
+          "logicGroup": {
+            "type": "string",
+            "enum": [
+              "OR",
+              "AND_NOT"
+            ],
+            "nullable": true
+          },
+          "typeValue": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "typeValue",
+          "value"
+        ]
+      },
+      "FractionControlOption": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "value"
+        ]
+      }
+    }
+  }
+}

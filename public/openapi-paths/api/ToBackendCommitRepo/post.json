@@ -1,0 +1,450 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "mprove backend",
+    "description": "",
+    "version": "12.0.11",
+    "contact": {}
+  },
+  "paths": {
+    "/api/ToBackendCommitRepo": {
+      "post": {
+        "operationId": "CommitRepoController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendCommitRepoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendCommitRepoResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ToBackendCommitRepoRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendCommitRepoRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendCommitRepoRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendCommitRepoResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendCommitRepoResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendCommitRepoResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendCommitRepoRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendCommitRepo"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendCommitRepoRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "branchId": {
+            "type": "string"
+          },
+          "repoId": {
+            "type": "string"
+          },
+          "commitMessage": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "projectId",
+          "branchId",
+          "repoId",
+          "commitMessage"
+        ]
+      },
+      "ToBackendCommitRepoResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendCommitRepo"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendCommitRepoResponsePayload": {
+        "type": "object",
+        "properties": {
+          "repo": {
+            "$ref": "#/components/schemas/Repo"
+          },
+          "session": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SessionApi"
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "required": [
+          "repo"
+        ]
+      },
+      "Repo": {
+        "type": "object",
+        "properties": {
+          "orgId": {
+            "type": "string"
+          },
+          "projectId": {
+            "type": "string"
+          },
+          "repoId": {
+            "type": "string"
+          },
+          "currentBranchId": {
+            "type": "string"
+          },
+          "repoStatus": {
+            "type": "string",
+            "enum": [
+              "NeedCommit",
+              "NeedPull",
+              "NeedPush",
+              "Ok"
+            ]
+          },
+          "conflicts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiskFileLine"
+            }
+          },
+          "nodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiskCatalogNode"
+            }
+          },
+          "changesToCommit": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiskFileChange"
+            }
+          },
+          "changesToPush": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiskFileChange"
+            }
+          }
+        },
+        "required": [
+          "orgId",
+          "projectId",
+          "repoId",
+          "currentBranchId",
+          "repoStatus",
+          "conflicts",
+          "nodes",
+          "changesToCommit",
+          "changesToPush"
+        ]
+      },
+      "SessionApi": {
+        "type": "object",
+        "properties": {
+          "sessionId": {
+            "type": "string"
+          },
+          "opencodeSessionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Explorer",
+              "Editor"
+            ]
+          },
+          "provider": {
+            "type": "string"
+          },
+          "agent": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastMessageProviderModel": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastMessageVariant": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string"
+          },
+          "archiveReason": {
+            "type": "string",
+            "enum": [
+              "User",
+              "Expire",
+              "Commit"
+            ],
+            "nullable": true
+          },
+          "pauseReason": {
+            "type": "string",
+            "enum": [
+              "User",
+              "Idle",
+              "Safe",
+              "External"
+            ],
+            "nullable": true
+          },
+          "repoId": {
+            "type": "string"
+          },
+          "branchId": {
+            "type": "string"
+          },
+          "initialBranch": {
+            "type": "string",
+            "nullable": true
+          },
+          "envId": {
+            "type": "string",
+            "nullable": true
+          },
+          "initialCommit": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "lastActivityTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "firstMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "useCodex": {
+            "type": "boolean"
+          },
+          "closedExplorerTabIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "required": [
+          "sessionId",
+          "type",
+          "provider",
+          "agent",
+          "status",
+          "repoId",
+          "branchId",
+          "createdTs",
+          "lastActivityTs",
+          "useCodex"
+        ]
+      },
+      "DiskFileLine": {
+        "type": "object",
+        "properties": {
+          "fileId": {
+            "type": "string"
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "lineNumber": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "fileId",
+          "fileName",
+          "lineNumber"
+        ]
+      },
+      "DiskCatalogNode": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "isFolder": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "fileId": {
+            "type": "string",
+            "nullable": true
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiskCatalogNode"
+            },
+            "nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "isFolder",
+          "name"
+        ]
+      },
+      "DiskFileChange": {
+        "type": "object",
+        "properties": {
+          "fileName": {
+            "type": "string"
+          },
+          "fileId": {
+            "type": "string"
+          },
+          "parentPath": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "New",
+              "Deleted",
+              "Modified",
+              "Conflicted",
+              "TypeChange",
+              "Renamed",
+              "Ignored",
+              "Unmodified",
+              "Copied",
+              "Untracked",
+              "Unreadable"
+            ]
+          },
+          "content": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "fileName",
+          "fileId",
+          "parentPath",
+          "status"
+        ]
+      }
+    }
+  }
+}

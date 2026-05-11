@@ -1,0 +1,642 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "mprove backend",
+    "description": "",
+    "version": "12.0.11",
+    "contact": {}
+  },
+  "paths": {
+    "/api/ToBackendCreateFolder": {
+      "post": {
+        "operationId": "CreateFolderController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendCreateFolderRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendCreateFolderResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ToBackendCreateFolderRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendCreateFolderRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendCreateFolderRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendCreateFolderResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendCreateFolderResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendCreateFolderResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendCreateFolderRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendCreateFolder"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendCreateFolderRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "repoId": {
+            "type": "string"
+          },
+          "branchId": {
+            "type": "string"
+          },
+          "envId": {
+            "type": "string"
+          },
+          "parentNodeId": {
+            "type": "string"
+          },
+          "folderName": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "projectId",
+          "repoId",
+          "branchId",
+          "envId",
+          "parentNodeId",
+          "folderName"
+        ]
+      },
+      "ToBackendCreateFolderResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendCreateFolder"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendCreateFolderResponsePayload": {
+        "type": "object",
+        "properties": {
+          "repo": {
+            "$ref": "#/components/schemas/Repo"
+          },
+          "struct": {
+            "$ref": "#/components/schemas/StructX"
+          },
+          "needValidate": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "repo",
+          "struct",
+          "needValidate"
+        ]
+      },
+      "Repo": {
+        "type": "object",
+        "properties": {
+          "orgId": {
+            "type": "string"
+          },
+          "projectId": {
+            "type": "string"
+          },
+          "repoId": {
+            "type": "string"
+          },
+          "currentBranchId": {
+            "type": "string"
+          },
+          "repoStatus": {
+            "type": "string",
+            "enum": [
+              "NeedCommit",
+              "NeedPull",
+              "NeedPush",
+              "Ok"
+            ]
+          },
+          "conflicts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiskFileLine"
+            }
+          },
+          "nodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiskCatalogNode"
+            }
+          },
+          "changesToCommit": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiskFileChange"
+            }
+          },
+          "changesToPush": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiskFileChange"
+            }
+          }
+        },
+        "required": [
+          "orgId",
+          "projectId",
+          "repoId",
+          "currentBranchId",
+          "repoStatus",
+          "conflicts",
+          "nodes",
+          "changesToCommit",
+          "changesToPush"
+        ]
+      },
+      "StructX": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "structId": {
+            "type": "string"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BmlError"
+            }
+          },
+          "metrics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModelMetricX"
+            }
+          },
+          "presets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Preset"
+            }
+          },
+          "mproveConfig": {
+            "$ref": "#/components/schemas/MproveConfig"
+          },
+          "mproveVersion": {
+            "type": "string"
+          },
+          "serverTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "projectId",
+          "structId",
+          "errors",
+          "metrics",
+          "presets",
+          "mproveConfig",
+          "mproveVersion",
+          "serverTs"
+        ]
+      },
+      "DiskFileLine": {
+        "type": "object",
+        "properties": {
+          "fileId": {
+            "type": "string"
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "lineNumber": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "fileId",
+          "fileName",
+          "lineNumber"
+        ]
+      },
+      "DiskCatalogNode": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "isFolder": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "fileId": {
+            "type": "string",
+            "nullable": true
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiskCatalogNode"
+            },
+            "nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "isFolder",
+          "name"
+        ]
+      },
+      "DiskFileChange": {
+        "type": "object",
+        "properties": {
+          "fileName": {
+            "type": "string"
+          },
+          "fileId": {
+            "type": "string"
+          },
+          "parentPath": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "New",
+              "Deleted",
+              "Modified",
+              "Conflicted",
+              "TypeChange",
+              "Renamed",
+              "Ignored",
+              "Unmodified",
+              "Copied",
+              "Untracked",
+              "Unreadable"
+            ]
+          },
+          "content": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "fileName",
+          "fileId",
+          "parentPath",
+          "status"
+        ]
+      },
+      "BmlError": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiskFileLine"
+            }
+          }
+        },
+        "required": [
+          "title",
+          "message",
+          "lines"
+        ]
+      },
+      "ModelMetricX": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string",
+            "nullable": true
+          },
+          "modelType": {
+            "type": "string",
+            "enum": [
+              "Store",
+              "Malloy"
+            ]
+          },
+          "connectionType": {
+            "type": "string",
+            "enum": [
+              "PostgreSQL",
+              "MySQL",
+              "SnowFlake",
+              "BigQuery",
+              "Databricks",
+              "MotherDuck",
+              "Presto",
+              "Trino",
+              "GoogleApi",
+              "Api"
+            ]
+          },
+          "fieldId": {
+            "type": "string"
+          },
+          "fieldClass": {
+            "type": "string",
+            "enum": [
+              "dimension",
+              "time",
+              "measure",
+              "calculation",
+              "filter",
+              "join",
+              "info"
+            ]
+          },
+          "fieldResult": {
+            "type": "string",
+            "enum": [
+              "day_of_week",
+              "day_of_week_index",
+              "month_name",
+              "quarter_of_year",
+              "ts",
+              "yesno",
+              "string",
+              "number",
+              "date",
+              "boolean",
+              "array",
+              "record",
+              "json",
+              "sql_native"
+            ],
+            "nullable": true
+          },
+          "timeFieldId": {
+            "type": "string"
+          },
+          "structId": {
+            "type": "string"
+          },
+          "filePath": {
+            "type": "string",
+            "nullable": true
+          },
+          "fieldLineNum": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Model"
+            ]
+          },
+          "metricId": {
+            "type": "string"
+          },
+          "topNode": {
+            "type": "string",
+            "nullable": true
+          },
+          "label": {
+            "type": "string",
+            "nullable": true
+          },
+          "topLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "partNodeLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "partFieldLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "partLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "timeNodeLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "timeFieldLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "timeLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "formatNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "currencyPrefix": {
+            "type": "string",
+            "nullable": true
+          },
+          "currencySuffix": {
+            "type": "string",
+            "nullable": true
+          },
+          "serverTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "hasAccessToModel": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "modelType",
+          "connectionType",
+          "fieldId",
+          "fieldClass",
+          "timeFieldId",
+          "structId",
+          "type",
+          "metricId",
+          "serverTs",
+          "hasAccessToModel"
+        ]
+      },
+      "Preset": {
+        "type": "object",
+        "properties": {
+          "presetId": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "parsedContent": {}
+        },
+        "required": [
+          "presetId",
+          "label",
+          "path",
+          "parsedContent"
+        ]
+      },
+      "MproveConfig": {
+        "type": "object",
+        "properties": {
+          "mproveDirValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "caseSensitiveStringFilters": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "weekStart": {
+            "type": "string",
+            "enum": [
+              "Sunday",
+              "Monday"
+            ],
+            "nullable": true
+          },
+          "allowTimezones": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "defaultTimezone": {
+            "type": "string",
+            "nullable": true
+          },
+          "formatNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "currencyPrefix": {
+            "type": "string",
+            "nullable": true
+          },
+          "currencySuffix": {
+            "type": "string",
+            "nullable": true
+          },
+          "thousandsSeparator": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      }
+    }
+  }
+}

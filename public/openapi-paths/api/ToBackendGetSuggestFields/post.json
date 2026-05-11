@@ -1,0 +1,670 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "mprove backend",
+    "description": "",
+    "version": "12.0.11",
+    "contact": {}
+  },
+  "paths": {
+    "/api/ToBackendGetSuggestFields": {
+      "post": {
+        "operationId": "GetSuggestFieldsController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendGetSuggestFieldsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendGetSuggestFieldsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ToBackendGetSuggestFieldsRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetSuggestFieldsRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetSuggestFieldsRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetSuggestFieldsResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetSuggestFieldsResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetSuggestFieldsResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetSuggestFieldsRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendGetSuggestFields"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendGetSuggestFieldsRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "repoId": {
+            "type": "string"
+          },
+          "branchId": {
+            "type": "string"
+          },
+          "envId": {
+            "type": "string"
+          },
+          "parentId": {
+            "type": "string"
+          },
+          "parentType": {
+            "type": "string",
+            "enum": [
+              "Dashboard",
+              "ChartDialogDashboard",
+              "SuggestDimensionDashboard",
+              "Report",
+              "ChartDialogReport",
+              "SuggestDimensionReport",
+              "Chart",
+              "SuggestDimensionChart",
+              "SuggestDimensionModel",
+              "Blank"
+            ]
+          }
+        },
+        "required": [
+          "projectId",
+          "repoId",
+          "branchId",
+          "envId",
+          "parentId",
+          "parentType"
+        ]
+      },
+      "ToBackendGetSuggestFieldsResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendGetSuggestFields"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendGetSuggestFieldsResponsePayload": {
+        "type": "object",
+        "properties": {
+          "needValidate": {
+            "type": "boolean"
+          },
+          "struct": {
+            "$ref": "#/components/schemas/StructX"
+          },
+          "userMember": {
+            "$ref": "#/components/schemas/Member"
+          },
+          "suggestFields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SuggestField"
+            }
+          }
+        },
+        "required": [
+          "needValidate",
+          "struct",
+          "userMember",
+          "suggestFields"
+        ]
+      },
+      "StructX": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "structId": {
+            "type": "string"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BmlError"
+            }
+          },
+          "metrics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModelMetricX"
+            }
+          },
+          "presets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Preset"
+            }
+          },
+          "mproveConfig": {
+            "$ref": "#/components/schemas/MproveConfig"
+          },
+          "mproveVersion": {
+            "type": "string"
+          },
+          "serverTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "projectId",
+          "structId",
+          "errors",
+          "metrics",
+          "presets",
+          "mproveConfig",
+          "mproveVersion",
+          "serverTs"
+        ]
+      },
+      "Member": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "memberId": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "alias": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "avatarSmall": {
+            "type": "string"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isAdmin": {
+            "type": "boolean"
+          },
+          "isEditor": {
+            "type": "boolean"
+          },
+          "isExplorer": {
+            "type": "boolean"
+          },
+          "serverTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "projectId",
+          "memberId",
+          "email",
+          "alias",
+          "firstName",
+          "lastName",
+          "fullName",
+          "avatarSmall",
+          "roles",
+          "isAdmin",
+          "isEditor",
+          "isExplorer",
+          "serverTs"
+        ]
+      },
+      "SuggestField": {
+        "type": "object",
+        "properties": {
+          "modelFieldRef": {
+            "type": "string"
+          },
+          "connectionType": {
+            "type": "string",
+            "enum": [
+              "PostgreSQL",
+              "MySQL",
+              "SnowFlake",
+              "BigQuery",
+              "Databricks",
+              "MotherDuck",
+              "Presto",
+              "Trino",
+              "GoogleApi",
+              "Api"
+            ]
+          },
+          "topLabel": {
+            "type": "string"
+          },
+          "partNodeLabel": {
+            "type": "string"
+          },
+          "partFieldLabel": {
+            "type": "string"
+          },
+          "partLabel": {
+            "type": "string"
+          },
+          "fieldClass": {
+            "type": "string",
+            "enum": [
+              "dimension",
+              "time",
+              "measure",
+              "calculation",
+              "filter",
+              "join",
+              "info"
+            ]
+          },
+          "result": {
+            "type": "string",
+            "enum": [
+              "day_of_week",
+              "day_of_week_index",
+              "month_name",
+              "quarter_of_year",
+              "ts",
+              "yesno",
+              "string",
+              "number",
+              "date",
+              "boolean",
+              "array",
+              "record",
+              "json",
+              "sql_native"
+            ]
+          }
+        },
+        "required": [
+          "modelFieldRef",
+          "connectionType",
+          "topLabel",
+          "partNodeLabel",
+          "partFieldLabel",
+          "partLabel",
+          "fieldClass",
+          "result"
+        ]
+      },
+      "BmlError": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiskFileLine"
+            }
+          }
+        },
+        "required": [
+          "title",
+          "message",
+          "lines"
+        ]
+      },
+      "ModelMetricX": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string",
+            "nullable": true
+          },
+          "modelType": {
+            "type": "string",
+            "enum": [
+              "Store",
+              "Malloy"
+            ]
+          },
+          "connectionType": {
+            "type": "string",
+            "enum": [
+              "PostgreSQL",
+              "MySQL",
+              "SnowFlake",
+              "BigQuery",
+              "Databricks",
+              "MotherDuck",
+              "Presto",
+              "Trino",
+              "GoogleApi",
+              "Api"
+            ]
+          },
+          "fieldId": {
+            "type": "string"
+          },
+          "fieldClass": {
+            "type": "string",
+            "enum": [
+              "dimension",
+              "time",
+              "measure",
+              "calculation",
+              "filter",
+              "join",
+              "info"
+            ]
+          },
+          "fieldResult": {
+            "type": "string",
+            "enum": [
+              "day_of_week",
+              "day_of_week_index",
+              "month_name",
+              "quarter_of_year",
+              "ts",
+              "yesno",
+              "string",
+              "number",
+              "date",
+              "boolean",
+              "array",
+              "record",
+              "json",
+              "sql_native"
+            ],
+            "nullable": true
+          },
+          "timeFieldId": {
+            "type": "string"
+          },
+          "structId": {
+            "type": "string"
+          },
+          "filePath": {
+            "type": "string",
+            "nullable": true
+          },
+          "fieldLineNum": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Model"
+            ]
+          },
+          "metricId": {
+            "type": "string"
+          },
+          "topNode": {
+            "type": "string",
+            "nullable": true
+          },
+          "label": {
+            "type": "string",
+            "nullable": true
+          },
+          "topLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "partNodeLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "partFieldLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "partLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "timeNodeLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "timeFieldLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "timeLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "formatNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "currencyPrefix": {
+            "type": "string",
+            "nullable": true
+          },
+          "currencySuffix": {
+            "type": "string",
+            "nullable": true
+          },
+          "serverTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "hasAccessToModel": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "modelType",
+          "connectionType",
+          "fieldId",
+          "fieldClass",
+          "timeFieldId",
+          "structId",
+          "type",
+          "metricId",
+          "serverTs",
+          "hasAccessToModel"
+        ]
+      },
+      "Preset": {
+        "type": "object",
+        "properties": {
+          "presetId": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "parsedContent": {}
+        },
+        "required": [
+          "presetId",
+          "label",
+          "path",
+          "parsedContent"
+        ]
+      },
+      "MproveConfig": {
+        "type": "object",
+        "properties": {
+          "mproveDirValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "caseSensitiveStringFilters": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "weekStart": {
+            "type": "string",
+            "enum": [
+              "Sunday",
+              "Monday"
+            ],
+            "nullable": true
+          },
+          "allowTimezones": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "defaultTimezone": {
+            "type": "string",
+            "nullable": true
+          },
+          "formatNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "currencyPrefix": {
+            "type": "string",
+            "nullable": true
+          },
+          "currencySuffix": {
+            "type": "string",
+            "nullable": true
+          },
+          "thousandsSeparator": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "DiskFileLine": {
+        "type": "object",
+        "properties": {
+          "fileId": {
+            "type": "string"
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "lineNumber": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "fileId",
+          "fileName",
+          "lineNumber"
+        ]
+      }
+    }
+  }
+}

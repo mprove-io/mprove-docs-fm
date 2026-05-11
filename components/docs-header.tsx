@@ -13,10 +13,10 @@ import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/cn';
 
 interface DocsHeaderProps extends ComponentProps<'header'> {
-  showOpenAPI?: boolean;
   openapiHref?: string;
   cliHref?: string;
   skillsHref?: string;
+  mcpHref?: string;
 }
 
 const tabs = [
@@ -41,6 +41,11 @@ const tabs = [
     href: '/content/openapi',
     label: 'OpenAPI',
     match: (pathname: string) => pathname.startsWith('/content/openapi')
+  },
+  {
+    href: '/content/mcp',
+    label: 'MCP',
+    match: (pathname: string) => pathname.startsWith('/content/mcp')
   }
 ] as const;
 
@@ -49,15 +54,15 @@ const topLevelTabClass =
 const activeTopLevelTabClass = 'border-fd-primary text-fd-primary';
 
 export function DocsHeader({
-  showOpenAPI = true,
   openapiHref = '/content/openapi',
   cliHref = '/content/cli',
   skillsHref = '/content/skills',
+  mcpHref = '/content/mcp',
   ...props
 }: DocsHeaderProps) {
   const pathname = usePathname();
   const { slots } = useDocsLayout();
-  const allTabs = tabs.map(tab => {
+  const visibleTabs = tabs.map(tab => {
     if (tab.label === 'OpenAPI') {
       return { ...tab, href: openapiHref };
     }
@@ -67,11 +72,11 @@ export function DocsHeader({
     if (tab.label === 'Skills') {
       return { ...tab, href: skillsHref };
     }
+    if (tab.label === 'MCP') {
+      return { ...tab, href: mcpHref };
+    }
     return tab;
   });
-  const visibleTabs = showOpenAPI
-    ? allTabs
-    : allTabs.filter(tab => tab.label !== 'OpenAPI');
 
   return (
     <header

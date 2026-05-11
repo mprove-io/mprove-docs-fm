@@ -1,0 +1,240 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "mprove backend",
+    "description": "",
+    "version": "12.0.11",
+    "contact": {}
+  },
+  "paths": {
+    "/api/ToBackendSpecialRebuildStructs": {
+      "post": {
+        "operationId": "SpecialRebuildStructsController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendSpecialRebuildStructsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendSpecialRebuildStructsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ToBackendSpecialRebuildStructsRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendSpecialRebuildStructsRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendSpecialRebuildStructsRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendSpecialRebuildStructsResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendSpecialRebuildStructsResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendSpecialRebuildStructsResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendSpecialRebuildStructsRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendSpecialRebuildStructs"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendSpecialRebuildStructsRequestPayload": {
+        "type": "object",
+        "properties": {
+          "specialKey": {
+            "type": "string"
+          },
+          "userIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "skipRebuild": {
+            "type": "boolean"
+          },
+          "overrideTimezone": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "specialKey",
+          "userIds",
+          "skipRebuild"
+        ]
+      },
+      "ToBackendSpecialRebuildStructsResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendSpecialRebuildStructs"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendSpecialRebuildStructsResponsePayload": {
+        "type": "object",
+        "properties": {
+          "notFoundProjectIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "successBridgeItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BridgeItem"
+            }
+          },
+          "successTotal": {
+            "type": "number"
+          },
+          "errorGetCatalogBridgeItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BridgeItem"
+            }
+          },
+          "errorTotal": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "notFoundProjectIds",
+          "successBridgeItems",
+          "successTotal",
+          "errorGetCatalogBridgeItems",
+          "errorTotal"
+        ]
+      },
+      "BridgeItem": {
+        "type": "object",
+        "properties": {
+          "orgId": {
+            "type": "string"
+          },
+          "projectId": {
+            "type": "string"
+          },
+          "repoId": {
+            "type": "string"
+          },
+          "branchId": {
+            "type": "string"
+          },
+          "envId": {
+            "type": "string"
+          },
+          "structId": {
+            "type": "string"
+          },
+          "needValidate": {
+            "type": "boolean"
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "orgId",
+          "projectId",
+          "repoId",
+          "branchId",
+          "envId",
+          "structId",
+          "needValidate"
+        ]
+      }
+    }
+  }
+}

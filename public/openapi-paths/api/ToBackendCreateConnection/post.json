@@ -1,0 +1,814 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "mprove backend",
+    "description": "",
+    "version": "12.0.11",
+    "contact": {}
+  },
+  "paths": {
+    "/api/ToBackendCreateConnection": {
+      "post": {
+        "operationId": "CreateConnectionController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendCreateConnectionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendCreateConnectionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ToBackendCreateConnectionRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendCreateConnectionRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendCreateConnectionRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendCreateConnectionResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendCreateConnectionResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendCreateConnectionResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendCreateConnectionRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendCreateConnection"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendCreateConnectionRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "envId": {
+            "type": "string"
+          },
+          "connectionId": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "PostgreSQL",
+              "MySQL",
+              "SnowFlake",
+              "BigQuery",
+              "Databricks",
+              "MotherDuck",
+              "Presto",
+              "Trino",
+              "GoogleApi",
+              "Api"
+            ]
+          },
+          "options": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ConnectionOptions"
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "required": [
+          "projectId",
+          "envId",
+          "connectionId",
+          "type"
+        ]
+      },
+      "ToBackendCreateConnectionResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendCreateConnection"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendCreateConnectionResponsePayload": {
+        "type": "object",
+        "properties": {
+          "connection": {
+            "$ref": "#/components/schemas/ProjectConnection"
+          }
+        },
+        "required": [
+          "connection"
+        ]
+      },
+      "ConnectionOptions": {
+        "type": "object",
+        "properties": {
+          "bigquery": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OptionsBigquery"
+              }
+            ],
+            "nullable": true
+          },
+          "databricks": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OptionsDatabricks"
+              }
+            ],
+            "nullable": true
+          },
+          "motherduck": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OptionsMotherduck"
+              }
+            ],
+            "nullable": true
+          },
+          "postgres": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OptionsPostgres"
+              }
+            ],
+            "nullable": true
+          },
+          "snowflake": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OptionsSnowflake"
+              }
+            ],
+            "nullable": true
+          },
+          "mysql": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OptionsMysql"
+              }
+            ],
+            "nullable": true
+          },
+          "trino": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OptionsTrino"
+              }
+            ],
+            "nullable": true
+          },
+          "presto": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OptionsPresto"
+              }
+            ],
+            "nullable": true
+          },
+          "storeApi": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OptionsStoreApi"
+              }
+            ],
+            "nullable": true
+          },
+          "storeGoogleApi": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OptionsStoreGoogleApi"
+              }
+            ],
+            "nullable": true
+          }
+        }
+      },
+      "ProjectConnection": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "connectionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "envId": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "PostgreSQL",
+              "MySQL",
+              "SnowFlake",
+              "BigQuery",
+              "Databricks",
+              "MotherDuck",
+              "Presto",
+              "Trino",
+              "GoogleApi",
+              "Api"
+            ],
+            "nullable": true
+          },
+          "options": {
+            "$ref": "#/components/schemas/ConnectionOptions"
+          },
+          "rawSchema": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ConnectionRawSchema"
+              }
+            ],
+            "nullable": true
+          },
+          "serverTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
+            "nullable": true
+          }
+        },
+        "required": [
+          "options"
+        ]
+      },
+      "OptionsBigquery": {
+        "type": "object",
+        "properties": {
+          "serviceAccountCredentials": {
+            "nullable": true
+          },
+          "googleCloudProject": {
+            "type": "string",
+            "nullable": true
+          },
+          "googleCloudClientEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "bigqueryQuerySizeLimitGb": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
+            "nullable": true
+          }
+        }
+      },
+      "OptionsDatabricks": {
+        "type": "object",
+        "properties": {
+          "authType": {
+            "type": "string",
+            "enum": [
+              "OAuthM2M",
+              "PersonalAccessToken"
+            ],
+            "nullable": true
+          },
+          "host": {
+            "type": "string",
+            "nullable": true
+          },
+          "internalHost": {
+            "type": "string",
+            "nullable": true
+          },
+          "path": {
+            "type": "string",
+            "nullable": true
+          },
+          "token": {
+            "type": "string",
+            "nullable": true
+          },
+          "oauthClientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "oauthClientSecret": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultCatalog": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultSchema": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "OptionsMotherduck": {
+        "type": "object",
+        "properties": {
+          "motherduckToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "database": {
+            "type": "string",
+            "nullable": true
+          },
+          "attachModeSingle": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "accessModeReadOnly": {
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "OptionsPostgres": {
+        "type": "object",
+        "properties": {
+          "host": {
+            "type": "string",
+            "nullable": true
+          },
+          "internalHost": {
+            "type": "string",
+            "nullable": true
+          },
+          "port": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "internalPort": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "database": {
+            "type": "string",
+            "nullable": true
+          },
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSSL": {
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "OptionsSnowflake": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "type": "string",
+            "nullable": true
+          },
+          "warehouse": {
+            "type": "string",
+            "nullable": true
+          },
+          "database": {
+            "type": "string",
+            "nullable": true
+          },
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "OptionsMysql": {
+        "type": "object",
+        "properties": {
+          "host": {
+            "type": "string",
+            "nullable": true
+          },
+          "internalHost": {
+            "type": "string",
+            "nullable": true
+          },
+          "port": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "internalPort": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "database": {
+            "type": "string",
+            "nullable": true
+          },
+          "user": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "OptionsTrino": {
+        "type": "object",
+        "properties": {
+          "server": {
+            "type": "string",
+            "nullable": true
+          },
+          "internalServer": {
+            "type": "string",
+            "nullable": true
+          },
+          "catalog": {
+            "type": "string",
+            "nullable": true
+          },
+          "schema": {
+            "type": "string",
+            "nullable": true
+          },
+          "user": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "extraConfig": {
+            "nullable": true
+          }
+        }
+      },
+      "OptionsPresto": {
+        "type": "object",
+        "properties": {
+          "server": {
+            "type": "string",
+            "nullable": true
+          },
+          "internalServer": {
+            "type": "string",
+            "nullable": true
+          },
+          "catalog": {
+            "type": "string",
+            "nullable": true
+          },
+          "schema": {
+            "type": "string",
+            "nullable": true
+          },
+          "user": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "extraConfig": {
+            "nullable": true
+          },
+          "port": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "internalPort": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
+            "nullable": true
+          }
+        }
+      },
+      "OptionsStoreApi": {
+        "type": "object",
+        "properties": {
+          "headers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiHeader"
+            },
+            "nullable": true
+          },
+          "baseUrl": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "OptionsStoreGoogleApi": {
+        "type": "object",
+        "properties": {
+          "headers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiHeader"
+            },
+            "nullable": true
+          },
+          "baseUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "googleAuthScopes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "serviceAccountCredentials": {
+            "nullable": true
+          },
+          "googleCloudProject": {
+            "type": "string",
+            "nullable": true
+          },
+          "googleCloudClientEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "googleAccessToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "googleAccessTokenExpiryDate": {
+            "type": "number",
+            "nullable": true
+          }
+        }
+      },
+      "ConnectionRawSchema": {
+        "type": "object",
+        "properties": {
+          "tables": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RawSchemaTable"
+            }
+          },
+          "lastRefreshedTs": {
+            "type": "number"
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "tables",
+          "lastRefreshedTs"
+        ]
+      },
+      "ApiHeader": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "RawSchemaTable": {
+        "type": "object",
+        "properties": {
+          "schemaName": {
+            "type": "string"
+          },
+          "tableName": {
+            "type": "string"
+          },
+          "tableType": {
+            "type": "string"
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RawSchemaColumn"
+            }
+          },
+          "indexes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RawSchemaIndex"
+            }
+          }
+        },
+        "required": [
+          "schemaName",
+          "tableName",
+          "tableType",
+          "columns",
+          "indexes"
+        ]
+      },
+      "RawSchemaColumn": {
+        "type": "object",
+        "properties": {
+          "columnName": {
+            "type": "string"
+          },
+          "dataType": {
+            "type": "string"
+          },
+          "elementType": {
+            "type": "string",
+            "nullable": true
+          },
+          "isNullable": {
+            "type": "boolean"
+          },
+          "isPrimaryKey": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isUnique": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "foreignKeys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RawSchemaForeignKey"
+            }
+          }
+        },
+        "required": [
+          "columnName",
+          "dataType",
+          "isNullable",
+          "foreignKeys"
+        ]
+      },
+      "RawSchemaIndex": {
+        "type": "object",
+        "properties": {
+          "indexName": {
+            "type": "string"
+          },
+          "indexColumns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isUnique": {
+            "type": "boolean"
+          },
+          "isPrimaryKey": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "indexName",
+          "indexColumns",
+          "isUnique",
+          "isPrimaryKey"
+        ]
+      },
+      "RawSchemaForeignKey": {
+        "type": "object",
+        "properties": {
+          "constraintName": {
+            "type": "string"
+          },
+          "referencedSchemaName": {
+            "type": "string"
+          },
+          "referencedTableName": {
+            "type": "string"
+          },
+          "referencedColumnName": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "constraintName",
+          "referencedSchemaName",
+          "referencedTableName",
+          "referencedColumnName"
+        ]
+      }
+    }
+  }
+}

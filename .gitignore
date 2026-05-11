@@ -9,9 +9,6 @@
 *.env
 .envrc
 
-public/openapi.json
-public/openapi-paths/
-
 # deps
 /node_modules
 

@@ -1,0 +1,334 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "mprove backend",
+    "description": "",
+    "version": "12.0.11",
+    "contact": {}
+  },
+  "paths": {
+    "/api/ToBackendSendMessageToEditorSession": {
+      "post": {
+        "operationId": "SendMessageToEditorSessionController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendSendMessageToEditorSessionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendSendMessageToEditorSessionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ToBackendSendMessageToEditorSessionRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendSendMessageToEditorSessionRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendSendMessageToEditorSessionRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendSendMessageToEditorSessionResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendSendMessageToEditorSessionResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendSendMessageToEditorSessionResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendSendMessageToEditorSessionRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendSendMessageToEditorSession"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendSendMessageToEditorSessionRequestPayload": {
+        "type": "object",
+        "properties": {
+          "sessionId": {
+            "type": "string"
+          },
+          "messageId": {
+            "type": "string",
+            "nullable": true
+          },
+          "partId": {
+            "type": "string",
+            "nullable": true
+          },
+          "interactionType": {
+            "type": "string",
+            "enum": [
+              "Message",
+              "Question",
+              "Permission",
+              "Stop"
+            ]
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "model": {
+            "type": "string",
+            "nullable": true
+          },
+          "variant": {
+            "type": "string",
+            "nullable": true
+          },
+          "agent": {
+            "type": "string",
+            "nullable": true
+          },
+          "permissionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "reply": {
+            "type": "string",
+            "nullable": true
+          },
+          "questionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "answers": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "nullable": true
+          }
+        },
+        "required": [
+          "sessionId",
+          "interactionType"
+        ]
+      },
+      "ToBackendSendMessageToEditorSessionResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendSendMessageToEditorSession"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendSendMessageToEditorSessionResponsePayload": {
+        "type": "object",
+        "properties": {
+          "session": {
+            "$ref": "#/components/schemas/SessionApi"
+          }
+        },
+        "required": [
+          "session"
+        ]
+      },
+      "SessionApi": {
+        "type": "object",
+        "properties": {
+          "sessionId": {
+            "type": "string"
+          },
+          "opencodeSessionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Explorer",
+              "Editor"
+            ]
+          },
+          "provider": {
+            "type": "string"
+          },
+          "agent": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastMessageProviderModel": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastMessageVariant": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string"
+          },
+          "archiveReason": {
+            "type": "string",
+            "enum": [
+              "User",
+              "Expire",
+              "Commit"
+            ],
+            "nullable": true
+          },
+          "pauseReason": {
+            "type": "string",
+            "enum": [
+              "User",
+              "Idle",
+              "Safe",
+              "External"
+            ],
+            "nullable": true
+          },
+          "repoId": {
+            "type": "string"
+          },
+          "branchId": {
+            "type": "string"
+          },
+          "initialBranch": {
+            "type": "string",
+            "nullable": true
+          },
+          "envId": {
+            "type": "string",
+            "nullable": true
+          },
+          "initialCommit": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "lastActivityTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "firstMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "useCodex": {
+            "type": "boolean"
+          },
+          "closedExplorerTabIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "required": [
+          "sessionId",
+          "type",
+          "provider",
+          "agent",
+          "status",
+          "repoId",
+          "branchId",
+          "createdTs",
+          "lastActivityTs",
+          "useCodex"
+        ]
+      }
+    }
+  }
+}

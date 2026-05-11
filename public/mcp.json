@@ -1,0 +1,4297 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "MCP Tools",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "run",
+      "description": "Run dashboards, charts, and reports queries. Returns query statuses and statistics."
+    },
+    {
+      "name": "get-state",
+      "description": "Get project state: models, dashboards, charts, reports, metrics, validation errors, and repo info"
+    },
+    {
+      "name": "get-model",
+      "description": "Get a model definition including its fields, dimensions, measures, and access info"
+    },
+    {
+      "name": "get-query-info",
+      "description": "Get query info for a chart, dashboard, or report. Returns query status, SQL, malloy and data."
+    },
+    {
+      "name": "validate",
+      "description": "Validate (rebuild) Mprove files for a project branch and environment"
+    },
+    {
+      "name": "get-sample",
+      "description": "Fetch sample data rows from a database table or column for a project connection"
+    },
+    {
+      "name": "get-schemas",
+      "description": "Fetch database schemas (tables, columns, relationships, indexes) for project SQL connections"
+    },
+    {
+      "name": "get-connections-list",
+      "description": "Get connection info (type, API endpoints, header keys, OAuth scopes) for project connections"
+    },
+    {
+      "name": "get-skills",
+      "description": "Get all available mprove skills"
+    },
+    {
+      "name": "read-docs",
+      "description": "Read Mprove documentation pages sourced from https://docs.mprove.io/content/docs/docs-for-ai.mdx.\nCall with pageIds to read one or more pages in one tool call."
+    },
+    {
+      "name": "list-docs",
+      "description": "List available Mprove documentation pageIds sourced from https://docs.mprove.io/content/docs/docs-for-ai.mdx.\nPageIds can be used in read-docs tool to get page content."
+    },
+    {
+      "name": "search-docs",
+      "description": "Search Mprove documentation pages sourced from https://docs.mprove.io/content/docs/docs-for-ai.mdx.\nWhitespace-separated query terms are AND-matched (case-insensitive) across cached docs content;\nreturns matching page ids with snippet previews."
+    }
+  ],
+  "paths": {
+    "/mcp/run": {
+      "post": {
+        "operationId": "run",
+        "summary": "run",
+        "description": "Run dashboards, charts, and reports queries. Returns query statuses and statistics.",
+        "tags": [
+          "run"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/McpToolRunInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Output",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/McpToolRunOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp/get-state": {
+      "post": {
+        "operationId": "get-state",
+        "summary": "get-state",
+        "description": "Get project state: models, dashboards, charts, reports, metrics, validation errors, and repo info",
+        "tags": [
+          "get-state"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/McpToolGetStateInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Output",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/McpToolGetStateOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp/get-model": {
+      "post": {
+        "operationId": "get-model",
+        "summary": "get-model",
+        "description": "Get a model definition including its fields, dimensions, measures, and access info",
+        "tags": [
+          "get-model"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/McpToolGetModelInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Output",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/McpToolGetModelOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp/get-query-info": {
+      "post": {
+        "operationId": "get-query-info",
+        "summary": "get-query-info",
+        "description": "Get query info for a chart, dashboard, or report. Returns query status, SQL, malloy and data.",
+        "tags": [
+          "get-query-info"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/McpToolGetQueryInfoInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Output",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/McpToolGetQueryInfoOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp/validate": {
+      "post": {
+        "operationId": "validate",
+        "summary": "validate",
+        "description": "Validate (rebuild) Mprove files for a project branch and environment",
+        "tags": [
+          "validate"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/McpToolValidateFilesInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Output",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/McpToolValidateFilesOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp/get-sample": {
+      "post": {
+        "operationId": "get-sample",
+        "summary": "get-sample",
+        "description": "Fetch sample data rows from a database table or column for a project connection",
+        "tags": [
+          "get-sample"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/McpToolGetSampleInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Output",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/McpToolGetSampleOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp/get-schemas": {
+      "post": {
+        "operationId": "get-schemas",
+        "summary": "get-schemas",
+        "description": "Fetch database schemas (tables, columns, relationships, indexes) for project SQL connections",
+        "tags": [
+          "get-schemas"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/McpToolGetSchemasInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Output",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/McpToolGetSchemasOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp/get-connections-list": {
+      "post": {
+        "operationId": "get-connections-list",
+        "summary": "get-connections-list",
+        "description": "Get connection info (type, API endpoints, header keys, OAuth scopes) for project connections",
+        "tags": [
+          "get-connections-list"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/McpToolGetConnectionsListInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Output",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/McpToolGetConnectionsListOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp/get-skills": {
+      "post": {
+        "operationId": "get-skills",
+        "summary": "get-skills",
+        "description": "Get all available mprove skills",
+        "tags": [
+          "get-skills"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/McpToolGetSkillsInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Output",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/McpToolGetSkillsOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp/read-docs": {
+      "post": {
+        "operationId": "read-docs",
+        "summary": "read-docs",
+        "description": "Read Mprove documentation pages sourced from https://docs.mprove.io/content/docs/docs-for-ai.mdx.\nCall with pageIds to read one or more pages in one tool call.",
+        "tags": [
+          "read-docs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/McpToolReadDocsInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Output",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/McpToolReadDocsOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp/list-docs": {
+      "post": {
+        "operationId": "list-docs",
+        "summary": "list-docs",
+        "description": "List available Mprove documentation pageIds sourced from https://docs.mprove.io/content/docs/docs-for-ai.mdx.\nPageIds can be used in read-docs tool to get page content.",
+        "tags": [
+          "list-docs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/McpToolListDocsInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Output",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/McpToolListDocsOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp/search-docs": {
+      "post": {
+        "operationId": "search-docs",
+        "summary": "search-docs",
+        "description": "Search Mprove documentation pages sourced from https://docs.mprove.io/content/docs/docs-for-ai.mdx.\nWhitespace-separated query terms are AND-matched (case-insensitive) across cached docs content;\nreturns matching page ids with snippet previews.",
+        "tags": [
+          "search-docs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/McpToolSearchDocsInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Output",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/McpToolSearchDocsOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "McpToolRunInput": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "Project ID"
+          },
+          "repoId": {
+            "type": "string",
+            "description": "Repository ID"
+          },
+          "branchId": {
+            "type": "string",
+            "description": "Git branch name"
+          },
+          "envId": {
+            "type": "string",
+            "description": "Environment ID"
+          },
+          "concurrency": {
+            "description": "Max concurrent queries. Omit to use server default.",
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "wait": {
+            "type": "boolean",
+            "description": "Wait for queries completion"
+          },
+          "sleep": {
+            "description": "Seconds to sleep between query status checks. Omit to use default of 3 seconds.",
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "dashboardIds": {
+            "description": "Comma-separated dashboard IDs to run. Omit to run all dashboards.",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "chartIds": {
+            "description": "Comma-separated chart IDs to run. Omit to run all charts.",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "noDashboards": {
+            "type": "boolean",
+            "description": "Do not run dashboards"
+          },
+          "noCharts": {
+            "type": "boolean",
+            "description": "Do not run charts"
+          },
+          "getDashboards": {
+            "type": "boolean",
+            "description": "Include dashboards in output"
+          },
+          "getCharts": {
+            "type": "boolean",
+            "description": "Include charts in output"
+          },
+          "reportIds": {
+            "description": "Comma-separated report IDs to run. Omit to run all reports.",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "noReports": {
+            "type": "boolean",
+            "description": "Do not run reports"
+          },
+          "getReports": {
+            "type": "boolean",
+            "description": "Include reports in output"
+          }
+        },
+        "required": [
+          "projectId",
+          "repoId",
+          "branchId",
+          "envId",
+          "wait",
+          "noDashboards",
+          "noCharts",
+          "getDashboards",
+          "getCharts",
+          "noReports",
+          "getReports"
+        ],
+        "additionalProperties": false,
+        "id": "McpToolRunInput"
+      },
+      "McpToolRunOutput": {
+        "type": "object",
+        "properties": {
+          "charts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RunChart"
+            }
+          },
+          "dashboards": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RunDashboard"
+            }
+          },
+          "reports": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RunReport"
+            }
+          },
+          "errorCharts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RunChart"
+            }
+          },
+          "errorDashboards": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RunDashboard"
+            }
+          },
+          "errorReports": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RunReport"
+            }
+          },
+          "queriesStats": {
+            "$ref": "#/components/schemas/RunQueriesStats"
+          }
+        },
+        "required": [
+          "charts",
+          "dashboards",
+          "reports",
+          "errorCharts",
+          "errorDashboards",
+          "errorReports",
+          "queriesStats"
+        ],
+        "additionalProperties": false,
+        "id": "McpToolRunOutput"
+      },
+      "McpToolGetStateInput": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "Project ID"
+          },
+          "repoId": {
+            "type": "string",
+            "description": "Repository ID"
+          },
+          "branchId": {
+            "type": "string",
+            "description": "Git branch name"
+          },
+          "envId": {
+            "type": "string",
+            "description": "Environment ID"
+          },
+          "isFetch": {
+            "type": "boolean",
+            "description": "Fetch latest data from the database"
+          },
+          "getErrors": {
+            "type": "boolean",
+            "description": "Include validation errors in output"
+          },
+          "getRepo": {
+            "type": "boolean",
+            "description": "Include repo info in output"
+          },
+          "getRepoNodes": {
+            "type": "boolean",
+            "description": "Include repo file nodes in output"
+          },
+          "getModels": {
+            "type": "boolean",
+            "description": "Include models in output"
+          },
+          "getDashboards": {
+            "type": "boolean",
+            "description": "Include dashboards in output"
+          },
+          "getCharts": {
+            "type": "boolean",
+            "description": "Include charts in output"
+          },
+          "getMetrics": {
+            "type": "boolean",
+            "description": "Include metrics in output"
+          },
+          "getReports": {
+            "type": "boolean",
+            "description": "Include reports in output"
+          }
+        },
+        "required": [
+          "projectId",
+          "repoId",
+          "branchId",
+          "envId",
+          "isFetch",
+          "getErrors",
+          "getRepo",
+          "getRepoNodes",
+          "getModels",
+          "getDashboards",
+          "getCharts",
+          "getMetrics",
+          "getReports"
+        ],
+        "additionalProperties": false,
+        "id": "McpToolGetStateInput"
+      },
+      "McpToolGetStateOutput": {
+        "type": "object",
+        "properties": {
+          "needValidate": {
+            "type": "boolean"
+          },
+          "structId": {
+            "type": "string"
+          },
+          "validationErrorsTotal": {
+            "type": "number"
+          },
+          "modelsTotal": {
+            "type": "number"
+          },
+          "chartsTotal": {
+            "type": "number"
+          },
+          "dashboardsTotal": {
+            "type": "number"
+          },
+          "reportsTotal": {
+            "type": "number"
+          },
+          "builderUrl": {
+            "type": "string"
+          },
+          "validationErrors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MproveValidationError"
+            }
+          },
+          "modelItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StateModelItem"
+            }
+          },
+          "chartItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StateChartItem"
+            }
+          },
+          "dashboardItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StateDashboardItem"
+            }
+          },
+          "reportItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StateReportItem"
+            }
+          },
+          "metricItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StateMetricItem"
+            }
+          },
+          "repo": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StateRepo"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "needValidate",
+          "structId",
+          "validationErrorsTotal",
+          "modelsTotal",
+          "chartsTotal",
+          "dashboardsTotal",
+          "reportsTotal",
+          "builderUrl",
+          "validationErrors",
+          "modelItems",
+          "chartItems",
+          "dashboardItems",
+          "reportItems",
+          "metricItems"
+        ],
+        "additionalProperties": false,
+        "id": "McpToolGetStateOutput"
+      },
+      "McpToolGetModelInput": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "Project ID"
+          },
+          "repoId": {
+            "type": "string",
+            "description": "Repository ID"
+          },
+          "branchId": {
+            "type": "string",
+            "description": "Git branch name"
+          },
+          "envId": {
+            "type": "string",
+            "description": "Environment ID"
+          },
+          "modelId": {
+            "type": "string",
+            "description": "Model ID"
+          },
+          "getMalloy": {
+            "default": false,
+            "description": "Include Malloy source in output",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "projectId",
+          "repoId",
+          "branchId",
+          "envId",
+          "modelId",
+          "getMalloy"
+        ],
+        "additionalProperties": false,
+        "id": "McpToolGetModelInput"
+      },
+      "McpToolGetModelOutput": {
+        "type": "object",
+        "properties": {
+          "needValidate": {
+            "type": "boolean"
+          },
+          "model": {
+            "$ref": "#/components/schemas/Model"
+          }
+        },
+        "required": [
+          "needValidate",
+          "model"
+        ],
+        "additionalProperties": false,
+        "id": "McpToolGetModelOutput"
+      },
+      "McpToolGetQueryInfoInput": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "Project ID"
+          },
+          "repoId": {
+            "type": "string",
+            "description": "Repository ID"
+          },
+          "branchId": {
+            "type": "string",
+            "description": "Git branch name"
+          },
+          "envId": {
+            "type": "string",
+            "description": "Environment ID"
+          },
+          "chartId": {
+            "description": "Chart ID to get query info for. Omit if querying a dashboard or report.",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "dashboardId": {
+            "description": "Dashboard ID to get query info for. Omit if querying a chart or report.",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tileIndex": {
+            "description": "Dashboard tile index. Omit to get all tiles.",
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reportId": {
+            "description": "Report ID to get query info for. Omit if querying a chart or dashboard.",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rowId": {
+            "description": "Report row ID. Omit to get all rows.",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "timezone": {
+            "type": "string",
+            "description": "Timezone, e.g. \"UTC\""
+          },
+          "timeSpec": {
+            "description": "Time specification for the query. Omit to use default time range.",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "timeRangeFractionBrick": {
+            "description": "Time range fraction brick. Omit to use default.",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "getMalloy": {
+            "type": "boolean",
+            "description": "Include Malloy query in output"
+          },
+          "getSql": {
+            "type": "boolean",
+            "description": "Include SQL query in output"
+          },
+          "getData": {
+            "type": "boolean",
+            "description": "Include query data in output"
+          },
+          "isFetch": {
+            "type": "boolean",
+            "description": "Fetch latest data from the database"
+          }
+        },
+        "required": [
+          "projectId",
+          "repoId",
+          "branchId",
+          "envId",
+          "timezone",
+          "getMalloy",
+          "getSql",
+          "getData",
+          "isFetch"
+        ],
+        "additionalProperties": false,
+        "id": "McpToolGetQueryInfoInput"
+      },
+      "McpToolGetQueryInfoOutput": {
+        "type": "object",
+        "properties": {
+          "chart": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/QueryInfoChart"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "dashboard": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/QueryInfoDashboard"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "report": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/QueryInfoReport"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "id": "McpToolGetQueryInfoOutput"
+      },
+      "McpToolValidateFilesInput": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "Project ID"
+          },
+          "repoId": {
+            "type": "string",
+            "description": "Repository ID"
+          },
+          "branchId": {
+            "type": "string",
+            "description": "Git branch name"
+          },
+          "envId": {
+            "type": "string",
+            "description": "Environment ID"
+          }
+        },
+        "required": [
+          "projectId",
+          "repoId",
+          "branchId",
+          "envId"
+        ],
+        "additionalProperties": false,
+        "id": "McpToolValidateFilesInput"
+      },
+      "McpToolValidateFilesOutput": {
+        "type": "object",
+        "properties": {
+          "needValidate": {
+            "type": "boolean"
+          },
+          "validationErrorsTotal": {
+            "type": "number"
+          },
+          "validationErrors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MproveValidationError"
+            }
+          },
+          "repo": {
+            "$ref": "#/components/schemas/ValidateFilesRepo"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "needValidate",
+          "validationErrorsTotal",
+          "validationErrors",
+          "repo",
+          "url"
+        ],
+        "additionalProperties": false,
+        "id": "McpToolValidateFilesOutput"
+      },
+      "McpToolGetSampleInput": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "Project ID"
+          },
+          "envId": {
+            "type": "string",
+            "description": "Environment ID"
+          },
+          "connectionId": {
+            "type": "string",
+            "description": "Connection ID"
+          },
+          "schemaName": {
+            "type": "string",
+            "description": "Database schema name"
+          },
+          "tableName": {
+            "type": "string",
+            "description": "Database table name"
+          },
+          "columnName": {
+            "description": "Column name to sample. Omit to get all columns from the table.",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "offset": {
+            "description": "Row offset for pagination. Omit to start from the first row.",
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "projectId",
+          "envId",
+          "connectionId",
+          "schemaName",
+          "tableName"
+        ],
+        "additionalProperties": false,
+        "id": "McpToolGetSampleInput"
+      },
+      "McpToolGetSampleOutput": {
+        "type": "object",
+        "properties": {
+          "columnNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "errorMessage": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "columnNames",
+          "rows"
+        ],
+        "additionalProperties": false,
+        "id": "McpToolGetSampleOutput"
+      },
+      "McpToolGetSchemasInput": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "Project ID"
+          },
+          "envId": {
+            "type": "string",
+            "description": "Environment ID"
+          },
+          "repoId": {
+            "type": "string",
+            "description": "Repository ID"
+          },
+          "branchId": {
+            "type": "string",
+            "description": "Git branch name"
+          },
+          "isRefreshExistingCache": {
+            "type": "boolean",
+            "description": "Refresh cached schemas from the database"
+          }
+        },
+        "required": [
+          "projectId",
+          "envId",
+          "repoId",
+          "branchId",
+          "isRefreshExistingCache"
+        ],
+        "additionalProperties": false,
+        "id": "McpToolGetSchemasInput"
+      },
+      "McpToolGetSchemasOutput": {
+        "type": "object",
+        "properties": {
+          "combinedSchemaItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CombinedSchemaItem"
+            }
+          }
+        },
+        "required": [
+          "combinedSchemaItems"
+        ],
+        "additionalProperties": false,
+        "id": "McpToolGetSchemasOutput"
+      },
+      "McpToolGetConnectionsListInput": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "Project ID"
+          },
+          "envId": {
+            "type": "string",
+            "description": "Environment ID"
+          }
+        },
+        "required": [
+          "projectId",
+          "envId"
+        ],
+        "additionalProperties": false,
+        "id": "McpToolGetConnectionsListInput"
+      },
+      "McpToolGetConnectionsListOutput": {
+        "type": "object",
+        "properties": {
+          "connectionItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConnectionItem"
+            }
+          }
+        },
+        "required": [
+          "connectionItems"
+        ],
+        "additionalProperties": false,
+        "id": "McpToolGetConnectionsListOutput"
+      },
+      "McpToolGetSkillsInput": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false,
+        "id": "McpToolGetSkillsInput"
+      },
+      "McpToolGetSkillsOutput": {
+        "type": "object",
+        "properties": {
+          "skillItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SkillItem"
+            }
+          }
+        },
+        "required": [
+          "skillItems"
+        ],
+        "additionalProperties": false,
+        "id": "McpToolGetSkillsOutput"
+      },
+      "McpToolReadDocsInput": {
+        "type": "object",
+        "properties": {
+          "pageIds": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "One or more documentation page ids. Use list-docs to see available ids."
+          }
+        },
+        "required": [
+          "pageIds"
+        ],
+        "additionalProperties": false,
+        "id": "McpToolReadDocsInput"
+      },
+      "McpToolReadDocsOutput": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "ok": {
+                "type": "boolean",
+                "const": true
+              },
+              "readDocsResults": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "pageId": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "pageId",
+                    "content"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "ok",
+              "readDocsResults"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "ok": {
+                "type": "boolean",
+                "const": false
+              },
+              "error": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "ok",
+              "error"
+            ],
+            "additionalProperties": false
+          }
+        ],
+        "id": "McpToolReadDocsOutput"
+      },
+      "McpToolListDocsInput": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false,
+        "id": "McpToolListDocsInput"
+      },
+      "McpToolListDocsOutput": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "const": true
+          },
+          "pageIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "ok",
+          "pageIds"
+        ],
+        "additionalProperties": false,
+        "id": "McpToolListDocsOutput"
+      },
+      "McpToolSearchDocsInput": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Search query. Whitespace-separated terms are AND-matched (case-insensitive) against documentation file contents."
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "additionalProperties": false,
+        "id": "McpToolSearchDocsInput"
+      },
+      "McpToolSearchDocsOutput": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "ok": {
+                "type": "boolean",
+                "const": true
+              },
+              "searchDocsResults": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "pageId": {
+                      "type": "string"
+                    },
+                    "snippets": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "pageId",
+                    "snippets"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "ok",
+              "searchDocsResults"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "ok": {
+                "type": "boolean",
+                "const": false
+              },
+              "error": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "ok",
+              "error"
+            ],
+            "additionalProperties": false
+          }
+        ],
+        "id": "McpToolSearchDocsOutput"
+      },
+      "RunChart": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "chartId": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "query": {
+            "$ref": "#/components/schemas/RunQuery"
+          }
+        },
+        "required": [
+          "title",
+          "chartId",
+          "url",
+          "query"
+        ],
+        "additionalProperties": false,
+        "id": "RunChart"
+      },
+      "RunQuery": {
+        "type": "object",
+        "properties": {
+          "queryId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "New",
+              "Running",
+              "Canceled",
+              "Completed",
+              "Error"
+            ]
+          },
+          "lastErrorMessage": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "queryId",
+          "status"
+        ],
+        "additionalProperties": false,
+        "id": "RunQuery"
+      },
+      "RunDashboard": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "dashboardId": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "tiles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RunTile"
+            }
+          }
+        },
+        "required": [
+          "title",
+          "dashboardId",
+          "url",
+          "tiles"
+        ],
+        "additionalProperties": false,
+        "id": "RunDashboard"
+      },
+      "RunTile": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "query": {
+            "$ref": "#/components/schemas/RunQuery"
+          }
+        },
+        "required": [
+          "title",
+          "query"
+        ],
+        "additionalProperties": false,
+        "id": "RunTile"
+      },
+      "RunReport": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "reportId": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RunReportRow"
+            }
+          }
+        },
+        "required": [
+          "title",
+          "reportId",
+          "url",
+          "rows"
+        ],
+        "additionalProperties": false,
+        "id": "RunReport"
+      },
+      "RunReportRow": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "query": {
+            "$ref": "#/components/schemas/RunQuery"
+          }
+        },
+        "required": [
+          "title",
+          "query"
+        ],
+        "additionalProperties": false,
+        "id": "RunReportRow"
+      },
+      "RunQueriesStats": {
+        "type": "object",
+        "properties": {
+          "started": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "running": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "completed": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "error": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "canceled": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "started",
+          "running",
+          "completed",
+          "error",
+          "canceled"
+        ],
+        "additionalProperties": false,
+        "id": "RunQueriesStats"
+      },
+      "MproveValidationError": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MproveValidationErrorLine"
+            }
+          }
+        },
+        "required": [
+          "title",
+          "message",
+          "lines"
+        ],
+        "additionalProperties": false,
+        "id": "MproveValidationError"
+      },
+      "MproveValidationErrorLine": {
+        "type": "object",
+        "properties": {
+          "filePath": {
+            "type": "string"
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "lineNumber": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "filePath",
+          "fileName",
+          "lineNumber"
+        ],
+        "additionalProperties": false,
+        "id": "MproveValidationErrorLine"
+      },
+      "StateModelItem": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "modelId",
+          "url"
+        ],
+        "additionalProperties": false,
+        "id": "StateModelItem"
+      },
+      "StateChartItem": {
+        "type": "object",
+        "properties": {
+          "chartId": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "chartId",
+          "url"
+        ],
+        "additionalProperties": false,
+        "id": "StateChartItem"
+      },
+      "StateDashboardItem": {
+        "type": "object",
+        "properties": {
+          "dashboardId": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "dashboardId",
+          "url"
+        ],
+        "additionalProperties": false,
+        "id": "StateDashboardItem"
+      },
+      "StateReportItem": {
+        "type": "object",
+        "properties": {
+          "reportId": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reportId",
+          "url"
+        ],
+        "additionalProperties": false,
+        "id": "StateReportItem"
+      },
+      "StateMetricItem": {
+        "type": "object",
+        "properties": {
+          "metricId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "metricId",
+          "name"
+        ],
+        "additionalProperties": false,
+        "id": "StateMetricItem"
+      },
+      "StateRepo": {
+        "type": "object",
+        "properties": {
+          "orgId": {
+            "type": "string"
+          },
+          "projectId": {
+            "type": "string"
+          },
+          "repoId": {
+            "type": "string"
+          },
+          "currentBranchId": {
+            "type": "string"
+          },
+          "repoStatus": {
+            "type": "string",
+            "enum": [
+              "NeedCommit",
+              "NeedPull",
+              "NeedPush",
+              "Ok"
+            ]
+          },
+          "conflicts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidateFilesRepoConflict"
+            }
+          },
+          "nodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiskCatalogNode"
+            }
+          }
+        },
+        "required": [
+          "orgId",
+          "projectId",
+          "repoId",
+          "currentBranchId",
+          "repoStatus",
+          "conflicts",
+          "nodes"
+        ],
+        "additionalProperties": false,
+        "id": "StateRepo"
+      },
+      "ValidateFilesRepoConflict": {
+        "type": "object",
+        "properties": {
+          "fileId": {
+            "type": "string"
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "lineNumber": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "fileId",
+          "fileName",
+          "lineNumber"
+        ],
+        "additionalProperties": false,
+        "id": "ValidateFilesRepoConflict"
+      },
+      "DiskCatalogNode": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "isFolder": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "fileId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "children": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/DiskCatalogNode"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "isFolder",
+          "name"
+        ],
+        "additionalProperties": false,
+        "id": "DiskCatalogNode"
+      },
+      "Model": {
+        "type": "object",
+        "properties": {
+          "structId": {
+            "type": "string"
+          },
+          "modelId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Store",
+              "Malloy"
+            ]
+          },
+          "source": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "connectionId": {
+            "type": "string"
+          },
+          "connectionType": {
+            "type": "string",
+            "enum": [
+              "PostgreSQL",
+              "MySQL",
+              "SnowFlake",
+              "BigQuery",
+              "Databricks",
+              "MotherDuck",
+              "Presto",
+              "Trino",
+              "GoogleApi",
+              "Api"
+            ]
+          },
+          "filePath": {
+            "type": "string"
+          },
+          "fileText": {
+            "type": "string"
+          },
+          "storeContent": {},
+          "dateRangeIncludesRightSide": {
+            "type": "boolean"
+          },
+          "accessRoles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "label": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModelField"
+            }
+          },
+          "nodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModelNode"
+            }
+          },
+          "malloyModelDef": {},
+          "serverTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "hasAccess": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "structId",
+          "modelId",
+          "type",
+          "connectionId",
+          "connectionType",
+          "filePath",
+          "fileText",
+          "storeContent",
+          "dateRangeIncludesRightSide",
+          "accessRoles",
+          "label",
+          "fields",
+          "nodes",
+          "malloyModelDef",
+          "serverTs"
+        ],
+        "additionalProperties": false,
+        "id": "Model"
+      },
+      "ModelField": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "malloyFieldName": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "malloyFieldPath": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "malloyTags": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/KeyValuePair"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "mproveTags": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/KeyValuePair"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "hidden": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "maxFractions": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "label": {
+            "type": "string"
+          },
+          "fieldClass": {
+            "type": "string",
+            "enum": [
+              "dimension",
+              "time",
+              "measure",
+              "calculation",
+              "filter",
+              "join",
+              "info"
+            ]
+          },
+          "result": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "day_of_week",
+                  "day_of_week_index",
+                  "month_name",
+                  "quarter_of_year",
+                  "ts",
+                  "yesno",
+                  "string",
+                  "number",
+                  "date",
+                  "boolean",
+                  "array",
+                  "record",
+                  "json",
+                  "sql_native"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "suggestModelDimension": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sqlName": {
+            "type": "string"
+          },
+          "topId": {
+            "type": "string"
+          },
+          "topLabel": {
+            "type": "string"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "count_distinct",
+                  "sum",
+                  "sum_by_key",
+                  "average",
+                  "average_by_key",
+                  "median_by_key",
+                  "percentile_by_key",
+                  "min",
+                  "max",
+                  "list",
+                  "custom",
+                  "yesno_is_true"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "groupId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "groupLabel": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "groupDescription": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "formatNumber": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "currencyPrefix": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "currencySuffix": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "buildMetrics": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "timeframe": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "detail": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "timestamps",
+                  "minutes",
+                  "hours",
+                  "days",
+                  "weeksSunday",
+                  "weeksMonday",
+                  "months",
+                  "quarters",
+                  "years"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "hidden",
+          "required",
+          "label",
+          "fieldClass",
+          "sqlName",
+          "topId",
+          "topLabel"
+        ],
+        "additionalProperties": false,
+        "id": "ModelField"
+      },
+      "KeyValuePair": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "key"
+        ],
+        "additionalProperties": false,
+        "id": "KeyValuePair"
+      },
+      "ModelNode": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "nodeClass": {
+            "type": "string",
+            "enum": [
+              "dimension",
+              "time",
+              "measure",
+              "calculation",
+              "filter",
+              "join",
+              "info"
+            ]
+          },
+          "viewName": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "isField": {
+            "type": "boolean"
+          },
+          "fieldFileName": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "viewFilePath": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "fieldFilePath": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "fieldResult": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "day_of_week",
+                  "day_of_week_index",
+                  "month_name",
+                  "quarter_of_year",
+                  "ts",
+                  "yesno",
+                  "string",
+                  "number",
+                  "date",
+                  "boolean",
+                  "array",
+                  "record",
+                  "json",
+                  "sql_native"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "fieldLineNum": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "hidden": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "children": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ModelNode"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "label",
+          "nodeClass",
+          "isField",
+          "hidden",
+          "required"
+        ],
+        "additionalProperties": false,
+        "id": "ModelNode"
+      },
+      "QueryInfoChart": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "chartId": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "query": {
+            "$ref": "#/components/schemas/QueryInfoQuery"
+          }
+        },
+        "required": [
+          "title",
+          "chartId",
+          "url",
+          "query"
+        ],
+        "additionalProperties": false,
+        "id": "QueryInfoChart"
+      },
+      "QueryInfoQuery": {
+        "type": "object",
+        "properties": {
+          "connectionId": {
+            "type": "string"
+          },
+          "connectionType": {
+            "type": "string",
+            "enum": [
+              "PostgreSQL",
+              "MySQL",
+              "SnowFlake",
+              "BigQuery",
+              "Databricks",
+              "MotherDuck",
+              "Presto",
+              "Trino",
+              "GoogleApi",
+              "Api"
+            ]
+          },
+          "queryId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "New",
+              "Running",
+              "Canceled",
+              "Completed",
+              "Error"
+            ]
+          },
+          "lastRunBy": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "lastRunTs": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "lastCancelTs": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "lastCompleteTs": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "lastCompleteDuration": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "lastErrorMessage": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "lastErrorTs": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "data": {
+            "anyOf": [
+              {},
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "malloy": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sql": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "connectionId",
+          "connectionType",
+          "queryId",
+          "status"
+        ],
+        "additionalProperties": false,
+        "id": "QueryInfoQuery"
+      },
+      "QueryInfoDashboard": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "dashboardId": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "tiles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QueryInfoTile"
+            }
+          }
+        },
+        "required": [
+          "title",
+          "dashboardId",
+          "url",
+          "tiles"
+        ],
+        "additionalProperties": false,
+        "id": "QueryInfoDashboard"
+      },
+      "QueryInfoTile": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "query": {
+            "$ref": "#/components/schemas/QueryInfoQuery"
+          }
+        },
+        "required": [
+          "title",
+          "query"
+        ],
+        "additionalProperties": false,
+        "id": "QueryInfoTile"
+      },
+      "QueryInfoReport": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "reportId": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QueryInfoRow"
+            }
+          }
+        },
+        "required": [
+          "title",
+          "reportId",
+          "url",
+          "rows"
+        ],
+        "additionalProperties": false,
+        "id": "QueryInfoReport"
+      },
+      "QueryInfoRow": {
+        "type": "object",
+        "properties": {
+          "rowId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "rowType": {
+            "type": "string",
+            "enum": [
+              "empty",
+              "header",
+              "metric",
+              "formula"
+            ]
+          },
+          "metricId": {
+            "type": "string"
+          },
+          "formula": {
+            "type": "string"
+          },
+          "parameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Parameter"
+            }
+          },
+          "query": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/QueryInfoQuery"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "records": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {}
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "rowId",
+          "name",
+          "rowType",
+          "metricId",
+          "formula",
+          "parameters"
+        ],
+        "additionalProperties": false,
+        "id": "QueryInfoRow"
+      },
+      "Parameter": {
+        "type": "object",
+        "properties": {
+          "apply_to": {
+            "type": "string"
+          },
+          "listen": {
+            "type": "string"
+          },
+          "fractions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Fraction"
+            }
+          }
+        },
+        "required": [
+          "apply_to",
+          "listen",
+          "fractions"
+        ],
+        "additionalProperties": false,
+        "id": "Parameter"
+      },
+      "Fraction": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/FractionControl"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "brick": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "parentBrick": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "operator": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "Or",
+                  "And"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "logicGroup": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "OR",
+                  "AND_NOT"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "StoreFraction",
+              "StringIsAnyValue",
+              "StringIsEqualTo",
+              "StringStartsWith",
+              "StringEndsWith",
+              "StringContains",
+              "StringIsLike",
+              "StringIsEmpty",
+              "StringIsNull",
+              "StringIsNotEqualTo",
+              "StringDoesNotStartWith",
+              "StringDoesNotEndWith",
+              "StringDoesNotContain",
+              "StringIsNotLike",
+              "StringIsNotEmpty",
+              "StringIsNotNull",
+              "NumberIsAnyValue",
+              "NumberIsEqualTo",
+              "NumberIsGreaterThan",
+              "NumberIsGreaterThanOrEqualTo",
+              "NumberIsLessThan",
+              "NumberIsLessThanOrEqualTo",
+              "NumberIsBetween",
+              "NumberIsNull",
+              "NumberIsNotEqualTo",
+              "NumberIsNotGreaterThan",
+              "NumberIsNotGreaterThanOrEqualTo",
+              "NumberIsNotLessThan",
+              "NumberIsNotLessThanOrEqualTo",
+              "NumberIsNotBetween",
+              "NumberIsNotNull",
+              "BooleanIsAnyValue",
+              "BooleanIsTrue",
+              "BooleanIsFalse",
+              "BooleanIsTruthy",
+              "BooleanIsFalsy",
+              "BooleanIsNull",
+              "BooleanIsNotTrue",
+              "BooleanIsNotFalse",
+              "BooleanIsNotTruthy",
+              "BooleanIsNotFalsy",
+              "BooleanIsNotNull",
+              "TsIsAnyValue",
+              "TsIsInLast",
+              "TsIsOnDay",
+              "TsIsOnWeek",
+              "TsIsOnMonth",
+              "TsIsOnQuarter",
+              "TsIsOnYear",
+              "TsIsInNext",
+              "TsIsAfter",
+              "TsIsStarting",
+              "TsIsBeginFor",
+              "TsIsBetween",
+              "TsIsBefore",
+              "TsIsThrough",
+              "TsIsOnHour",
+              "TsIsOnMinute",
+              "TsIsOnTimestamp",
+              "TsIsNull",
+              "TsIsNotInLast",
+              "TsIsNotOnDay",
+              "TsIsNotOnWeek",
+              "TsIsNotOnMonth",
+              "TsIsNotOnQuarter",
+              "TsIsNotOnYear",
+              "TsIsNotInNext",
+              "TsIsNotBeginFor",
+              "TsIsNotBetween",
+              "TsIsNotOnHour",
+              "TsIsNotOnMinute",
+              "TsIsNotOnTimestamp",
+              "TsIsNotNull",
+              "DayOfWeekIsAnyValue",
+              "DayOfWeekIs",
+              "DayOfWeekIsNull",
+              "DayOfWeekIsNot",
+              "DayOfWeekIsNotNull",
+              "DayOfWeekIndexIsAnyValue",
+              "DayOfWeekIndexIsEqualTo",
+              "DayOfWeekIndexIsNull",
+              "DayOfWeekIndexIsNotEqualTo",
+              "DayOfWeekIndexIsNotNull",
+              "MonthNameIsAnyValue",
+              "MonthNameIs",
+              "MonthNameIsNull",
+              "MonthNameIsNot",
+              "MonthNameIsNotNull",
+              "QuarterOfYearIsAnyValue",
+              "QuarterOfYearIs",
+              "QuarterOfYearIsNull",
+              "QuarterOfYearIsNot",
+              "QuarterOfYearIsNotNull",
+              "TsIsBeforeRelative",
+              "TsIsAfterRelative",
+              "YesnoIsAnyValue",
+              "YesnoIs"
+            ]
+          },
+          "storeFractionSubTypeOptions": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/FractionSubTypeOption"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "storeFractionSubType": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "storeFractionSubTypeLabel": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "storeFractionLogicGroupWithSubType": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "meta": {
+            "anyOf": [
+              {},
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "storeResult": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "stringValue": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "numberValue1": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "numberValue2": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "numberValues": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "numberBetweenOption": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "Inclusive",
+                  "LeftInclusive",
+                  "RightInclusive",
+                  "Exclusive"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "yesnoValue": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "Yes",
+                  "No"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "dayOfWeekValue": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                  "Sunday"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "dayOfWeekIndexValues": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "monthNameValue": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "January",
+                  "February",
+                  "March",
+                  "April",
+                  "May",
+                  "June",
+                  "July",
+                  "August",
+                  "September",
+                  "October",
+                  "November",
+                  "December"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "quarterOfYearValue": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "q1",
+                  "q2",
+                  "q3",
+                  "q4"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsDateYear": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsDateQuarter": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsDateMonth": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsDateDay": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsDateHour": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsDateMinute": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsDateToYear": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsDateToQuarter": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsDateToMonth": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsDateToDay": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsDateToHour": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsDateToMinute": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsForValue": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsForUnit": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "seconds",
+                  "minutes",
+                  "hours",
+                  "days",
+                  "weeks",
+                  "months",
+                  "quarters",
+                  "years"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsLastValue": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsLastUnit": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "seconds",
+                  "minutes",
+                  "hours",
+                  "days",
+                  "weeks",
+                  "months",
+                  "quarters",
+                  "years"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsLastCompleteOption": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "CompleteWithCurrent",
+                  "CompletePlusCurrent",
+                  "Complete"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsNextValue": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsNextUnit": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "seconds",
+                  "minutes",
+                  "hours",
+                  "days",
+                  "weeks",
+                  "months",
+                  "quarters",
+                  "years"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsMoment": {
+            "anyOf": [
+              {},
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsMomentType": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "Literal",
+                  "Today",
+                  "Yesterday",
+                  "Tomorrow",
+                  "This",
+                  "Last",
+                  "Next",
+                  "Ago",
+                  "FromNow",
+                  "Now",
+                  "Timestamp"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsMomentUnit": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "second",
+                  "minute",
+                  "hour",
+                  "day",
+                  "week",
+                  "month",
+                  "quarter",
+                  "year",
+                  "monday",
+                  "tuesday",
+                  "wednesday",
+                  "thursday",
+                  "friday",
+                  "saturday",
+                  "sunday"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsTimestampValue": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsMomentAgoFromNowQuantity": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsFromMoment": {
+            "anyOf": [
+              {},
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsFromMomentType": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "Literal",
+                  "Today",
+                  "Yesterday",
+                  "Tomorrow",
+                  "This",
+                  "Last",
+                  "Next",
+                  "Ago",
+                  "FromNow",
+                  "Now",
+                  "Timestamp"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsFromMomentUnit": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "second",
+                  "minute",
+                  "hour",
+                  "day",
+                  "week",
+                  "month",
+                  "quarter",
+                  "year",
+                  "monday",
+                  "tuesday",
+                  "wednesday",
+                  "thursday",
+                  "friday",
+                  "saturday",
+                  "sunday"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsFromTimestampValue": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsFromMomentAgoFromNowQuantity": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsToMoment": {
+            "anyOf": [
+              {},
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsToMomentType": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "Literal",
+                  "Today",
+                  "Yesterday",
+                  "Tomorrow",
+                  "This",
+                  "Last",
+                  "Next",
+                  "Ago",
+                  "FromNow",
+                  "Now",
+                  "Timestamp"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsToMomentUnit": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "second",
+                  "minute",
+                  "hour",
+                  "day",
+                  "week",
+                  "month",
+                  "quarter",
+                  "year",
+                  "monday",
+                  "tuesday",
+                  "wednesday",
+                  "thursday",
+                  "friday",
+                  "saturday",
+                  "sunday"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsToTimestampValue": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tsToMomentAgoFromNowQuantity": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "additionalProperties": false,
+        "id": "Fraction"
+      },
+      "FractionControl": {
+        "type": "object",
+        "properties": {
+          "options": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/FractionControlOption"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "value": {
+            "anyOf": [
+              {},
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "required": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "controlClass": {
+            "type": "string",
+            "enum": [
+              "list_input",
+              "input",
+              "switch",
+              "date_picker",
+              "selector"
+            ]
+          },
+          "isMetricsDate": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "controlClass"
+        ],
+        "additionalProperties": false,
+        "id": "FractionControl"
+      },
+      "FractionControlOption": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "value"
+        ],
+        "additionalProperties": false,
+        "id": "FractionControlOption"
+      },
+      "FractionSubTypeOption": {
+        "type": "object",
+        "properties": {
+          "logicGroup": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "OR",
+                  "AND_NOT"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "typeValue": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "typeValue",
+          "value"
+        ],
+        "additionalProperties": false,
+        "id": "FractionSubTypeOption"
+      },
+      "ValidateFilesRepo": {
+        "type": "object",
+        "properties": {
+          "orgId": {
+            "type": "string"
+          },
+          "projectId": {
+            "type": "string"
+          },
+          "repoId": {
+            "type": "string"
+          },
+          "currentBranchId": {
+            "type": "string"
+          },
+          "repoStatus": {
+            "type": "string",
+            "enum": [
+              "NeedCommit",
+              "NeedPull",
+              "NeedPush",
+              "Ok"
+            ]
+          },
+          "conflicts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidateFilesRepoConflict"
+            }
+          }
+        },
+        "required": [
+          "orgId",
+          "projectId",
+          "repoId",
+          "currentBranchId",
+          "repoStatus",
+          "conflicts"
+        ],
+        "additionalProperties": false,
+        "id": "ValidateFilesRepo"
+      },
+      "CombinedSchemaItem": {
+        "type": "object",
+        "properties": {
+          "connectionId": {
+            "type": "string"
+          },
+          "schemas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CombinedSchema"
+            }
+          },
+          "lastRefreshedTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "errorMessage": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "connectionId",
+          "schemas",
+          "lastRefreshedTs"
+        ],
+        "additionalProperties": false,
+        "id": "CombinedSchemaItem"
+      },
+      "CombinedSchema": {
+        "type": "object",
+        "properties": {
+          "schemaName": {
+            "type": "string"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tables": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CombinedSchemaTable"
+            }
+          }
+        },
+        "required": [
+          "schemaName",
+          "tables"
+        ],
+        "additionalProperties": false,
+        "id": "CombinedSchema"
+      },
+      "CombinedSchemaTable": {
+        "type": "object",
+        "properties": {
+          "tableName": {
+            "type": "string"
+          },
+          "tableType": {
+            "type": "string"
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CombinedSchemaColumn"
+            }
+          },
+          "indexes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RawSchemaIndex"
+            }
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "tableName",
+          "tableType",
+          "columns",
+          "indexes"
+        ],
+        "additionalProperties": false,
+        "id": "CombinedSchemaTable"
+      },
+      "CombinedSchemaColumn": {
+        "type": "object",
+        "properties": {
+          "columnName": {
+            "type": "string"
+          },
+          "dataType": {
+            "type": "string"
+          },
+          "isNullable": {
+            "type": "boolean"
+          },
+          "isPrimaryKey": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "isUnique": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "foreignKeys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RawSchemaForeignKey"
+            }
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "example": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "cacheUniqueValues": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "references": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ColumnCombinedReference"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "cachedColumn": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "projectId": {
+                    "type": "string"
+                  },
+                  "connectionId": {
+                    "type": "string"
+                  },
+                  "envId": {
+                    "type": "string"
+                  },
+                  "schemaName": {
+                    "type": "string"
+                  },
+                  "tableName": {
+                    "type": "string"
+                  },
+                  "columnName": {
+                    "type": "string"
+                  },
+                  "requestedByUserId": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "running",
+                      "completed",
+                      "error"
+                    ]
+                  },
+                  "errorMessage": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "startedTs": {
+                    "type": "number"
+                  },
+                  "completedTs": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "completedDurationMs": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "limit": {
+                    "type": "number"
+                  },
+                  "sampleSize": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "isLimitReached": {
+                    "anyOf": [
+                      {
+                        "type": "boolean"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "serverTs": {
+                    "type": "number"
+                  },
+                  "uniqueValuesCount": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "projectId",
+                  "connectionId",
+                  "envId",
+                  "schemaName",
+                  "tableName",
+                  "columnName",
+                  "status",
+                  "startedTs",
+                  "limit",
+                  "serverTs"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "columnName",
+          "dataType",
+          "isNullable",
+          "foreignKeys"
+        ],
+        "additionalProperties": false,
+        "id": "CombinedSchemaColumn"
+      },
+      "RawSchemaForeignKey": {
+        "type": "object",
+        "properties": {
+          "constraintName": {
+            "type": "string"
+          },
+          "referencedSchemaName": {
+            "type": "string"
+          },
+          "referencedTableName": {
+            "type": "string"
+          },
+          "referencedColumnName": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "constraintName",
+          "referencedSchemaName",
+          "referencedTableName",
+          "referencedColumnName"
+        ],
+        "additionalProperties": false,
+        "id": "RawSchemaForeignKey"
+      },
+      "ColumnCombinedReference": {
+        "type": "object",
+        "properties": {
+          "relationshipType": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "one_to_one",
+                  "one_to_many",
+                  "many_to_one",
+                  "many_to_many"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "isForeignKey": {
+            "type": "boolean"
+          },
+          "referencedSchemaName": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "referencedTableName": {
+            "type": "string"
+          },
+          "referencedColumnName": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "isForeignKey",
+          "referencedTableName",
+          "referencedColumnName"
+        ],
+        "additionalProperties": false,
+        "id": "ColumnCombinedReference"
+      },
+      "RawSchemaIndex": {
+        "type": "object",
+        "properties": {
+          "indexName": {
+            "type": "string"
+          },
+          "indexColumns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isUnique": {
+            "type": "boolean"
+          },
+          "isPrimaryKey": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "indexName",
+          "indexColumns",
+          "isUnique",
+          "isPrimaryKey"
+        ],
+        "additionalProperties": false,
+        "id": "RawSchemaIndex"
+      },
+      "ConnectionItem": {
+        "type": "object",
+        "properties": {
+          "connectionId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "PostgreSQL",
+              "MySQL",
+              "SnowFlake",
+              "BigQuery",
+              "Databricks",
+              "MotherDuck",
+              "Presto",
+              "Trino",
+              "GoogleApi",
+              "Api"
+            ]
+          },
+          "baseUrl": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "headerKeys": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "googleAuthScopes": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "connectionId",
+          "type"
+        ],
+        "additionalProperties": false,
+        "id": "ConnectionItem"
+      },
+      "SkillItem": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "content"
+        ],
+        "additionalProperties": false,
+        "id": "SkillItem"
+      }
+    }
+  }
+}

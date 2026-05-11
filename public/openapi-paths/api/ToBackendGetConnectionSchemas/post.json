@@ -1,0 +1,547 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "mprove backend",
+    "description": "",
+    "version": "12.0.11",
+    "contact": {}
+  },
+  "paths": {
+    "/api/ToBackendGetConnectionSchemas": {
+      "post": {
+        "operationId": "GetConnectionSchemasController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendGetConnectionSchemasRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendGetConnectionSchemasResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ToBackendGetConnectionSchemasRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetConnectionSchemasRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetConnectionSchemasRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetConnectionSchemasResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetConnectionSchemasResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetConnectionSchemasResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetConnectionSchemasRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendGetConnectionSchemas"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendGetConnectionSchemasRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "envId": {
+            "type": "string"
+          },
+          "repoId": {
+            "type": "string"
+          },
+          "branchId": {
+            "type": "string"
+          },
+          "isRefreshExistingCache": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "projectId",
+          "envId",
+          "repoId",
+          "branchId",
+          "isRefreshExistingCache"
+        ]
+      },
+      "ToBackendGetConnectionSchemasResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendGetConnectionSchemas"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendGetConnectionSchemasResponsePayload": {
+        "type": "object",
+        "properties": {
+          "userMember": {
+            "$ref": "#/components/schemas/Member"
+          },
+          "combinedSchemaItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CombinedSchemaItem"
+            }
+          }
+        },
+        "required": [
+          "userMember",
+          "combinedSchemaItems"
+        ]
+      },
+      "Member": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "memberId": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "alias": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "avatarSmall": {
+            "type": "string"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isAdmin": {
+            "type": "boolean"
+          },
+          "isEditor": {
+            "type": "boolean"
+          },
+          "isExplorer": {
+            "type": "boolean"
+          },
+          "serverTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "projectId",
+          "memberId",
+          "email",
+          "alias",
+          "firstName",
+          "lastName",
+          "fullName",
+          "avatarSmall",
+          "roles",
+          "isAdmin",
+          "isEditor",
+          "isExplorer",
+          "serverTs"
+        ]
+      },
+      "CombinedSchemaItem": {
+        "type": "object",
+        "properties": {
+          "connectionId": {
+            "type": "string"
+          },
+          "schemas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CombinedSchema"
+            }
+          },
+          "lastRefreshedTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "connectionId",
+          "schemas",
+          "lastRefreshedTs"
+        ]
+      },
+      "CombinedSchema": {
+        "type": "object",
+        "properties": {
+          "schemaName": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "tables": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CombinedSchemaTable"
+            }
+          }
+        },
+        "required": [
+          "schemaName",
+          "tables"
+        ]
+      },
+      "CombinedSchemaTable": {
+        "type": "object",
+        "properties": {
+          "tableName": {
+            "type": "string"
+          },
+          "tableType": {
+            "type": "string"
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CombinedSchemaColumn"
+            }
+          },
+          "indexes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RawSchemaIndex"
+            }
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "tableName",
+          "tableType",
+          "columns",
+          "indexes"
+        ]
+      },
+      "CombinedSchemaColumn": {
+        "type": "object",
+        "properties": {
+          "columnName": {
+            "type": "string"
+          },
+          "dataType": {
+            "type": "string"
+          },
+          "isNullable": {
+            "type": "boolean"
+          },
+          "isPrimaryKey": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isUnique": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "foreignKeys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RawSchemaForeignKey"
+            }
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "example": {
+            "type": "string",
+            "nullable": true
+          },
+          "cacheUniqueValues": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "references": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ColumnCombinedReference"
+            },
+            "nullable": true
+          },
+          "cachedColumn": {
+            "type": "object",
+            "properties": {
+              "projectId": {
+                "type": "string"
+              },
+              "connectionId": {
+                "type": "string"
+              },
+              "envId": {
+                "type": "string"
+              },
+              "schemaName": {
+                "type": "string"
+              },
+              "tableName": {
+                "type": "string"
+              },
+              "columnName": {
+                "type": "string"
+              },
+              "requestedByUserId": {
+                "type": "string",
+                "nullable": true
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "running",
+                  "completed",
+                  "error"
+                ]
+              },
+              "errorMessage": {
+                "type": "string",
+                "nullable": true
+              },
+              "startedTs": {
+                "type": "number"
+              },
+              "completedTs": {
+                "type": "number",
+                "nullable": true
+              },
+              "completedDurationMs": {
+                "type": "number",
+                "nullable": true
+              },
+              "limit": {
+                "type": "number"
+              },
+              "sampleSize": {
+                "type": "number",
+                "nullable": true
+              },
+              "isLimitReached": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "serverTs": {
+                "type": "number"
+              },
+              "uniqueValuesCount": {
+                "type": "number",
+                "nullable": true
+              }
+            },
+            "required": [
+              "projectId",
+              "connectionId",
+              "envId",
+              "schemaName",
+              "tableName",
+              "columnName",
+              "status",
+              "startedTs",
+              "limit",
+              "serverTs"
+            ],
+            "nullable": true
+          }
+        },
+        "required": [
+          "columnName",
+          "dataType",
+          "isNullable",
+          "foreignKeys"
+        ]
+      },
+      "RawSchemaIndex": {
+        "type": "object",
+        "properties": {
+          "indexName": {
+            "type": "string"
+          },
+          "indexColumns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isUnique": {
+            "type": "boolean"
+          },
+          "isPrimaryKey": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "indexName",
+          "indexColumns",
+          "isUnique",
+          "isPrimaryKey"
+        ]
+      },
+      "RawSchemaForeignKey": {
+        "type": "object",
+        "properties": {
+          "constraintName": {
+            "type": "string"
+          },
+          "referencedSchemaName": {
+            "type": "string"
+          },
+          "referencedTableName": {
+            "type": "string"
+          },
+          "referencedColumnName": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "constraintName",
+          "referencedSchemaName",
+          "referencedTableName",
+          "referencedColumnName"
+        ]
+      },
+      "ColumnCombinedReference": {
+        "type": "object",
+        "properties": {
+          "relationshipType": {
+            "type": "string",
+            "enum": [
+              "one_to_one",
+              "one_to_many",
+              "many_to_one",
+              "many_to_many"
+            ],
+            "nullable": true
+          },
+          "isForeignKey": {
+            "type": "boolean"
+          },
+          "referencedSchemaName": {
+            "type": "string",
+            "nullable": true
+          },
+          "referencedTableName": {
+            "type": "string"
+          },
+          "referencedColumnName": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "isForeignKey",
+          "referencedTableName",
+          "referencedColumnName"
+        ]
+      }
+    }
+  }
+}

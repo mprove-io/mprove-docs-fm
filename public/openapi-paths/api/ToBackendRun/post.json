@@ -1,0 +1,423 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "mprove backend",
+    "description": "",
+    "version": "12.0.11",
+    "contact": {}
+  },
+  "paths": {
+    "/api/ToBackendRun": {
+      "post": {
+        "operationId": "RunController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendRunRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendRunResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ToBackendRunRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendRunRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendRunRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendRunResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendRunResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendRunResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendRunRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendRun"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendRunRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "repoId": {
+            "type": "string"
+          },
+          "branchId": {
+            "type": "string"
+          },
+          "envId": {
+            "type": "string"
+          },
+          "concurrency": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "wait": {
+            "type": "boolean"
+          },
+          "sleep": {
+            "type": "number",
+            "nullable": true
+          },
+          "dashboardIds": {
+            "type": "string",
+            "nullable": true
+          },
+          "chartIds": {
+            "type": "string",
+            "nullable": true
+          },
+          "noDashboards": {
+            "type": "boolean"
+          },
+          "noCharts": {
+            "type": "boolean"
+          },
+          "getDashboards": {
+            "type": "boolean"
+          },
+          "getCharts": {
+            "type": "boolean"
+          },
+          "reportIds": {
+            "type": "string",
+            "nullable": true
+          },
+          "noReports": {
+            "type": "boolean"
+          },
+          "getReports": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "projectId",
+          "repoId",
+          "branchId",
+          "envId",
+          "wait",
+          "noDashboards",
+          "noCharts",
+          "getDashboards",
+          "getCharts",
+          "noReports",
+          "getReports"
+        ]
+      },
+      "ToBackendRunResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendRun"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendRunResponsePayload": {
+        "type": "object",
+        "properties": {
+          "charts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RunChart"
+            }
+          },
+          "dashboards": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RunDashboard"
+            }
+          },
+          "errorCharts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RunChart"
+            }
+          },
+          "errorDashboards": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RunDashboard"
+            }
+          },
+          "reports": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RunReport"
+            }
+          },
+          "errorReports": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RunReport"
+            }
+          },
+          "queriesStats": {
+            "$ref": "#/components/schemas/McliQueriesStats"
+          }
+        },
+        "required": [
+          "charts",
+          "dashboards",
+          "errorCharts",
+          "errorDashboards",
+          "reports",
+          "errorReports",
+          "queriesStats"
+        ]
+      },
+      "RunChart": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "chartId": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "query": {
+            "$ref": "#/components/schemas/RunQuery"
+          }
+        },
+        "required": [
+          "title",
+          "chartId",
+          "url",
+          "query"
+        ]
+      },
+      "RunDashboard": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "dashboardId": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "tiles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RunTile"
+            }
+          }
+        },
+        "required": [
+          "title",
+          "dashboardId",
+          "url",
+          "tiles"
+        ]
+      },
+      "RunReport": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "reportId": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RunReportRow"
+            }
+          }
+        },
+        "required": [
+          "title",
+          "reportId",
+          "url",
+          "rows"
+        ]
+      },
+      "McliQueriesStats": {
+        "type": "object",
+        "properties": {
+          "started": {
+            "type": "number"
+          },
+          "running": {
+            "type": "number"
+          },
+          "completed": {
+            "type": "number"
+          },
+          "error": {
+            "type": "number"
+          },
+          "canceled": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "started",
+          "running",
+          "completed",
+          "error",
+          "canceled"
+        ]
+      },
+      "RunQuery": {
+        "type": "object",
+        "properties": {
+          "queryId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "New",
+              "Running",
+              "Canceled",
+              "Completed",
+              "Error"
+            ]
+          },
+          "lastErrorMessage": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "queryId",
+          "status"
+        ]
+      },
+      "RunTile": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "query": {
+            "$ref": "#/components/schemas/RunQuery"
+          }
+        },
+        "required": [
+          "title",
+          "query"
+        ]
+      },
+      "RunReportRow": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "query": {
+            "$ref": "#/components/schemas/RunQuery"
+          }
+        },
+        "required": [
+          "title",
+          "query"
+        ]
+      }
+    }
+  }
+}

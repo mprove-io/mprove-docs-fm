@@ -1,0 +1,283 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "mprove backend",
+    "description": "",
+    "version": "12.0.11",
+    "contact": {}
+  },
+  "paths": {
+    "/api/ToBackendViewCachedColumn": {
+      "post": {
+        "operationId": "ViewCachedColumnController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendViewCachedColumnRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendViewCachedColumnResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ToBackendViewCachedColumnRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendViewCachedColumnRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendViewCachedColumnRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendViewCachedColumnResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendViewCachedColumnResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendViewCachedColumnResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendViewCachedColumnRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendViewCachedColumn"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendViewCachedColumnRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "envId": {
+            "type": "string"
+          },
+          "connectionId": {
+            "type": "string"
+          },
+          "schemaName": {
+            "type": "string"
+          },
+          "tableName": {
+            "type": "string"
+          },
+          "columnName": {
+            "type": "string"
+          },
+          "offset": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "projectId",
+          "envId",
+          "connectionId",
+          "schemaName",
+          "tableName",
+          "columnName",
+          "offset"
+        ]
+      },
+      "ToBackendViewCachedColumnResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendViewCachedColumn"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendViewCachedColumnResponsePayload": {
+        "type": "object",
+        "properties": {
+          "cachedColumn": {
+            "type": "object",
+            "properties": {
+              "projectId": {
+                "type": "string"
+              },
+              "connectionId": {
+                "type": "string"
+              },
+              "envId": {
+                "type": "string"
+              },
+              "schemaName": {
+                "type": "string"
+              },
+              "tableName": {
+                "type": "string"
+              },
+              "columnName": {
+                "type": "string"
+              },
+              "requestedByUserId": {
+                "type": "string",
+                "nullable": true
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "running",
+                  "completed",
+                  "error"
+                ]
+              },
+              "errorMessage": {
+                "type": "string",
+                "nullable": true
+              },
+              "startedTs": {
+                "type": "number"
+              },
+              "completedTs": {
+                "type": "number",
+                "nullable": true
+              },
+              "completedDurationMs": {
+                "type": "number",
+                "nullable": true
+              },
+              "limit": {
+                "type": "number"
+              },
+              "sampleSize": {
+                "type": "number",
+                "nullable": true
+              },
+              "isLimitReached": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "serverTs": {
+                "type": "number"
+              },
+              "uniqueValuesCount": {
+                "type": "number",
+                "nullable": true
+              }
+            },
+            "required": [
+              "projectId",
+              "connectionId",
+              "envId",
+              "schemaName",
+              "tableName",
+              "columnName",
+              "status",
+              "startedTs",
+              "limit",
+              "serverTs"
+            ],
+            "nullable": true
+          },
+          "columnNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "columnNames",
+          "rows"
+        ]
+      }
+    }
+  }
+}

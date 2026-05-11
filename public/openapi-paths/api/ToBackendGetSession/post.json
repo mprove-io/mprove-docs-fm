@@ -1,0 +1,428 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "mprove backend",
+    "description": "",
+    "version": "12.0.11",
+    "contact": {}
+  },
+  "paths": {
+    "/api/ToBackendGetSession": {
+      "post": {
+        "operationId": "GetSessionController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendGetSessionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendGetSessionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ToBackendGetSessionRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetSessionRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetSessionRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetSessionResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetSessionResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetSessionResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetSessionRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendGetSession"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendGetSessionRequestPayload": {
+        "type": "object",
+        "properties": {
+          "sessionId": {
+            "type": "string"
+          },
+          "isFetchFromOpencode": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "sessionId",
+          "isFetchFromOpencode"
+        ]
+      },
+      "ToBackendGetSessionResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendGetSession"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendGetSessionResponsePayload": {
+        "type": "object",
+        "properties": {
+          "session": {
+            "$ref": "#/components/schemas/SessionApi"
+          },
+          "ocSession": {
+            "$ref": "#/components/schemas/OcSessionApi"
+          },
+          "lastEventIndex": {
+            "type": "number"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SessionMessageApi"
+            }
+          },
+          "parts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SessionPartApi"
+            }
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SessionEventApi"
+            }
+          },
+          "sessions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SessionApi"
+            }
+          },
+          "hasMoreArchived": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "session",
+          "ocSession",
+          "lastEventIndex",
+          "messages",
+          "parts",
+          "events",
+          "sessions",
+          "hasMoreArchived"
+        ]
+      },
+      "SessionApi": {
+        "type": "object",
+        "properties": {
+          "sessionId": {
+            "type": "string"
+          },
+          "opencodeSessionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Explorer",
+              "Editor"
+            ]
+          },
+          "provider": {
+            "type": "string"
+          },
+          "agent": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastMessageProviderModel": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastMessageVariant": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string"
+          },
+          "archiveReason": {
+            "type": "string",
+            "enum": [
+              "User",
+              "Expire",
+              "Commit"
+            ],
+            "nullable": true
+          },
+          "pauseReason": {
+            "type": "string",
+            "enum": [
+              "User",
+              "Idle",
+              "Safe",
+              "External"
+            ],
+            "nullable": true
+          },
+          "repoId": {
+            "type": "string"
+          },
+          "branchId": {
+            "type": "string"
+          },
+          "initialBranch": {
+            "type": "string",
+            "nullable": true
+          },
+          "envId": {
+            "type": "string",
+            "nullable": true
+          },
+          "initialCommit": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "lastActivityTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "firstMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "useCodex": {
+            "type": "boolean"
+          },
+          "closedExplorerTabIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "required": [
+          "sessionId",
+          "type",
+          "provider",
+          "agent",
+          "status",
+          "repoId",
+          "branchId",
+          "createdTs",
+          "lastActivityTs",
+          "useCodex"
+        ]
+      },
+      "OcSessionApi": {
+        "type": "object",
+        "properties": {
+          "sessionId": {
+            "type": "string"
+          },
+          "todos": {
+            "type": "array",
+            "items": {},
+            "nullable": true
+          },
+          "questions": {
+            "type": "array",
+            "items": {},
+            "nullable": true
+          },
+          "permissions": {
+            "type": "array",
+            "items": {},
+            "nullable": true
+          },
+          "ocSessionStatus": {
+            "nullable": true
+          },
+          "lastSessionError": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {},
+            "nullable": true
+          },
+          "isLastErrorRecovered": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "required": [
+          "sessionId"
+        ]
+      },
+      "SessionMessageApi": {
+        "type": "object",
+        "properties": {
+          "messageId": {
+            "type": "string"
+          },
+          "sessionId": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "ocMessage": {}
+        },
+        "required": [
+          "messageId",
+          "sessionId",
+          "role",
+          "ocMessage"
+        ]
+      },
+      "SessionPartApi": {
+        "type": "object",
+        "properties": {
+          "partId": {
+            "type": "string"
+          },
+          "messageId": {
+            "type": "string"
+          },
+          "sessionId": {
+            "type": "string"
+          },
+          "ocPart": {}
+        },
+        "required": [
+          "partId",
+          "messageId",
+          "sessionId",
+          "ocPart"
+        ]
+      },
+      "SessionEventApi": {
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "string"
+          },
+          "eventIndex": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "eventType": {
+            "type": "string"
+          },
+          "ocEvent": {}
+        },
+        "required": [
+          "eventId",
+          "eventIndex",
+          "eventType",
+          "ocEvent"
+        ]
+      }
+    }
+  }
+}

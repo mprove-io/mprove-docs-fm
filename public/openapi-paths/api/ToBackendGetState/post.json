@@ -1,0 +1,557 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "mprove backend",
+    "description": "",
+    "version": "12.0.11",
+    "contact": {}
+  },
+  "paths": {
+    "/api/ToBackendGetState": {
+      "post": {
+        "operationId": "GetStateController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendGetStateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendGetStateResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ToBackendGetStateRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetStateRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetStateRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetStateResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetStateResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetStateResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetStateRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendGetState"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendGetStateRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "repoId": {
+            "type": "string"
+          },
+          "branchId": {
+            "type": "string"
+          },
+          "envId": {
+            "type": "string"
+          },
+          "isFetch": {
+            "type": "boolean"
+          },
+          "getErrors": {
+            "type": "boolean"
+          },
+          "getRepo": {
+            "type": "boolean"
+          },
+          "getRepoNodes": {
+            "type": "boolean"
+          },
+          "getModels": {
+            "type": "boolean"
+          },
+          "getDashboards": {
+            "type": "boolean"
+          },
+          "getCharts": {
+            "type": "boolean"
+          },
+          "getMetrics": {
+            "type": "boolean"
+          },
+          "getReports": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "projectId",
+          "repoId",
+          "branchId",
+          "envId",
+          "isFetch",
+          "getErrors",
+          "getRepo",
+          "getRepoNodes",
+          "getModels",
+          "getDashboards",
+          "getCharts",
+          "getMetrics",
+          "getReports"
+        ]
+      },
+      "ToBackendGetStateResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendGetState"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendGetStateResponsePayload": {
+        "type": "object",
+        "properties": {
+          "needValidate": {
+            "type": "boolean"
+          },
+          "structId": {
+            "type": "string"
+          },
+          "validationErrorsTotal": {
+            "type": "number"
+          },
+          "modelsTotal": {
+            "type": "number"
+          },
+          "chartsTotal": {
+            "type": "number"
+          },
+          "dashboardsTotal": {
+            "type": "number"
+          },
+          "reportsTotal": {
+            "type": "number"
+          },
+          "builderUrl": {
+            "type": "string"
+          },
+          "validationErrors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MproveValidationError"
+            }
+          },
+          "modelItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StateModelItem"
+            }
+          },
+          "chartItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StateChartItem"
+            }
+          },
+          "dashboardItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StateDashboardItem"
+            }
+          },
+          "reportItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StateReportItem"
+            }
+          },
+          "metricItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StateMetricItem"
+            }
+          },
+          "repo": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Repo"
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "required": [
+          "needValidate",
+          "structId",
+          "validationErrorsTotal",
+          "modelsTotal",
+          "chartsTotal",
+          "dashboardsTotal",
+          "reportsTotal",
+          "builderUrl",
+          "validationErrors",
+          "modelItems",
+          "chartItems",
+          "dashboardItems",
+          "reportItems",
+          "metricItems"
+        ]
+      },
+      "MproveValidationError": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MproveValidationErrorLine"
+            }
+          }
+        },
+        "required": [
+          "title",
+          "message",
+          "lines"
+        ]
+      },
+      "StateModelItem": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "modelId",
+          "url"
+        ]
+      },
+      "StateChartItem": {
+        "type": "object",
+        "properties": {
+          "chartId": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "chartId",
+          "url"
+        ]
+      },
+      "StateDashboardItem": {
+        "type": "object",
+        "properties": {
+          "dashboardId": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "dashboardId",
+          "url"
+        ]
+      },
+      "StateReportItem": {
+        "type": "object",
+        "properties": {
+          "reportId": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reportId",
+          "url"
+        ]
+      },
+      "StateMetricItem": {
+        "type": "object",
+        "properties": {
+          "metricId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "metricId",
+          "name"
+        ]
+      },
+      "Repo": {
+        "type": "object",
+        "properties": {
+          "orgId": {
+            "type": "string"
+          },
+          "projectId": {
+            "type": "string"
+          },
+          "repoId": {
+            "type": "string"
+          },
+          "currentBranchId": {
+            "type": "string"
+          },
+          "repoStatus": {
+            "type": "string",
+            "enum": [
+              "NeedCommit",
+              "NeedPull",
+              "NeedPush",
+              "Ok"
+            ]
+          },
+          "conflicts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiskFileLine"
+            }
+          },
+          "nodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiskCatalogNode"
+            }
+          },
+          "changesToCommit": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiskFileChange"
+            }
+          },
+          "changesToPush": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiskFileChange"
+            }
+          }
+        },
+        "required": [
+          "orgId",
+          "projectId",
+          "repoId",
+          "currentBranchId",
+          "repoStatus",
+          "conflicts",
+          "nodes",
+          "changesToCommit",
+          "changesToPush"
+        ]
+      },
+      "MproveValidationErrorLine": {
+        "type": "object",
+        "properties": {
+          "filePath": {
+            "type": "string"
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "lineNumber": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "filePath",
+          "fileName",
+          "lineNumber"
+        ]
+      },
+      "DiskFileLine": {
+        "type": "object",
+        "properties": {
+          "fileId": {
+            "type": "string"
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "lineNumber": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "fileId",
+          "fileName",
+          "lineNumber"
+        ]
+      },
+      "DiskCatalogNode": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "isFolder": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "fileId": {
+            "type": "string",
+            "nullable": true
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiskCatalogNode"
+            },
+            "nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "isFolder",
+          "name"
+        ]
+      },
+      "DiskFileChange": {
+        "type": "object",
+        "properties": {
+          "fileName": {
+            "type": "string"
+          },
+          "fileId": {
+            "type": "string"
+          },
+          "parentPath": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "New",
+              "Deleted",
+              "Modified",
+              "Conflicted",
+              "TypeChange",
+              "Renamed",
+              "Ignored",
+              "Unmodified",
+              "Copied",
+              "Untracked",
+              "Unreadable"
+            ]
+          },
+          "content": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "fileName",
+          "fileId",
+          "parentPath",
+          "status"
+        ]
+      }
+    }
+  }
+}

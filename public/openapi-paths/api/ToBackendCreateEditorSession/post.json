@@ -1,0 +1,220 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "mprove backend",
+    "description": "",
+    "version": "12.0.11",
+    "contact": {}
+  },
+  "paths": {
+    "/api/ToBackendCreateEditorSession": {
+      "post": {
+        "operationId": "CreateEditorSessionController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendCreateEditorSessionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendCreateEditorSessionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ToBackendCreateEditorSessionRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendCreateEditorSessionRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendCreateEditorSessionRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendCreateEditorSessionResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendCreateEditorSessionResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendCreateEditorSessionResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendCreateEditorSessionRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendCreateEditorSession"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendCreateEditorSessionRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "sandboxType": {
+            "type": "string",
+            "enum": [
+              "E2B"
+            ]
+          },
+          "provider": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "agent": {
+            "type": "string"
+          },
+          "variant": {
+            "type": "string"
+          },
+          "envId": {
+            "type": "string"
+          },
+          "initialBranch": {
+            "type": "string"
+          },
+          "firstMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "messageId": {
+            "type": "string"
+          },
+          "partId": {
+            "type": "string"
+          },
+          "useCodex": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "projectId",
+          "sandboxType",
+          "provider",
+          "model",
+          "agent",
+          "variant",
+          "envId",
+          "initialBranch",
+          "messageId",
+          "partId",
+          "useCodex"
+        ]
+      },
+      "ToBackendCreateEditorSessionResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendCreateEditorSession"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendCreateEditorSessionResponsePayload": {
+        "type": "object",
+        "properties": {
+          "sessionId": {
+            "type": "string"
+          },
+          "repoId": {
+            "type": "string"
+          },
+          "branchId": {
+            "type": "string"
+          },
+          "envId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "sessionId",
+          "repoId",
+          "branchId",
+          "envId"
+        ]
+      }
+    }
+  }
+}

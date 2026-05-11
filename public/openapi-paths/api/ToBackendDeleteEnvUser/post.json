@@ -1,0 +1,358 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "mprove backend",
+    "description": "",
+    "version": "12.0.11",
+    "contact": {}
+  },
+  "paths": {
+    "/api/ToBackendDeleteEnvUser": {
+      "post": {
+        "operationId": "DeleteEnvUserController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendDeleteEnvUserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendDeleteEnvUserResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ToBackendDeleteEnvUserRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendDeleteEnvUserRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendDeleteEnvUserRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendDeleteEnvUserResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendDeleteEnvUserResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendDeleteEnvUserResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendDeleteEnvUserRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendDeleteEnvUser"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendDeleteEnvUserRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "envId": {
+            "type": "string"
+          },
+          "envUserId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "projectId",
+          "envId",
+          "envUserId"
+        ]
+      },
+      "ToBackendDeleteEnvUserResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendDeleteEnvUser"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendDeleteEnvUserResponsePayload": {
+        "type": "object",
+        "properties": {
+          "userMember": {
+            "$ref": "#/components/schemas/Member"
+          },
+          "envs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Env"
+            }
+          }
+        },
+        "required": [
+          "userMember",
+          "envs"
+        ]
+      },
+      "Member": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "memberId": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "alias": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "avatarSmall": {
+            "type": "string"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isAdmin": {
+            "type": "boolean"
+          },
+          "isEditor": {
+            "type": "boolean"
+          },
+          "isExplorer": {
+            "type": "boolean"
+          },
+          "serverTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "projectId",
+          "memberId",
+          "email",
+          "alias",
+          "firstName",
+          "lastName",
+          "fullName",
+          "avatarSmall",
+          "roles",
+          "isAdmin",
+          "isEditor",
+          "isExplorer",
+          "serverTs"
+        ]
+      },
+      "Env": {
+        "type": "object",
+        "properties": {
+          "envId": {
+            "type": "string"
+          },
+          "projectId": {
+            "type": "string"
+          },
+          "envUsers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EnvUser"
+            }
+          },
+          "isFallbackToProdConnections": {
+            "type": "boolean"
+          },
+          "isFallbackToProdVariables": {
+            "type": "boolean"
+          },
+          "useProdCache": {
+            "type": "boolean"
+          },
+          "envConnectionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "envConnectionIdsWithFallback": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "fallbackConnectionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "evs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Ev"
+            }
+          },
+          "evsWithFallback": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Ev"
+            }
+          },
+          "fallbackEvIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "envId",
+          "projectId",
+          "envUsers",
+          "isFallbackToProdConnections",
+          "isFallbackToProdVariables",
+          "useProdCache",
+          "envConnectionIds",
+          "envConnectionIdsWithFallback",
+          "fallbackConnectionIds",
+          "evs",
+          "evsWithFallback",
+          "fallbackEvIds"
+        ]
+      },
+      "EnvUser": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "alias": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "userId",
+          "alias",
+          "firstName",
+          "lastName",
+          "fullName"
+        ]
+      },
+      "Ev": {
+        "type": "object",
+        "properties": {
+          "evId": {
+            "type": "string"
+          },
+          "val": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "evId",
+          "val"
+        ]
+      }
+    }
+  }
+}

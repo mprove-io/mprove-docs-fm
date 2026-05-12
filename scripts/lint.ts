@@ -4,23 +4,48 @@ import {
   scanURLs,
   validateFiles,
 } from 'next-validate-link';
-import type { InferPageType } from 'fumadocs-core/source';
-import { isMdxPageData, source } from '@/lib/source';
+import { isMcpMdxPageData, mcpDocsSource } from '@/lib/mcp-source';
+import {
+  cliSource,
+  docsSource,
+  isMdxPageData,
+  skillsSource
+} from '@/lib/source';
+
+const pageSources = [
+  {
+    route: 'content/docs/[[...slug]]',
+    source: docsSource
+  },
+  {
+    route: 'content/cli/[[...slug]]',
+    source: cliSource
+  },
+  {
+    route: 'content/skills/[[...slug]]',
+    source: skillsSource
+  },
+  {
+    route: 'content/mcp/[[...slug]]',
+    source: mcpDocsSource
+  }
+];
 
 async function checkLinks() {
   const scanned = await scanURLs({
     // pick a preset for your React framework
     preset: 'next',
-    populate: {
-      'docs/[[...slug]]': source.getPages().map((page) => {
-        return {
+    populate: Object.fromEntries(
+      pageSources.map(({ route, source }) => [
+        route,
+        source.getPages().map(page => ({
           value: {
-            slug: page.slugs,
+            slug: page.slugs
           },
-          hashes: getHeadings(page),
-        };
-      }),
-    },
+          hashes: getHeadings(page)
+        }))
+      ])
+    )
   });
 
   printErrors(
@@ -35,26 +60,26 @@ async function checkLinks() {
       // check relative paths
       checkRelativePaths: 'as-url',
     }),
-    true,
+    true
   );
 }
 
-function getHeadings({ data }: InferPageType<typeof source>): string[] {
-  if (!isMdxPageData(data)) {
+function getHeadings({ data }: { data: unknown }): string[] {
+  if (!isLinkCheckableMdxPageData(data)) {
     return [];
   }
 
   if (!data.toc) {
-    return []; 
+    return [];
   }
 
-  return data.toc.map((item: { url: string }) => item.url.slice(1));
+  return data.toc.map(item => item.url.slice(1));
 }
 
 function getFiles() {
-  const promises = source.getPages().map(
-    async (page): Promise<FileObject | null> => {
-      if (!page.absolutePath || !isMdxPageData(page.data)) {
+  const promises = pageSources.flatMap(({ source }) =>
+    source.getPages().map(async (page): Promise<FileObject | null> => {
+      if (!page.absolutePath || !isLinkCheckableMdxPageData(page.data)) {
         return null;
       }
 
@@ -62,14 +87,25 @@ function getFiles() {
         path: page.absolutePath,
         content: await page.data.getText('raw'),
         url: page.url,
-        data: page.data,
+        data: page.data
       };
-    },
+    })
   );
 
   return Promise.all(promises).then((files) =>
-    files.filter((file): file is FileObject => file !== null),
+    files.filter((file): file is FileObject => file !== null)
   );
+}
+
+type LinkCheckableMdxPageData = {
+  getText: (format: 'raw') => Promise<string>;
+  toc?: Array<{ url: string }>;
+};
+
+function isLinkCheckableMdxPageData(
+  data: unknown
+): data is LinkCheckableMdxPageData {
+  return isMdxPageData(data) || isMcpMdxPageData(data);
 }
 
 void checkLinks();

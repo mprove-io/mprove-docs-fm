@@ -2,7 +2,7 @@
   "title": "CLI",
   "pages": [
     "install-cli",
-    "configuration",
+    "cli-configuration",
     "---Main Commands---",
     "main-commands/sync",
     "main-commands/get-connections-list",

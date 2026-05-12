@@ -95,11 +95,13 @@
   font-weight: 500;
 }
 
-#nd-sidebar [data-active="true"]::before {
+#nd-sidebar [data-active="true"]::before,
+#nd-sidebar-mobile [data-active="true"]::before {
   content: none !important;
 }
 
-#nd-sidebar [class*="before:bg-fd-border"]::before {
+#nd-sidebar [class*="before:bg-fd-border"]::before,
+#nd-sidebar-mobile [class*="before:bg-fd-border"]::before {
   content: none !important;
 }
 

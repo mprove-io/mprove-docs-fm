@@ -47,6 +47,19 @@ export const skills = defineDocs({
   }
 });
 
+export const mcpDocs = defineDocs({
+  dir: 'content/mcp',
+  docs: {
+    schema: frontmatterSchema,
+    postprocess: {
+      includeProcessedMarkdown: true
+    }
+  },
+  meta: {
+    schema: metaSchema
+  }
+});
+
 export default defineConfig({
   mdxOptions: {
     // MDX options

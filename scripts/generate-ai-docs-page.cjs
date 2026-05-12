@@ -4,6 +4,7 @@ const path = require('node:path');
 const docsDir = path.join(process.cwd(), 'content', 'docs');
 const cliDir = path.join(process.cwd(), 'content', 'cli');
 const skillsDir = path.join(process.cwd(), 'content', 'skills');
+const mcpDir = path.join(process.cwd(), 'content', 'mcp');
 const outputPath = path.join(docsDir, 'docs-for-ai.mdx');
 const outputRelativePath = toPosix(path.relative(process.cwd(), outputPath));
 
@@ -15,9 +16,11 @@ async function main() {
 
   const cliPages = await collectMdxPagesInDir(cliDir);
   const skillsPages = await collectMdxPagesInDir(skillsDir);
+  const mcpPages = await collectMdxPagesInDir(mcpDir);
   const docsList = formatList(docsPages.sort());
   const cliList = formatList(cliPages.sort());
   const skillsList = formatList(skillsPages.sort());
+  const mcpList = formatList(mcpPages.sort());
 
   const content = `---
 title: Docs for AI
@@ -37,6 +40,10 @@ ${docsList}
 ## Skills
 
 ${skillsList}
+
+## MCP
+
+${mcpList}
 
 ## CLI
 

@@ -13,6 +13,13 @@
   border-right: 1px solid var(--color-fd-border) !important;
 }
 
+#nd-sidebar-mobile {
+  --fd-sidebar-drawer-offset: -100%;
+  border-left: 0 !important;
+  inset-inline-end: auto !important;
+  inset-inline-start: 0 !important;
+}
+
 #nd-sidebar a,
 #nd-sidebar button,
 #nd-sidebar-mobile a,

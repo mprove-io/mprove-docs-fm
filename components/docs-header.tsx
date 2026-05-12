@@ -56,7 +56,7 @@ const activeTopLevelTabClass = 'border-fd-primary text-fd-primary';
 export function DocsHeader({
   openapiHref = '/content/openapi',
   cliHref = '/content/cli',
-  skillsHref = '/content/skills',
+  skillsHref = '/content/skills/download-skill-md',
   mcpHref = '/content/mcp',
   ...props
 }: DocsHeaderProps) {

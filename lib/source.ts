@@ -84,7 +84,9 @@ export const cliTree = cliSource.pageTree;
 export const skillsTree = skillsSource.pageTree;
 
 export const firstCliPage = cliSource.getPages().at(0)?.url;
-export const firstSkillsPage = skillsSource.getPages().at(0)?.url;
+export const firstSkillsPage =
+  skillsSource.getPage(['download-skill-md'])?.url ??
+  skillsSource.getPages().at(0)?.url;
 
 export function isMdxPageData(data: unknown): data is DocsPageData {
   return (

@@ -26,6 +26,7 @@ const SETUP_TAGS = [
   'Projects',
   'Members',
   'Connections',
+  'CachedColumns',
   'Envs',
   'Users',
   'Avatars',

@@ -37,7 +37,15 @@ export const mcpSourceLoader = mcpPages
     }>)
   : null;
 
-export const mcpTree = mcpSourceLoader?.pageTree;
+export const mcpTree = mcpSourceLoader
+  ? {
+      ...mcpSourceLoader.pageTree,
+      children: [
+        { type: 'separator' as const, name: 'MCP Tools' },
+        ...mcpSourceLoader.pageTree.children
+      ]
+    }
+  : undefined;
 export const mcpEnabled = Boolean(mcpSourceLoader);
 export const firstMcpPage = mcpSourceLoader
   ?.getPages()

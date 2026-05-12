@@ -103,7 +103,7 @@ function convertMcpToOpenAPI(document) {
       title: 'MCP Tools',
       version: '1.0.0'
     },
-    servers: [{ url: '/' }],
+    servers: [{ url: 'http://localhost:3000/' }],
     tags,
     paths,
     components: {

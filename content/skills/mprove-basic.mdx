@@ -8,7 +8,7 @@ description: Mprove Basics
 Use `mprove` CLI for `sync` command only. 
 For other tasks, use Mprove MCP tools.
 
-If you changed or created files, run `mprove sync --env <env-id>` before calling mprove mcp tools to:
+If you changed or created files, run `mprove sync --env <env-id>` before calling Mprove MCP tools to:
 - sync uncommitted changes between local repo and backend repo
 - validate (rebuild) Malloy and Mprove files
 
@@ -18,9 +18,9 @@ If project has no `mprove.yml` file - you should setup Mprove project first.
 
 The flow for setup a new Mprove project:
 
-- create .gitignore if not exist (or add missing parts from .gitignore example)
-- load more relevant skills to context
-- call `get-schemas` tool. If there are no connections, ask the user to create Mprove connection to database in UI before proceeding to the next step.
+- create `.gitignore` file if not exist (or add missing parts from `.gitignore` example)
+- load more relevant skills to context if needed
+- call `get-schemas` tool. If there are no connections, ask the user to create Mprove database connection in UI before proceeding to the next step.
 - create `mprove.yml` (if not exist)
 - call `get-state` tool
 - create `.schema` file for metadata and relationships (use `get-schemas` and `get-sample` tools to understand relationships)
@@ -34,7 +34,7 @@ The flow for setup a new Mprove project:
 - mprove-project-structure (Files and folders structure patterns)
 - mprove-connection-schemas (`.schema` metadata files)
 - mprove-build-malloy-model (Build Mprove Model based on Malloy sources)
-- mprove-build-store-model (Build Mprove Model based on HTTP API (Store) sources)
+- mprove-build-store-model (Build Mprove `*.store` Model file based on HTTP API sources)
 - mprove-build-chart (Build Mprove Chart)
 - mprove-build-report (Build Mprove Report)
 - mprove-build-dashboard (Build Mprove Dashboard)
@@ -46,9 +46,7 @@ If YAML property has an array type - use an empty array [] instead of undefined 
 
 Mprove Reports are much more useful for Metrics (measures + time based dimension) than Mprove Charts or Dashboards.
 
-## Docs
-
-When you need to look up Mprove documentation, check `https://docs.mprove.io/docs/reference/model-malloy` and/or other pages based on task.
+## Malloy Docs
 
 When you need to look up Malloy documentation, check `https://docs.malloydata.dev/documentation/user_guides/quickstart_modeling` and/or other pages based on task.
 

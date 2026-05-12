@@ -10,10 +10,10 @@
     "user-roles",
     "access-roles",
 
-    "---Builder---",
-    "builder/builder",
-    "builder/editor-ai-session",
-    "builder/openai-codex-setup",
+    "---AI Sessions---",
+    "ai-sessions/builder",
+    "ai-sessions/explorer",
+    "ai-sessions/openai-codex-setup",
 
     "---Reference---",
     "reference/project-config",

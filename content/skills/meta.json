@@ -1,6 +1,7 @@
 {
   "title": "Skills",
   "pages": [
+    "download-skill-md",
     "---SKILL.md---",
     "mprove-basic",
     "mprove-project-structure",

@@ -15,7 +15,6 @@
     "builder/editor-ai-session",
     "builder/openai-codex-setup",
     "builder/mcp-server",
-    "builder/skills",
 
     "---Reference---",
     "reference/project-config",

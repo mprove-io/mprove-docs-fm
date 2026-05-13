@@ -7,10 +7,11 @@ description: Build Mprove Model based on Malloy sources
 
 ## Docs
 
-https://docs.mprove.io/docs/reference/model-malloy
-https://docs.malloydata.dev/documentation
+Call `read-docs` tool with `pageId: reference/model-malloy` to read Mprove documentation
 
-## Some parts of Malloy language are not supported in Mprove Models yet
+For Malloy documentation you can check https://docs.malloydata.dev/documentation
+
+## Parts of Malloy language are not supported in Mprove Models yet
 
 Do not use it:
 
@@ -78,19 +79,19 @@ Add `##! experimental{sql_functions}` malloy source tag if using sql functions l
 
 It is important to have all time parts to be present (.day, .week, .month, etc) so user will be able to select any Time Detail in UI.
 
-These tags build metrics for all measures of Mprove Malloy Model for a field_group of time dimensions.
+`build_metrics` tag creates metrics for each pair of measure and time dimension of `field_group`.
 
 ```
   #(mprove) build_metrics field_group="Created At"
 ```
 
-Dimensions in field_group must be based on the same "\_ts" field.
+Dimensions in `field_group` must be based on the same "\_ts" field. Create "\_ts" dimension based on time column.
 
-Mprove tags `build_metrics` and `field_group` should be applied at the sources (prefer "\_tx") that have the time columns which are useful. Create "\_ts" dimension based on time column.
+Mprove `build_metrics` and `field_group` tags should be applied at the sources (prefer "\_tx") that have useful time columns.
 
 # Types
 
-Use and apply malloy types for sources that are based on tables (prefer "\_table" suffix sources).
+Use and apply Malloy types for sources that are based on tables (prefer "\_table" suffix sources).
 The type should list all columns of the source table.
 
 https://docs.malloydata.dev/documentation/experiments/virtual_sources

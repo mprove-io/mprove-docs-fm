@@ -1820,7 +1820,7 @@
         },
         "summary": "GetOrgUsers",
         "tags": [
-          "OrgUsers"
+          "Users"
         ]
       }
     },
@@ -2748,6 +2748,39 @@
         ]
       }
     },
+    "/api/ToBackendGetQueryInfo": {
+      "post": {
+        "description": "Get Malloy, SQL, and data",
+        "operationId": "GetQueryInfoController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendGetQueryInfoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendGetQueryInfoResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "GetQueryInfo",
+        "tags": [
+          "Queries"
+        ]
+      }
+    },
     "/api/ToBackendRunQueries": {
       "post": {
         "description": "Run queries for specified mconfigs",
@@ -3243,39 +3276,6 @@
         ]
       }
     },
-    "/api/ToBackendGetQueryInfo": {
-      "post": {
-        "description": "Get Malloy, SQL, and data",
-        "operationId": "GetQueryInfoController",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ToBackendGetQueryInfoRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ToBackendGetQueryInfoResponse"
-                }
-              }
-            }
-          }
-        },
-        "summary": "GetQueryInfo",
-        "tags": [
-          "QueryInfo"
-        ]
-      }
-    },
     "/api/ToBackendRun": {
       "post": {
         "description": "Run dashboards, charts, and reports in batch",
@@ -3306,6 +3306,39 @@
         "summary": "Run",
         "tags": [
           "Run"
+        ]
+      }
+    },
+    "/api/ToBackendGetServerUsers": {
+      "post": {
+        "description": "Get a paginated list of all users across all organizations",
+        "operationId": "GetServerUsersController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendGetServerUsersRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendGetServerUsersResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "GetServerUsers",
+        "tags": [
+          "Users"
         ]
       }
     },
@@ -4914,10 +4947,6 @@
       "description": ""
     },
     {
-      "name": "OrgUsers",
-      "description": ""
-    },
-    {
       "name": "Orgs",
       "description": ""
     },
@@ -4927,10 +4956,6 @@
     },
     {
       "name": "Queries",
-      "description": ""
-    },
-    {
-      "name": "QueryInfo",
       "description": ""
     },
     {
@@ -16192,6 +16217,9 @@
           "serverNowTs": {
             "type": "number"
           },
+          "isMproveAdmin": {
+            "type": "boolean"
+          },
           "struct": {
             "$ref": "#/components/schemas/StructX"
           },
@@ -16218,6 +16246,7 @@
           "needValidate",
           "user",
           "serverNowTs",
+          "isMproveAdmin",
           "struct",
           "userMember",
           "repo"
@@ -20509,6 +20538,459 @@
           "payload"
         ]
       },
+      "ToBackendGetQueryInfoRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendGetQueryInfo"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendGetQueryInfoRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "repoId": {
+            "type": "string"
+          },
+          "branchId": {
+            "type": "string"
+          },
+          "envId": {
+            "type": "string"
+          },
+          "chartId": {
+            "type": "string",
+            "nullable": true
+          },
+          "dashboardId": {
+            "type": "string",
+            "nullable": true
+          },
+          "tileIndex": {
+            "type": "number",
+            "nullable": true
+          },
+          "reportId": {
+            "type": "string",
+            "nullable": true
+          },
+          "rowId": {
+            "type": "string",
+            "nullable": true
+          },
+          "timezone": {
+            "type": "string"
+          },
+          "timeSpec": {
+            "type": "string",
+            "enum": [
+              "timestamps",
+              "seconds",
+              "minutes",
+              "hours",
+              "days",
+              "weeks",
+              "months",
+              "quarters",
+              "years"
+            ],
+            "nullable": true
+          },
+          "timeRangeFractionBrick": {
+            "type": "string",
+            "nullable": true
+          },
+          "getMalloy": {
+            "type": "boolean"
+          },
+          "getSql": {
+            "type": "boolean"
+          },
+          "getData": {
+            "type": "boolean"
+          },
+          "isFetch": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "projectId",
+          "repoId",
+          "branchId",
+          "envId",
+          "timezone",
+          "getMalloy",
+          "getSql",
+          "getData",
+          "isFetch"
+        ]
+      },
+      "ToBackendGetQueryInfoRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetQueryInfoRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetQueryInfoRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetQueryInfoResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendGetQueryInfo"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendGetQueryInfoResponsePayload": {
+        "type": "object",
+        "properties": {
+          "chart": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QueryInfoChart"
+              }
+            ],
+            "nullable": true
+          },
+          "dashboard": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QueryInfoDashboard"
+              }
+            ],
+            "nullable": true
+          },
+          "report": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QueryInfoReport"
+              }
+            ],
+            "nullable": true
+          }
+        }
+      },
+      "QueryInfoChart": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "chartId": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "query": {
+            "$ref": "#/components/schemas/QueryInfoQuery"
+          }
+        },
+        "required": [
+          "title",
+          "chartId",
+          "url",
+          "query"
+        ]
+      },
+      "QueryInfoQuery": {
+        "type": "object",
+        "properties": {
+          "connectionId": {
+            "type": "string"
+          },
+          "connectionType": {
+            "type": "string",
+            "enum": [
+              "PostgreSQL",
+              "MySQL",
+              "SnowFlake",
+              "BigQuery",
+              "Databricks",
+              "MotherDuck",
+              "Presto",
+              "Trino",
+              "GoogleApi",
+              "Api"
+            ]
+          },
+          "queryId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "New",
+              "Running",
+              "Canceled",
+              "Completed",
+              "Error"
+            ]
+          },
+          "lastRunBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastRunTs": {
+            "type": "number",
+            "nullable": true
+          },
+          "lastCancelTs": {
+            "type": "number",
+            "nullable": true
+          },
+          "lastCompleteTs": {
+            "type": "number",
+            "nullable": true
+          },
+          "lastCompleteDuration": {
+            "type": "number",
+            "nullable": true
+          },
+          "lastErrorMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastErrorTs": {
+            "type": "number",
+            "nullable": true
+          },
+          "data": {
+            "nullable": true
+          },
+          "malloy": {
+            "type": "string",
+            "nullable": true
+          },
+          "sql": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "connectionId",
+          "connectionType",
+          "queryId",
+          "status"
+        ]
+      },
+      "QueryInfoDashboard": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "dashboardId": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "tiles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QueryInfoTile"
+            }
+          }
+        },
+        "required": [
+          "title",
+          "dashboardId",
+          "url",
+          "tiles"
+        ]
+      },
+      "QueryInfoTile": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "query": {
+            "$ref": "#/components/schemas/QueryInfoQuery"
+          }
+        },
+        "required": [
+          "title",
+          "query"
+        ]
+      },
+      "QueryInfoReport": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "reportId": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QueryInfoRow"
+            }
+          }
+        },
+        "required": [
+          "title",
+          "reportId",
+          "url",
+          "rows"
+        ]
+      },
+      "QueryInfoRow": {
+        "type": "object",
+        "properties": {
+          "rowId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "rowType": {
+            "type": "string",
+            "enum": [
+              "empty",
+              "header",
+              "metric",
+              "formula"
+            ]
+          },
+          "metricId": {
+            "type": "string"
+          },
+          "formula": {
+            "type": "string"
+          },
+          "parameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Parameter"
+            }
+          },
+          "query": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QueryInfoQuery"
+              }
+            ],
+            "nullable": true
+          },
+          "records": {
+            "type": "array",
+            "items": {},
+            "nullable": true
+          }
+        },
+        "required": [
+          "rowId",
+          "name",
+          "rowType",
+          "metricId",
+          "formula",
+          "parameters"
+        ]
+      },
+      "Parameter": {
+        "type": "object",
+        "properties": {
+          "apply_to": {
+            "type": "string"
+          },
+          "listen": {
+            "type": "string"
+          },
+          "fractions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Fraction"
+            }
+          }
+        },
+        "required": [
+          "apply_to",
+          "listen",
+          "fractions"
+        ]
+      },
+      "ToBackendGetQueryInfoResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetQueryInfoResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetQueryInfoResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
       "ToBackendRunQueriesRequestInfo": {
         "type": "object",
         "properties": {
@@ -22312,28 +22794,6 @@
           "key",
           "value",
           "error"
-        ]
-      },
-      "Parameter": {
-        "type": "object",
-        "properties": {
-          "apply_to": {
-            "type": "string"
-          },
-          "listen": {
-            "type": "string"
-          },
-          "fractions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Fraction"
-            }
-          }
-        },
-        "required": [
-          "apply_to",
-          "listen",
-          "fractions"
         ]
       },
       "Chart": {
@@ -24653,437 +25113,6 @@
           "payload"
         ]
       },
-      "ToBackendGetQueryInfoRequestInfo": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "enum": [
-              "api/ToBackendGetQueryInfo"
-            ]
-          },
-          "traceId": {
-            "type": "string"
-          },
-          "idempotencyKey": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "name",
-          "traceId",
-          "idempotencyKey"
-        ]
-      },
-      "ToBackendGetQueryInfoRequestPayload": {
-        "type": "object",
-        "properties": {
-          "projectId": {
-            "type": "string"
-          },
-          "repoId": {
-            "type": "string"
-          },
-          "branchId": {
-            "type": "string"
-          },
-          "envId": {
-            "type": "string"
-          },
-          "chartId": {
-            "type": "string",
-            "nullable": true
-          },
-          "dashboardId": {
-            "type": "string",
-            "nullable": true
-          },
-          "tileIndex": {
-            "type": "number",
-            "nullable": true
-          },
-          "reportId": {
-            "type": "string",
-            "nullable": true
-          },
-          "rowId": {
-            "type": "string",
-            "nullable": true
-          },
-          "timezone": {
-            "type": "string"
-          },
-          "timeSpec": {
-            "type": "string",
-            "enum": [
-              "timestamps",
-              "seconds",
-              "minutes",
-              "hours",
-              "days",
-              "weeks",
-              "months",
-              "quarters",
-              "years"
-            ],
-            "nullable": true
-          },
-          "timeRangeFractionBrick": {
-            "type": "string",
-            "nullable": true
-          },
-          "getMalloy": {
-            "type": "boolean"
-          },
-          "getSql": {
-            "type": "boolean"
-          },
-          "getData": {
-            "type": "boolean"
-          },
-          "isFetch": {
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "projectId",
-          "repoId",
-          "branchId",
-          "envId",
-          "timezone",
-          "getMalloy",
-          "getSql",
-          "getData",
-          "isFetch"
-        ]
-      },
-      "ToBackendGetQueryInfoRequest": {
-        "type": "object",
-        "properties": {
-          "info": {
-            "$ref": "#/components/schemas/ToBackendGetQueryInfoRequestInfo"
-          },
-          "payload": {
-            "$ref": "#/components/schemas/ToBackendGetQueryInfoRequestPayload"
-          }
-        },
-        "required": [
-          "info",
-          "payload"
-        ]
-      },
-      "ToBackendGetQueryInfoResponseInfo": {
-        "type": "object",
-        "properties": {
-          "path": {
-            "type": "string",
-            "enum": [
-              "/api/ToBackendGetQueryInfo"
-            ]
-          },
-          "method": {
-            "type": "string",
-            "enum": [
-              "POST"
-            ]
-          },
-          "mproveVersion": {
-            "type": "string",
-            "nullable": true
-          },
-          "duration": {
-            "type": "number",
-            "nullable": true
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "Ok",
-              "Error"
-            ]
-          },
-          "traceId": {
-            "type": "string"
-          },
-          "error": {
-            "nullable": true
-          }
-        },
-        "required": [
-          "path",
-          "method",
-          "status",
-          "traceId"
-        ]
-      },
-      "ToBackendGetQueryInfoResponsePayload": {
-        "type": "object",
-        "properties": {
-          "chart": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/QueryInfoChart"
-              }
-            ],
-            "nullable": true
-          },
-          "dashboard": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/QueryInfoDashboard"
-              }
-            ],
-            "nullable": true
-          },
-          "report": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/QueryInfoReport"
-              }
-            ],
-            "nullable": true
-          }
-        }
-      },
-      "QueryInfoChart": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string"
-          },
-          "chartId": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string"
-          },
-          "query": {
-            "$ref": "#/components/schemas/QueryInfoQuery"
-          }
-        },
-        "required": [
-          "title",
-          "chartId",
-          "url",
-          "query"
-        ]
-      },
-      "QueryInfoQuery": {
-        "type": "object",
-        "properties": {
-          "connectionId": {
-            "type": "string"
-          },
-          "connectionType": {
-            "type": "string",
-            "enum": [
-              "PostgreSQL",
-              "MySQL",
-              "SnowFlake",
-              "BigQuery",
-              "Databricks",
-              "MotherDuck",
-              "Presto",
-              "Trino",
-              "GoogleApi",
-              "Api"
-            ]
-          },
-          "queryId": {
-            "type": "string"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "New",
-              "Running",
-              "Canceled",
-              "Completed",
-              "Error"
-            ]
-          },
-          "lastRunBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "lastRunTs": {
-            "type": "number",
-            "nullable": true
-          },
-          "lastCancelTs": {
-            "type": "number",
-            "nullable": true
-          },
-          "lastCompleteTs": {
-            "type": "number",
-            "nullable": true
-          },
-          "lastCompleteDuration": {
-            "type": "number",
-            "nullable": true
-          },
-          "lastErrorMessage": {
-            "type": "string",
-            "nullable": true
-          },
-          "lastErrorTs": {
-            "type": "number",
-            "nullable": true
-          },
-          "data": {
-            "nullable": true
-          },
-          "malloy": {
-            "type": "string",
-            "nullable": true
-          },
-          "sql": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "required": [
-          "connectionId",
-          "connectionType",
-          "queryId",
-          "status"
-        ]
-      },
-      "QueryInfoDashboard": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string"
-          },
-          "dashboardId": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string"
-          },
-          "tiles": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/QueryInfoTile"
-            }
-          }
-        },
-        "required": [
-          "title",
-          "dashboardId",
-          "url",
-          "tiles"
-        ]
-      },
-      "QueryInfoTile": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string"
-          },
-          "query": {
-            "$ref": "#/components/schemas/QueryInfoQuery"
-          }
-        },
-        "required": [
-          "title",
-          "query"
-        ]
-      },
-      "QueryInfoReport": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string"
-          },
-          "reportId": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string"
-          },
-          "rows": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/QueryInfoRow"
-            }
-          }
-        },
-        "required": [
-          "title",
-          "reportId",
-          "url",
-          "rows"
-        ]
-      },
-      "QueryInfoRow": {
-        "type": "object",
-        "properties": {
-          "rowId": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "rowType": {
-            "type": "string",
-            "enum": [
-              "empty",
-              "header",
-              "metric",
-              "formula"
-            ]
-          },
-          "metricId": {
-            "type": "string"
-          },
-          "formula": {
-            "type": "string"
-          },
-          "parameters": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Parameter"
-            }
-          },
-          "query": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/QueryInfoQuery"
-              }
-            ],
-            "nullable": true
-          },
-          "records": {
-            "type": "array",
-            "items": {},
-            "nullable": true
-          }
-        },
-        "required": [
-          "rowId",
-          "name",
-          "rowType",
-          "metricId",
-          "formula",
-          "parameters"
-        ]
-      },
-      "ToBackendGetQueryInfoResponse": {
-        "type": "object",
-        "properties": {
-          "info": {
-            "$ref": "#/components/schemas/ToBackendGetQueryInfoResponseInfo"
-          },
-          "payload": {
-            "$ref": "#/components/schemas/ToBackendGetQueryInfoResponsePayload"
-          }
-        },
-        "required": [
-          "info",
-          "payload"
-        ]
-      },
       "ToBackendRunRequestInfo": {
         "type": "object",
         "properties": {
@@ -25457,6 +25486,212 @@
           },
           "payload": {
             "$ref": "#/components/schemas/ToBackendRunResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetServerUsersRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendGetServerUsers"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendGetServerUsersRequestPayload": {
+        "type": "object",
+        "properties": {
+          "pageNum": {
+            "type": "number"
+          },
+          "perPage": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "pageNum",
+          "perPage"
+        ]
+      },
+      "ToBackendGetServerUsersRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetServerUsersRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetServerUsersRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetServerUsersResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendGetServerUsers"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendGetServerUsersResponsePayload": {
+        "type": "object",
+        "properties": {
+          "serverUsersList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServerUsersItem"
+            }
+          },
+          "total": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "serverUsersList",
+          "total"
+        ]
+      },
+      "ServerUsersItem": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "avatarSmall": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string"
+          },
+          "alias": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "createdTs": {
+            "type": "number",
+            "nullable": true
+          },
+          "memberships": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServerUsersMembershipItem"
+            }
+          }
+        },
+        "required": [
+          "userId",
+          "email",
+          "alias",
+          "firstName",
+          "lastName",
+          "fullName",
+          "memberships"
+        ]
+      },
+      "ServerUsersMembershipItem": {
+        "type": "object",
+        "properties": {
+          "orgId": {
+            "type": "string"
+          },
+          "isOrgOwner": {
+            "type": "boolean"
+          },
+          "projectId": {
+            "type": "string"
+          },
+          "isAdmin": {
+            "type": "boolean"
+          },
+          "isFileEditor": {
+            "type": "boolean"
+          },
+          "isExplorer": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "orgId",
+          "isOrgOwner",
+          "projectId",
+          "isAdmin",
+          "isFileEditor",
+          "isExplorer"
+        ]
+      },
+      "ToBackendGetServerUsersResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetServerUsersResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetServerUsersResponsePayload"
           }
         },
         "required": [

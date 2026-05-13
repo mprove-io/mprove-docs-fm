@@ -1,0 +1,249 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "mprove backend",
+    "description": "",
+    "version": "12.0.11",
+    "contact": {}
+  },
+  "paths": {
+    "/api/ToBackendGetServerUsers": {
+      "post": {
+        "operationId": "GetServerUsersController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendGetServerUsersRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendGetServerUsersResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ToBackendGetServerUsersRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetServerUsersRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetServerUsersRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetServerUsersResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetServerUsersResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetServerUsersResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetServerUsersRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendGetServerUsers"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendGetServerUsersRequestPayload": {
+        "type": "object",
+        "properties": {
+          "pageNum": {
+            "type": "number"
+          },
+          "perPage": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "pageNum",
+          "perPage"
+        ]
+      },
+      "ToBackendGetServerUsersResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendGetServerUsers"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendGetServerUsersResponsePayload": {
+        "type": "object",
+        "properties": {
+          "serverUsersList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServerUsersItem"
+            }
+          },
+          "total": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "serverUsersList",
+          "total"
+        ]
+      },
+      "ServerUsersItem": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "avatarSmall": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string"
+          },
+          "alias": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "createdTs": {
+            "type": "number",
+            "nullable": true
+          },
+          "memberships": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServerUsersMembershipItem"
+            }
+          }
+        },
+        "required": [
+          "userId",
+          "email",
+          "alias",
+          "firstName",
+          "lastName",
+          "fullName",
+          "memberships"
+        ]
+      },
+      "ServerUsersMembershipItem": {
+        "type": "object",
+        "properties": {
+          "orgId": {
+            "type": "string"
+          },
+          "isOrgOwner": {
+            "type": "boolean"
+          },
+          "projectId": {
+            "type": "string"
+          },
+          "isAdmin": {
+            "type": "boolean"
+          },
+          "isFileEditor": {
+            "type": "boolean"
+          },
+          "isExplorer": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "orgId",
+          "isOrgOwner",
+          "projectId",
+          "isAdmin",
+          "isFileEditor",
+          "isExplorer"
+        ]
+      }
+    }
+  }
+}

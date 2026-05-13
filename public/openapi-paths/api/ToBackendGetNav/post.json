@@ -206,6 +206,9 @@
           "serverNowTs": {
             "type": "number"
           },
+          "isMproveAdmin": {
+            "type": "boolean"
+          },
           "struct": {
             "$ref": "#/components/schemas/StructX"
           },
@@ -232,6 +235,7 @@
           "needValidate",
           "user",
           "serverNowTs",
+          "isMproveAdmin",
           "struct",
           "userMember",
           "repo"

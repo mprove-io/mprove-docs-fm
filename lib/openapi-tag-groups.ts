@@ -6,9 +6,8 @@ const DATA_TAGS = [
   'Reports',
   'Mconfigs',
   'Queries',
-  'SuggestFields',
-  'QueryInfo',
-  'Run'
+  'Run',
+  'SuggestFields'
 ] as const;
 
 const FILES_TAGS = [
@@ -21,15 +20,14 @@ const FILES_TAGS = [
 ] as const;
 
 const SETUP_TAGS = [
+  'Users',
+  'Avatars',
   'Orgs',
-  'OrgUsers',
   'Projects',
   'Members',
   'Connections',
   'CachedColumns',
   'Envs',
-  'Users',
-  'Avatars',
   'Nav'
 ] as const;
 

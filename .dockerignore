@@ -5,8 +5,6 @@ _nogit
 .pnpm-store/
 .vscode/
 node_modules/
-public/openapi.json
-public/openapi-paths/
 public/paths/
 docs.Dockerfile
 next-env.d.ts

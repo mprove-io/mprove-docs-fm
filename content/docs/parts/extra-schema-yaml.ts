@@ -1,5 +1,5 @@
 export const extraSchemaYaml = `schema: c1_postgres.fleet
-description: 'Fleet management system tracking vehicles, drivers, trips, and maintenance records'
+description: 'Fleet management system tracking vehicles, drivers, trips, and maintenance'
 tables:
   - table: trips
     description: 'Individual vehicle trips with route, distance, and assigned driver'
@@ -29,6 +29,7 @@ tables:
       - column: status
         description: 'Trip completion status'
         example: 'completed'
+        cache_unique_values: true
 
   - table: vehicles
     description: 'Fleet vehicles with make, model, and current operational status'
@@ -49,6 +50,7 @@ tables:
       - column: name
         description: 'Full name of the driver'
         example: 'Carlos Rivera'
+        cache_unique_values: true
 
   - table: maintenance_records
     description: 'Scheduled and unscheduled vehicle maintenance events'
@@ -64,4 +66,5 @@ tables:
             type: many_to_one
       - column: service_type
         description: 'Type of maintenance performed'
-        example: 'oil change'`;
+        example: 'oil change'
+        cache_unique_values: true`;

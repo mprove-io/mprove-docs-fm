@@ -112,6 +112,18 @@
   content: none !important;
 }
 
+@media (min-width: 768px) {
+  #nd-docs-layout {
+    --fd-sidebar-width: clamp(220px, 14vw, 268px);
+  }
+}
+
+@media (min-width: 1280px) {
+  #nd-docs-layout {
+    --fd-toc-width: clamp(176px, 12vw, 268px);
+  }
+}
+
 code {
   font-size: 0.85rem;
 }

@@ -37,16 +37,17 @@ export function DocsLayoutClient({
 
   return (
     <DocsLayout
-      key={
-        sidebarDisabled
-          ? `${section}-unavailable`
-          : section
-      }
+      key={sidebarDisabled ? `${section}-unavailable` : section}
       tree={tree}
       tabs={false}
       containerProps={{
         className:
-          'max-md:[--fd-header-height:7rem] md:[--fd-header-height:3.5rem] md:[--fd-sidebar-width:268px] xl:[--fd-toc-width:268px]'
+          'max-md:[--fd-header-height:7rem] md:[--fd-header-height:3.5rem]',
+        style: {
+          gridTemplate: `"sidebar sidebar header toc ."
+"sidebar sidebar toc-popover toc ."
+"sidebar sidebar main toc ." 1fr / minmax(min-content, 1fr) var(--fd-sidebar-col) minmax(0, calc(var(--fd-layout-width,97rem) - var(--fd-sidebar-width) - var(--fd-toc-width))) var(--fd-toc-width) minmax(0, 1fr)`
+        }
       }}
       sidebar={{
         enabled: !sidebarDisabled,

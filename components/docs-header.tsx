@@ -24,8 +24,7 @@ const tabs = [
     href: '/content/docs/quickstart',
     label: 'Docs',
     match: (pathname: string) =>
-      pathname === '/content/docs' ||
-      pathname.startsWith('/content/docs/')
+      pathname === '/content/docs' || pathname.startsWith('/content/docs/')
   },
   {
     href: '/content/skills',
@@ -86,8 +85,8 @@ export function DocsHeader({
         props.className
       )}
     >
-      <div className='hidden h-(--fd-header-height) items-center gap-3 px-4 md:flex md:px-6 xl:px-8'>
-        <div className='hidden min-w-0 flex-1 items-center gap-2 md:flex'>
+      <div className='hidden h-(--fd-header-height) min-w-0 items-center px-4 md:flex md:px-6 xl:px-8'>
+        <nav className='flex min-w-0 flex-1 items-center gap-2 overflow-x-auto overflow-y-hidden whitespace-nowrap [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'>
           {visibleTabs.map(tab => {
             const active = tab.match(pathname);
 
@@ -105,16 +104,16 @@ export function DocsHeader({
               </Link>
             );
           })}
-        </div>
 
-        <div className='hidden min-w-0 flex-1 justify-center md:flex'>
+          <SearchTrigger
+            hideIfDisabled
+            className='ms-2 flex-none p-2 min-[920px]:hidden'
+          />
           <FullSearchTrigger
             hideIfDisabled
-            className='w-full max-w-[320px] rounded-full ps-2.5'
+            className='ms-2 hidden w-[clamp(12rem,28vw,20rem)] flex-none rounded-full ps-2.5 min-[920px]:flex'
           />
-        </div>
-
-        <div className='hidden flex-1 md:block' />
+        </nav>
       </div>
 
       <div className='space-y-3 px-4 py-3 md:hidden'>

@@ -105,14 +105,18 @@ export function DocsHeader({
             );
           })}
 
+          <div className='min-w-2 flex-1' aria-hidden />
+
           <SearchTrigger
             hideIfDisabled
-            className='ms-2 flex-none p-2 min-[920px]:hidden'
+            className='ms-2 flex-none p-2 min-[950px]:hidden'
           />
           <FullSearchTrigger
             hideIfDisabled
-            className='ms-2 hidden w-[clamp(12rem,28vw,20rem)] flex-none rounded-full ps-2.5 min-[920px]:flex'
+            className='ms-2 hidden w-[clamp(12rem,28vw,20rem)] flex-none rounded-full ps-2.5 min-[950px]:flex'
           />
+
+          <div className='min-w-2 flex-4' aria-hidden />
         </nav>
       </div>
 

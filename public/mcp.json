@@ -2037,6 +2037,16 @@
               }
             ]
           },
+          "malloyBaseFieldId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "malloyTags": {
             "anyOf": [
               {
@@ -2243,6 +2253,9 @@
               }
             ]
           },
+          "isFieldGroupTimeframeBase": {
+            "type": "boolean"
+          },
           "timeframe": {
             "anyOf": [
               {
@@ -2283,7 +2296,8 @@
           "fieldClass",
           "sqlName",
           "topId",
-          "topLabel"
+          "topLabel",
+          "isFieldGroupTimeframeBase"
         ],
         "additionalProperties": false,
         "id": "ModelField"

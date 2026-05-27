@@ -3,7 +3,7 @@
   "info": {
     "title": "mprove backend",
     "description": "",
-    "version": "12.0.14",
+    "version": "12.0.18",
     "contact": {}
   },
   "paths": {
@@ -1559,6 +1559,10 @@
             },
             "nullable": true
           },
+          "malloyBaseFieldId": {
+            "type": "string",
+            "nullable": true
+          },
           "malloyTags": {
             "type": "array",
             "items": {
@@ -1681,6 +1685,9 @@
             "type": "boolean",
             "nullable": true
           },
+          "isFieldGroupTimeframeBase": {
+            "type": "boolean"
+          },
           "timeframe": {
             "type": "string",
             "nullable": true
@@ -1709,7 +1716,8 @@
           "fieldClass",
           "sqlName",
           "topId",
-          "topLabel"
+          "topLabel",
+          "isFieldGroupTimeframeBase"
         ]
       },
       "ModelNode": {
@@ -1965,6 +1973,10 @@
             },
             "nullable": true
           },
+          "malloyBaseFieldId": {
+            "type": "string",
+            "nullable": true
+          },
           "malloyTags": {
             "type": "array",
             "items": {
@@ -2087,6 +2099,9 @@
             "type": "boolean",
             "nullable": true
           },
+          "isFieldGroupTimeframeBase": {
+            "type": "boolean"
+          },
           "timeframe": {
             "type": "string",
             "nullable": true
@@ -2127,6 +2142,7 @@
           "sqlName",
           "topId",
           "topLabel",
+          "isFieldGroupTimeframeBase",
           "sortingNumber"
         ]
       },

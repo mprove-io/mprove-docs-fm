@@ -3,7 +3,7 @@
   "info": {
     "title": "mprove backend",
     "description": "",
-    "version": "12.0.18",
+    "version": "12.0.19",
     "contact": {}
   },
   "paths": {
@@ -1214,6 +1214,14 @@
               "info"
             ]
           },
+          "fieldFileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "fieldFilePath": {
+            "type": "string",
+            "nullable": true
+          },
           "result": {
             "type": "string",
             "enum": [
@@ -1232,6 +1240,12 @@
               "json",
               "sql_native"
             ],
+            "nullable": true
+          },
+          "fieldLineNum": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
             "nullable": true
           },
           "suggestModelDimension": {
@@ -1297,7 +1311,7 @@
             "type": "boolean",
             "nullable": true
           },
-          "isFieldGroupTimeframeBase": {
+          "isTimeframeBase": {
             "type": "boolean"
           },
           "timeframe": {
@@ -1329,7 +1343,7 @@
           "sqlName",
           "topId",
           "topLabel",
-          "isFieldGroupTimeframeBase"
+          "isTimeframeBase"
         ]
       },
       "ModelNode": {
@@ -2980,6 +2994,14 @@
               "info"
             ]
           },
+          "fieldFileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "fieldFilePath": {
+            "type": "string",
+            "nullable": true
+          },
           "result": {
             "type": "string",
             "enum": [
@@ -2998,6 +3020,12 @@
               "json",
               "sql_native"
             ],
+            "nullable": true
+          },
+          "fieldLineNum": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
             "nullable": true
           },
           "suggestModelDimension": {
@@ -3063,7 +3091,7 @@
             "type": "boolean",
             "nullable": true
           },
-          "isFieldGroupTimeframeBase": {
+          "isTimeframeBase": {
             "type": "boolean"
           },
           "timeframe": {
@@ -3106,7 +3134,7 @@
           "sqlName",
           "topId",
           "topLabel",
-          "isFieldGroupTimeframeBase",
+          "isTimeframeBase",
           "sortingNumber"
         ]
       },

@@ -2104,6 +2104,26 @@
               "info"
             ]
           },
+          "fieldFileName": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "fieldFilePath": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "result": {
             "anyOf": [
               {
@@ -2124,6 +2144,18 @@
                   "json",
                   "sql_native"
                 ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "fieldLineNum": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
               },
               {
                 "type": "null"
@@ -2253,7 +2285,7 @@
               }
             ]
           },
-          "isFieldGroupTimeframeBase": {
+          "isTimeframeBase": {
             "type": "boolean"
           },
           "timeframe": {
@@ -2297,7 +2329,7 @@
           "sqlName",
           "topId",
           "topLabel",
-          "isFieldGroupTimeframeBase"
+          "isTimeframeBase"
         ],
         "additionalProperties": false,
         "id": "ModelField"

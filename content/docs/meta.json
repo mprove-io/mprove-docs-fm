@@ -9,6 +9,7 @@
     "environments",
     "user-roles",
     "access-roles",
+    "row-level-security",
 
     "---AI Sessions---",
     "ai-sessions/builder",

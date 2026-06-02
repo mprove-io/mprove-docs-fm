@@ -7,7 +7,8 @@ const DATA_TAGS = [
   'Mconfigs',
   'Queries',
   'Run',
-  'SuggestFields'
+  'SuggestFields',
+  'Nav'
 ] as const;
 
 const FILES_TAGS = [
@@ -28,7 +29,8 @@ const SETUP_TAGS = [
   'Connections',
   'CachedColumns',
   'Envs',
-  'Nav'
+  'Roles',
+  'Givens'
 ] as const;
 
 const CHAT_TAGS = ['Sessions'] as const;

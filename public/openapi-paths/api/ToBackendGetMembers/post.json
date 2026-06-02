@@ -3,7 +3,7 @@
   "info": {
     "title": "mprove backend",
     "description": "",
-    "version": "12.0.19",
+    "version": "12.0.20",
     "contact": {}
   },
   "paths": {
@@ -165,6 +165,12 @@
               "$ref": "#/components/schemas/Member"
             }
           },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Role"
+            }
+          },
           "total": {
             "type": "number"
           }
@@ -172,6 +178,7 @@
         "required": [
           "userMember",
           "members",
+          "roles",
           "total"
         ]
       },
@@ -237,6 +244,46 @@
           "isEditor",
           "isExplorer",
           "serverTs"
+        ]
+      },
+      "Role": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "roleId": {
+            "type": "string"
+          },
+          "gvs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Gv"
+            }
+          }
+        },
+        "required": [
+          "projectId",
+          "roleId",
+          "gvs"
+        ]
+      },
+      "Gv": {
+        "type": "object",
+        "properties": {
+          "givenId": {
+            "type": "string"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "givenId",
+          "values"
         ]
       }
     }

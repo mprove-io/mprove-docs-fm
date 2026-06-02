@@ -1593,6 +1593,39 @@
         ]
       }
     },
+    "/api/ToBackendGetMemberGivens": {
+      "post": {
+        "description": "Get effective given values available to a project member",
+        "operationId": "GetMemberGivensController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendGetMemberGivensRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendGetMemberGivensResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "GetMemberGivens",
+        "tags": [
+          "Members"
+        ]
+      }
+    },
     "/api/ToBackendGetMembersList": {
       "post": {
         "description": "Get the full list of project members",
@@ -2649,6 +2682,336 @@
         ]
       }
     },
+    "/api/ToBackendCreateGiven": {
+      "post": {
+        "description": "Create a project given",
+        "operationId": "CreateGivenController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendCreateGivenRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendCreateGivenResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "CreateGiven",
+        "tags": [
+          "Givens"
+        ]
+      }
+    },
+    "/api/ToBackendDeleteGiven": {
+      "post": {
+        "description": "Delete a project given",
+        "operationId": "DeleteGivenController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendDeleteGivenRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendDeleteGivenResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "DeleteGiven",
+        "tags": [
+          "Givens"
+        ]
+      }
+    },
+    "/api/ToBackendEditGiven": {
+      "post": {
+        "description": "Edit a project given",
+        "operationId": "EditGivenController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendEditGivenRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendEditGivenResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "EditGiven",
+        "tags": [
+          "Givens"
+        ]
+      }
+    },
+    "/api/ToBackendGetGivens": {
+      "post": {
+        "description": "Get project givens",
+        "operationId": "GetGivensController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendGetGivensRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendGetGivensResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "GetGivens",
+        "tags": [
+          "Givens"
+        ]
+      }
+    },
+    "/api/ToBackendCreateRole": {
+      "post": {
+        "description": "Create a project role",
+        "operationId": "CreateRoleController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendCreateRoleRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendCreateRoleResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "CreateRole",
+        "tags": [
+          "Roles"
+        ]
+      }
+    },
+    "/api/ToBackendCreateRoleGiven": {
+      "post": {
+        "description": "Create a project role given",
+        "operationId": "CreateRoleGivenController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendCreateRoleGivenRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendCreateRoleGivenResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "CreateRoleGiven",
+        "tags": [
+          "Roles"
+        ]
+      }
+    },
+    "/api/ToBackendEditRoleGiven": {
+      "post": {
+        "description": "Edit a project role given",
+        "operationId": "EditRoleGivenController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendEditRoleGivenRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendEditRoleGivenResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "EditRoleGiven",
+        "tags": [
+          "Roles"
+        ]
+      }
+    },
+    "/api/ToBackendDeleteRoleGiven": {
+      "post": {
+        "description": "Delete a project role given",
+        "operationId": "DeleteRoleGivenController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendDeleteRoleGivenRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendDeleteRoleGivenResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "DeleteRoleGiven",
+        "tags": [
+          "Roles"
+        ]
+      }
+    },
+    "/api/ToBackendDeleteRole": {
+      "post": {
+        "description": "Delete a project role",
+        "operationId": "DeleteRoleController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendDeleteRoleRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendDeleteRoleResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "DeleteRole",
+        "tags": [
+          "Roles"
+        ]
+      }
+    },
+    "/api/ToBackendGetRoles": {
+      "post": {
+        "description": "Get project roles",
+        "operationId": "GetRolesController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendGetRolesRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendGetRolesResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "GetRoles",
+        "tags": [
+          "Roles"
+        ]
+      }
+    },
     "/api/ToBackendCancelQueries": {
       "post": {
         "description": "Cancel running queries for specified mconfigs",
@@ -3502,6 +3865,39 @@
           }
         },
         "summary": "DeleteUser",
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/api/ToBackendGetUserGivens": {
+      "post": {
+        "description": "Get the current user's normalized selected givens and effective member givens",
+        "operationId": "GetUserGivensController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendGetUserGivensRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendGetUserGivensResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "GetUserGivens",
         "tags": [
           "Users"
         ]
@@ -4882,7 +5278,7 @@
   "info": {
     "title": "mprove backend",
     "description": "",
-    "version": "12.0.19",
+    "version": "12.0.20",
     "contact": {}
   },
   "tags": [
@@ -4928,6 +5324,10 @@
     },
     {
       "name": "Folders",
+      "description": ""
+    },
+    {
+      "name": "Givens",
       "description": ""
     },
     {
@@ -5005,6 +5405,9 @@
     {
       "name": "Users",
       "description": ""
+    },
+    {
+      "name": "Roles"
     }
   ],
   "servers": [
@@ -12822,6 +13225,55 @@
               "$ref": "#/components/schemas/Filter"
             }
           },
+          "appliedGivens": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "boolean"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "boolean"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "defaultText": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "defaultText"
+                  ]
+                }
+              ]
+            },
+            "nullable": true
+          },
           "chart": {
             "$ref": "#/components/schemas/MconfigChart"
           },
@@ -14330,17 +14782,36 @@
       "ToBackendSuggestDimensionValuesResponsePayload": {
         "type": "object",
         "properties": {
-          "mconfig": {
-            "$ref": "#/components/schemas/MconfigX"
+          "matchedValues": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "string"
+                },
+                "count": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "value",
+                "count"
+              ]
+            },
+            "nullable": true
           },
-          "query": {
-            "$ref": "#/components/schemas/Query"
+          "matchedValuesMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true
           }
-        },
-        "required": [
-          "mconfig",
-          "query"
-        ]
+        }
       },
       "ToBackendSuggestDimensionValuesResponse": {
         "type": "object",
@@ -14847,6 +15318,12 @@
               "$ref": "#/components/schemas/Member"
             }
           },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Role"
+            }
+          },
           "total": {
             "type": "number"
           }
@@ -14854,7 +15331,48 @@
         "required": [
           "userMember",
           "members",
+          "roles",
           "total"
+        ]
+      },
+      "Role": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "roleId": {
+            "type": "string"
+          },
+          "gvs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Gv"
+            }
+          }
+        },
+        "required": [
+          "projectId",
+          "roleId",
+          "gvs"
+        ]
+      },
+      "Gv": {
+        "type": "object",
+        "properties": {
+          "givenId": {
+            "type": "string"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "givenId",
+          "values"
         ]
       },
       "ToBackendGetMembersResponse": {
@@ -14865,6 +15383,186 @@
           },
           "payload": {
             "$ref": "#/components/schemas/ToBackendGetMembersResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetMemberGivensRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendGetMemberGivens"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendGetMemberGivensRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "memberId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "projectId",
+          "memberId"
+        ]
+      },
+      "ToBackendGetMemberGivensRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetMemberGivensRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetMemberGivensRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetMemberGivensResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendGetMemberGivens"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendGetMemberGivensResponsePayload": {
+        "type": "object",
+        "properties": {
+          "memberGivens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MemberGiven"
+            }
+          }
+        },
+        "required": [
+          "memberGivens"
+        ]
+      },
+      "MemberGiven": {
+        "type": "object",
+        "properties": {
+          "givenId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "String",
+              "Number",
+              "Boolean",
+              "Date",
+              "Timestamp"
+            ]
+          },
+          "isMultiple": {
+            "type": "boolean"
+          },
+          "memberGivenValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MemberGivenValue"
+            }
+          }
+        },
+        "required": [
+          "givenId",
+          "type",
+          "isMultiple",
+          "memberGivenValues"
+        ]
+      },
+      "MemberGivenValue": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          },
+          "isProjectDefault": {
+            "type": "boolean"
+          },
+          "roleIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "value",
+          "isProjectDefault",
+          "roleIds"
+        ]
+      },
+      "ToBackendGetMemberGivensResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetMemberGivensResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetMemberGivensResponsePayload"
           }
         },
         "required": [
@@ -16420,6 +17118,13 @@
               "$ref": "#/components/schemas/ProjectReportLink"
             }
           },
+          "projectSelectedGivenLinks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectSelectedGivenLink"
+            },
+            "nullable": true
+          },
           "permissionsAutoAcceptSessionIds": {
             "type": "array",
             "items": {
@@ -16578,6 +17283,63 @@
         "required": [
           "projectId",
           "reportId"
+        ]
+      },
+      "ProjectSelectedGivenLink": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "givens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SelectedGiven"
+            }
+          },
+          "navTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
+            "nullable": true
+          }
+        },
+        "required": [
+          "projectId",
+          "givens"
+        ]
+      },
+      "SelectedGiven": {
+        "type": "object",
+        "properties": {
+          "givenId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "String",
+              "Number",
+              "Boolean",
+              "Date",
+              "Timestamp"
+            ]
+          },
+          "isMultiple": {
+            "type": "boolean"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "givenId",
+          "type",
+          "isMultiple",
+          "values"
         ]
       },
       "ToBackendGetNavResponse": {
@@ -20158,6 +20920,1390 @@
           "payload"
         ]
       },
+      "ToBackendCreateGivenRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendCreateGiven"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendCreateGivenRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "givenId": {
+            "type": "string",
+            "pattern": "^[A-Z_][A-Z0-9_]*$"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "String",
+              "Number",
+              "Boolean",
+              "Date",
+              "Timestamp"
+            ]
+          },
+          "isMultiple": {
+            "type": "boolean"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "projectId",
+          "givenId",
+          "type",
+          "isMultiple",
+          "values"
+        ]
+      },
+      "ToBackendCreateGivenRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendCreateGivenRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendCreateGivenRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendCreateGivenResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendCreateGiven"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendCreateGivenResponsePayload": {
+        "type": "object",
+        "properties": {
+          "userMember": {
+            "$ref": "#/components/schemas/Member"
+          },
+          "givens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Given"
+            }
+          }
+        },
+        "required": [
+          "userMember",
+          "givens"
+        ]
+      },
+      "Given": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "givenId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "String",
+              "Number",
+              "Boolean",
+              "Date",
+              "Timestamp"
+            ]
+          },
+          "isMultiple": {
+            "type": "boolean"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "projectId",
+          "givenId",
+          "type",
+          "isMultiple",
+          "values"
+        ]
+      },
+      "ToBackendCreateGivenResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendCreateGivenResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendCreateGivenResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendDeleteGivenRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendDeleteGiven"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendDeleteGivenRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "givenId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "projectId",
+          "givenId"
+        ]
+      },
+      "ToBackendDeleteGivenRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendDeleteGivenRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendDeleteGivenRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendDeleteGivenResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendDeleteGiven"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendDeleteGivenResponsePayload": {
+        "type": "object",
+        "properties": {
+          "userMember": {
+            "$ref": "#/components/schemas/Member"
+          },
+          "givens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Given"
+            }
+          }
+        },
+        "required": [
+          "userMember",
+          "givens"
+        ]
+      },
+      "ToBackendDeleteGivenResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendDeleteGivenResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendDeleteGivenResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendEditGivenRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendEditGiven"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendEditGivenRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "givenId": {
+            "type": "string",
+            "pattern": "^[A-Z_][A-Z0-9_]*$"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "projectId",
+          "givenId",
+          "values"
+        ]
+      },
+      "ToBackendEditGivenRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendEditGivenRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendEditGivenRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendEditGivenResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendEditGiven"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendEditGivenResponsePayload": {
+        "type": "object",
+        "properties": {
+          "userMember": {
+            "$ref": "#/components/schemas/Member"
+          },
+          "givens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Given"
+            }
+          }
+        },
+        "required": [
+          "userMember",
+          "givens"
+        ]
+      },
+      "ToBackendEditGivenResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendEditGivenResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendEditGivenResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetGivensRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendGetGivens"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendGetGivensRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "projectId"
+        ]
+      },
+      "ToBackendGetGivensRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetGivensRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetGivensRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetGivensResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendGetGivens"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendGetGivensResponsePayload": {
+        "type": "object",
+        "properties": {
+          "userMember": {
+            "$ref": "#/components/schemas/Member"
+          },
+          "givens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Given"
+            }
+          }
+        },
+        "required": [
+          "userMember",
+          "givens"
+        ]
+      },
+      "ToBackendGetGivensResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetGivensResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetGivensResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendCreateRoleRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendCreateRole"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendCreateRoleRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "roleId": {
+            "type": "string",
+            "pattern": "^[a-z_][a-z0-9_]*$"
+          }
+        },
+        "required": [
+          "projectId",
+          "roleId"
+        ]
+      },
+      "ToBackendCreateRoleRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendCreateRoleRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendCreateRoleRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendCreateRoleResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendCreateRole"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendCreateRoleResponsePayload": {
+        "type": "object",
+        "properties": {
+          "userMember": {
+            "$ref": "#/components/schemas/Member"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Role"
+            }
+          }
+        },
+        "required": [
+          "userMember",
+          "roles"
+        ]
+      },
+      "ToBackendCreateRoleResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendCreateRoleResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendCreateRoleResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendCreateRoleGivenRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendCreateRoleGiven"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendCreateRoleGivenRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "roleId": {
+            "type": "string"
+          },
+          "givenId": {
+            "type": "string"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "projectId",
+          "roleId",
+          "givenId",
+          "values"
+        ]
+      },
+      "ToBackendCreateRoleGivenRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendCreateRoleGivenRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendCreateRoleGivenRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendCreateRoleGivenResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendCreateRoleGiven"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendCreateRoleGivenResponsePayload": {
+        "type": "object",
+        "properties": {
+          "userMember": {
+            "$ref": "#/components/schemas/Member"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Role"
+            }
+          }
+        },
+        "required": [
+          "userMember",
+          "roles"
+        ]
+      },
+      "ToBackendCreateRoleGivenResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendCreateRoleGivenResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendCreateRoleGivenResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendEditRoleGivenRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendEditRoleGiven"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendEditRoleGivenRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "roleId": {
+            "type": "string"
+          },
+          "givenId": {
+            "type": "string"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "projectId",
+          "roleId",
+          "givenId",
+          "values"
+        ]
+      },
+      "ToBackendEditRoleGivenRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendEditRoleGivenRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendEditRoleGivenRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendEditRoleGivenResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendEditRoleGiven"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendEditRoleGivenResponsePayload": {
+        "type": "object",
+        "properties": {
+          "userMember": {
+            "$ref": "#/components/schemas/Member"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Role"
+            }
+          }
+        },
+        "required": [
+          "userMember",
+          "roles"
+        ]
+      },
+      "ToBackendEditRoleGivenResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendEditRoleGivenResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendEditRoleGivenResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendDeleteRoleGivenRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendDeleteRoleGiven"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendDeleteRoleGivenRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "roleId": {
+            "type": "string"
+          },
+          "givenId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "projectId",
+          "roleId",
+          "givenId"
+        ]
+      },
+      "ToBackendDeleteRoleGivenRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendDeleteRoleGivenRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendDeleteRoleGivenRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendDeleteRoleGivenResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendDeleteRoleGiven"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendDeleteRoleGivenResponsePayload": {
+        "type": "object",
+        "properties": {
+          "userMember": {
+            "$ref": "#/components/schemas/Member"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Role"
+            }
+          }
+        },
+        "required": [
+          "userMember",
+          "roles"
+        ]
+      },
+      "ToBackendDeleteRoleGivenResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendDeleteRoleGivenResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendDeleteRoleGivenResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendDeleteRoleRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendDeleteRole"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendDeleteRoleRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "roleId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "projectId",
+          "roleId"
+        ]
+      },
+      "ToBackendDeleteRoleRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendDeleteRoleRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendDeleteRoleRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendDeleteRoleResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendDeleteRole"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendDeleteRoleResponsePayload": {
+        "type": "object",
+        "properties": {
+          "userMember": {
+            "$ref": "#/components/schemas/Member"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Role"
+            }
+          }
+        },
+        "required": [
+          "userMember",
+          "roles"
+        ]
+      },
+      "ToBackendDeleteRoleResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendDeleteRoleResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendDeleteRoleResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetRolesRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendGetRoles"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendGetRolesRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "projectId"
+        ]
+      },
+      "ToBackendGetRolesRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetRolesRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetRolesRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetRolesResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendGetRoles"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendGetRolesResponsePayload": {
+        "type": "object",
+        "properties": {
+          "userMember": {
+            "$ref": "#/components/schemas/Member"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Role"
+            }
+          },
+          "givens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Given"
+            }
+          }
+        },
+        "required": [
+          "userMember",
+          "roles",
+          "givens"
+        ]
+      },
+      "ToBackendGetRolesResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetRolesResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetRolesResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
       "ToBackendCancelQueriesRequestInfo": {
         "type": "object",
         "properties": {
@@ -23000,6 +25146,55 @@
             "items": {
               "$ref": "#/components/schemas/Filter"
             }
+          },
+          "appliedGivens": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "boolean"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "boolean"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "defaultText": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "defaultText"
+                  ]
+                }
+              ]
+            },
+            "nullable": true
           },
           "chart": {
             "$ref": "#/components/schemas/MconfigChart"
@@ -26592,6 +28787,131 @@
           },
           "payload": {
             "$ref": "#/components/schemas/ToBackendDeleteUserResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetUserGivensRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendGetUserGivens"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendGetUserGivensRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "projectId"
+        ]
+      },
+      "ToBackendGetUserGivensRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetUserGivensRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetUserGivensRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetUserGivensResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendGetUserGivens"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendGetUserGivensResponsePayload": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "memberGivens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MemberGiven"
+            }
+          }
+        },
+        "required": [
+          "user",
+          "memberGivens"
+        ]
+      },
+      "ToBackendGetUserGivensResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetUserGivensResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetUserGivensResponsePayload"
           }
         },
         "required": [
@@ -30769,7 +33089,10 @@
             "nullable": true
           },
           "accessRoles": {
-            "type": "string",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
             "nullable": true
           },
           "tilesGrid": {
@@ -30941,7 +33264,10 @@
             "nullable": true
           },
           "accessRoles": {
-            "type": "string",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
             "nullable": true
           },
           "tilesGrid": {

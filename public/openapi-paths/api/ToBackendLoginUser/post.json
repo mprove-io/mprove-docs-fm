@@ -3,7 +3,7 @@
   "info": {
     "title": "mprove backend",
     "description": "",
-    "version": "12.0.19",
+    "version": "12.0.20",
     "contact": {}
   },
   "paths": {
@@ -287,6 +287,13 @@
             "items": {
               "$ref": "#/components/schemas/ProjectReportLink"
             }
+          },
+          "projectSelectedGivenLinks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectSelectedGivenLink"
+            },
+            "nullable": true
           },
           "permissionsAutoAcceptSessionIds": {
             "type": "array",
@@ -952,6 +959,30 @@
           "reportId"
         ]
       },
+      "ProjectSelectedGivenLink": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "givens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SelectedGiven"
+            }
+          },
+          "navTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
+            "nullable": true
+          }
+        },
+        "required": [
+          "projectId",
+          "givens"
+        ]
+      },
       "FractionControl": {
         "type": "object",
         "properties": {
@@ -1021,6 +1052,39 @@
         "required": [
           "typeValue",
           "value"
+        ]
+      },
+      "SelectedGiven": {
+        "type": "object",
+        "properties": {
+          "givenId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "String",
+              "Number",
+              "Boolean",
+              "Date",
+              "Timestamp"
+            ]
+          },
+          "isMultiple": {
+            "type": "boolean"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "givenId",
+          "type",
+          "isMultiple",
+          "values"
         ]
       },
       "FractionControlOption": {

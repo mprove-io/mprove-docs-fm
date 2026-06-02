@@ -1,0 +1,223 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "mprove backend",
+    "description": "",
+    "version": "12.0.20",
+    "contact": {}
+  },
+  "paths": {
+    "/api/ToBackendGetMemberGivens": {
+      "post": {
+        "operationId": "GetMemberGivensController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendGetMemberGivensRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendGetMemberGivensResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ToBackendGetMemberGivensRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetMemberGivensRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetMemberGivensRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetMemberGivensResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetMemberGivensResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetMemberGivensResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetMemberGivensRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendGetMemberGivens"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendGetMemberGivensRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "memberId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "projectId",
+          "memberId"
+        ]
+      },
+      "ToBackendGetMemberGivensResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendGetMemberGivens"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendGetMemberGivensResponsePayload": {
+        "type": "object",
+        "properties": {
+          "memberGivens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MemberGiven"
+            }
+          }
+        },
+        "required": [
+          "memberGivens"
+        ]
+      },
+      "MemberGiven": {
+        "type": "object",
+        "properties": {
+          "givenId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "String",
+              "Number",
+              "Boolean",
+              "Date",
+              "Timestamp"
+            ]
+          },
+          "isMultiple": {
+            "type": "boolean"
+          },
+          "memberGivenValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MemberGivenValue"
+            }
+          }
+        },
+        "required": [
+          "givenId",
+          "type",
+          "isMultiple",
+          "memberGivenValues"
+        ]
+      },
+      "MemberGivenValue": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          },
+          "isProjectDefault": {
+            "type": "boolean"
+          },
+          "roleIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "value",
+          "isProjectDefault",
+          "roleIds"
+        ]
+      }
+    }
+  }
+}

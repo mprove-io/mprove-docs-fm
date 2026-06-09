@@ -5278,7 +5278,7 @@
   "info": {
     "title": "mprove backend",
     "description": "",
-    "version": "12.0.20",
+    "version": "12.0.22",
     "contact": {}
   },
   "tags": [
@@ -26960,48 +26960,121 @@
         ]
       },
       "ToBackendSyncRepoRequestPayload": {
-        "type": "object",
-        "properties": {
-          "projectId": {
-            "type": "string"
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "projectId": {
+                "type": "string"
+              },
+              "repoId": {
+                "type": "string"
+              },
+              "branchId": {
+                "type": "string"
+              },
+              "lastCommit": {
+                "type": "string"
+              },
+              "envId": {
+                "type": "string"
+              },
+              "getRepo": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "getRepoNodes": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "getErrors": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "debug": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "direction": {
+                "type": "string",
+                "enum": [
+                  "to-server"
+                ]
+              },
+              "changedFiles": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/DiskSyncFile"
+                }
+              },
+              "deletedFiles": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/DiskSyncFile"
+                }
+              }
+            },
+            "required": [
+              "projectId",
+              "repoId",
+              "branchId",
+              "lastCommit",
+              "envId",
+              "direction",
+              "changedFiles",
+              "deletedFiles"
+            ]
           },
-          "repoId": {
-            "type": "string"
-          },
-          "branchId": {
-            "type": "string"
-          },
-          "lastCommit": {
-            "type": "string"
-          },
-          "lastSyncTime": {
-            "type": "number"
-          },
-          "envId": {
-            "type": "string"
-          },
-          "localChangedFiles": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DiskSyncFile"
-            }
-          },
-          "localDeletedFiles": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DiskSyncFile"
-            }
+          {
+            "type": "object",
+            "properties": {
+              "projectId": {
+                "type": "string"
+              },
+              "repoId": {
+                "type": "string"
+              },
+              "branchId": {
+                "type": "string"
+              },
+              "lastCommit": {
+                "type": "string"
+              },
+              "envId": {
+                "type": "string"
+              },
+              "getRepo": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "getRepoNodes": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "getErrors": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "debug": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "direction": {
+                "type": "string",
+                "enum": [
+                  "from-server"
+                ]
+              }
+            },
+            "required": [
+              "projectId",
+              "repoId",
+              "branchId",
+              "lastCommit",
+              "envId",
+              "direction"
+            ]
           }
-        },
-        "required": [
-          "projectId",
-          "repoId",
-          "branchId",
-          "lastCommit",
-          "lastSyncTime",
-          "envId",
-          "localChangedFiles",
-          "localDeletedFiles"
         ]
       },
       "DiskSyncFile": {
@@ -27029,10 +27102,6 @@
           },
           "content": {
             "type": "string",
-            "nullable": true
-          },
-          "modifiedTime": {
-            "type": "number",
             "nullable": true
           }
         },
@@ -27100,44 +27169,187 @@
         ]
       },
       "ToBackendSyncRepoResponsePayload": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "orgId": {
+                "type": "string"
+              },
+              "repoId": {
+                "type": "string"
+              },
+              "validationErrorsTotal": {
+                "type": "number"
+              },
+              "validationErrors": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/BmlError"
+                },
+                "nullable": true
+              },
+              "devChangesToCommit": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/DiskFileChange"
+                }
+              },
+              "repo": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ToBackendSyncRepoRepo"
+                  }
+                ],
+                "nullable": true
+              },
+              "needValidate": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "structId": {
+                "type": "string",
+                "nullable": true
+              },
+              "direction": {
+                "type": "string",
+                "enum": [
+                  "to-server"
+                ]
+              },
+              "appliedChangesOnServer": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "orgId",
+              "repoId",
+              "validationErrorsTotal",
+              "devChangesToCommit",
+              "direction",
+              "appliedChangesOnServer"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "orgId": {
+                "type": "string"
+              },
+              "repoId": {
+                "type": "string"
+              },
+              "validationErrorsTotal": {
+                "type": "number"
+              },
+              "validationErrors": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/BmlError"
+                },
+                "nullable": true
+              },
+              "devChangesToCommit": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/DiskFileChange"
+                }
+              },
+              "repo": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ToBackendSyncRepoRepo"
+                  }
+                ],
+                "nullable": true
+              },
+              "needValidate": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "structId": {
+                "type": "string",
+                "nullable": true
+              },
+              "direction": {
+                "type": "string",
+                "enum": [
+                  "from-server"
+                ]
+              },
+              "changedFiles": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/DiskSyncFile"
+                }
+              },
+              "deletedFiles": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/DiskSyncFile"
+                }
+              }
+            },
+            "required": [
+              "orgId",
+              "repoId",
+              "validationErrorsTotal",
+              "devChangesToCommit",
+              "direction",
+              "changedFiles",
+              "deletedFiles"
+            ]
+          }
+        ]
+      },
+      "ToBackendSyncRepoRepo": {
         "type": "object",
         "properties": {
-          "restChangedFiles": {
+          "orgId": {
+            "type": "string"
+          },
+          "projectId": {
+            "type": "string"
+          },
+          "repoId": {
+            "type": "string"
+          },
+          "currentBranchId": {
+            "type": "string"
+          },
+          "repoStatus": {
+            "type": "string",
+            "enum": [
+              "NeedCommit",
+              "NeedPull",
+              "NeedPush",
+              "Ok"
+            ]
+          },
+          "conflicts": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/DiskSyncFile"
+              "$ref": "#/components/schemas/DiskFileLine"
             }
           },
-          "restDeletedFiles": {
+          "nodes": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/DiskSyncFile"
-            }
-          },
-          "needValidate": {
-            "type": "boolean"
-          },
-          "repo": {
-            "$ref": "#/components/schemas/Repo"
-          },
-          "struct": {
-            "$ref": "#/components/schemas/StructX"
-          },
-          "devReqReceiveTime": {
-            "type": "number"
-          },
-          "devRespSentTime": {
-            "type": "number"
+              "$ref": "#/components/schemas/DiskCatalogNode"
+            },
+            "nullable": true
           }
         },
         "required": [
-          "restChangedFiles",
-          "restDeletedFiles",
-          "needValidate",
-          "repo",
-          "struct",
-          "devReqReceiveTime",
-          "devRespSentTime"
+          "orgId",
+          "projectId",
+          "repoId",
+          "currentBranchId",
+          "repoStatus",
+          "conflicts"
         ]
       },
       "ToBackendSyncRepoResponse": {

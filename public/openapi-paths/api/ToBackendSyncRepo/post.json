@@ -3,7 +3,7 @@
   "info": {
     "title": "mprove backend",
     "description": "",
-    "version": "12.0.20",
+    "version": "12.0.22",
     "contact": {}
   },
   "paths": {
@@ -91,48 +91,121 @@
         ]
       },
       "ToBackendSyncRepoRequestPayload": {
-        "type": "object",
-        "properties": {
-          "projectId": {
-            "type": "string"
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "projectId": {
+                "type": "string"
+              },
+              "repoId": {
+                "type": "string"
+              },
+              "branchId": {
+                "type": "string"
+              },
+              "lastCommit": {
+                "type": "string"
+              },
+              "envId": {
+                "type": "string"
+              },
+              "getRepo": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "getRepoNodes": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "getErrors": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "debug": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "direction": {
+                "type": "string",
+                "enum": [
+                  "to-server"
+                ]
+              },
+              "changedFiles": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/DiskSyncFile"
+                }
+              },
+              "deletedFiles": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/DiskSyncFile"
+                }
+              }
+            },
+            "required": [
+              "projectId",
+              "repoId",
+              "branchId",
+              "lastCommit",
+              "envId",
+              "direction",
+              "changedFiles",
+              "deletedFiles"
+            ]
           },
-          "repoId": {
-            "type": "string"
-          },
-          "branchId": {
-            "type": "string"
-          },
-          "lastCommit": {
-            "type": "string"
-          },
-          "lastSyncTime": {
-            "type": "number"
-          },
-          "envId": {
-            "type": "string"
-          },
-          "localChangedFiles": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DiskSyncFile"
-            }
-          },
-          "localDeletedFiles": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DiskSyncFile"
-            }
+          {
+            "type": "object",
+            "properties": {
+              "projectId": {
+                "type": "string"
+              },
+              "repoId": {
+                "type": "string"
+              },
+              "branchId": {
+                "type": "string"
+              },
+              "lastCommit": {
+                "type": "string"
+              },
+              "envId": {
+                "type": "string"
+              },
+              "getRepo": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "getRepoNodes": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "getErrors": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "debug": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "direction": {
+                "type": "string",
+                "enum": [
+                  "from-server"
+                ]
+              }
+            },
+            "required": [
+              "projectId",
+              "repoId",
+              "branchId",
+              "lastCommit",
+              "envId",
+              "direction"
+            ]
           }
-        },
-        "required": [
-          "projectId",
-          "repoId",
-          "branchId",
-          "lastCommit",
-          "lastSyncTime",
-          "envId",
-          "localChangedFiles",
-          "localDeletedFiles"
         ]
       },
       "ToBackendSyncRepoResponseInfo": {
@@ -180,44 +253,140 @@
         ]
       },
       "ToBackendSyncRepoResponsePayload": {
-        "type": "object",
-        "properties": {
-          "restChangedFiles": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DiskSyncFile"
-            }
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "orgId": {
+                "type": "string"
+              },
+              "repoId": {
+                "type": "string"
+              },
+              "validationErrorsTotal": {
+                "type": "number"
+              },
+              "validationErrors": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/BmlError"
+                },
+                "nullable": true
+              },
+              "devChangesToCommit": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/DiskFileChange"
+                }
+              },
+              "repo": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ToBackendSyncRepoRepo"
+                  }
+                ],
+                "nullable": true
+              },
+              "needValidate": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "structId": {
+                "type": "string",
+                "nullable": true
+              },
+              "direction": {
+                "type": "string",
+                "enum": [
+                  "to-server"
+                ]
+              },
+              "appliedChangesOnServer": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "orgId",
+              "repoId",
+              "validationErrorsTotal",
+              "devChangesToCommit",
+              "direction",
+              "appliedChangesOnServer"
+            ]
           },
-          "restDeletedFiles": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DiskSyncFile"
-            }
-          },
-          "needValidate": {
-            "type": "boolean"
-          },
-          "repo": {
-            "$ref": "#/components/schemas/Repo"
-          },
-          "struct": {
-            "$ref": "#/components/schemas/StructX"
-          },
-          "devReqReceiveTime": {
-            "type": "number"
-          },
-          "devRespSentTime": {
-            "type": "number"
+          {
+            "type": "object",
+            "properties": {
+              "orgId": {
+                "type": "string"
+              },
+              "repoId": {
+                "type": "string"
+              },
+              "validationErrorsTotal": {
+                "type": "number"
+              },
+              "validationErrors": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/BmlError"
+                },
+                "nullable": true
+              },
+              "devChangesToCommit": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/DiskFileChange"
+                }
+              },
+              "repo": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ToBackendSyncRepoRepo"
+                  }
+                ],
+                "nullable": true
+              },
+              "needValidate": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "structId": {
+                "type": "string",
+                "nullable": true
+              },
+              "direction": {
+                "type": "string",
+                "enum": [
+                  "from-server"
+                ]
+              },
+              "changedFiles": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/DiskSyncFile"
+                }
+              },
+              "deletedFiles": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/DiskSyncFile"
+                }
+              }
+            },
+            "required": [
+              "orgId",
+              "repoId",
+              "validationErrorsTotal",
+              "devChangesToCommit",
+              "direction",
+              "changedFiles",
+              "deletedFiles"
+            ]
           }
-        },
-        "required": [
-          "restChangedFiles",
-          "restDeletedFiles",
-          "needValidate",
-          "repo",
-          "struct",
-          "devReqReceiveTime",
-          "devRespSentTime"
         ]
       },
       "DiskSyncFile": {
@@ -246,17 +415,75 @@
           "content": {
             "type": "string",
             "nullable": true
-          },
-          "modifiedTime": {
-            "type": "number",
-            "nullable": true
           }
         },
         "required": [
           "path"
         ]
       },
-      "Repo": {
+      "BmlError": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiskFileLine"
+            }
+          }
+        },
+        "required": [
+          "title",
+          "message",
+          "lines"
+        ]
+      },
+      "DiskFileChange": {
+        "type": "object",
+        "properties": {
+          "fileName": {
+            "type": "string"
+          },
+          "fileId": {
+            "type": "string"
+          },
+          "parentPath": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "New",
+              "Deleted",
+              "Modified",
+              "Conflicted",
+              "TypeChange",
+              "Renamed",
+              "Ignored",
+              "Unmodified",
+              "Copied",
+              "Untracked",
+              "Unreadable"
+            ]
+          },
+          "content": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "fileName",
+          "fileId",
+          "parentPath",
+          "status"
+        ]
+      },
+      "ToBackendSyncRepoRepo": {
         "type": "object",
         "properties": {
           "orgId": {
@@ -290,19 +517,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DiskCatalogNode"
-            }
-          },
-          "changesToCommit": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DiskFileChange"
-            }
-          },
-          "changesToPush": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DiskFileChange"
-            }
+            },
+            "nullable": true
           }
         },
         "required": [
@@ -311,60 +527,7 @@
           "repoId",
           "currentBranchId",
           "repoStatus",
-          "conflicts",
-          "nodes",
-          "changesToCommit",
-          "changesToPush"
-        ]
-      },
-      "StructX": {
-        "type": "object",
-        "properties": {
-          "projectId": {
-            "type": "string"
-          },
-          "structId": {
-            "type": "string"
-          },
-          "errors": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/BmlError"
-            }
-          },
-          "metrics": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ModelMetricX"
-            }
-          },
-          "presets": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Preset"
-            }
-          },
-          "mproveConfig": {
-            "$ref": "#/components/schemas/MproveConfig"
-          },
-          "mproveVersion": {
-            "type": "string"
-          },
-          "serverTs": {
-            "type": "integer",
-            "minimum": -9007199254740991,
-            "maximum": 9007199254740991
-          }
-        },
-        "required": [
-          "projectId",
-          "structId",
-          "errors",
-          "metrics",
-          "presets",
-          "mproveConfig",
-          "mproveVersion",
-          "serverTs"
+          "conflicts"
         ]
       },
       "DiskFileLine": {
@@ -417,297 +580,6 @@
           "isFolder",
           "name"
         ]
-      },
-      "DiskFileChange": {
-        "type": "object",
-        "properties": {
-          "fileName": {
-            "type": "string"
-          },
-          "fileId": {
-            "type": "string"
-          },
-          "parentPath": {
-            "type": "string"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "New",
-              "Deleted",
-              "Modified",
-              "Conflicted",
-              "TypeChange",
-              "Renamed",
-              "Ignored",
-              "Unmodified",
-              "Copied",
-              "Untracked",
-              "Unreadable"
-            ]
-          },
-          "content": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "required": [
-          "fileName",
-          "fileId",
-          "parentPath",
-          "status"
-        ]
-      },
-      "BmlError": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          },
-          "lines": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DiskFileLine"
-            }
-          }
-        },
-        "required": [
-          "title",
-          "message",
-          "lines"
-        ]
-      },
-      "ModelMetricX": {
-        "type": "object",
-        "properties": {
-          "modelId": {
-            "type": "string",
-            "nullable": true
-          },
-          "modelType": {
-            "type": "string",
-            "enum": [
-              "Store",
-              "Malloy"
-            ]
-          },
-          "connectionType": {
-            "type": "string",
-            "enum": [
-              "PostgreSQL",
-              "MySQL",
-              "SnowFlake",
-              "BigQuery",
-              "Databricks",
-              "MotherDuck",
-              "Presto",
-              "Trino",
-              "GoogleApi",
-              "Api"
-            ]
-          },
-          "fieldId": {
-            "type": "string"
-          },
-          "fieldClass": {
-            "type": "string",
-            "enum": [
-              "dimension",
-              "time",
-              "measure",
-              "calculation",
-              "filter",
-              "join",
-              "info"
-            ]
-          },
-          "fieldResult": {
-            "type": "string",
-            "enum": [
-              "day_of_week",
-              "day_of_week_index",
-              "month_name",
-              "quarter_of_year",
-              "ts",
-              "yesno",
-              "string",
-              "number",
-              "date",
-              "boolean",
-              "array",
-              "record",
-              "json",
-              "sql_native"
-            ],
-            "nullable": true
-          },
-          "timeFieldId": {
-            "type": "string"
-          },
-          "structId": {
-            "type": "string"
-          },
-          "filePath": {
-            "type": "string",
-            "nullable": true
-          },
-          "fieldLineNum": {
-            "type": "integer",
-            "minimum": -9007199254740991,
-            "maximum": 9007199254740991,
-            "nullable": true
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "Model"
-            ]
-          },
-          "metricId": {
-            "type": "string"
-          },
-          "topNode": {
-            "type": "string",
-            "nullable": true
-          },
-          "label": {
-            "type": "string",
-            "nullable": true
-          },
-          "topLabel": {
-            "type": "string",
-            "nullable": true
-          },
-          "partNodeLabel": {
-            "type": "string",
-            "nullable": true
-          },
-          "partFieldLabel": {
-            "type": "string",
-            "nullable": true
-          },
-          "partLabel": {
-            "type": "string",
-            "nullable": true
-          },
-          "timeNodeLabel": {
-            "type": "string",
-            "nullable": true
-          },
-          "timeFieldLabel": {
-            "type": "string",
-            "nullable": true
-          },
-          "timeLabel": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "formatNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "currencyPrefix": {
-            "type": "string",
-            "nullable": true
-          },
-          "currencySuffix": {
-            "type": "string",
-            "nullable": true
-          },
-          "serverTs": {
-            "type": "integer",
-            "minimum": -9007199254740991,
-            "maximum": 9007199254740991
-          },
-          "hasAccessToModel": {
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "modelType",
-          "connectionType",
-          "fieldId",
-          "fieldClass",
-          "timeFieldId",
-          "structId",
-          "type",
-          "metricId",
-          "serverTs",
-          "hasAccessToModel"
-        ]
-      },
-      "Preset": {
-        "type": "object",
-        "properties": {
-          "presetId": {
-            "type": "string"
-          },
-          "label": {
-            "type": "string"
-          },
-          "path": {
-            "type": "string"
-          },
-          "parsedContent": {}
-        },
-        "required": [
-          "presetId",
-          "label",
-          "path",
-          "parsedContent"
-        ]
-      },
-      "MproveConfig": {
-        "type": "object",
-        "properties": {
-          "mproveDirValue": {
-            "type": "string",
-            "nullable": true
-          },
-          "caseSensitiveStringFilters": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "weekStart": {
-            "type": "string",
-            "enum": [
-              "Sunday",
-              "Monday"
-            ],
-            "nullable": true
-          },
-          "allowTimezones": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "defaultTimezone": {
-            "type": "string",
-            "nullable": true
-          },
-          "formatNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "currencyPrefix": {
-            "type": "string",
-            "nullable": true
-          },
-          "currencySuffix": {
-            "type": "string",
-            "nullable": true
-          },
-          "thousandsSeparator": {
-            "type": "string",
-            "nullable": true
-          }
-        }
       }
     }
   }

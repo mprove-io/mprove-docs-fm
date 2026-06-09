@@ -4,11 +4,16 @@ title: sync
 
 # sync
 
-Mprove **sync** allows you to sync uncommitted changes between local and dev repositories while working with project files on your local machine.
+`mprove sync` allows you to sync uncommitted changes between local and server dev repositories while working with project files on your local machine.
+
+`mprove sync` applies LOCAL repo state to server repo.
+
+`mprove sync --from-server` applies SERVER repo state to local repo.
+
+Mprove `sync` does not mix states. You chose what state to use by specifying or not specifying `--from-server` option.
 
 <Callout type="info">
-  For **mprove sync** to work, the current git branch in the Local repository
-  and the branch in the Dev repository must be in the same commit.
+  For "sync" to work, the Local and Server dev repositories must be on the same branch and commit
 </Callout>
 
 ## Workflows
@@ -18,17 +23,17 @@ You can change your approach depending on the task.
 ### Workflow "Commit on Local machine":
 
 - Make changes on Local machine
-- Sync changes (mprove sync)
+- Apply local changes to server repo using `mprove sync`
 - Check and fix validation errors in web UI
-- Sync changes using (mprove sync)
+- Apply server repo changes to local repo using `mprove sync --from-server`
 - Commit changes on Local machine
-- Push changes from Local machine to Remote (git push)
-- Revert Dev repo to Remote in web UI (or revert Dev repo to last-commit and pull changes from Remote)
+- Push changes from Local machine to Remote using `git push`
+- Revert Dev repo to last-commit and pull changes from Remote
 
 ### Workflow "Commit on Dev (web UI)":
 
 - Make changes on Local machine
-- Sync changes (mprove sync)
+- Apply local changes to server repo using `mprove sync`
 - Check and fix validation errors (web UI)
 - Commit changes on Dev (web UI)
 - Push changes from Dev to Remote (web UI)
@@ -39,7 +44,7 @@ You can change your approach depending on the task.
 
 ```
 ➜  ~ mprove sync -h
-Synchronize files (uncommitted changes) between Local and Dev repo, validate Mprove Files for selected env
+Overwrite SERVER repo state using local repo state and vice versa, depending on the "--from-server" option
 
 ━━━ Usage ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -47,10 +52,10 @@ $ mprove sync
 
 ━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  --project-id #0       (required) Project Id
-  --env #0              (required) Environment
+  --project-id #0       Project Id
+  --env #0              (default "prod") Environment
   --local-path #0       (optional, if not specified then the current working directory is used) Absolute path of local git repository
-  --first-sync          (default false) if set, then the previous sync timestamp is ignored
+  --from-server         (default false) if set, then server uncommitted changes overwrite local uncommitted changes
   --get-repo            (default false), show repo in output
   --get-repo-nodes      (default false), show repo nodes in output
   --get-errors          (default false), show validation errors in output
@@ -60,19 +65,23 @@ $ mprove sync
 
 ━━━ Examples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Synchronize files (uncommitted changes) between Local and Dev repo, validate Mprove Files for selected env
-  $ mprove sync --project-id DXYE72ODCP5LWPWH2EXQ --env prod
+Apply LOCAL uncommitted repo state to the server repo
+  $ mprove sync
+
+Apply SERVER uncommitted repo state to the local repo
+  $ mprove sync --from-server
 ```
 
 ## Example Output
 
 ```
-➜  ~ mprove sync \
---local-path /mprove/mprove_data/mp5 \
---env-file-path /mprove/.env \
---env prod
+➜  ~ mprove sync
 
-message:               Sync completed
-validationErrorsTotal: 0
-url:                   https://app.mprove.io/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/T2SQOCM8KK2QMRYYH75N/branch/main/env/prod/builder
+message:                Sync completed
+appliedChangesOnLocal: 
+  (empty array)
+appliedChangesOnServer: 
+  - (modified) README.md
+validationErrorsTotal:  0
+url:                    http://localhost:3000/org/AWNCAHWLFQTQJYCH3ZSE/project/DXYE72ODCP5LWPWH2EXQ/repo/T2SQOCM8KK2QMRYYH75N/branch/main/env/prod/builder
 ```

@@ -3,7 +3,7 @@
   "info": {
     "title": "mprove backend",
     "description": "",
-    "version": "12.0.22",
+    "version": "12.0.24",
     "contact": {}
   },
   "paths": {
@@ -107,6 +107,10 @@
           },
           "oldMconfigId": {
             "type": "string"
+          },
+          "setPivotDefaults": {
+            "type": "boolean",
+            "nullable": true
           }
         },
         "required": [
@@ -578,7 +582,8 @@
               "bar",
               "scatter",
               "pie",
-              "single"
+              "single",
+              "pivot_table"
             ]
           },
           "title": {
@@ -604,8 +609,41 @@
             "type": "string",
             "nullable": true
           },
+          "pivotRows": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "pivotColumns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "pivotValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MconfigChartPivotValue"
+            },
+            "nullable": true
+          },
           "format": {
             "type": "boolean",
+            "nullable": true
+          },
+          "pivotTheme": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstColumnWidth": {
+            "type": "number",
+            "nullable": true
+          },
+          "valueColumnsWidth": {
+            "type": "number",
             "nullable": true
           },
           "xAxis": {
@@ -1360,6 +1398,17 @@
           "type"
         ]
       },
+      "MconfigChartPivotValue": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "field"
+        ]
+      },
       "MconfigChartXAxis": {
         "type": "object",
         "properties": {
@@ -1401,7 +1450,8 @@
               "bar",
               "scatter",
               "pie",
-              "single"
+              "single",
+              "pivot_table"
             ],
             "nullable": true
           },

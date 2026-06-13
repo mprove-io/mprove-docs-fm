@@ -21,6 +21,12 @@ tiles: # Chart must have exactly one tile
     - field_path
     multi_field: field_path
     size_field: field_path
+    pivot_rows:
+    - field_path
+    pivot_columns:
+    - field_path
+    pivot_values:
+    - field: field_path
   options:
     x_axis:
       scale: false
@@ -30,4 +36,6 @@ tiles: # Chart must have exactly one tile
     series:
     - data_field: field_path
       y_axis_index: 0
-      type: chart_type`
+      type: chart_type
+    first_column_width: 235
+    value_columns_width: 181`

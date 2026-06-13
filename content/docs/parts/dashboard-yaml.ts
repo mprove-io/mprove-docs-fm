@@ -38,6 +38,12 @@ tiles:
     - field_path
     multi_field: field_path
     size_field: field_path
+    pivot_rows:
+    - field_path
+    pivot_columns:
+    - field_path
+    pivot_values:
+    - field: field_path
   options:
     x_axis:
       scale: false
@@ -48,6 +54,8 @@ tiles:
     - data_field: field_path
       y_axis_index: 0
       type: chart_type
+    first_column_width: 235
+    value_columns_width: 181
   plate:
     plate_width: 8
     plate_height: 12

@@ -3,7 +3,7 @@
   "info": {
     "title": "mprove backend",
     "description": "",
-    "version": "12.0.25",
+    "version": "12.0.26",
     "contact": {}
   },
   "paths": {
@@ -444,6 +444,10 @@
           },
           "mproveConfig": {
             "$ref": "#/components/schemas/MproveConfig"
+          },
+          "mproveExplorer": {
+            "type": "string",
+            "nullable": true
           },
           "mproveVersion": {
             "type": "string"

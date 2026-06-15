@@ -5278,7 +5278,7 @@
   "info": {
     "title": "mprove backend",
     "description": "",
-    "version": "12.0.25",
+    "version": "12.0.26",
     "contact": {}
   },
   "tags": [
@@ -8649,6 +8649,10 @@
           },
           "mproveConfig": {
             "$ref": "#/components/schemas/MproveConfig"
+          },
+          "mproveExplorer": {
+            "type": "string",
+            "nullable": true
           },
           "mproveVersion": {
             "type": "string"
@@ -24279,6 +24283,10 @@
             "items": {
               "$ref": "#/components/schemas/Preset"
             }
+          },
+          "mproveExplorer": {
+            "type": "string",
+            "nullable": true
           },
           "mconfigs": {
             "type": "array",

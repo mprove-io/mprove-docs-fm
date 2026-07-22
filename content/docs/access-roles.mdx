@@ -4,21 +4,17 @@ title: Access Roles
 
 # Access Roles
 
-Access roles can be assigned to project members by users with **ProjectAdmin** role.
+Project admins can assign access roles to project members in UI.
 
-Dashboards, Reports and Models have `access_roles` parameter:
+Charts, Dashboards, Reports, Models and Spaces have `access_roles` parameter:
 - Syntax for Mprove YAML - `access_roles: [sales, marketing]`
 - Syntax for Malloy model custom tags - `access_roles="sales, marketing"`
 
-Only project members with "sales" or "marketing" access roles will be able to access these objects.
+In this case, access will be granted to project members with "Sales" or "Marketing" access roles.
 
-If an object has no `access_roles` then any project member can access this object. This means that the object is public for all project members.
+Reports, Charts and Dashboards (objects) authored by user are stored in personal folder under `mprove-users` path. 
+Project admins and editors can specify object's `space` in UI. Specifying space will move file to the space folder.
 
 <Callout>
-  If a user has access to a model, then he also has access to all model's charts.
-
-  A user may have access to the dashboard, but not have access to the models of
-  dashboard tiles.
-
-  A user may have access to the report, but not have access to the models of report rows (metrics).
+Users with **ProjectAdmin** or **FileEditor** roles have access to all Charts, Dashboards, Reports, Models and Spaces of project.
 </Callout>

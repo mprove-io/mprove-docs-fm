@@ -7,6 +7,8 @@ title: Space
 import { DynamicCodeBlock } from "@/components/dynamic-codeblock";
 import { spaceYaml } from "@/content/docs/parts/space-yaml";
 
+Mprove `spaces` are just folders with ability to specify `access_roles` for their contents (reports, charts and dashboards).
+
 Each top level space must be stored as **space_name.space** YAML file:
 
 <DynamicCodeBlock
@@ -20,13 +22,17 @@ Each top level space must be stored as **space_name.space** YAML file:
   }}
 />
 
+`space_name.space` file must be stored in a folder named `space_name`.
+
+Folders (subspaces) are optional; they can be useful if certain users need access to only a portion of the parent space.
+
 ## Reference
 
 ### Space
 
-| Name         | Type                                            | Default | Description                                                              |
-| ------------ | ----------------------------------------------- | ------- | ------------------------------------------------------------------------ |
-| space\*      | string                                          | -       | Space name                                                               |
-| title        | string                                          | -       | Space title in UI                                                        |
-| access_roles | string []                                       | -       | If specified, only users with the listed roles will have access to Space |
-| folders      | [Space []](/content/docs/reference/space#space) | -       | Begin a section of subspaces                                                |
+| Name         | Type                                            | Default | Description                                                                  |
+| ------------ | ----------------------------------------------- | ------- | ---------------------------------------------------------------------------- |
+| space\*      | string                                          | -       | Space name                                                                   |
+| title        | string                                          | -       | Space title in UI                                                            |
+| access_roles | string []                                       | -       | If specified, only users with the listed roles will have access to the Space |
+| folders      | [Space []](/content/docs/reference/space#space) | -       | Begin a section of subspaces                                                 |

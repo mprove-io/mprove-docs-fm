@@ -4,6 +4,7 @@ connection: c7_google
 label: Google Analytics
 description: 'Google Analytics Reporting'
 access_roles: []
+space: sales
 method: POST
 request: |
   <createRequest.js content>

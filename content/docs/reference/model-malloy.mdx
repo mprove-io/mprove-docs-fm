@@ -36,6 +36,7 @@ import './tables/c1_distribution_centers_tx.malloy';
 #(mprove) label="Order Items"
 #(mprove) top_label="Order Items"
 #(mprove) access_roles="sales, marketing"
+#(mprove) space="sales"
 source: c1_order_items is c1_order_items_tx extend {
   join_one: orders is c1_orders_tx on order_id = orders.order_id
   join_one: users is c1_users_tx on orders.user_id = users.user_id
@@ -106,6 +107,7 @@ source: c1_orders_tx is c1_orders_table include {
 | label                  | tag  | -       | Model label in UI                                                                                                                                                                                                                 |
 | top_label              | tag  | -       | Top node label in the Model Schema                                                                                                                                                                                                |
 | access_roles           | tag  | -       | User roles list separated by comma. If `access_roles` tag is set, only users with specified roles will be able to explore the model. If `access_roles` tag is not specified, all project users will be able to explore the model. |
+| space                  | tag  | -       | full space path (separated by dots, like "sales.s2.s3")                                                                                                                                                                                                                       |
 | tree_double_underscore | tag  | -       | If this tag is set, the portion of the field name preceding the double underscore will be used to create a top-level group in the model fields tree in the UI.                                                                    |
 
 ### Dimension #(mprove) Tags

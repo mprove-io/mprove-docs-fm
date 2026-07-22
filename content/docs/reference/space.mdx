@@ -7,7 +7,9 @@ title: Space
 import { DynamicCodeBlock } from "@/components/dynamic-codeblock";
 import { spaceYaml } from "@/content/docs/parts/space-yaml";
 
-Mprove `spaces` are just folders with ability to specify `access_roles` for their contents (reports, charts and dashboards).
+"Spaces" in Mprove are used to create UI catalog trees for reports, charts and dashboards.
+
+`.space` file adds `access_roles` to the actual folder contents. 
 
 Each top level space must be stored as **space_name.space** YAML file:
 
@@ -24,7 +26,7 @@ Each top level space must be stored as **space_name.space** YAML file:
 
 `space_name.space` file must be stored in a folder named `space_name`.
 
-Folders (subspaces) are optional; they can be useful if certain users need access to only a portion of the parent space.
+`folders` (subspaces) are optional; they can be useful if certain users need access to a portion of the parent space.
 
 ## Reference
 

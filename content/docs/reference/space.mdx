@@ -1,0 +1,32 @@
+---
+title: Space
+---
+
+# Space
+
+import { DynamicCodeBlock } from "@/components/dynamic-codeblock";
+import { spaceYaml } from "@/content/docs/parts/space-yaml";
+
+Each top level space must be stored as **space_name.space** YAML file:
+
+<DynamicCodeBlock
+  lang="yaml"
+  code={spaceYaml}
+  options={{
+    themes: {
+      light: "catppuccin-latte",
+      dark: "rose-pine",
+    },
+  }}
+/>
+
+## Reference
+
+### Space
+
+| Name         | Type                                            | Default | Description                                                              |
+| ------------ | ----------------------------------------------- | ------- | ------------------------------------------------------------------------ |
+| space\*      | string                                          | -       | Space name                                                               |
+| title        | string                                          | -       | Space title in UI                                                        |
+| access_roles | string []                                       | -       | If specified, only users with the listed roles will have access to Space |
+| folders      | [Space []](/content/docs/reference/space#space) | -       | Begin a section of subspaces                                                |

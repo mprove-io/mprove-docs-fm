@@ -3,7 +3,7 @@
   "info": {
     "title": "mprove backend",
     "description": "",
-    "version": "12.0.26",
+    "version": "12.0.27",
     "contact": {}
   },
   "paths": {
@@ -245,6 +245,12 @@
               "$ref": "#/components/schemas/Preset"
             }
           },
+          "spaces": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Space"
+            }
+          },
           "mproveExplorer": {
             "type": "string",
             "nullable": true
@@ -272,6 +278,7 @@
           "charts",
           "metrics",
           "presets",
+          "spaces",
           "mconfigs",
           "queries"
         ]
@@ -362,6 +369,13 @@
           "filePath": {
             "type": "string"
           },
+          "space": {
+            "type": "string",
+            "nullable": true
+          },
+          "spaceFullTitle": {
+            "type": "string"
+          },
           "fileText": {
             "type": "string"
           },
@@ -373,6 +387,24 @@
             "type": "array",
             "items": {
               "type": "string"
+            }
+          },
+          "accessRolesCombined": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                },
+                "isDirect": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "role",
+                "isDirect"
+              ]
             }
           },
           "label": {
@@ -408,10 +440,12 @@
           "connectionId",
           "connectionType",
           "filePath",
+          "spaceFullTitle",
           "fileText",
           "storeContent",
           "dateRangeIncludesRightSide",
           "accessRoles",
+          "accessRolesCombined",
           "label",
           "fields",
           "nodes",
@@ -643,10 +677,32 @@
           "filePath": {
             "type": "string"
           },
+          "space": {
+            "type": "string",
+            "nullable": true
+          },
           "accessRoles": {
             "type": "array",
             "items": {
               "type": "string"
+            }
+          },
+          "accessRolesCombined": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                },
+                "isDirect": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "role",
+                "isDirect"
+              ]
             }
           },
           "tiles": {
@@ -676,6 +732,7 @@
           "title",
           "filePath",
           "accessRoles",
+          "accessRolesCombined",
           "tiles",
           "fields",
           "content",
@@ -703,6 +760,10 @@
           "filePath": {
             "type": "string"
           },
+          "space": {
+            "type": "string",
+            "nullable": true
+          },
           "fields": {
             "type": "array",
             "items": {
@@ -713,6 +774,24 @@
             "type": "array",
             "items": {
               "type": "string"
+            }
+          },
+          "accessRolesCombined": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                },
+                "isDirect": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "role",
+                "isDirect"
+              ]
             }
           },
           "title": {
@@ -794,6 +873,7 @@
           "filePath",
           "fields",
           "accessRoles",
+          "accessRolesCombined",
           "title",
           "timezone",
           "timeSpec",
@@ -847,6 +927,34 @@
           "filePath": {
             "type": "string"
           },
+          "space": {
+            "type": "string",
+            "nullable": true
+          },
+          "accessRoles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "accessRolesCombined": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                },
+                "isDirect": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "role",
+                "isDirect"
+              ]
+            }
+          },
           "tiles": {
             "type": "array",
             "items": {
@@ -868,6 +976,8 @@
           "modelId",
           "modelLabel",
           "filePath",
+          "accessRoles",
+          "accessRolesCombined",
           "tiles",
           "serverTs"
         ]
@@ -891,6 +1001,55 @@
           "label",
           "path",
           "parsedContent"
+        ]
+      },
+      "Space": {
+        "type": "object",
+        "properties": {
+          "space": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "fullTitle": {
+            "type": "string"
+          },
+          "filePath": {
+            "type": "string"
+          },
+          "accessRoles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "accessRolesCombined": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                },
+                "isDirect": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "role",
+                "isDirect"
+              ]
+            }
+          }
+        },
+        "required": [
+          "space",
+          "fullTitle",
+          "filePath",
+          "accessRoles",
+          "accessRolesCombined"
         ]
       },
       "Mconfig": {

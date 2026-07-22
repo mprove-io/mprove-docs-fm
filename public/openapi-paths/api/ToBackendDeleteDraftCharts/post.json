@@ -3,7 +3,7 @@
   "info": {
     "title": "mprove backend",
     "description": "",
-    "version": "12.0.26",
+    "version": "12.0.27",
     "contact": {}
   },
   "paths": {
@@ -166,7 +166,122 @@
       },
       "ToBackendDeleteDraftChartsResponsePayload": {
         "type": "object",
-        "properties": {}
+        "properties": {
+          "chartUnitDrafts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChartUnit"
+            }
+          }
+        },
+        "required": [
+          "chartUnitDrafts"
+        ]
+      },
+      "ChartUnit": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "chartUnit"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "chartId": {
+            "type": "string"
+          },
+          "modelId": {
+            "type": "string"
+          },
+          "modelLabel": {
+            "type": "string"
+          },
+          "chartType": {
+            "type": "string",
+            "enum": [
+              "table",
+              "line",
+              "bar",
+              "scatter",
+              "pie",
+              "single",
+              "pivot_table"
+            ]
+          },
+          "iconPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "draft": {
+            "type": "boolean"
+          },
+          "title": {
+            "type": "string"
+          },
+          "filePath": {
+            "type": "string",
+            "nullable": true
+          },
+          "space": {
+            "type": "string",
+            "nullable": true
+          },
+          "accessRoles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "accessRolesCombined": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                },
+                "isDirect": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "role",
+                "isDirect"
+              ]
+            }
+          },
+          "author": {
+            "type": "string",
+            "nullable": true
+          },
+          "canEditOrDeleteChart": {
+            "type": "boolean"
+          },
+          "isFavorite": {
+            "type": "boolean"
+          },
+          "spaceFullTitle": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "id",
+          "chartId",
+          "modelId",
+          "modelLabel",
+          "chartType",
+          "draft",
+          "title",
+          "accessRoles",
+          "accessRolesCombined",
+          "canEditOrDeleteChart",
+          "isFavorite",
+          "spaceFullTitle"
+        ]
       }
     }
   }

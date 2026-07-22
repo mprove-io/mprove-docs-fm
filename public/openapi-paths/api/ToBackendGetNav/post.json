@@ -3,7 +3,7 @@
   "info": {
     "title": "mprove backend",
     "description": "",
-    "version": "12.0.26",
+    "version": "12.0.27",
     "contact": {}
   },
   "paths": {
@@ -335,6 +335,12 @@
               "$ref": "#/components/schemas/Preset"
             }
           },
+          "spaces": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Space"
+            }
+          },
           "mproveConfig": {
             "$ref": "#/components/schemas/MproveConfig"
           },
@@ -358,6 +364,7 @@
           "modelFilePaths",
           "metrics",
           "presets",
+          "spaces",
           "mproveConfig",
           "mproveVersion",
           "serverTs"
@@ -556,6 +563,10 @@
             "items": {
               "$ref": "#/components/schemas/ProjectSelectedGivenLink"
             },
+            "nullable": true
+          },
+          "chartsByModel": {
+            "type": "boolean",
             "nullable": true
           },
           "permissionsAutoAcceptSessionIds": {
@@ -801,6 +812,55 @@
           "label",
           "path",
           "parsedContent"
+        ]
+      },
+      "Space": {
+        "type": "object",
+        "properties": {
+          "space": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "fullTitle": {
+            "type": "string"
+          },
+          "filePath": {
+            "type": "string"
+          },
+          "accessRoles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "accessRolesCombined": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                },
+                "isDirect": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "role",
+                "isDirect"
+              ]
+            }
+          }
+        },
+        "required": [
+          "space",
+          "fullTitle",
+          "filePath",
+          "accessRoles",
+          "accessRolesCombined"
         ]
       },
       "MproveConfig": {

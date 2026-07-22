@@ -1943,6 +1943,19 @@
           "filePath": {
             "type": "string"
           },
+          "space": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "spaceFullTitle": {
+            "type": "string"
+          },
           "fileText": {
             "type": "string"
           },
@@ -1954,6 +1967,25 @@
             "type": "array",
             "items": {
               "type": "string"
+            }
+          },
+          "accessRolesCombined": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                },
+                "isDirect": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "role",
+                "isDirect"
+              ],
+              "additionalProperties": false
             }
           },
           "label": {
@@ -1995,10 +2027,12 @@
           "connectionId",
           "connectionType",
           "filePath",
+          "spaceFullTitle",
           "fileText",
           "storeContent",
           "dateRangeIncludesRightSide",
           "accessRoles",
+          "accessRolesCombined",
           "label",
           "fields",
           "nodes",

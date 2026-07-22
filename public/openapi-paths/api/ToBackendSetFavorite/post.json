@@ -7,16 +7,16 @@
     "contact": {}
   },
   "paths": {
-    "/api/ToBackendSetOrgInfo": {
+    "/api/ToBackendSetFavorite": {
       "post": {
-        "operationId": "SetOrgInfoController",
+        "operationId": "SetFavoriteController",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ToBackendSetOrgInfoRequest"
+                "$ref": "#/components/schemas/ToBackendSetFavoriteRequest"
               }
             }
           }
@@ -27,7 +27,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ToBackendSetOrgInfoResponse"
+                  "$ref": "#/components/schemas/ToBackendSetFavoriteResponse"
                 }
               }
             }
@@ -38,14 +38,14 @@
   },
   "components": {
     "schemas": {
-      "ToBackendSetOrgInfoRequest": {
+      "ToBackendSetFavoriteRequest": {
         "type": "object",
         "properties": {
           "info": {
-            "$ref": "#/components/schemas/ToBackendSetOrgInfoRequestInfo"
+            "$ref": "#/components/schemas/ToBackendSetFavoriteRequestInfo"
           },
           "payload": {
-            "$ref": "#/components/schemas/ToBackendSetOrgInfoRequestPayload"
+            "$ref": "#/components/schemas/ToBackendSetFavoriteRequestPayload"
           }
         },
         "required": [
@@ -53,14 +53,14 @@
           "payload"
         ]
       },
-      "ToBackendSetOrgInfoResponse": {
+      "ToBackendSetFavoriteResponse": {
         "type": "object",
         "properties": {
           "info": {
-            "$ref": "#/components/schemas/ToBackendSetOrgInfoResponseInfo"
+            "$ref": "#/components/schemas/ToBackendSetFavoriteResponseInfo"
           },
           "payload": {
-            "$ref": "#/components/schemas/ToBackendSetOrgInfoResponsePayload"
+            "$ref": "#/components/schemas/ToBackendSetFavoriteResponsePayload"
           }
         },
         "required": [
@@ -68,13 +68,13 @@
           "payload"
         ]
       },
-      "ToBackendSetOrgInfoRequestInfo": {
+      "ToBackendSetFavoriteRequestInfo": {
         "type": "object",
         "properties": {
           "name": {
             "type": "string",
             "enum": [
-              "api/ToBackendSetOrgInfo"
+              "api/ToBackendSetFavorite"
             ]
           },
           "traceId": {
@@ -90,28 +90,41 @@
           "idempotencyKey"
         ]
       },
-      "ToBackendSetOrgInfoRequestPayload": {
+      "ToBackendSetFavoriteRequestPayload": {
         "type": "object",
         "properties": {
-          "orgId": {
+          "projectId": {
             "type": "string"
           },
-          "name": {
+          "type": {
             "type": "string",
-            "nullable": true
+            "enum": [
+              "Report",
+              "Dashboard",
+              "Chart"
+            ]
+          },
+          "targetId": {
+            "type": "string"
+          },
+          "isFavorite": {
+            "type": "boolean"
           }
         },
         "required": [
-          "orgId"
+          "projectId",
+          "type",
+          "targetId",
+          "isFavorite"
         ]
       },
-      "ToBackendSetOrgInfoResponseInfo": {
+      "ToBackendSetFavoriteResponseInfo": {
         "type": "object",
         "properties": {
           "path": {
             "type": "string",
             "enum": [
-              "/api/ToBackendSetOrgInfo"
+              "/api/ToBackendSetFavorite"
             ]
           },
           "method": {
@@ -149,45 +162,9 @@
           "traceId"
         ]
       },
-      "ToBackendSetOrgInfoResponsePayload": {
+      "ToBackendSetFavoriteResponsePayload": {
         "type": "object",
-        "properties": {
-          "org": {
-            "$ref": "#/components/schemas/Org"
-          }
-        },
-        "required": [
-          "org"
-        ]
-      },
-      "Org": {
-        "type": "object",
-        "properties": {
-          "orgId": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "ownerId": {
-            "type": "string"
-          },
-          "ownerEmail": {
-            "type": "string"
-          },
-          "serverTs": {
-            "type": "integer",
-            "minimum": -9007199254740991,
-            "maximum": 9007199254740991
-          }
-        },
-        "required": [
-          "orgId",
-          "name",
-          "ownerId",
-          "ownerEmail",
-          "serverTs"
-        ]
+        "properties": {}
       }
     }
   }

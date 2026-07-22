@@ -3,7 +3,7 @@
   "info": {
     "title": "mprove backend",
     "description": "",
-    "version": "12.0.26",
+    "version": "12.0.27",
     "contact": {}
   },
   "paths": {
@@ -114,6 +114,10 @@
           "title": {
             "type": "string"
           },
+          "space": {
+            "type": "string",
+            "nullable": true
+          },
           "accessRoles": {
             "type": "array",
             "items": {
@@ -144,10 +148,16 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ReportField"
-            }
+            },
+            "nullable": true
           },
           "chart": {
-            "$ref": "#/components/schemas/MconfigChart"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MconfigChart"
+              }
+            ],
+            "nullable": true
           }
         },
         "required": [
@@ -161,9 +171,7 @@
           "accessRoles",
           "timezone",
           "timeSpec",
-          "timeRangeFractionBrick",
-          "newReportFields",
-          "chart"
+          "timeRangeFractionBrick"
         ]
       },
       "ToBackendSaveModifyReportResponseInfo": {
@@ -225,8 +233,17 @@
           "report": {
             "$ref": "#/components/schemas/ReportX"
           },
-          "reportPart": {
-            "$ref": "#/components/schemas/ReportX"
+          "reportUnitDrafts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReportUnit"
+            }
+          },
+          "reportSpaceNodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ToBackendSaveModifyReportResponse__schema0"
+            }
           }
         },
         "required": [
@@ -234,7 +251,8 @@
           "struct",
           "userMember",
           "report",
-          "reportPart"
+          "reportUnitDrafts",
+          "reportSpaceNodes"
         ]
       },
       "ReportField": {
@@ -442,6 +460,12 @@
               "$ref": "#/components/schemas/Preset"
             }
           },
+          "spaces": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Space"
+            }
+          },
           "mproveConfig": {
             "$ref": "#/components/schemas/MproveConfig"
           },
@@ -465,6 +489,7 @@
           "modelFilePaths",
           "metrics",
           "presets",
+          "spaces",
           "mproveConfig",
           "mproveVersion",
           "serverTs"
@@ -555,6 +580,10 @@
           "filePath": {
             "type": "string"
           },
+          "space": {
+            "type": "string",
+            "nullable": true
+          },
           "fields": {
             "type": "array",
             "items": {
@@ -565,6 +594,24 @@
             "type": "array",
             "items": {
               "type": "string"
+            }
+          },
+          "accessRolesCombined": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                },
+                "isDirect": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "role",
+                "isDirect"
+              ]
             }
           },
           "title": {
@@ -667,6 +714,7 @@
           "filePath",
           "fields",
           "accessRoles",
+          "accessRolesCombined",
           "title",
           "timezone",
           "timeSpec",
@@ -685,6 +733,168 @@
           "metricsStartDateYYYYMMDD",
           "metricsEndDateExcludedYYYYMMDD",
           "metricsEndDateIncludedYYYYMMDD"
+        ]
+      },
+      "ReportUnit": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "reportUnit"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "reportId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "filePath": {
+            "type": "string",
+            "nullable": true
+          },
+          "space": {
+            "type": "string",
+            "nullable": true
+          },
+          "accessRoles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "accessRolesCombined": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                },
+                "isDirect": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "role",
+                "isDirect"
+              ]
+            }
+          },
+          "author": {
+            "type": "string",
+            "nullable": true
+          },
+          "canEditOrDeleteReport": {
+            "type": "boolean"
+          },
+          "isFavorite": {
+            "type": "boolean"
+          },
+          "draft": {
+            "type": "boolean"
+          },
+          "spaceFullTitle": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "id",
+          "reportId",
+          "title",
+          "accessRoles",
+          "accessRolesCombined",
+          "canEditOrDeleteReport",
+          "isFavorite",
+          "draft",
+          "spaceFullTitle"
+        ]
+      },
+      "ToBackendSaveModifyReportResponse__schema0": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "spaceFolder"
+                ]
+              },
+              "id": {
+                "type": "string"
+              },
+              "space": {
+                "type": "string"
+              },
+              "filePath": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "accessRoles": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "accessRolesCombined": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "role": {
+                      "type": "string"
+                    },
+                    "isDirect": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "role",
+                    "isDirect"
+                  ]
+                }
+              },
+              "isSynthetic": {
+                "type": "boolean"
+              },
+              "modelId": {
+                "type": "string",
+                "nullable": true
+              },
+              "modelLabel": {
+                "type": "string",
+                "nullable": true
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ToBackendSaveModifyReportResponse__schema0"
+                }
+              }
+            },
+            "required": [
+              "type",
+              "id",
+              "space",
+              "filePath",
+              "title",
+              "accessRoles",
+              "accessRolesCombined",
+              "isSynthetic",
+              "children"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/SpaceUnit"
+          }
         ]
       },
       "Fraction": {
@@ -1462,6 +1672,55 @@
           "parsedContent"
         ]
       },
+      "Space": {
+        "type": "object",
+        "properties": {
+          "space": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "fullTitle": {
+            "type": "string"
+          },
+          "filePath": {
+            "type": "string"
+          },
+          "accessRoles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "accessRolesCombined": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                },
+                "isDirect": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "role",
+                "isDirect"
+              ]
+            }
+          }
+        },
+        "required": [
+          "space",
+          "fullTitle",
+          "filePath",
+          "accessRoles",
+          "accessRolesCombined"
+        ]
+      },
       "MproveConfig": {
         "type": "object",
         "properties": {
@@ -1685,6 +1944,107 @@
           "fieldId",
           "fractions",
           "field"
+        ]
+      },
+      "SpaceUnit": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "spaceUnit"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "unitId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "filePath": {
+            "type": "string",
+            "nullable": true
+          },
+          "space": {
+            "type": "string",
+            "nullable": true
+          },
+          "accessRoles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "accessRolesCombined": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                },
+                "isDirect": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "role",
+                "isDirect"
+              ]
+            }
+          },
+          "author": {
+            "type": "string",
+            "nullable": true
+          },
+          "canEditOrDeleteUnit": {
+            "type": "boolean"
+          },
+          "isFavorite": {
+            "type": "boolean"
+          },
+          "spaceFullTitle": {
+            "type": "string"
+          },
+          "modelId": {
+            "type": "string",
+            "nullable": true
+          },
+          "modelLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "chartType": {
+            "type": "string",
+            "enum": [
+              "table",
+              "line",
+              "bar",
+              "scatter",
+              "pie",
+              "single",
+              "pivot_table"
+            ],
+            "nullable": true
+          },
+          "iconPath": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "type",
+          "id",
+          "unitId",
+          "title",
+          "accessRoles",
+          "accessRolesCombined",
+          "canEditOrDeleteUnit",
+          "isFavorite",
+          "spaceFullTitle"
         ]
       },
       "FractionControl": {

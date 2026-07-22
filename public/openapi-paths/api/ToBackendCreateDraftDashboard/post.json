@@ -3,7 +3,7 @@
   "info": {
     "title": "mprove backend",
     "description": "",
-    "version": "12.0.26",
+    "version": "12.0.27",
     "contact": {}
   },
   "paths": {
@@ -197,16 +197,19 @@
       "ToBackendCreateDraftDashboardResponsePayload": {
         "type": "object",
         "properties": {
-          "newDashboardPart": {
-            "$ref": "#/components/schemas/DashboardPart"
-          },
           "dashboard": {
             "$ref": "#/components/schemas/DashboardX"
+          },
+          "dashboardUnitDrafts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DashboardUnit"
+            }
           }
         },
         "required": [
-          "newDashboardPart",
-          "dashboard"
+          "dashboard",
+          "dashboardUnitDrafts"
         ]
       },
       "DashboardField": {
@@ -347,59 +350,6 @@
           "plateY"
         ]
       },
-      "DashboardPart": {
-        "type": "object",
-        "properties": {
-          "structId": {
-            "type": "string"
-          },
-          "dashboardId": {
-            "type": "string"
-          },
-          "draft": {
-            "type": "boolean"
-          },
-          "creatorId": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "filePath": {
-            "type": "string"
-          },
-          "accessRoles": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "tiles": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Tile"
-            }
-          },
-          "author": {
-            "type": "string"
-          },
-          "canEditOrDeleteDashboard": {
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "structId",
-          "dashboardId",
-          "draft",
-          "creatorId",
-          "title",
-          "filePath",
-          "accessRoles",
-          "tiles",
-          "author",
-          "canEditOrDeleteDashboard"
-        ]
-      },
       "DashboardX": {
         "type": "object",
         "properties": {
@@ -421,10 +371,32 @@
           "filePath": {
             "type": "string"
           },
+          "space": {
+            "type": "string",
+            "nullable": true
+          },
           "accessRoles": {
             "type": "array",
             "items": {
               "type": "string"
+            }
+          },
+          "accessRolesCombined": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                },
+                "isDirect": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "role",
+                "isDirect"
+              ]
             }
           },
           "tiles": {
@@ -472,6 +444,7 @@
           "title",
           "filePath",
           "accessRoles",
+          "accessRolesCombined",
           "tiles",
           "fields",
           "content",
@@ -480,6 +453,86 @@
           "author",
           "canEditOrDeleteDashboard",
           "storeModels"
+        ]
+      },
+      "DashboardUnit": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "dashboardUnit"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "dashboardId": {
+            "type": "string"
+          },
+          "draft": {
+            "type": "boolean"
+          },
+          "title": {
+            "type": "string"
+          },
+          "filePath": {
+            "type": "string",
+            "nullable": true
+          },
+          "space": {
+            "type": "string",
+            "nullable": true
+          },
+          "accessRoles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "accessRolesCombined": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                },
+                "isDirect": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "role",
+                "isDirect"
+              ]
+            }
+          },
+          "author": {
+            "type": "string",
+            "nullable": true
+          },
+          "canEditOrDeleteDashboard": {
+            "type": "boolean"
+          },
+          "isFavorite": {
+            "type": "boolean"
+          },
+          "spaceFullTitle": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "id",
+          "dashboardId",
+          "draft",
+          "title",
+          "accessRoles",
+          "accessRolesCombined",
+          "canEditOrDeleteDashboard",
+          "isFavorite",
+          "spaceFullTitle"
         ]
       },
       "Fraction": {
@@ -1135,6 +1188,13 @@
           "filePath": {
             "type": "string"
           },
+          "space": {
+            "type": "string",
+            "nullable": true
+          },
+          "spaceFullTitle": {
+            "type": "string"
+          },
           "fileText": {
             "type": "string"
           },
@@ -1146,6 +1206,24 @@
             "type": "array",
             "items": {
               "type": "string"
+            }
+          },
+          "accessRolesCombined": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                },
+                "isDirect": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "role",
+                "isDirect"
+              ]
             }
           },
           "label": {
@@ -1180,10 +1258,12 @@
           "connectionId",
           "connectionType",
           "filePath",
+          "spaceFullTitle",
           "fileText",
           "storeContent",
           "dateRangeIncludesRightSide",
           "accessRoles",
+          "accessRolesCombined",
           "label",
           "fields",
           "nodes",

@@ -3,7 +3,7 @@
   "info": {
     "title": "mprove backend",
     "description": "",
-    "version": "12.0.26",
+    "version": "12.0.27",
     "contact": {}
   },
   "paths": {
@@ -131,6 +131,10 @@
             "type": "string",
             "nullable": true
           },
+          "space": {
+            "type": "string",
+            "nullable": true
+          },
           "accessRoles": {
             "type": "array",
             "items": {
@@ -209,13 +213,23 @@
           "dashboard": {
             "$ref": "#/components/schemas/DashboardX"
           },
-          "newDashboardPart": {
-            "$ref": "#/components/schemas/DashboardPart"
+          "dashboardUnitDrafts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DashboardUnit"
+            }
+          },
+          "dashboardSpaceNodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ToBackendSaveModifyDashboardResponse__schema0"
+            }
           }
         },
         "required": [
           "dashboard",
-          "newDashboardPart"
+          "dashboardUnitDrafts",
+          "dashboardSpaceNodes"
         ]
       },
       "TileX": {
@@ -327,10 +341,32 @@
           "filePath": {
             "type": "string"
           },
+          "space": {
+            "type": "string",
+            "nullable": true
+          },
           "accessRoles": {
             "type": "array",
             "items": {
               "type": "string"
+            }
+          },
+          "accessRolesCombined": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                },
+                "isDirect": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "role",
+                "isDirect"
+              ]
             }
           },
           "tiles": {
@@ -378,6 +414,7 @@
           "title",
           "filePath",
           "accessRoles",
+          "accessRolesCombined",
           "tiles",
           "fields",
           "content",
@@ -388,10 +425,16 @@
           "storeModels"
         ]
       },
-      "DashboardPart": {
+      "DashboardUnit": {
         "type": "object",
         "properties": {
-          "structId": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "dashboardUnit"
+            ]
+          },
+          "id": {
             "type": "string"
           },
           "dashboardId": {
@@ -400,14 +443,16 @@
           "draft": {
             "type": "boolean"
           },
-          "creatorId": {
-            "type": "string"
-          },
           "title": {
             "type": "string"
           },
           "filePath": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
+          },
+          "space": {
+            "type": "string",
+            "nullable": true
           },
           "accessRoles": {
             "type": "array",
@@ -415,30 +460,131 @@
               "type": "string"
             }
           },
-          "tiles": {
+          "accessRolesCombined": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Tile"
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                },
+                "isDirect": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "role",
+                "isDirect"
+              ]
             }
           },
           "author": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "canEditOrDeleteDashboard": {
             "type": "boolean"
+          },
+          "isFavorite": {
+            "type": "boolean"
+          },
+          "spaceFullTitle": {
+            "type": "string"
           }
         },
         "required": [
-          "structId",
+          "type",
+          "id",
           "dashboardId",
           "draft",
-          "creatorId",
           "title",
-          "filePath",
           "accessRoles",
-          "tiles",
-          "author",
-          "canEditOrDeleteDashboard"
+          "accessRolesCombined",
+          "canEditOrDeleteDashboard",
+          "isFavorite",
+          "spaceFullTitle"
+        ]
+      },
+      "ToBackendSaveModifyDashboardResponse__schema0": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "spaceFolder"
+                ]
+              },
+              "id": {
+                "type": "string"
+              },
+              "space": {
+                "type": "string"
+              },
+              "filePath": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "accessRoles": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "accessRolesCombined": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "role": {
+                      "type": "string"
+                    },
+                    "isDirect": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "role",
+                    "isDirect"
+                  ]
+                }
+              },
+              "isSynthetic": {
+                "type": "boolean"
+              },
+              "modelId": {
+                "type": "string",
+                "nullable": true
+              },
+              "modelLabel": {
+                "type": "string",
+                "nullable": true
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ToBackendSaveModifyDashboardResponse__schema0"
+                }
+              }
+            },
+            "required": [
+              "type",
+              "id",
+              "space",
+              "filePath",
+              "title",
+              "accessRoles",
+              "accessRolesCombined",
+              "isSynthetic",
+              "children"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/SpaceUnit"
+          }
         ]
       },
       "MconfigX": {
@@ -900,6 +1046,13 @@
           "filePath": {
             "type": "string"
           },
+          "space": {
+            "type": "string",
+            "nullable": true
+          },
+          "spaceFullTitle": {
+            "type": "string"
+          },
           "fileText": {
             "type": "string"
           },
@@ -911,6 +1064,24 @@
             "type": "array",
             "items": {
               "type": "string"
+            }
+          },
+          "accessRolesCombined": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                },
+                "isDirect": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "role",
+                "isDirect"
+              ]
             }
           },
           "label": {
@@ -945,10 +1116,12 @@
           "connectionId",
           "connectionType",
           "filePath",
+          "spaceFullTitle",
           "fileText",
           "storeContent",
           "dateRangeIncludesRightSide",
           "accessRoles",
+          "accessRolesCombined",
           "label",
           "fields",
           "nodes",
@@ -957,72 +1130,105 @@
           "hasAccess"
         ]
       },
-      "Tile": {
+      "SpaceUnit": {
         "type": "object",
         "properties": {
-          "modelId": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "spaceUnit"
+            ]
+          },
+          "id": {
             "type": "string"
           },
-          "modelLabel": {
+          "unitId": {
             "type": "string"
-          },
-          "modelFilePath": {
-            "type": "string"
-          },
-          "mconfigId": {
-            "type": "string"
-          },
-          "queryId": {
-            "type": "string"
-          },
-          "trackChangeId": {
-            "type": "string"
-          },
-          "listen": {
-            "type": "object",
-            "propertyNames": {
-              "type": "string"
-            },
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "deletedFilterFieldIds": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
           },
           "title": {
             "type": "string"
           },
-          "plateWidth": {
-            "type": "number"
+          "filePath": {
+            "type": "string",
+            "nullable": true
           },
-          "plateHeight": {
-            "type": "number"
+          "space": {
+            "type": "string",
+            "nullable": true
           },
-          "plateX": {
-            "type": "number"
+          "accessRoles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
-          "plateY": {
-            "type": "number"
+          "accessRolesCombined": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                },
+                "isDirect": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "role",
+                "isDirect"
+              ]
+            }
+          },
+          "author": {
+            "type": "string",
+            "nullable": true
+          },
+          "canEditOrDeleteUnit": {
+            "type": "boolean"
+          },
+          "isFavorite": {
+            "type": "boolean"
+          },
+          "spaceFullTitle": {
+            "type": "string"
+          },
+          "modelId": {
+            "type": "string",
+            "nullable": true
+          },
+          "modelLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "chartType": {
+            "type": "string",
+            "enum": [
+              "table",
+              "line",
+              "bar",
+              "scatter",
+              "pie",
+              "single",
+              "pivot_table"
+            ],
+            "nullable": true
+          },
+          "iconPath": {
+            "type": "string",
+            "nullable": true
           }
         },
         "required": [
-          "modelId",
-          "modelLabel",
-          "modelFilePath",
-          "mconfigId",
-          "queryId",
-          "trackChangeId",
-          "listen",
+          "type",
+          "id",
+          "unitId",
           "title",
-          "plateWidth",
-          "plateHeight",
-          "plateX",
-          "plateY"
+          "accessRoles",
+          "accessRolesCombined",
+          "canEditOrDeleteUnit",
+          "isFavorite",
+          "spaceFullTitle"
         ]
       },
       "StorePart": {

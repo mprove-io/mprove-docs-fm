@@ -3,7 +3,7 @@
   "info": {
     "title": "mprove backend",
     "description": "",
-    "version": "12.0.26",
+    "version": "12.0.27",
     "contact": {}
   },
   "paths": {
@@ -224,6 +224,10 @@
             "items": {
               "$ref": "#/components/schemas/ProjectSelectedGivenLink"
             },
+            "nullable": true
+          },
+          "chartsByModel": {
+            "type": "boolean",
             "nullable": true
           },
           "permissionsAutoAcceptSessionIds": {

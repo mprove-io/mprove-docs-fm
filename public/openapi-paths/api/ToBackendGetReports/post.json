@@ -3,7 +3,7 @@
   "info": {
     "title": "mprove backend",
     "description": "",
-    "version": "12.0.26",
+    "version": "12.0.27",
     "contact": {}
   },
   "paths": {
@@ -169,10 +169,16 @@
           "userMember": {
             "$ref": "#/components/schemas/Member"
           },
-          "reports": {
+          "reportUnitDrafts": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ReportX"
+              "$ref": "#/components/schemas/ReportUnit"
+            }
+          },
+          "reportSpaceNodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ToBackendGetReportsResponse__schema0"
             }
           },
           "storeModels": {
@@ -186,7 +192,8 @@
           "needValidate",
           "struct",
           "userMember",
-          "reports",
+          "reportUnitDrafts",
+          "reportSpaceNodes",
           "storeModels"
         ]
       },
@@ -223,6 +230,12 @@
               "$ref": "#/components/schemas/Preset"
             }
           },
+          "spaces": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Space"
+            }
+          },
           "mproveConfig": {
             "$ref": "#/components/schemas/MproveConfig"
           },
@@ -246,6 +259,7 @@
           "modelFilePaths",
           "metrics",
           "presets",
+          "spaces",
           "mproveConfig",
           "mproveVersion",
           "serverTs"
@@ -315,32 +329,31 @@
           "serverTs"
         ]
       },
-      "ReportX": {
+      "ReportUnit": {
         "type": "object",
         "properties": {
-          "projectId": {
-            "type": "string"
+          "type": {
+            "type": "string",
+            "enum": [
+              "reportUnit"
+            ]
           },
-          "structId": {
+          "id": {
             "type": "string"
           },
           "reportId": {
             "type": "string"
           },
-          "draft": {
-            "type": "boolean"
-          },
-          "creatorId": {
+          "title": {
             "type": "string"
           },
           "filePath": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
-          "fields": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ReportField"
-            }
+          "space": {
+            "type": "string",
+            "nullable": true
           },
           "accessRoles": {
             "type": "array",
@@ -348,124 +361,134 @@
               "type": "string"
             }
           },
-          "title": {
-            "type": "string"
-          },
-          "timezone": {
-            "type": "string"
-          },
-          "timeSpec": {
-            "type": "string",
-            "enum": [
-              "timestamps",
-              "seconds",
-              "minutes",
-              "hours",
-              "days",
-              "weeks",
-              "months",
-              "quarters",
-              "years"
-            ]
-          },
-          "timeRangeFraction": {
-            "$ref": "#/components/schemas/Fraction"
-          },
-          "rangeStart": {
-            "type": "number",
-            "nullable": true
-          },
-          "rangeEnd": {
-            "type": "number",
-            "nullable": true
-          },
-          "columns": {
+          "accessRolesCombined": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Column"
-            }
-          },
-          "rows": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Row"
-            }
-          },
-          "isTimeColumnsLimitExceeded": {
-            "type": "boolean"
-          },
-          "timeColumnsLimit": {
-            "type": "integer",
-            "minimum": -9007199254740991,
-            "maximum": 9007199254740991
-          },
-          "timeColumnsLength": {
-            "type": "integer",
-            "minimum": -9007199254740991,
-            "maximum": 9007199254740991
-          },
-          "draftCreatedTs": {
-            "type": "integer",
-            "minimum": -9007199254740991,
-            "maximum": 9007199254740991
-          },
-          "chart": {
-            "$ref": "#/components/schemas/MconfigChart"
-          },
-          "serverTs": {
-            "type": "integer",
-            "minimum": -9007199254740991,
-            "maximum": 9007199254740991
-          },
-          "extendedFilters": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FilterX"
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                },
+                "isDirect": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "role",
+                "isDirect"
+              ]
             }
           },
           "author": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "canEditOrDeleteReport": {
             "type": "boolean"
           },
-          "metricsStartDateYYYYMMDD": {
-            "type": "string"
+          "isFavorite": {
+            "type": "boolean"
           },
-          "metricsEndDateExcludedYYYYMMDD": {
-            "type": "string"
+          "draft": {
+            "type": "boolean"
           },
-          "metricsEndDateIncludedYYYYMMDD": {
+          "spaceFullTitle": {
             "type": "string"
           }
         },
         "required": [
-          "projectId",
-          "structId",
+          "type",
+          "id",
           "reportId",
-          "draft",
-          "creatorId",
-          "filePath",
-          "fields",
-          "accessRoles",
           "title",
-          "timezone",
-          "timeSpec",
-          "timeRangeFraction",
-          "columns",
-          "rows",
-          "isTimeColumnsLimitExceeded",
-          "timeColumnsLimit",
-          "timeColumnsLength",
-          "draftCreatedTs",
-          "chart",
-          "serverTs",
-          "extendedFilters",
-          "author",
+          "accessRoles",
+          "accessRolesCombined",
           "canEditOrDeleteReport",
-          "metricsStartDateYYYYMMDD",
-          "metricsEndDateExcludedYYYYMMDD",
-          "metricsEndDateIncludedYYYYMMDD"
+          "isFavorite",
+          "draft",
+          "spaceFullTitle"
+        ]
+      },
+      "ToBackendGetReportsResponse__schema0": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "spaceFolder"
+                ]
+              },
+              "id": {
+                "type": "string"
+              },
+              "space": {
+                "type": "string"
+              },
+              "filePath": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "accessRoles": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "accessRolesCombined": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "role": {
+                      "type": "string"
+                    },
+                    "isDirect": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "role",
+                    "isDirect"
+                  ]
+                }
+              },
+              "isSynthetic": {
+                "type": "boolean"
+              },
+              "modelId": {
+                "type": "string",
+                "nullable": true
+              },
+              "modelLabel": {
+                "type": "string",
+                "nullable": true
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ToBackendGetReportsResponse__schema0"
+                }
+              }
+            },
+            "required": [
+              "type",
+              "id",
+              "space",
+              "filePath",
+              "title",
+              "accessRoles",
+              "accessRolesCombined",
+              "isSynthetic",
+              "children"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/SpaceUnit"
+          }
         ]
       },
       "ModelX": {
@@ -509,6 +532,13 @@
           "filePath": {
             "type": "string"
           },
+          "space": {
+            "type": "string",
+            "nullable": true
+          },
+          "spaceFullTitle": {
+            "type": "string"
+          },
           "fileText": {
             "type": "string"
           },
@@ -520,6 +550,24 @@
             "type": "array",
             "items": {
               "type": "string"
+            }
+          },
+          "accessRolesCombined": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                },
+                "isDirect": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "role",
+                "isDirect"
+              ]
             }
           },
           "label": {
@@ -554,10 +602,12 @@
           "connectionId",
           "connectionType",
           "filePath",
+          "spaceFullTitle",
           "fileText",
           "storeContent",
           "dateRangeIncludesRightSide",
           "accessRoles",
+          "accessRolesCombined",
           "label",
           "fields",
           "nodes",
@@ -772,6 +822,55 @@
           "parsedContent"
         ]
       },
+      "Space": {
+        "type": "object",
+        "properties": {
+          "space": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "fullTitle": {
+            "type": "string"
+          },
+          "filePath": {
+            "type": "string"
+          },
+          "accessRoles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "accessRolesCombined": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                },
+                "isDirect": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "role",
+                "isDirect"
+              ]
+            }
+          }
+        },
+        "required": [
+          "space",
+          "fullTitle",
+          "filePath",
+          "accessRoles",
+          "accessRolesCombined"
+        ]
+      },
       "MproveConfig": {
         "type": "object",
         "properties": {
@@ -817,747 +916,78 @@
           }
         }
       },
-      "ReportField": {
+      "SpaceUnit": {
         "type": "object",
         "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "spaceUnit"
+            ]
+          },
           "id": {
             "type": "string"
           },
-          "hidden": {
-            "type": "boolean"
-          },
-          "label": {
+          "unitId": {
             "type": "string"
           },
-          "description": {
+          "title": {
+            "type": "string"
+          },
+          "filePath": {
             "type": "string",
             "nullable": true
           },
-          "fractions": {
+          "space": {
+            "type": "string",
+            "nullable": true
+          },
+          "accessRoles": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Fraction"
+              "type": "string"
             }
           },
-          "maxFractions": {
-            "type": "number",
-            "nullable": true
-          },
-          "result": {
-            "type": "string",
-            "enum": [
-              "day_of_week",
-              "day_of_week_index",
-              "month_name",
-              "quarter_of_year",
-              "ts",
-              "yesno",
-              "string",
-              "number",
-              "date",
-              "boolean",
-              "array",
-              "record",
-              "json",
-              "sql_native"
-            ],
-            "nullable": true
-          },
-          "suggestModelDimension": {
-            "type": "string",
-            "nullable": true
-          },
-          "storeModel": {
-            "type": "string",
-            "nullable": true
-          },
-          "storeResult": {
-            "type": "string",
-            "nullable": true
-          },
-          "storeFilter": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "required": [
-          "id",
-          "hidden",
-          "label",
-          "fractions"
-        ]
-      },
-      "Fraction": {
-        "type": "object",
-        "properties": {
-          "controls": {
+          "accessRolesCombined": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/FractionControl"
-            },
-            "nullable": true
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                },
+                "isDirect": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "role",
+                "isDirect"
+              ]
+            }
           },
-          "brick": {
+          "author": {
             "type": "string",
             "nullable": true
           },
-          "parentBrick": {
-            "type": "string",
-            "nullable": true
+          "canEditOrDeleteUnit": {
+            "type": "boolean"
           },
-          "operator": {
-            "type": "string",
-            "enum": [
-              "Or",
-              "And"
-            ],
-            "nullable": true
+          "isFavorite": {
+            "type": "boolean"
           },
-          "logicGroup": {
-            "type": "string",
-            "enum": [
-              "OR",
-              "AND_NOT"
-            ],
-            "nullable": true
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "StoreFraction",
-              "StringIsAnyValue",
-              "StringIsEqualTo",
-              "StringStartsWith",
-              "StringEndsWith",
-              "StringContains",
-              "StringIsLike",
-              "StringIsEmpty",
-              "StringIsNull",
-              "StringIsNotEqualTo",
-              "StringDoesNotStartWith",
-              "StringDoesNotEndWith",
-              "StringDoesNotContain",
-              "StringIsNotLike",
-              "StringIsNotEmpty",
-              "StringIsNotNull",
-              "NumberIsAnyValue",
-              "NumberIsEqualTo",
-              "NumberIsGreaterThan",
-              "NumberIsGreaterThanOrEqualTo",
-              "NumberIsLessThan",
-              "NumberIsLessThanOrEqualTo",
-              "NumberIsBetween",
-              "NumberIsNull",
-              "NumberIsNotEqualTo",
-              "NumberIsNotGreaterThan",
-              "NumberIsNotGreaterThanOrEqualTo",
-              "NumberIsNotLessThan",
-              "NumberIsNotLessThanOrEqualTo",
-              "NumberIsNotBetween",
-              "NumberIsNotNull",
-              "BooleanIsAnyValue",
-              "BooleanIsTrue",
-              "BooleanIsFalse",
-              "BooleanIsTruthy",
-              "BooleanIsFalsy",
-              "BooleanIsNull",
-              "BooleanIsNotTrue",
-              "BooleanIsNotFalse",
-              "BooleanIsNotTruthy",
-              "BooleanIsNotFalsy",
-              "BooleanIsNotNull",
-              "TsIsAnyValue",
-              "TsIsInLast",
-              "TsIsOnDay",
-              "TsIsOnWeek",
-              "TsIsOnMonth",
-              "TsIsOnQuarter",
-              "TsIsOnYear",
-              "TsIsInNext",
-              "TsIsAfter",
-              "TsIsStarting",
-              "TsIsBeginFor",
-              "TsIsBetween",
-              "TsIsBefore",
-              "TsIsThrough",
-              "TsIsOnHour",
-              "TsIsOnMinute",
-              "TsIsOnTimestamp",
-              "TsIsNull",
-              "TsIsNotInLast",
-              "TsIsNotOnDay",
-              "TsIsNotOnWeek",
-              "TsIsNotOnMonth",
-              "TsIsNotOnQuarter",
-              "TsIsNotOnYear",
-              "TsIsNotInNext",
-              "TsIsNotBeginFor",
-              "TsIsNotBetween",
-              "TsIsNotOnHour",
-              "TsIsNotOnMinute",
-              "TsIsNotOnTimestamp",
-              "TsIsNotNull",
-              "DayOfWeekIsAnyValue",
-              "DayOfWeekIs",
-              "DayOfWeekIsNull",
-              "DayOfWeekIsNot",
-              "DayOfWeekIsNotNull",
-              "DayOfWeekIndexIsAnyValue",
-              "DayOfWeekIndexIsEqualTo",
-              "DayOfWeekIndexIsNull",
-              "DayOfWeekIndexIsNotEqualTo",
-              "DayOfWeekIndexIsNotNull",
-              "MonthNameIsAnyValue",
-              "MonthNameIs",
-              "MonthNameIsNull",
-              "MonthNameIsNot",
-              "MonthNameIsNotNull",
-              "QuarterOfYearIsAnyValue",
-              "QuarterOfYearIs",
-              "QuarterOfYearIsNull",
-              "QuarterOfYearIsNot",
-              "QuarterOfYearIsNotNull",
-              "TsIsBeforeRelative",
-              "TsIsAfterRelative",
-              "YesnoIsAnyValue",
-              "YesnoIs"
-            ]
-          },
-          "storeFractionSubTypeOptions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FractionSubTypeOption"
-            },
-            "nullable": true
-          },
-          "storeFractionSubType": {
-            "type": "string",
-            "nullable": true
-          },
-          "storeFractionSubTypeLabel": {
-            "type": "string",
-            "nullable": true
-          },
-          "storeFractionLogicGroupWithSubType": {
-            "type": "string",
-            "nullable": true
-          },
-          "meta": {
-            "nullable": true
-          },
-          "storeResult": {
-            "type": "string",
-            "nullable": true
-          },
-          "stringValue": {
-            "type": "string",
-            "nullable": true
-          },
-          "numberValue1": {
-            "type": "number",
-            "nullable": true
-          },
-          "numberValue2": {
-            "type": "number",
-            "nullable": true
-          },
-          "numberValues": {
-            "type": "string",
-            "nullable": true
-          },
-          "numberBetweenOption": {
-            "type": "string",
-            "enum": [
-              "Inclusive",
-              "LeftInclusive",
-              "RightInclusive",
-              "Exclusive"
-            ],
-            "nullable": true
-          },
-          "yesnoValue": {
-            "type": "string",
-            "enum": [
-              "Yes",
-              "No"
-            ],
-            "nullable": true
-          },
-          "dayOfWeekValue": {
-            "type": "string",
-            "enum": [
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday",
-              "Sunday"
-            ],
-            "nullable": true
-          },
-          "dayOfWeekIndexValues": {
-            "type": "string",
-            "nullable": true
-          },
-          "monthNameValue": {
-            "type": "string",
-            "enum": [
-              "January",
-              "February",
-              "March",
-              "April",
-              "May",
-              "June",
-              "July",
-              "August",
-              "September",
-              "October",
-              "November",
-              "December"
-            ],
-            "nullable": true
-          },
-          "quarterOfYearValue": {
-            "type": "string",
-            "enum": [
-              "q1",
-              "q2",
-              "q3",
-              "q4"
-            ],
-            "nullable": true
-          },
-          "tsDateYear": {
-            "type": "number",
-            "nullable": true
-          },
-          "tsDateQuarter": {
-            "type": "number",
-            "nullable": true
-          },
-          "tsDateMonth": {
-            "type": "number",
-            "nullable": true
-          },
-          "tsDateDay": {
-            "type": "number",
-            "nullable": true
-          },
-          "tsDateHour": {
-            "type": "number",
-            "nullable": true
-          },
-          "tsDateMinute": {
-            "type": "number",
-            "nullable": true
-          },
-          "tsDateToYear": {
-            "type": "number",
-            "nullable": true
-          },
-          "tsDateToQuarter": {
-            "type": "number",
-            "nullable": true
-          },
-          "tsDateToMonth": {
-            "type": "number",
-            "nullable": true
-          },
-          "tsDateToDay": {
-            "type": "number",
-            "nullable": true
-          },
-          "tsDateToHour": {
-            "type": "number",
-            "nullable": true
-          },
-          "tsDateToMinute": {
-            "type": "number",
-            "nullable": true
-          },
-          "tsForValue": {
-            "type": "number",
-            "nullable": true
-          },
-          "tsForUnit": {
-            "type": "string",
-            "enum": [
-              "seconds",
-              "minutes",
-              "hours",
-              "days",
-              "weeks",
-              "months",
-              "quarters",
-              "years"
-            ],
-            "nullable": true
-          },
-          "tsLastValue": {
-            "type": "number",
-            "nullable": true
-          },
-          "tsLastUnit": {
-            "type": "string",
-            "enum": [
-              "seconds",
-              "minutes",
-              "hours",
-              "days",
-              "weeks",
-              "months",
-              "quarters",
-              "years"
-            ],
-            "nullable": true
-          },
-          "tsLastCompleteOption": {
-            "type": "string",
-            "enum": [
-              "CompleteWithCurrent",
-              "CompletePlusCurrent",
-              "Complete"
-            ],
-            "nullable": true
-          },
-          "tsNextValue": {
-            "type": "number",
-            "nullable": true
-          },
-          "tsNextUnit": {
-            "type": "string",
-            "enum": [
-              "seconds",
-              "minutes",
-              "hours",
-              "days",
-              "weeks",
-              "months",
-              "quarters",
-              "years"
-            ],
-            "nullable": true
-          },
-          "tsMoment": {
-            "nullable": true
-          },
-          "tsMomentType": {
-            "type": "string",
-            "enum": [
-              "Literal",
-              "Today",
-              "Yesterday",
-              "Tomorrow",
-              "This",
-              "Last",
-              "Next",
-              "Ago",
-              "FromNow",
-              "Now",
-              "Timestamp"
-            ],
-            "nullable": true
-          },
-          "tsMomentUnit": {
-            "type": "string",
-            "enum": [
-              "second",
-              "minute",
-              "hour",
-              "day",
-              "week",
-              "month",
-              "quarter",
-              "year",
-              "monday",
-              "tuesday",
-              "wednesday",
-              "thursday",
-              "friday",
-              "saturday",
-              "sunday"
-            ],
-            "nullable": true
-          },
-          "tsTimestampValue": {
-            "type": "string",
-            "nullable": true
-          },
-          "tsMomentAgoFromNowQuantity": {
-            "type": "number",
-            "nullable": true
-          },
-          "tsFromMoment": {
-            "nullable": true
-          },
-          "tsFromMomentType": {
-            "type": "string",
-            "enum": [
-              "Literal",
-              "Today",
-              "Yesterday",
-              "Tomorrow",
-              "This",
-              "Last",
-              "Next",
-              "Ago",
-              "FromNow",
-              "Now",
-              "Timestamp"
-            ],
-            "nullable": true
-          },
-          "tsFromMomentUnit": {
-            "type": "string",
-            "enum": [
-              "second",
-              "minute",
-              "hour",
-              "day",
-              "week",
-              "month",
-              "quarter",
-              "year",
-              "monday",
-              "tuesday",
-              "wednesday",
-              "thursday",
-              "friday",
-              "saturday",
-              "sunday"
-            ],
-            "nullable": true
-          },
-          "tsFromTimestampValue": {
-            "type": "string",
-            "nullable": true
-          },
-          "tsFromMomentAgoFromNowQuantity": {
-            "type": "number",
-            "nullable": true
-          },
-          "tsToMoment": {
-            "nullable": true
-          },
-          "tsToMomentType": {
-            "type": "string",
-            "enum": [
-              "Literal",
-              "Today",
-              "Yesterday",
-              "Tomorrow",
-              "This",
-              "Last",
-              "Next",
-              "Ago",
-              "FromNow",
-              "Now",
-              "Timestamp"
-            ],
-            "nullable": true
-          },
-          "tsToMomentUnit": {
-            "type": "string",
-            "enum": [
-              "second",
-              "minute",
-              "hour",
-              "day",
-              "week",
-              "month",
-              "quarter",
-              "year",
-              "monday",
-              "tuesday",
-              "wednesday",
-              "thursday",
-              "friday",
-              "saturday",
-              "sunday"
-            ],
-            "nullable": true
-          },
-          "tsToTimestampValue": {
-            "type": "string",
-            "nullable": true
-          },
-          "tsToMomentAgoFromNowQuantity": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "required": [
-          "type"
-        ]
-      },
-      "Column": {
-        "type": "object",
-        "properties": {
-          "columnId": {
-            "type": "integer",
-            "minimum": -9007199254740991,
-            "maximum": 9007199254740991
-          },
-          "label": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "columnId",
-          "label"
-        ]
-      },
-      "Row": {
-        "type": "object",
-        "properties": {
-          "rowId": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "rowType": {
-            "type": "string",
-            "enum": [
-              "empty",
-              "header",
-              "metric",
-              "formula"
-            ]
-          },
-          "metricId": {
+          "spaceFullTitle": {
             "type": "string"
           },
           "modelId": {
-            "type": "string"
-          },
-          "topLabel": {
-            "type": "string"
-          },
-          "partNodeLabel": {
-            "type": "string"
-          },
-          "partFieldLabel": {
-            "type": "string"
-          },
-          "partLabel": {
-            "type": "string"
-          },
-          "timeNodeLabel": {
-            "type": "string"
-          },
-          "timeFieldLabel": {
-            "type": "string"
-          },
-          "timeLabel": {
-            "type": "string"
-          },
-          "formulaError": {
             "type": "string",
             "nullable": true
           },
-          "topQueryError": {
+          "modelLabel": {
             "type": "string",
             "nullable": true
           },
-          "hasAccessToModel": {
-            "type": "boolean"
-          },
-          "mconfig": {
-            "$ref": "#/components/schemas/MconfigX"
-          },
-          "query": {
-            "$ref": "#/components/schemas/Query"
-          },
-          "showChart": {
-            "type": "boolean"
-          },
-          "rqs": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Rq"
-            }
-          },
-          "records": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RowRecord"
-            }
-          },
-          "formatNumber": {
-            "type": "string"
-          },
-          "currencyPrefix": {
-            "type": "string"
-          },
-          "currencySuffix": {
-            "type": "string"
-          },
-          "parameters": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Parameter"
-            }
-          },
-          "parametersFiltersWithExcludedTime": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Filter"
-            }
-          },
-          "formula": {
-            "type": "string"
-          },
-          "formulaDeps": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "deps": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        },
-        "required": [
-          "rowId",
-          "name",
-          "rowType",
-          "metricId",
-          "modelId",
-          "topLabel",
-          "partNodeLabel",
-          "partFieldLabel",
-          "partLabel",
-          "timeNodeLabel",
-          "timeFieldLabel",
-          "timeLabel",
-          "hasAccessToModel",
-          "mconfig",
-          "query",
-          "showChart",
-          "rqs",
-          "records",
-          "formatNumber",
-          "currencyPrefix",
-          "currencySuffix",
-          "parameters",
-          "parametersFiltersWithExcludedTime",
-          "formula",
-          "formulaDeps",
-          "deps"
-        ]
-      },
-      "MconfigChart": {
-        "type": "object",
-        "properties": {
-          "isValid": {
-            "type": "boolean"
-          },
-          "type": {
+          "chartType": {
             "type": "string",
             "enum": [
               "table",
@@ -1567,110 +997,24 @@
               "pie",
               "single",
               "pivot_table"
-            ]
+            ],
+            "nullable": true
           },
-          "title": {
+          "iconPath": {
             "type": "string",
             "nullable": true
-          },
-          "xField": {
-            "type": "string",
-            "nullable": true
-          },
-          "yFields": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "multiField": {
-            "type": "string",
-            "nullable": true
-          },
-          "sizeField": {
-            "type": "string",
-            "nullable": true
-          },
-          "pivotRows": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "pivotColumns": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "pivotValues": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MconfigChartPivotValue"
-            },
-            "nullable": true
-          },
-          "format": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "pivotTheme": {
-            "type": "string",
-            "nullable": true
-          },
-          "firstColumnWidth": {
-            "type": "number",
-            "nullable": true
-          },
-          "valueColumnsWidth": {
-            "type": "number",
-            "nullable": true
-          },
-          "xAxis": {
-            "$ref": "#/components/schemas/MconfigChartXAxis"
-          },
-          "yAxis": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MconfigChartYAxis"
-            }
-          },
-          "series": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MconfigChartSeries"
-            }
           }
         },
         "required": [
-          "isValid",
           "type",
-          "xAxis",
-          "yAxis",
-          "series"
-        ]
-      },
-      "FilterX": {
-        "type": "object",
-        "properties": {
-          "fieldId": {
-            "type": "string"
-          },
-          "fractions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Fraction"
-            }
-          },
-          "field": {}
-        },
-        "required": [
-          "fieldId",
-          "fractions",
-          "field"
+          "id",
+          "unitId",
+          "title",
+          "accessRoles",
+          "accessRolesCombined",
+          "canEditOrDeleteUnit",
+          "isFavorite",
+          "spaceFullTitle"
         ]
       },
       "ModelField": {
@@ -1979,593 +1323,6 @@
           "lineNumber"
         ]
       },
-      "FractionControl": {
-        "type": "object",
-        "properties": {
-          "options": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FractionControlOption"
-            },
-            "nullable": true
-          },
-          "value": {
-            "nullable": true
-          },
-          "label": {
-            "type": "string",
-            "nullable": true
-          },
-          "required": {
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
-            "type": "string"
-          },
-          "controlClass": {
-            "type": "string",
-            "enum": [
-              "list_input",
-              "input",
-              "switch",
-              "date_picker",
-              "selector"
-            ]
-          },
-          "isMetricsDate": {
-            "type": "boolean",
-            "nullable": true
-          }
-        },
-        "required": [
-          "name",
-          "controlClass"
-        ]
-      },
-      "FractionSubTypeOption": {
-        "type": "object",
-        "properties": {
-          "logicGroup": {
-            "type": "string",
-            "enum": [
-              "OR",
-              "AND_NOT"
-            ],
-            "nullable": true
-          },
-          "typeValue": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          },
-          "label": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "required": [
-          "typeValue",
-          "value"
-        ]
-      },
-      "MconfigX": {
-        "type": "object",
-        "properties": {
-          "structId": {
-            "type": "string"
-          },
-          "mconfigId": {
-            "type": "string"
-          },
-          "queryId": {
-            "type": "string"
-          },
-          "modelId": {
-            "type": "string"
-          },
-          "modelType": {
-            "type": "string",
-            "enum": [
-              "Store",
-              "Malloy"
-            ]
-          },
-          "parentType": {
-            "type": "string",
-            "enum": [
-              "Dashboard",
-              "ChartDialogDashboard",
-              "SuggestDimensionDashboard",
-              "Report",
-              "ChartDialogReport",
-              "SuggestDimensionReport",
-              "Chart",
-              "SuggestDimensionChart",
-              "SuggestDimensionModel",
-              "Blank"
-            ]
-          },
-          "parentId": {
-            "type": "string",
-            "nullable": true
-          },
-          "dateRangeIncludesRightSide": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "storePart": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StorePart"
-              }
-            ],
-            "nullable": true
-          },
-          "modelLabel": {
-            "type": "string"
-          },
-          "modelFilePath": {
-            "type": "string",
-            "nullable": true
-          },
-          "malloyQueryStable": {
-            "type": "string",
-            "nullable": true
-          },
-          "malloyQueryExtra": {
-            "type": "string",
-            "nullable": true
-          },
-          "compiledQuery": {},
-          "select": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "sortings": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Sorting"
-            }
-          },
-          "sorts": {
-            "type": "string",
-            "nullable": true
-          },
-          "timezone": {
-            "type": "string"
-          },
-          "limit": {
-            "type": "number"
-          },
-          "filters": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Filter"
-            }
-          },
-          "appliedGivens": {
-            "type": "object",
-            "propertyNames": {
-              "type": "string"
-            },
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "anyOf": [
-                    {
-                      "anyOf": [
-                        {
-                          "type": "string"
-                        },
-                        {
-                          "type": "boolean"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "array",
-                      "items": {
-                        "anyOf": [
-                          {
-                            "type": "string"
-                          },
-                          {
-                            "type": "boolean"
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "defaultText": {
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "defaultText"
-                  ]
-                }
-              ]
-            },
-            "nullable": true
-          },
-          "chart": {
-            "$ref": "#/components/schemas/MconfigChart"
-          },
-          "serverTs": {
-            "type": "integer",
-            "minimum": -9007199254740991,
-            "maximum": 9007199254740991
-          },
-          "fields": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MconfigField"
-            }
-          },
-          "extendedFilters": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FilterX"
-            }
-          }
-        },
-        "required": [
-          "structId",
-          "mconfigId",
-          "queryId",
-          "modelId",
-          "modelType",
-          "parentType",
-          "modelLabel",
-          "compiledQuery",
-          "select",
-          "sortings",
-          "timezone",
-          "limit",
-          "filters",
-          "chart",
-          "serverTs",
-          "fields",
-          "extendedFilters"
-        ]
-      },
-      "Query": {
-        "type": "object",
-        "properties": {
-          "projectId": {
-            "type": "string"
-          },
-          "envId": {
-            "type": "string"
-          },
-          "connectionId": {
-            "type": "string"
-          },
-          "connectionType": {
-            "type": "string",
-            "enum": [
-              "PostgreSQL",
-              "MySQL",
-              "SnowFlake",
-              "BigQuery",
-              "Databricks",
-              "MotherDuck",
-              "Presto",
-              "Trino",
-              "GoogleApi",
-              "Api"
-            ]
-          },
-          "queryId": {
-            "type": "string"
-          },
-          "reportId": {
-            "type": "string",
-            "nullable": true
-          },
-          "reportStructId": {
-            "type": "string",
-            "nullable": true
-          },
-          "sql": {
-            "type": "string",
-            "nullable": true
-          },
-          "apiMethod": {
-            "type": "string",
-            "enum": [
-              "POST",
-              "GET"
-            ],
-            "nullable": true
-          },
-          "apiUrl": {
-            "type": "string",
-            "nullable": true
-          },
-          "apiBody": {},
-          "status": {
-            "type": "string",
-            "enum": [
-              "New",
-              "Running",
-              "Canceled",
-              "Completed",
-              "Error"
-            ]
-          },
-          "data": {
-            "nullable": true
-          },
-          "lastRunBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "lastRunTs": {
-            "type": "integer",
-            "minimum": -9007199254740991,
-            "maximum": 9007199254740991,
-            "nullable": true
-          },
-          "lastCancelTs": {
-            "type": "integer",
-            "minimum": -9007199254740991,
-            "maximum": 9007199254740991,
-            "nullable": true
-          },
-          "lastCompleteTs": {
-            "type": "integer",
-            "minimum": -9007199254740991,
-            "maximum": 9007199254740991,
-            "nullable": true
-          },
-          "lastCompleteDuration": {
-            "type": "number",
-            "nullable": true
-          },
-          "lastErrorMessage": {
-            "type": "string",
-            "nullable": true
-          },
-          "lastErrorTs": {
-            "type": "integer",
-            "minimum": -9007199254740991,
-            "maximum": 9007199254740991,
-            "nullable": true
-          },
-          "queryJobId": {
-            "type": "string",
-            "nullable": true
-          },
-          "bigqueryQueryJobId": {
-            "type": "string",
-            "nullable": true
-          },
-          "bigqueryConsecutiveErrorsGetJob": {
-            "type": "integer",
-            "minimum": -9007199254740991,
-            "maximum": 9007199254740991
-          },
-          "bigqueryConsecutiveErrorsGetResults": {
-            "type": "integer",
-            "minimum": -9007199254740991,
-            "maximum": 9007199254740991
-          },
-          "serverTs": {
-            "type": "integer",
-            "minimum": -9007199254740991,
-            "maximum": 9007199254740991
-          }
-        },
-        "required": [
-          "projectId",
-          "envId",
-          "connectionId",
-          "connectionType",
-          "queryId",
-          "apiBody",
-          "status",
-          "bigqueryConsecutiveErrorsGetJob",
-          "bigqueryConsecutiveErrorsGetResults",
-          "serverTs"
-        ]
-      },
-      "Rq": {
-        "type": "object",
-        "properties": {
-          "fractionBrick": {
-            "type": "string"
-          },
-          "timezone": {
-            "type": "string"
-          },
-          "timeSpec": {
-            "type": "string",
-            "enum": [
-              "timestamps",
-              "seconds",
-              "minutes",
-              "hours",
-              "days",
-              "weeks",
-              "months",
-              "quarters",
-              "years"
-            ]
-          },
-          "timeStartTs": {
-            "type": "integer",
-            "minimum": -9007199254740991,
-            "maximum": 9007199254740991
-          },
-          "timeEndTs": {
-            "type": "integer",
-            "minimum": -9007199254740991,
-            "maximum": 9007199254740991
-          },
-          "mconfigId": {
-            "type": "string"
-          },
-          "queryId": {
-            "type": "string"
-          },
-          "kitId": {
-            "type": "string"
-          },
-          "lastCalculatedTs": {
-            "type": "integer",
-            "minimum": -9007199254740991,
-            "maximum": 9007199254740991,
-            "nullable": true
-          }
-        },
-        "required": [
-          "fractionBrick",
-          "timezone",
-          "timeSpec",
-          "timeStartTs",
-          "timeEndTs",
-          "mconfigId",
-          "queryId",
-          "kitId"
-        ]
-      },
-      "RowRecord": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "columnLabel": {
-            "type": "string"
-          },
-          "key": {
-            "type": "number"
-          },
-          "value": {},
-          "error": {}
-        },
-        "required": [
-          "id",
-          "columnLabel",
-          "key",
-          "value",
-          "error"
-        ]
-      },
-      "Parameter": {
-        "type": "object",
-        "properties": {
-          "apply_to": {
-            "type": "string"
-          },
-          "listen": {
-            "type": "string"
-          },
-          "fractions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Fraction"
-            }
-          }
-        },
-        "required": [
-          "apply_to",
-          "listen",
-          "fractions"
-        ]
-      },
-      "Filter": {
-        "type": "object",
-        "properties": {
-          "fieldId": {
-            "type": "string"
-          },
-          "fractions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Fraction"
-            }
-          }
-        },
-        "required": [
-          "fieldId",
-          "fractions"
-        ]
-      },
-      "MconfigChartPivotValue": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "field"
-        ]
-      },
-      "MconfigChartXAxis": {
-        "type": "object",
-        "properties": {
-          "scale": {
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "scale"
-        ]
-      },
-      "MconfigChartYAxis": {
-        "type": "object",
-        "properties": {
-          "scale": {
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "scale"
-        ]
-      },
-      "MconfigChartSeries": {
-        "type": "object",
-        "properties": {
-          "dataField": {
-            "type": "string",
-            "nullable": true
-          },
-          "dataRowId": {
-            "type": "string",
-            "nullable": true
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "table",
-              "line",
-              "bar",
-              "scatter",
-              "pie",
-              "single",
-              "pivot_table"
-            ],
-            "nullable": true
-          },
-          "yAxisIndex": {
-            "type": "integer",
-            "minimum": -9007199254740991,
-            "maximum": 9007199254740991,
-            "nullable": true
-          }
-        }
-      },
       "KeyValuePair": {
         "type": "object",
         "properties": {
@@ -2579,267 +1336,6 @@
         },
         "required": [
           "key"
-        ]
-      },
-      "FractionControlOption": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "string"
-          },
-          "label": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "required": [
-          "value"
-        ]
-      },
-      "StorePart": {
-        "type": "object",
-        "properties": {
-          "reqTemplate": {
-            "type": "string"
-          },
-          "reqFunction": {
-            "type": "string"
-          },
-          "reqJsonParts": {
-            "type": "string"
-          },
-          "reqBody": {
-            "type": "string"
-          },
-          "reqUrlPath": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "reqTemplate",
-          "reqFunction",
-          "reqJsonParts",
-          "reqBody",
-          "reqUrlPath"
-        ]
-      },
-      "Sorting": {
-        "type": "object",
-        "properties": {
-          "fieldId": {
-            "type": "string"
-          },
-          "desc": {
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "fieldId",
-          "desc"
-        ]
-      },
-      "MconfigField": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "malloyFieldName": {
-            "type": "string",
-            "nullable": true
-          },
-          "malloyFieldPath": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "malloyBaseFieldId": {
-            "type": "string",
-            "nullable": true
-          },
-          "malloyTags": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/KeyValuePair"
-            },
-            "nullable": true
-          },
-          "mproveTags": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/KeyValuePair"
-            },
-            "nullable": true
-          },
-          "hidden": {
-            "type": "boolean"
-          },
-          "required": {
-            "type": "boolean"
-          },
-          "maxFractions": {
-            "type": "number",
-            "nullable": true
-          },
-          "label": {
-            "type": "string"
-          },
-          "fieldClass": {
-            "type": "string",
-            "enum": [
-              "dimension",
-              "time",
-              "measure",
-              "calculation",
-              "filter",
-              "join",
-              "info"
-            ]
-          },
-          "fieldFileName": {
-            "type": "string",
-            "nullable": true
-          },
-          "fieldFilePath": {
-            "type": "string",
-            "nullable": true
-          },
-          "result": {
-            "type": "string",
-            "enum": [
-              "day_of_week",
-              "day_of_week_index",
-              "month_name",
-              "quarter_of_year",
-              "ts",
-              "yesno",
-              "string",
-              "number",
-              "date",
-              "boolean",
-              "array",
-              "record",
-              "json",
-              "sql_native"
-            ],
-            "nullable": true
-          },
-          "fieldLineNum": {
-            "type": "integer",
-            "minimum": -9007199254740991,
-            "maximum": 9007199254740991,
-            "nullable": true
-          },
-          "suggestModelDimension": {
-            "type": "string",
-            "nullable": true
-          },
-          "sqlName": {
-            "type": "string"
-          },
-          "topId": {
-            "type": "string"
-          },
-          "topLabel": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "count_distinct",
-              "sum",
-              "sum_by_key",
-              "average",
-              "average_by_key",
-              "median_by_key",
-              "percentile_by_key",
-              "min",
-              "max",
-              "list",
-              "custom",
-              "yesno_is_true"
-            ],
-            "nullable": true
-          },
-          "groupId": {
-            "type": "string",
-            "nullable": true
-          },
-          "groupLabel": {
-            "type": "string",
-            "nullable": true
-          },
-          "groupDescription": {
-            "type": "string",
-            "nullable": true
-          },
-          "formatNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "currencyPrefix": {
-            "type": "string",
-            "nullable": true
-          },
-          "currencySuffix": {
-            "type": "string",
-            "nullable": true
-          },
-          "buildMetrics": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "isTimeframeBase": {
-            "type": "boolean"
-          },
-          "timeframe": {
-            "type": "string",
-            "nullable": true
-          },
-          "detail": {
-            "type": "string",
-            "enum": [
-              "timestamps",
-              "minutes",
-              "hours",
-              "days",
-              "weeksSunday",
-              "weeksMonday",
-              "months",
-              "quarters",
-              "years"
-            ],
-            "nullable": true
-          },
-          "sorting": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Sorting"
-              }
-            ],
-            "nullable": true
-          },
-          "sortingNumber": {
-            "type": "number"
-          }
-        },
-        "required": [
-          "id",
-          "hidden",
-          "required",
-          "label",
-          "fieldClass",
-          "sqlName",
-          "topId",
-          "topLabel",
-          "isTimeframeBase",
-          "sortingNumber"
         ]
       }
     }

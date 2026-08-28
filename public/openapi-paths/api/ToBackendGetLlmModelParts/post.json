@@ -7,16 +7,16 @@
     "contact": {}
   },
   "paths": {
-    "/api/ToBackendSetProjectApiKey": {
+    "/api/ToBackendGetLlmModelParts": {
       "post": {
-        "operationId": "SetProjectApiKeyController",
+        "operationId": "GetLlmModelPartsController",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ToBackendSetProjectApiKeyRequest"
+                "$ref": "#/components/schemas/ToBackendGetLlmModelPartsRequest"
               }
             }
           }
@@ -27,7 +27,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ToBackendSetProjectApiKeyResponse"
+                  "$ref": "#/components/schemas/ToBackendGetLlmModelPartsResponse"
                 }
               }
             }
@@ -38,14 +38,14 @@
   },
   "components": {
     "schemas": {
-      "ToBackendSetProjectApiKeyRequest": {
+      "ToBackendGetLlmModelPartsRequest": {
         "type": "object",
         "properties": {
           "info": {
-            "$ref": "#/components/schemas/ToBackendSetProjectApiKeyRequestInfo"
+            "$ref": "#/components/schemas/ToBackendGetLlmModelPartsRequestInfo"
           },
           "payload": {
-            "$ref": "#/components/schemas/ToBackendSetProjectApiKeyRequestPayload"
+            "$ref": "#/components/schemas/ToBackendGetLlmModelPartsRequestPayload"
           }
         },
         "required": [
@@ -53,14 +53,14 @@
           "payload"
         ]
       },
-      "ToBackendSetProjectApiKeyResponse": {
+      "ToBackendGetLlmModelPartsResponse": {
         "type": "object",
         "properties": {
           "info": {
-            "$ref": "#/components/schemas/ToBackendSetProjectApiKeyResponseInfo"
+            "$ref": "#/components/schemas/ToBackendGetLlmModelPartsResponseInfo"
           },
           "payload": {
-            "$ref": "#/components/schemas/ToBackendSetProjectApiKeyResponsePayload"
+            "$ref": "#/components/schemas/ToBackendGetLlmModelPartsResponsePayload"
           }
         },
         "required": [
@@ -68,13 +68,13 @@
           "payload"
         ]
       },
-      "ToBackendSetProjectApiKeyRequestInfo": {
+      "ToBackendGetLlmModelPartsRequestInfo": {
         "type": "object",
         "properties": {
           "name": {
             "type": "string",
             "enum": [
-              "api/ToBackendSetProjectApiKey"
+              "api/ToBackendGetLlmModelParts"
             ]
           },
           "traceId": {
@@ -90,40 +90,30 @@
           "idempotencyKey"
         ]
       },
-      "ToBackendSetProjectApiKeyRequestPayload": {
+      "ToBackendGetLlmModelPartsRequestPayload": {
         "type": "object",
         "properties": {
           "projectId": {
             "type": "string"
           },
-          "zenApiKey": {
+          "providerId": {
             "type": "string",
-            "nullable": true
-          },
-          "anthropicApiKey": {
-            "type": "string",
-            "nullable": true
-          },
-          "openaiApiKey": {
-            "type": "string",
-            "nullable": true
-          },
-          "e2bApiKey": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1
           }
         },
         "required": [
-          "projectId"
-        ]
+          "projectId",
+          "providerId"
+        ],
+        "additionalProperties": false
       },
-      "ToBackendSetProjectApiKeyResponseInfo": {
+      "ToBackendGetLlmModelPartsResponseInfo": {
         "type": "object",
         "properties": {
           "path": {
             "type": "string",
             "enum": [
-              "/api/ToBackendSetProjectApiKey"
+              "/api/ToBackendGetLlmModelParts"
             ]
           },
           "method": {
@@ -161,77 +151,100 @@
           "traceId"
         ]
       },
-      "ToBackendSetProjectApiKeyResponsePayload": {
+      "ToBackendGetLlmModelPartsResponsePayload": {
         "type": "object",
         "properties": {
-          "project": {
-            "$ref": "#/components/schemas/Project"
+          "modelParts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LlmModelPart"
+            }
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true
           }
         },
         "required": [
-          "project"
-        ]
+          "modelParts"
+        ],
+        "additionalProperties": false
       },
-      "Project": {
+      "LlmModelPart": {
         "type": "object",
         "properties": {
-          "orgId": {
-            "type": "string"
+          "modelId": {
+            "type": "string",
+            "minLength": 1
           },
-          "projectId": {
-            "type": "string"
+          "catalogName": {
+            "type": "string",
+            "minLength": 1
           },
-          "remoteType": {
+          "providerModelInfo": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {},
+            "nullable": true
+          },
+          "modelsDevStatus": {
             "type": "string",
             "enum": [
-              "Managed",
-              "GitClone"
-            ]
-          },
-          "name": {
-            "type": "string"
-          },
-          "gitUrl": {
-            "type": "string",
+              "alpha",
+              "beta",
+              "deprecated"
+            ],
             "nullable": true
           },
-          "defaultBranch": {
-            "type": "string",
-            "nullable": true
-          },
-          "publicKey": {
-            "type": "string",
-            "nullable": true
-          },
-          "isZenApiKeySet": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "isAnthropicApiKeySet": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "isOpenaiApiKeySet": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "isE2bApiKeySet": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "serverTs": {
+          "contextLimit": {
             "type": "integer",
-            "minimum": -9007199254740991,
+            "exclusiveMinimum": 0,
             "maximum": 9007199254740991,
             "nullable": true
+          },
+          "inputLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "outputLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "codexContextWindow": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "codexMaxContextWindow": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "isOpencodeSupported": {
+            "type": "boolean"
           }
         },
         "required": [
-          "orgId",
-          "projectId",
-          "remoteType",
-          "name"
-        ]
+          "modelId",
+          "catalogName",
+          "isOpencodeSupported"
+        ],
+        "additionalProperties": false
       }
     }
   }

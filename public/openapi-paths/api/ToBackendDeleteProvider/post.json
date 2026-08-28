@@ -7,16 +7,16 @@
     "contact": {}
   },
   "paths": {
-    "/api/ToBackendCreateEditorSession": {
+    "/api/ToBackendDeleteProvider": {
       "post": {
-        "operationId": "CreateEditorSessionController",
+        "operationId": "DeleteProviderController",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ToBackendCreateEditorSessionRequest"
+                "$ref": "#/components/schemas/ToBackendDeleteProviderRequest"
               }
             }
           }
@@ -27,7 +27,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ToBackendCreateEditorSessionResponse"
+                  "$ref": "#/components/schemas/ToBackendDeleteProviderResponse"
                 }
               }
             }
@@ -38,14 +38,14 @@
   },
   "components": {
     "schemas": {
-      "ToBackendCreateEditorSessionRequest": {
+      "ToBackendDeleteProviderRequest": {
         "type": "object",
         "properties": {
           "info": {
-            "$ref": "#/components/schemas/ToBackendCreateEditorSessionRequestInfo"
+            "$ref": "#/components/schemas/ToBackendDeleteProviderRequestInfo"
           },
           "payload": {
-            "$ref": "#/components/schemas/ToBackendCreateEditorSessionRequestPayload"
+            "$ref": "#/components/schemas/ToBackendDeleteProviderRequestPayload"
           }
         },
         "required": [
@@ -53,14 +53,14 @@
           "payload"
         ]
       },
-      "ToBackendCreateEditorSessionResponse": {
+      "ToBackendDeleteProviderResponse": {
         "type": "object",
         "properties": {
           "info": {
-            "$ref": "#/components/schemas/ToBackendCreateEditorSessionResponseInfo"
+            "$ref": "#/components/schemas/ToBackendDeleteProviderResponseInfo"
           },
           "payload": {
-            "$ref": "#/components/schemas/ToBackendCreateEditorSessionResponsePayload"
+            "$ref": "#/components/schemas/ToBackendDeleteProviderResponsePayload"
           }
         },
         "required": [
@@ -68,13 +68,13 @@
           "payload"
         ]
       },
-      "ToBackendCreateEditorSessionRequestInfo": {
+      "ToBackendDeleteProviderRequestInfo": {
         "type": "object",
         "properties": {
           "name": {
             "type": "string",
             "enum": [
-              "api/ToBackendCreateEditorSession"
+              "api/ToBackendDeleteProvider"
             ]
           },
           "traceId": {
@@ -90,67 +90,28 @@
           "idempotencyKey"
         ]
       },
-      "ToBackendCreateEditorSessionRequestPayload": {
+      "ToBackendDeleteProviderRequestPayload": {
         "type": "object",
         "properties": {
           "projectId": {
             "type": "string"
           },
-          "sandboxType": {
-            "type": "string",
-            "enum": [
-              "E2B"
-            ]
-          },
           "providerId": {
-            "type": "string"
-          },
-          "modelId": {
-            "type": "string"
-          },
-          "agent": {
-            "type": "string"
-          },
-          "variant": {
-            "type": "string"
-          },
-          "envId": {
-            "type": "string"
-          },
-          "initialBranch": {
-            "type": "string"
-          },
-          "firstMessage": {
-            "type": "string",
-            "nullable": true
-          },
-          "messageId": {
-            "type": "string"
-          },
-          "partId": {
             "type": "string"
           }
         },
         "required": [
           "projectId",
-          "sandboxType",
-          "providerId",
-          "modelId",
-          "agent",
-          "variant",
-          "envId",
-          "initialBranch",
-          "messageId",
-          "partId"
+          "providerId"
         ]
       },
-      "ToBackendCreateEditorSessionResponseInfo": {
+      "ToBackendDeleteProviderResponseInfo": {
         "type": "object",
         "properties": {
           "path": {
             "type": "string",
             "enum": [
-              "/api/ToBackendCreateEditorSession"
+              "/api/ToBackendDeleteProvider"
             ]
           },
           "method": {
@@ -188,28 +149,9 @@
           "traceId"
         ]
       },
-      "ToBackendCreateEditorSessionResponsePayload": {
+      "ToBackendDeleteProviderResponsePayload": {
         "type": "object",
-        "properties": {
-          "sessionId": {
-            "type": "string"
-          },
-          "repoId": {
-            "type": "string"
-          },
-          "branchId": {
-            "type": "string"
-          },
-          "envId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "sessionId",
-          "repoId",
-          "branchId",
-          "envId"
-        ]
+        "properties": {}
       }
     }
   }

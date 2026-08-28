@@ -99,10 +99,10 @@
           "repoId": {
             "type": "string"
           },
-          "provider": {
+          "providerId": {
             "type": "string"
           },
-          "model": {
+          "modelId": {
             "type": "string"
           },
           "variant": {
@@ -123,22 +123,18 @@
           },
           "partId": {
             "type": "string"
-          },
-          "useCodex": {
-            "type": "boolean"
           }
         },
         "required": [
           "projectId",
           "repoId",
-          "provider",
-          "model",
+          "providerId",
+          "modelId",
           "variant",
           "branchId",
           "envId",
           "messageId",
-          "partId",
-          "useCodex"
+          "partId"
         ]
       },
       "ToBackendCreateExplorerSessionResponseInfo": {

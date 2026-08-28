@@ -308,20 +308,20 @@
             "type": "boolean",
             "nullable": true
           },
-          "newSessionExplorerProviderModel": {
+          "newSessionExplorerModelExtraId": {
             "type": "string",
             "nullable": true
           },
-          "newSessionEditorProviderModel": {
+          "newSessionExplorerVariant": {
+            "type": "string",
+            "nullable": true
+          },
+          "newSessionEditorModelExtraId": {
             "type": "string",
             "nullable": true
           },
           "newSessionEditorVariant": {
             "type": "string",
-            "nullable": true
-          },
-          "newSessionUseCodex": {
-            "type": "boolean",
             "nullable": true
           }
         },

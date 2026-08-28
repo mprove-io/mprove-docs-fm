@@ -7,16 +7,16 @@
     "contact": {}
   },
   "paths": {
-    "/api/ToBackendGetSessionProviderModels": {
+    "/api/ToBackendSetProjectSandboxProvider": {
       "post": {
-        "operationId": "GetSessionProviderModelsController",
+        "operationId": "SetProjectSandboxProviderController",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ToBackendGetSessionProviderModelsRequest"
+                "$ref": "#/components/schemas/ToBackendSetProjectSandboxProviderRequest"
               }
             }
           }
@@ -27,7 +27,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ToBackendGetSessionProviderModelsResponse"
+                  "$ref": "#/components/schemas/ToBackendSetProjectSandboxProviderResponse"
                 }
               }
             }
@@ -38,14 +38,14 @@
   },
   "components": {
     "schemas": {
-      "ToBackendGetSessionProviderModelsRequest": {
+      "ToBackendSetProjectSandboxProviderRequest": {
         "type": "object",
         "properties": {
           "info": {
-            "$ref": "#/components/schemas/ToBackendGetSessionProviderModelsRequestInfo"
+            "$ref": "#/components/schemas/ToBackendSetProjectSandboxProviderRequestInfo"
           },
           "payload": {
-            "$ref": "#/components/schemas/ToBackendGetSessionProviderModelsRequestPayload"
+            "$ref": "#/components/schemas/ToBackendSetProjectSandboxProviderRequestPayload"
           }
         },
         "required": [
@@ -53,14 +53,14 @@
           "payload"
         ]
       },
-      "ToBackendGetSessionProviderModelsResponse": {
+      "ToBackendSetProjectSandboxProviderResponse": {
         "type": "object",
         "properties": {
           "info": {
-            "$ref": "#/components/schemas/ToBackendGetSessionProviderModelsResponseInfo"
+            "$ref": "#/components/schemas/ToBackendSetProjectSandboxProviderResponseInfo"
           },
           "payload": {
-            "$ref": "#/components/schemas/ToBackendGetSessionProviderModelsResponsePayload"
+            "$ref": "#/components/schemas/ToBackendSetProjectSandboxProviderResponsePayload"
           }
         },
         "required": [
@@ -68,13 +68,13 @@
           "payload"
         ]
       },
-      "ToBackendGetSessionProviderModelsRequestInfo": {
+      "ToBackendSetProjectSandboxProviderRequestInfo": {
         "type": "object",
         "properties": {
           "name": {
             "type": "string",
             "enum": [
-              "api/ToBackendGetSessionProviderModels"
+              "api/ToBackendSetProjectSandboxProvider"
             ]
           },
           "traceId": {
@@ -90,39 +90,28 @@
           "idempotencyKey"
         ]
       },
-      "ToBackendGetSessionProviderModelsRequestPayload": {
+      "ToBackendSetProjectSandboxProviderRequestPayload": {
         "type": "object",
         "properties": {
           "projectId": {
             "type": "string"
           },
-          "sessionTypes": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "Explorer",
-                "Editor"
-              ]
-            }
-          },
-          "forceLoadFromCache": {
-            "type": "boolean",
+          "e2bApiKey": {
+            "type": "string",
             "nullable": true
           }
         },
         "required": [
-          "projectId",
-          "sessionTypes"
+          "projectId"
         ]
       },
-      "ToBackendGetSessionProviderModelsResponseInfo": {
+      "ToBackendSetProjectSandboxProviderResponseInfo": {
         "type": "object",
         "properties": {
           "path": {
             "type": "string",
             "enum": [
-              "/api/ToBackendGetSessionProviderModels"
+              "/api/ToBackendSetProjectSandboxProvider"
             ]
           },
           "method": {
@@ -160,59 +149,64 @@
           "traceId"
         ]
       },
-      "ToBackendGetSessionProviderModelsResponsePayload": {
+      "ToBackendSetProjectSandboxProviderResponsePayload": {
         "type": "object",
         "properties": {
-          "modelsOpencode": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SessionModelApi"
-            }
-          },
-          "modelsAi": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SessionModelApi"
-            }
+          "project": {
+            "$ref": "#/components/schemas/Project"
           }
         },
         "required": [
-          "modelsOpencode",
-          "modelsAi"
+          "project"
         ]
       },
-      "SessionModelApi": {
+      "Project": {
         "type": "object",
         "properties": {
-          "id": {
+          "orgId": {
             "type": "string"
+          },
+          "projectId": {
+            "type": "string"
+          },
+          "remoteType": {
+            "type": "string",
+            "enum": [
+              "Managed",
+              "GitClone"
+            ]
           },
           "name": {
             "type": "string"
           },
-          "providerId": {
-            "type": "string"
-          },
-          "providerName": {
-            "type": "string"
-          },
-          "variants": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
+          "gitUrl": {
+            "type": "string",
             "nullable": true
           },
-          "contextLimit": {
-            "type": "number",
+          "defaultBranch": {
+            "type": "string",
+            "nullable": true
+          },
+          "publicKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "isE2bApiKeySet": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "serverTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
             "nullable": true
           }
         },
         "required": [
-          "id",
-          "name",
-          "providerId",
-          "providerName"
+          "orgId",
+          "projectId",
+          "remoteType",
+          "name"
         ]
       }
     }

@@ -207,18 +207,6 @@
             "type": "string",
             "nullable": true
           },
-          "isZenApiKeySet": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "isAnthropicApiKeySet": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "isOpenaiApiKeySet": {
-            "type": "boolean",
-            "nullable": true
-          },
           "isE2bApiKeySet": {
             "type": "boolean",
             "nullable": true

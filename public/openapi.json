@@ -438,17 +438,17 @@
         ]
       }
     },
-    "/api/ToBackendGetSessionProviderModels": {
+    "/api/ToBackendGetLlmModelsWithProvider": {
       "post": {
         "description": "List available LLM provider models",
-        "operationId": "GetSessionProviderModelsController",
+        "operationId": "GetLlmModelsWithProviderController",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ToBackendGetSessionProviderModelsRequest"
+                "$ref": "#/components/schemas/ToBackendGetLlmModelsWithProviderRequest"
               }
             }
           }
@@ -459,15 +459,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ToBackendGetSessionProviderModelsResponse"
+                  "$ref": "#/components/schemas/ToBackendGetLlmModelsWithProviderResponse"
                 }
               }
             }
           }
         },
-        "summary": "GetSessionProviderModels",
+        "summary": "GetLlmModelsWithProvider",
         "tags": [
-          "Sessions"
+          "LlmModels"
         ]
       }
     },
@@ -1128,6 +1128,303 @@
         "summary": "GetConnectionsList",
         "tags": [
           "Connections"
+        ]
+      }
+    },
+    "/api/ToBackendCreateProvider": {
+      "post": {
+        "description": "Create a provider in a project",
+        "operationId": "CreateProviderController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendCreateProviderRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendCreateProviderResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "CreateProvider",
+        "tags": [
+          "Providers"
+        ]
+      }
+    },
+    "/api/ToBackendGetProviders": {
+      "post": {
+        "description": "Get project providers",
+        "operationId": "GetProvidersController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendGetProvidersRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendGetProvidersResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "GetProviders",
+        "tags": [
+          "Providers"
+        ]
+      }
+    },
+    "/api/ToBackendGetLlmModelParts": {
+      "post": {
+        "description": "Get models available for a built-in provider",
+        "operationId": "GetLlmModelPartsController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendGetLlmModelPartsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendGetLlmModelPartsResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "GetLlmModelParts",
+        "tags": [
+          "LlmModels"
+        ]
+      }
+    },
+    "/api/ToBackendEditProvider": {
+      "post": {
+        "description": "Update an existing provider",
+        "operationId": "EditProviderController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendEditProviderRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendEditProviderResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "EditProvider",
+        "tags": [
+          "Providers"
+        ]
+      }
+    },
+    "/api/ToBackendDeleteProvider": {
+      "post": {
+        "description": "Delete a provider from a project",
+        "operationId": "DeleteProviderController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendDeleteProviderRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendDeleteProviderResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "DeleteProvider",
+        "tags": [
+          "Providers"
+        ]
+      }
+    },
+    "/api/ToBackendToggleProvider": {
+      "post": {
+        "description": "Enable or disable an existing provider",
+        "operationId": "ToggleProviderController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendToggleProviderRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendToggleProviderResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "ToggleProvider",
+        "tags": [
+          "Providers"
+        ]
+      }
+    },
+    "/api/ToBackendCreateLlmModel": {
+      "post": {
+        "description": "Create a model in an existing provider",
+        "operationId": "CreateLlmModelController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendCreateLlmModelRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendCreateLlmModelResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "CreateLlmModel",
+        "tags": [
+          "LlmModels"
+        ]
+      }
+    },
+    "/api/ToBackendEditLlmModel": {
+      "post": {
+        "description": "Edit a model in an existing provider",
+        "operationId": "EditLlmModelController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendEditLlmModelRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendEditLlmModelResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "EditLlmModel",
+        "tags": [
+          "LlmModels"
+        ]
+      }
+    },
+    "/api/ToBackendDeleteLlmModel": {
+      "post": {
+        "description": "Delete a model from an existing provider",
+        "operationId": "DeleteLlmModelController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendDeleteLlmModelRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendDeleteLlmModelResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "DeleteLlmModel",
+        "tags": [
+          "LlmModels"
         ]
       }
     },
@@ -2319,17 +2616,17 @@
         ]
       }
     },
-    "/api/ToBackendSetProjectApiKey": {
+    "/api/ToBackendSetProjectSandboxProvider": {
       "post": {
-        "description": "Update third-party API keys on a project",
-        "operationId": "SetProjectApiKeyController",
+        "description": "Update the sandbox provider API key on a project",
+        "operationId": "SetProjectSandboxProviderController",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ToBackendSetProjectApiKeyRequest"
+                "$ref": "#/components/schemas/ToBackendSetProjectSandboxProviderRequest"
               }
             }
           }
@@ -2340,13 +2637,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ToBackendSetProjectApiKeyResponse"
+                  "$ref": "#/components/schemas/ToBackendSetProjectSandboxProviderResponse"
                 }
               }
             }
           }
         },
-        "summary": "SetProjectApiKey",
+        "summary": "SetProjectSandboxProvider",
         "tags": [
           "Projects"
         ]
@@ -5440,6 +5737,12 @@
       "description": ""
     },
     {
+      "name": "LlmModels"
+    },
+    {
+      "name": "Providers"
+    },
+    {
       "name": "Favorites"
     },
     {
@@ -5487,10 +5790,10 @@
               "E2B"
             ]
           },
-          "provider": {
+          "providerId": {
             "type": "string"
           },
-          "model": {
+          "modelId": {
             "type": "string"
           },
           "agent": {
@@ -5514,23 +5817,19 @@
           },
           "partId": {
             "type": "string"
-          },
-          "useCodex": {
-            "type": "boolean"
           }
         },
         "required": [
           "projectId",
           "sandboxType",
-          "provider",
-          "model",
+          "providerId",
+          "modelId",
           "agent",
           "variant",
           "envId",
           "initialBranch",
           "messageId",
-          "partId",
-          "useCodex"
+          "partId"
         ]
       },
       "ToBackendCreateEditorSessionRequest": {
@@ -5661,10 +5960,10 @@
           "repoId": {
             "type": "string"
           },
-          "provider": {
+          "providerId": {
             "type": "string"
           },
-          "model": {
+          "modelId": {
             "type": "string"
           },
           "variant": {
@@ -5685,22 +5984,18 @@
           },
           "partId": {
             "type": "string"
-          },
-          "useCodex": {
-            "type": "boolean"
           }
         },
         "required": [
           "projectId",
           "repoId",
-          "provider",
-          "model",
+          "providerId",
+          "modelId",
           "variant",
           "branchId",
           "envId",
           "messageId",
-          "partId",
-          "useCodex"
+          "partId"
         ]
       },
       "ToBackendCreateExplorerSessionRequest": {
@@ -5967,7 +6262,11 @@
             "type": "string",
             "nullable": true
           },
-          "model": {
+          "providerId": {
+            "type": "string",
+            "nullable": true
+          },
+          "modelId": {
             "type": "string",
             "nullable": true
           },
@@ -6068,19 +6367,14 @@
               "Editor"
             ]
           },
-          "provider": {
+          "providerId": {
             "type": "string"
           },
           "agent": {
             "type": "string"
           },
-          "model": {
-            "type": "string",
-            "nullable": true
-          },
-          "lastMessageProviderModel": {
-            "type": "string",
-            "nullable": true
+          "modelId": {
+            "type": "string"
           },
           "lastMessageVariant": {
             "type": "string",
@@ -6144,9 +6438,6 @@
             "type": "string",
             "nullable": true
           },
-          "useCodex": {
-            "type": "boolean"
-          },
           "closedExplorerTabIds": {
             "type": "array",
             "items": {
@@ -6158,14 +6449,14 @@
         "required": [
           "sessionId",
           "type",
-          "provider",
+          "providerId",
           "agent",
+          "modelId",
           "status",
           "repoId",
           "branchId",
           "createdTs",
-          "lastActivityTs",
-          "useCodex"
+          "lastActivityTs"
         ]
       },
       "ToBackendSendMessageToExplorerSessionResponse": {
@@ -6232,7 +6523,11 @@
             "type": "string",
             "nullable": true
           },
-          "model": {
+          "providerId": {
+            "type": "string",
+            "nullable": true
+          },
+          "modelId": {
             "type": "string",
             "nullable": true
           },
@@ -7354,13 +7649,13 @@
           "payload"
         ]
       },
-      "ToBackendGetSessionProviderModelsRequestInfo": {
+      "ToBackendGetLlmModelsWithProviderRequestInfo": {
         "type": "object",
         "properties": {
           "name": {
             "type": "string",
             "enum": [
-              "api/ToBackendGetSessionProviderModels"
+              "api/ToBackendGetLlmModelsWithProvider"
             ]
           },
           "traceId": {
@@ -7376,7 +7671,7 @@
           "idempotencyKey"
         ]
       },
-      "ToBackendGetSessionProviderModelsRequestPayload": {
+      "ToBackendGetLlmModelsWithProviderRequestPayload": {
         "type": "object",
         "properties": {
           "projectId": {
@@ -7391,10 +7686,6 @@
                 "Editor"
               ]
             }
-          },
-          "forceLoadFromCache": {
-            "type": "boolean",
-            "nullable": true
           }
         },
         "required": [
@@ -7402,14 +7693,14 @@
           "sessionTypes"
         ]
       },
-      "ToBackendGetSessionProviderModelsRequest": {
+      "ToBackendGetLlmModelsWithProviderRequest": {
         "type": "object",
         "properties": {
           "info": {
-            "$ref": "#/components/schemas/ToBackendGetSessionProviderModelsRequestInfo"
+            "$ref": "#/components/schemas/ToBackendGetLlmModelsWithProviderRequestInfo"
           },
           "payload": {
-            "$ref": "#/components/schemas/ToBackendGetSessionProviderModelsRequestPayload"
+            "$ref": "#/components/schemas/ToBackendGetLlmModelsWithProviderRequestPayload"
           }
         },
         "required": [
@@ -7417,13 +7708,13 @@
           "payload"
         ]
       },
-      "ToBackendGetSessionProviderModelsResponseInfo": {
+      "ToBackendGetLlmModelsWithProviderResponseInfo": {
         "type": "object",
         "properties": {
           "path": {
             "type": "string",
             "enum": [
-              "/api/ToBackendGetSessionProviderModels"
+              "/api/ToBackendGetLlmModelsWithProvider"
             ]
           },
           "method": {
@@ -7461,19 +7752,19 @@
           "traceId"
         ]
       },
-      "ToBackendGetSessionProviderModelsResponsePayload": {
+      "ToBackendGetLlmModelsWithProviderResponsePayload": {
         "type": "object",
         "properties": {
           "modelsOpencode": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/SessionModelApi"
+              "$ref": "#/components/schemas/LlmModelWithProvider"
             }
           },
           "modelsAi": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/SessionModelApi"
+              "$ref": "#/components/schemas/LlmModelWithProvider"
             }
           }
         },
@@ -7482,48 +7773,148 @@
           "modelsAi"
         ]
       },
-      "SessionModelApi": {
+      "LlmModelWithProvider": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string"
+          "modelId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "catalogName": {
+            "type": "string",
+            "nullable": true
+          },
+          "providerModelInfo": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {},
+            "nullable": true
+          },
+          "modelsDevStatus": {
+            "type": "string",
+            "enum": [
+              "alpha",
+              "beta",
+              "deprecated"
+            ],
+            "nullable": true
+          },
+          "contextLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "inputLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "outputLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "codexContextWindow": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "codexMaxContextWindow": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LlmModelVariant"
+            }
+          },
+          "isOpencodeSupported": {
+            "type": "boolean"
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
+          },
+          "isManual": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isExplorer": {
+            "type": "boolean"
+          },
+          "isBuilder": {
+            "type": "boolean"
+          },
+          "refreshedTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
           },
           "providerId": {
             "type": "string"
           },
           "providerName": {
             "type": "string"
-          },
-          "variants": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "contextLimit": {
-            "type": "number",
-            "nullable": true
           }
         },
         "required": [
-          "id",
-          "name",
+          "modelId",
+          "variants",
+          "isOpencodeSupported",
+          "isExplorer",
+          "isBuilder",
+          "refreshedTs",
           "providerId",
           "providerName"
-        ]
+        ],
+        "additionalProperties": false
       },
-      "ToBackendGetSessionProviderModelsResponse": {
+      "LlmModelVariant": {
+        "type": "object",
+        "properties": {
+          "variant": {
+            "type": "string",
+            "minLength": 1
+          },
+          "isExplorer": {
+            "type": "boolean"
+          },
+          "isBuilder": {
+            "type": "boolean"
+          },
+          "isExplorerRecommended": {
+            "type": "boolean"
+          },
+          "isBuilderRecommended": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "variant",
+          "isExplorer",
+          "isBuilder",
+          "isExplorerRecommended",
+          "isBuilderRecommended"
+        ],
+        "additionalProperties": false
+      },
+      "ToBackendGetLlmModelsWithProviderResponse": {
         "type": "object",
         "properties": {
           "info": {
-            "$ref": "#/components/schemas/ToBackendGetSessionProviderModelsResponseInfo"
+            "$ref": "#/components/schemas/ToBackendGetLlmModelsWithProviderResponseInfo"
           },
           "payload": {
-            "$ref": "#/components/schemas/ToBackendGetSessionProviderModelsResponsePayload"
+            "$ref": "#/components/schemas/ToBackendGetLlmModelsWithProviderResponsePayload"
           }
         },
         "required": [
@@ -12043,6 +12434,1947 @@
           },
           "payload": {
             "$ref": "#/components/schemas/ToBackendGetConnectionsListResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendCreateProviderRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendCreateProvider"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendCreateProviderRequestPayload": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "OpenAI"
+                ]
+              },
+              "projectId": {
+                "type": "string"
+              },
+              "providerId": {
+                "type": "string",
+                "enum": [
+                  "openai"
+                ]
+              },
+              "options": {
+                "type": "object",
+                "properties": {
+                  "apiKey": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "apiKey"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "type",
+              "projectId",
+              "providerId",
+              "options"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "Anthropic"
+                ]
+              },
+              "projectId": {
+                "type": "string"
+              },
+              "providerId": {
+                "type": "string",
+                "enum": [
+                  "anthropic"
+                ]
+              },
+              "options": {
+                "type": "object",
+                "properties": {
+                  "apiKey": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "apiKey"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "type",
+              "projectId",
+              "providerId",
+              "options"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "OpenAICompatible"
+                ]
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100
+              },
+              "projectId": {
+                "type": "string"
+              },
+              "providerId": {
+                "type": "string",
+                "maxLength": 32,
+                "pattern": "^[a-z0-9][a-z0-9-_]*$"
+              },
+              "options": {
+                "$ref": "#/components/schemas/ProviderOptionsOpenAICompatible"
+              }
+            },
+            "required": [
+              "type",
+              "name",
+              "projectId",
+              "providerId",
+              "options"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "OpenAICodex"
+                ]
+              },
+              "projectId": {
+                "type": "string"
+              },
+              "providerId": {
+                "type": "string",
+                "enum": [
+                  "openai-codex"
+                ]
+              },
+              "options": {
+                "$ref": "#/components/schemas/ProviderOptionsCodex"
+              }
+            },
+            "required": [
+              "type",
+              "projectId",
+              "providerId",
+              "options"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "ProviderOptionsOpenAICompatible": {
+        "type": "object",
+        "properties": {
+          "baseURL": {
+            "type": "string",
+            "minLength": 1
+          },
+          "apiKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "headers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ],
+              "additionalProperties": false
+            },
+            "nullable": true
+          },
+          "queryParams": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ],
+              "additionalProperties": false
+            },
+            "nullable": true
+          }
+        },
+        "required": [
+          "baseURL"
+        ],
+        "additionalProperties": false
+      },
+      "ProviderOptionsCodex": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "ToBackendCreateProviderRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendCreateProviderRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendCreateProviderRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendCreateProviderResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendCreateProvider"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendCreateProviderResponsePayload": {
+        "type": "object",
+        "properties": {
+          "provider": {
+            "$ref": "#/components/schemas/Provider"
+          }
+        },
+        "required": [
+          "provider"
+        ]
+      },
+      "Provider": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "OpenAI"
+                ]
+              },
+              "name": {
+                "type": "string"
+              },
+              "projectId": {
+                "type": "string"
+              },
+              "providerId": {
+                "type": "string",
+                "enum": [
+                  "openai"
+                ]
+              },
+              "isEnabled": {
+                "type": "boolean"
+              },
+              "models": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LlmModel"
+                }
+              },
+              "options": {
+                "$ref": "#/components/schemas/ProviderOptionsOpenAI"
+              },
+              "serverTs": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991,
+                "nullable": true
+              }
+            },
+            "required": [
+              "type",
+              "name",
+              "projectId",
+              "providerId",
+              "isEnabled",
+              "models",
+              "options"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "Anthropic"
+                ]
+              },
+              "name": {
+                "type": "string"
+              },
+              "projectId": {
+                "type": "string"
+              },
+              "providerId": {
+                "type": "string",
+                "enum": [
+                  "anthropic"
+                ]
+              },
+              "isEnabled": {
+                "type": "boolean"
+              },
+              "models": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LlmModel"
+                }
+              },
+              "options": {
+                "$ref": "#/components/schemas/ProviderOptionsAnthropic"
+              },
+              "serverTs": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991,
+                "nullable": true
+              }
+            },
+            "required": [
+              "type",
+              "name",
+              "projectId",
+              "providerId",
+              "isEnabled",
+              "models",
+              "options"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "OpenAICompatible"
+                ]
+              },
+              "name": {
+                "type": "string"
+              },
+              "projectId": {
+                "type": "string"
+              },
+              "providerId": {
+                "type": "string",
+                "maxLength": 32,
+                "pattern": "^[a-z0-9][a-z0-9-_]*$"
+              },
+              "isEnabled": {
+                "type": "boolean"
+              },
+              "models": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LlmModel"
+                }
+              },
+              "options": {
+                "$ref": "#/components/schemas/ProviderOptionsOpenAICompatible"
+              },
+              "serverTs": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991,
+                "nullable": true
+              }
+            },
+            "required": [
+              "type",
+              "name",
+              "projectId",
+              "providerId",
+              "isEnabled",
+              "models",
+              "options"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "OpenAICodex"
+                ]
+              },
+              "name": {
+                "type": "string"
+              },
+              "projectId": {
+                "type": "string"
+              },
+              "providerId": {
+                "type": "string",
+                "enum": [
+                  "openai-codex"
+                ]
+              },
+              "isEnabled": {
+                "type": "boolean"
+              },
+              "models": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LlmModel"
+                }
+              },
+              "options": {
+                "$ref": "#/components/schemas/ProviderOptionsCodex"
+              },
+              "serverTs": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991,
+                "nullable": true
+              }
+            },
+            "required": [
+              "type",
+              "name",
+              "projectId",
+              "providerId",
+              "isEnabled",
+              "models",
+              "options"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "LlmModel": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "catalogName": {
+            "type": "string",
+            "nullable": true
+          },
+          "providerModelInfo": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {},
+            "nullable": true
+          },
+          "modelsDevStatus": {
+            "type": "string",
+            "enum": [
+              "alpha",
+              "beta",
+              "deprecated"
+            ],
+            "nullable": true
+          },
+          "contextLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "inputLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "outputLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "codexContextWindow": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "codexMaxContextWindow": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LlmModelVariant"
+            }
+          },
+          "isOpencodeSupported": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "isManual": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isExplorer": {
+            "type": "boolean"
+          },
+          "isBuilder": {
+            "type": "boolean"
+          },
+          "refreshedTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "modelId",
+          "variants",
+          "isOpencodeSupported",
+          "isExplorer",
+          "isBuilder",
+          "refreshedTs"
+        ],
+        "additionalProperties": false
+      },
+      "ProviderOptionsOpenAI": {
+        "type": "object",
+        "properties": {
+          "apiKey": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProviderOptionsAnthropic": {
+        "type": "object",
+        "properties": {
+          "apiKey": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ToBackendCreateProviderResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendCreateProviderResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendCreateProviderResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetProvidersRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendGetProviders"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendGetProvidersRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "projectId"
+        ]
+      },
+      "ToBackendGetProvidersRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetProvidersRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetProvidersRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetProvidersResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendGetProviders"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendGetProvidersResponsePayload": {
+        "type": "object",
+        "properties": {
+          "userMember": {
+            "$ref": "#/components/schemas/Member"
+          },
+          "providers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Provider"
+            }
+          }
+        },
+        "required": [
+          "userMember",
+          "providers"
+        ]
+      },
+      "ToBackendGetProvidersResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetProvidersResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetProvidersResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetLlmModelPartsRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendGetLlmModelParts"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendGetLlmModelPartsRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "providerId": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "projectId",
+          "providerId"
+        ],
+        "additionalProperties": false
+      },
+      "ToBackendGetLlmModelPartsRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetLlmModelPartsRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetLlmModelPartsRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetLlmModelPartsResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendGetLlmModelParts"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendGetLlmModelPartsResponsePayload": {
+        "type": "object",
+        "properties": {
+          "modelParts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LlmModelPart"
+            }
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "modelParts"
+        ],
+        "additionalProperties": false
+      },
+      "LlmModelPart": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "catalogName": {
+            "type": "string",
+            "minLength": 1
+          },
+          "providerModelInfo": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {},
+            "nullable": true
+          },
+          "modelsDevStatus": {
+            "type": "string",
+            "enum": [
+              "alpha",
+              "beta",
+              "deprecated"
+            ],
+            "nullable": true
+          },
+          "contextLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "inputLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "outputLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "codexContextWindow": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "codexMaxContextWindow": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "isOpencodeSupported": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "modelId",
+          "catalogName",
+          "isOpencodeSupported"
+        ],
+        "additionalProperties": false
+      },
+      "ToBackendGetLlmModelPartsResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetLlmModelPartsResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetLlmModelPartsResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendEditProviderRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendEditProvider"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendEditProviderRequestPayload": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "projectId": {
+                "type": "string"
+              },
+              "providerId": {
+                "type": "string",
+                "enum": [
+                  "openai"
+                ]
+              },
+              "options": {
+                "$ref": "#/components/schemas/ProviderOptionsOpenAI"
+              }
+            },
+            "required": [
+              "projectId",
+              "providerId",
+              "options"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "projectId": {
+                "type": "string"
+              },
+              "providerId": {
+                "type": "string",
+                "enum": [
+                  "anthropic"
+                ]
+              },
+              "options": {
+                "$ref": "#/components/schemas/ProviderOptionsAnthropic"
+              }
+            },
+            "required": [
+              "projectId",
+              "providerId",
+              "options"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100
+              },
+              "projectId": {
+                "type": "string"
+              },
+              "providerId": {
+                "type": "string"
+              },
+              "options": {
+                "type": "object",
+                "properties": {
+                  "baseURL": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "apiKey": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "headers": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "key": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "value": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "key",
+                        "value"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "nullable": true
+                  },
+                  "queryParams": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "key": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "value": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "key",
+                        "value"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "nullable": true
+                  }
+                },
+                "required": [
+                  "baseURL"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "name",
+              "projectId",
+              "providerId",
+              "options"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "projectId": {
+                "type": "string"
+              },
+              "providerId": {
+                "type": "string",
+                "enum": [
+                  "openai-codex"
+                ]
+              },
+              "options": {
+                "$ref": "#/components/schemas/ProviderOptionsCodex"
+              }
+            },
+            "required": [
+              "projectId",
+              "providerId",
+              "options"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "ToBackendEditProviderRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendEditProviderRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendEditProviderRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendEditProviderResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendEditProvider"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendEditProviderResponsePayload": {
+        "type": "object",
+        "properties": {
+          "provider": {
+            "$ref": "#/components/schemas/Provider"
+          }
+        },
+        "required": [
+          "provider"
+        ]
+      },
+      "ToBackendEditProviderResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendEditProviderResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendEditProviderResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendDeleteProviderRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendDeleteProvider"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendDeleteProviderRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "providerId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "projectId",
+          "providerId"
+        ]
+      },
+      "ToBackendDeleteProviderRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendDeleteProviderRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendDeleteProviderRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendDeleteProviderResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendDeleteProvider"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendDeleteProviderResponsePayload": {
+        "type": "object",
+        "properties": {}
+      },
+      "ToBackendDeleteProviderResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendDeleteProviderResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendDeleteProviderResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendToggleProviderRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendToggleProvider"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendToggleProviderRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "providerId": {
+            "type": "string"
+          },
+          "isEnabled": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "projectId",
+          "providerId",
+          "isEnabled"
+        ]
+      },
+      "ToBackendToggleProviderRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendToggleProviderRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendToggleProviderRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendToggleProviderResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendToggleProvider"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendToggleProviderResponsePayload": {
+        "type": "object",
+        "properties": {
+          "provider": {
+            "$ref": "#/components/schemas/Provider"
+          }
+        },
+        "required": [
+          "provider"
+        ]
+      },
+      "ToBackendToggleProviderResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendToggleProviderResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendToggleProviderResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendCreateLlmModelRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendCreateLlmModel"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendCreateLlmModelRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "providerId": {
+            "type": "string"
+          },
+          "modelId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "isManual": {
+            "type": "boolean"
+          },
+          "contextLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "inputLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "outputLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LlmModelVariant"
+            }
+          },
+          "isExplorer": {
+            "type": "boolean"
+          },
+          "isBuilder": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "projectId",
+          "providerId",
+          "modelId",
+          "isManual",
+          "variants",
+          "isExplorer",
+          "isBuilder"
+        ],
+        "additionalProperties": false
+      },
+      "ToBackendCreateLlmModelRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendCreateLlmModelRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendCreateLlmModelRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendCreateLlmModelResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendCreateLlmModel"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendCreateLlmModelResponsePayload": {
+        "type": "object",
+        "properties": {
+          "provider": {
+            "$ref": "#/components/schemas/Provider"
+          }
+        },
+        "required": [
+          "provider"
+        ]
+      },
+      "ToBackendCreateLlmModelResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendCreateLlmModelResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendCreateLlmModelResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendEditLlmModelRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendEditLlmModel"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendEditLlmModelRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "providerId": {
+            "type": "string"
+          },
+          "modelId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "contextLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "inputLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "outputLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LlmModelVariant"
+            }
+          },
+          "isExplorer": {
+            "type": "boolean"
+          },
+          "isBuilder": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "projectId",
+          "providerId",
+          "modelId",
+          "variants",
+          "isExplorer",
+          "isBuilder"
+        ],
+        "additionalProperties": false
+      },
+      "ToBackendEditLlmModelRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendEditLlmModelRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendEditLlmModelRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendEditLlmModelResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendEditLlmModel"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendEditLlmModelResponsePayload": {
+        "type": "object",
+        "properties": {
+          "provider": {
+            "$ref": "#/components/schemas/Provider"
+          }
+        },
+        "required": [
+          "provider"
+        ]
+      },
+      "ToBackendEditLlmModelResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendEditLlmModelResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendEditLlmModelResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendDeleteLlmModelRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendDeleteLlmModel"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendDeleteLlmModelRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "providerId": {
+            "type": "string"
+          },
+          "modelId": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "projectId",
+          "providerId",
+          "modelId"
+        ]
+      },
+      "ToBackendDeleteLlmModelRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendDeleteLlmModelRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendDeleteLlmModelRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendDeleteLlmModelResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendDeleteLlmModel"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendDeleteLlmModelResponsePayload": {
+        "type": "object",
+        "properties": {
+          "provider": {
+            "$ref": "#/components/schemas/Provider"
+          }
+        },
+        "required": [
+          "provider"
+        ]
+      },
+      "ToBackendDeleteLlmModelResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendDeleteLlmModelResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendDeleteLlmModelResponsePayload"
           }
         },
         "required": [
@@ -17448,20 +19780,20 @@
             "type": "boolean",
             "nullable": true
           },
-          "newSessionExplorerProviderModel": {
+          "newSessionExplorerModelExtraId": {
             "type": "string",
             "nullable": true
           },
-          "newSessionEditorProviderModel": {
+          "newSessionExplorerVariant": {
+            "type": "string",
+            "nullable": true
+          },
+          "newSessionEditorModelExtraId": {
             "type": "string",
             "nullable": true
           },
           "newSessionEditorVariant": {
             "type": "string",
-            "nullable": true
-          },
-          "newSessionUseCodex": {
-            "type": "boolean",
             "nullable": true
           }
         },
@@ -18886,18 +21218,6 @@
             "type": "string",
             "nullable": true
           },
-          "isZenApiKeySet": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "isAnthropicApiKeySet": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "isOpenaiApiKeySet": {
-            "type": "boolean",
-            "nullable": true
-          },
           "isE2bApiKeySet": {
             "type": "boolean",
             "nullable": true
@@ -19548,13 +21868,13 @@
           "payload"
         ]
       },
-      "ToBackendSetProjectApiKeyRequestInfo": {
+      "ToBackendSetProjectSandboxProviderRequestInfo": {
         "type": "object",
         "properties": {
           "name": {
             "type": "string",
             "enum": [
-              "api/ToBackendSetProjectApiKey"
+              "api/ToBackendSetProjectSandboxProvider"
             ]
           },
           "traceId": {
@@ -19570,23 +21890,11 @@
           "idempotencyKey"
         ]
       },
-      "ToBackendSetProjectApiKeyRequestPayload": {
+      "ToBackendSetProjectSandboxProviderRequestPayload": {
         "type": "object",
         "properties": {
           "projectId": {
             "type": "string"
-          },
-          "zenApiKey": {
-            "type": "string",
-            "nullable": true
-          },
-          "anthropicApiKey": {
-            "type": "string",
-            "nullable": true
-          },
-          "openaiApiKey": {
-            "type": "string",
-            "nullable": true
           },
           "e2bApiKey": {
             "type": "string",
@@ -19597,14 +21905,14 @@
           "projectId"
         ]
       },
-      "ToBackendSetProjectApiKeyRequest": {
+      "ToBackendSetProjectSandboxProviderRequest": {
         "type": "object",
         "properties": {
           "info": {
-            "$ref": "#/components/schemas/ToBackendSetProjectApiKeyRequestInfo"
+            "$ref": "#/components/schemas/ToBackendSetProjectSandboxProviderRequestInfo"
           },
           "payload": {
-            "$ref": "#/components/schemas/ToBackendSetProjectApiKeyRequestPayload"
+            "$ref": "#/components/schemas/ToBackendSetProjectSandboxProviderRequestPayload"
           }
         },
         "required": [
@@ -19612,13 +21920,13 @@
           "payload"
         ]
       },
-      "ToBackendSetProjectApiKeyResponseInfo": {
+      "ToBackendSetProjectSandboxProviderResponseInfo": {
         "type": "object",
         "properties": {
           "path": {
             "type": "string",
             "enum": [
-              "/api/ToBackendSetProjectApiKey"
+              "/api/ToBackendSetProjectSandboxProvider"
             ]
           },
           "method": {
@@ -19656,7 +21964,7 @@
           "traceId"
         ]
       },
-      "ToBackendSetProjectApiKeyResponsePayload": {
+      "ToBackendSetProjectSandboxProviderResponsePayload": {
         "type": "object",
         "properties": {
           "project": {
@@ -19667,14 +21975,14 @@
           "project"
         ]
       },
-      "ToBackendSetProjectApiKeyResponse": {
+      "ToBackendSetProjectSandboxProviderResponse": {
         "type": "object",
         "properties": {
           "info": {
-            "$ref": "#/components/schemas/ToBackendSetProjectApiKeyResponseInfo"
+            "$ref": "#/components/schemas/ToBackendSetProjectSandboxProviderResponseInfo"
           },
           "payload": {
-            "$ref": "#/components/schemas/ToBackendSetProjectApiKeyResponsePayload"
+            "$ref": "#/components/schemas/ToBackendSetProjectSandboxProviderResponsePayload"
           }
         },
         "required": [
@@ -25724,6 +28032,13 @@
             },
             "nullable": true
           },
+          "providers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ToBackendSeedRecordsRequestPayloadProvidersItem"
+            },
+            "nullable": true
+          },
           "envs": {
             "type": "array",
             "items": {
@@ -25891,18 +28206,6 @@
           "e2bApiKey": {
             "type": "string",
             "nullable": true
-          },
-          "zenApiKey": {
-            "type": "string",
-            "nullable": true
-          },
-          "anthropicApiKey": {
-            "type": "string",
-            "nullable": true
-          },
-          "openaiApiKey": {
-            "type": "string",
-            "nullable": true
           }
         },
         "required": [
@@ -26007,6 +28310,238 @@
           "connectionId",
           "type"
         ]
+      },
+      "ToBackendSeedRecordsRequestPayloadProvidersItem": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "projectId": {
+                "type": "string"
+              },
+              "providerId": {
+                "type": "string",
+                "enum": [
+                  "openai"
+                ]
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "OpenAI"
+                ]
+              },
+              "isEnabled": {
+                "type": "boolean"
+              },
+              "models": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ToBackendSeedRecordsModel"
+                }
+              },
+              "options": {
+                "$ref": "#/components/schemas/ProviderOptionsOpenAI"
+              }
+            },
+            "required": [
+              "projectId",
+              "providerId",
+              "type",
+              "isEnabled",
+              "models",
+              "options"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "projectId": {
+                "type": "string"
+              },
+              "providerId": {
+                "type": "string",
+                "enum": [
+                  "anthropic"
+                ]
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "Anthropic"
+                ]
+              },
+              "isEnabled": {
+                "type": "boolean"
+              },
+              "models": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ToBackendSeedRecordsModel"
+                }
+              },
+              "options": {
+                "$ref": "#/components/schemas/ProviderOptionsAnthropic"
+              }
+            },
+            "required": [
+              "projectId",
+              "providerId",
+              "type",
+              "isEnabled",
+              "models",
+              "options"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "projectId": {
+                "type": "string"
+              },
+              "providerId": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "OpenAICompatible"
+                ]
+              },
+              "name": {
+                "type": "string"
+              },
+              "isEnabled": {
+                "type": "boolean"
+              },
+              "models": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ToBackendSeedRecordsModel"
+                }
+              },
+              "options": {
+                "$ref": "#/components/schemas/ProviderOptionsOpenAICompatible"
+              }
+            },
+            "required": [
+              "projectId",
+              "providerId",
+              "type",
+              "name",
+              "isEnabled",
+              "models",
+              "options"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "projectId": {
+                "type": "string"
+              },
+              "providerId": {
+                "type": "string",
+                "enum": [
+                  "openai-codex"
+                ]
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "OpenAICodex"
+                ]
+              },
+              "isEnabled": {
+                "type": "boolean"
+              },
+              "models": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ToBackendSeedRecordsModel"
+                }
+              },
+              "options": {
+                "$ref": "#/components/schemas/ProviderOptionsCodex"
+              }
+            },
+            "required": [
+              "projectId",
+              "providerId",
+              "type",
+              "isEnabled",
+              "models",
+              "options"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "ToBackendSeedRecordsModel": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "isManual": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "contextLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "inputLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "outputLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "isExplorer": {
+            "type": "boolean"
+          },
+          "isBuilder": {
+            "type": "boolean"
+          },
+          "providerModelInfo": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {},
+            "nullable": true
+          },
+          "isExplorerRecommended": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isBuilderRecommended": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "required": [
+          "modelId",
+          "isExplorer",
+          "isBuilder"
+        ],
+        "additionalProperties": false
       },
       "ToBackendSeedRecordsRequestPayloadEnvsItem": {
         "type": "object",

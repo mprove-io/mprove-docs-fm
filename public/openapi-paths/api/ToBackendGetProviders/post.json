@@ -1,0 +1,649 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "mprove backend",
+    "description": "",
+    "version": "12.0.27",
+    "contact": {}
+  },
+  "paths": {
+    "/api/ToBackendGetProviders": {
+      "post": {
+        "operationId": "GetProvidersController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendGetProvidersRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendGetProvidersResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ToBackendGetProvidersRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetProvidersRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetProvidersRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetProvidersResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetProvidersResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetProvidersResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetProvidersRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendGetProviders"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendGetProvidersRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "projectId"
+        ]
+      },
+      "ToBackendGetProvidersResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendGetProviders"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendGetProvidersResponsePayload": {
+        "type": "object",
+        "properties": {
+          "userMember": {
+            "$ref": "#/components/schemas/Member"
+          },
+          "providers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Provider"
+            }
+          }
+        },
+        "required": [
+          "userMember",
+          "providers"
+        ]
+      },
+      "Member": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "memberId": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "alias": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "avatarSmall": {
+            "type": "string"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isAdmin": {
+            "type": "boolean"
+          },
+          "isEditor": {
+            "type": "boolean"
+          },
+          "isExplorer": {
+            "type": "boolean"
+          },
+          "serverTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "projectId",
+          "memberId",
+          "email",
+          "alias",
+          "firstName",
+          "lastName",
+          "fullName",
+          "avatarSmall",
+          "roles",
+          "isAdmin",
+          "isEditor",
+          "isExplorer",
+          "serverTs"
+        ]
+      },
+      "Provider": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "OpenAI"
+                ]
+              },
+              "name": {
+                "type": "string"
+              },
+              "projectId": {
+                "type": "string"
+              },
+              "providerId": {
+                "type": "string",
+                "enum": [
+                  "openai"
+                ]
+              },
+              "isEnabled": {
+                "type": "boolean"
+              },
+              "models": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LlmModel"
+                }
+              },
+              "options": {
+                "$ref": "#/components/schemas/ProviderOptionsOpenAI"
+              },
+              "serverTs": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991,
+                "nullable": true
+              }
+            },
+            "required": [
+              "type",
+              "name",
+              "projectId",
+              "providerId",
+              "isEnabled",
+              "models",
+              "options"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "Anthropic"
+                ]
+              },
+              "name": {
+                "type": "string"
+              },
+              "projectId": {
+                "type": "string"
+              },
+              "providerId": {
+                "type": "string",
+                "enum": [
+                  "anthropic"
+                ]
+              },
+              "isEnabled": {
+                "type": "boolean"
+              },
+              "models": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LlmModel"
+                }
+              },
+              "options": {
+                "$ref": "#/components/schemas/ProviderOptionsAnthropic"
+              },
+              "serverTs": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991,
+                "nullable": true
+              }
+            },
+            "required": [
+              "type",
+              "name",
+              "projectId",
+              "providerId",
+              "isEnabled",
+              "models",
+              "options"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "OpenAICompatible"
+                ]
+              },
+              "name": {
+                "type": "string"
+              },
+              "projectId": {
+                "type": "string"
+              },
+              "providerId": {
+                "type": "string",
+                "maxLength": 32,
+                "pattern": "^[a-z0-9][a-z0-9-_]*$"
+              },
+              "isEnabled": {
+                "type": "boolean"
+              },
+              "models": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LlmModel"
+                }
+              },
+              "options": {
+                "$ref": "#/components/schemas/ProviderOptionsOpenAICompatible"
+              },
+              "serverTs": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991,
+                "nullable": true
+              }
+            },
+            "required": [
+              "type",
+              "name",
+              "projectId",
+              "providerId",
+              "isEnabled",
+              "models",
+              "options"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "OpenAICodex"
+                ]
+              },
+              "name": {
+                "type": "string"
+              },
+              "projectId": {
+                "type": "string"
+              },
+              "providerId": {
+                "type": "string",
+                "enum": [
+                  "openai-codex"
+                ]
+              },
+              "isEnabled": {
+                "type": "boolean"
+              },
+              "models": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LlmModel"
+                }
+              },
+              "options": {
+                "$ref": "#/components/schemas/ProviderOptionsCodex"
+              },
+              "serverTs": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991,
+                "nullable": true
+              }
+            },
+            "required": [
+              "type",
+              "name",
+              "projectId",
+              "providerId",
+              "isEnabled",
+              "models",
+              "options"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "LlmModel": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "catalogName": {
+            "type": "string",
+            "nullable": true
+          },
+          "providerModelInfo": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {},
+            "nullable": true
+          },
+          "modelsDevStatus": {
+            "type": "string",
+            "enum": [
+              "alpha",
+              "beta",
+              "deprecated"
+            ],
+            "nullable": true
+          },
+          "contextLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "inputLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "outputLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "codexContextWindow": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "codexMaxContextWindow": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LlmModelVariant"
+            }
+          },
+          "isOpencodeSupported": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "isManual": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isExplorer": {
+            "type": "boolean"
+          },
+          "isBuilder": {
+            "type": "boolean"
+          },
+          "refreshedTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "modelId",
+          "variants",
+          "isOpencodeSupported",
+          "isExplorer",
+          "isBuilder",
+          "refreshedTs"
+        ],
+        "additionalProperties": false
+      },
+      "ProviderOptionsOpenAI": {
+        "type": "object",
+        "properties": {
+          "apiKey": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProviderOptionsAnthropic": {
+        "type": "object",
+        "properties": {
+          "apiKey": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProviderOptionsOpenAICompatible": {
+        "type": "object",
+        "properties": {
+          "baseURL": {
+            "type": "string",
+            "minLength": 1
+          },
+          "apiKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "headers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ],
+              "additionalProperties": false
+            },
+            "nullable": true
+          },
+          "queryParams": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ],
+              "additionalProperties": false
+            },
+            "nullable": true
+          }
+        },
+        "required": [
+          "baseURL"
+        ],
+        "additionalProperties": false
+      },
+      "ProviderOptionsCodex": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "LlmModelVariant": {
+        "type": "object",
+        "properties": {
+          "variant": {
+            "type": "string",
+            "minLength": 1
+          },
+          "isExplorer": {
+            "type": "boolean"
+          },
+          "isBuilder": {
+            "type": "boolean"
+          },
+          "isExplorerRecommended": {
+            "type": "boolean"
+          },
+          "isBuilderRecommended": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "variant",
+          "isExplorer",
+          "isBuilder",
+          "isExplorerRecommended",
+          "isBuilderRecommended"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+}

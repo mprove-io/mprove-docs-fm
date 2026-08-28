@@ -1,0 +1,316 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "mprove backend",
+    "description": "",
+    "version": "12.0.27",
+    "contact": {}
+  },
+  "paths": {
+    "/api/ToBackendGetLlmModelsWithProvider": {
+      "post": {
+        "operationId": "GetLlmModelsWithProviderController",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToBackendGetLlmModelsWithProviderRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToBackendGetLlmModelsWithProviderResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ToBackendGetLlmModelsWithProviderRequest": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetLlmModelsWithProviderRequestInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetLlmModelsWithProviderRequestPayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetLlmModelsWithProviderResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/ToBackendGetLlmModelsWithProviderResponseInfo"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ToBackendGetLlmModelsWithProviderResponsePayload"
+          }
+        },
+        "required": [
+          "info",
+          "payload"
+        ]
+      },
+      "ToBackendGetLlmModelsWithProviderRequestInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "api/ToBackendGetLlmModelsWithProvider"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "idempotencyKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "traceId",
+          "idempotencyKey"
+        ]
+      },
+      "ToBackendGetLlmModelsWithProviderRequestPayload": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "sessionTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Explorer",
+                "Editor"
+              ]
+            }
+          }
+        },
+        "required": [
+          "projectId",
+          "sessionTypes"
+        ]
+      },
+      "ToBackendGetLlmModelsWithProviderResponseInfo": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "/api/ToBackendGetLlmModelsWithProvider"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "POST"
+            ]
+          },
+          "mproveVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Ok",
+              "Error"
+            ]
+          },
+          "traceId": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true
+          }
+        },
+        "required": [
+          "path",
+          "method",
+          "status",
+          "traceId"
+        ]
+      },
+      "ToBackendGetLlmModelsWithProviderResponsePayload": {
+        "type": "object",
+        "properties": {
+          "modelsOpencode": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LlmModelWithProvider"
+            }
+          },
+          "modelsAi": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LlmModelWithProvider"
+            }
+          }
+        },
+        "required": [
+          "modelsOpencode",
+          "modelsAi"
+        ]
+      },
+      "LlmModelWithProvider": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "catalogName": {
+            "type": "string",
+            "nullable": true
+          },
+          "providerModelInfo": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {},
+            "nullable": true
+          },
+          "modelsDevStatus": {
+            "type": "string",
+            "enum": [
+              "alpha",
+              "beta",
+              "deprecated"
+            ],
+            "nullable": true
+          },
+          "contextLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "inputLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "outputLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "codexContextWindow": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "codexMaxContextWindow": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "nullable": true
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LlmModelVariant"
+            }
+          },
+          "isOpencodeSupported": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "isManual": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isExplorer": {
+            "type": "boolean"
+          },
+          "isBuilder": {
+            "type": "boolean"
+          },
+          "refreshedTs": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "providerId": {
+            "type": "string"
+          },
+          "providerName": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "modelId",
+          "variants",
+          "isOpencodeSupported",
+          "isExplorer",
+          "isBuilder",
+          "refreshedTs",
+          "providerId",
+          "providerName"
+        ],
+        "additionalProperties": false
+      },
+      "LlmModelVariant": {
+        "type": "object",
+        "properties": {
+          "variant": {
+            "type": "string",
+            "minLength": 1
+          },
+          "isExplorer": {
+            "type": "boolean"
+          },
+          "isBuilder": {
+            "type": "boolean"
+          },
+          "isExplorerRecommended": {
+            "type": "boolean"
+          },
+          "isBuilderRecommended": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "variant",
+          "isExplorer",
+          "isBuilder",
+          "isExplorerRecommended",
+          "isBuilderRecommended"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+}

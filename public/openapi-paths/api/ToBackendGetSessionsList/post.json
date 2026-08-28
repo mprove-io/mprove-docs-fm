@@ -204,19 +204,14 @@
               "Editor"
             ]
           },
-          "provider": {
+          "providerId": {
             "type": "string"
           },
           "agent": {
             "type": "string"
           },
-          "model": {
-            "type": "string",
-            "nullable": true
-          },
-          "lastMessageProviderModel": {
-            "type": "string",
-            "nullable": true
+          "modelId": {
+            "type": "string"
           },
           "lastMessageVariant": {
             "type": "string",
@@ -280,9 +275,6 @@
             "type": "string",
             "nullable": true
           },
-          "useCodex": {
-            "type": "boolean"
-          },
           "closedExplorerTabIds": {
             "type": "array",
             "items": {
@@ -294,14 +286,14 @@
         "required": [
           "sessionId",
           "type",
-          "provider",
+          "providerId",
           "agent",
+          "modelId",
           "status",
           "repoId",
           "branchId",
           "createdTs",
-          "lastActivityTs",
-          "useCodex"
+          "lastActivityTs"
         ]
       }
     }

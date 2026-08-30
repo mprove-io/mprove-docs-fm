@@ -1,0 +1,58 @@
+---
+title: Editor
+---
+
+# Editor
+
+Editor AI Session can build Mprove models and create charts, reports and dashboards that are persisted as files (non-drafts).
+
+Editor Session runs in a sandbox ([E2B](https://e2b.dev/) provider).
+
+It is powered by open source [OpenCode](https://opencode.ai/) Server with default agents (build/plan + subagents).
+You can use your own [Opencode config](https://opencode.ai/docs/config/) that is local to project.
+
+AI agent uses [mprove sync](/content/cli/main-commands/sync) CLI command to sync uncommitted changes between sandbox repo and Mprove server.
+
+## Notes
+
+Each Editor Session runs in its own sandbox.
+
+It takes 10 to 15 seconds for session initial activation time (starting sandbox, pulling user project git repo and starting an Opencode server).
+
+After session is activated, there is a safe pause logic in place to save sandbox resources when session is 5 min+ idle.
+To resume a paused session (sandbox) you need to send a new message. Unpause (resume) is fast.
+Session state is preserved on pause/resume.
+
+## Capabilities
+
+- Setup Mprove project
+- Add metadata to dwh schemas
+- Build Mprove models
+- Build charts (non-draft)
+- Build reports (non-draft)
+- Build dashboards (non-draft)
+
+## E2B Sandbox Template
+
+- node 24.14.0
+- brew, curl, git, ripgrep, openssh-client, ca-certificates
+- opencode
+- [Opencode global config](https://github.com/mprove-io/mprove/blob/master/skills/opencode-global-config.json) with [Mprove MCP Server](/content/mcp/mcp-server) configured
+- [Mprove Skills](/content/skills/download-skill-md)
+- [Mprove CLI](/content/cli/install-cli) (only "mprove sync" is needed, other useful commands have corresponding mcp tools)
+- Malloy Docs repository
+
+## Credentials
+
+Credentials that are provided to sandbox during session activation:
+
+- LLM provider api key for selected session Model (see project settings API keys)
+- `MPROVE_CLI_API_KEY` (has access to mprove session repo branch and session env connections)
+- `MPROVE_CLI_PROJECT_ID`
+- `MPROVE_CLI_HOST`
+
+## Global Instructions
+
+These global instructions are merged with your project's local instruction files. See [Opencode Docs](https://opencode.ai/docs/rules/).
+
+- [mprove-instructions.md](https://github.com/mprove-io/mprove/blob/master/sandbox/mprove-instructions.md)

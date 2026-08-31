@@ -6,16 +6,40 @@ title: About
 
 Hey! I'm Alexander.
 
-[Mprove](https://mprove.io/) is an [Open Source](https://github.com/mprove-io/mprove) Business Intelligence tool focused on Metrics.
+I started working on Mprove in 2015 inspired by Looker. Understanding how things should work and look comes through a lot of trial and error. This is my third big attempt to build it right. Initially, Mprove YAML had its own module for SQL transformation logic, similar to LookML. In 2025, I replaced this part with Malloy as the next-generation data modeling language.
 
-With Mprove, instead of directly querying tables, you query semantic data models:
-- For SQL data sources, see [Malloy Models](/content/docs/reference/model-malloy).
-- For HTTP API data sources, see [Store Models](/content/docs/reference/model-store).
+[Mprove](https://mprove.io/) is a fully [Open Source](https://github.com/mprove-io/mprove) Business Intelligence tool
+with Malloy Semantic Layer.
 
-All Models, Charts, Reports and Dashboards are stored under git version control.
+Main Features:
 
-I started working on Mprove in 2015 inspired by Looker.
+- AI assists in building semantic data models (see [Editor](/content/docs/ai-sessions/editor))
+- AI answer questions based on governed data models (see [Explorer](/content/docs/ai-sessions/explorer))
+- [Git version control](/content/docs/builder#git-version-control) for Models, Charts, Dashboards and Reports
+- [DWH Schema](/content/docs/reference/dwh-schema) Discovery
+- [Spaces](/content/docs/reference/space)
+- [Access Roles](/content/docs/access-roles) and [Row Level Security](/content/docs/row-level-security)
+- Reports UI focused on Metrics
 
-Understanding how things should work and look comes through a lot of trial and error. This is my third big attempt to build it right.
+Working with Semantic Data Layer involves two parts:
 
-Initially, Mprove YAML had its own module for SQL transformation logic, similar to LookML. In 2025, I replaced this part with Malloy as the next-generation data modeling language.
+1. Build semantic data model (dont confuse with LLM models)
+2. Query data model
+
+When creating a data model, you specify:
+
+- How tables can be joined
+- What aggregations can be made
+- Access roles and parameters
+- And more
+
+I recommend creating and testing models locally using the Malloy VS Code Extension.
+
+You can then publish your work to the Mprove server by synchronizing uncommitted changes or performing a git commit.
+
+Mprove models are based on Malloy models but use a different library for rendering charts, dashboards, and reports.
+They use Mprove access_roles and Malloy Givens for row level security.
+
+With Mprove models in place, you can ask questions in the Explorer UI or explore manually by clicking Charts and choosing a model.
+
+

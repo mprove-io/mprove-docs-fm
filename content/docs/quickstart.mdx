@@ -13,67 +13,79 @@ To self host Mprove use [README.md](https://github.com/mprove-io/mprove/blob/mas
 <div className="fd-step">
 ### Sign Up
 
-After signing up, you will be able to log in and create an organization.
+After signing up, you will be able to log in and create an organization
 
 </div>
 
 <div className="fd-step">
 ### Create Organization
 
-To create a new organization, click the org selector in navbar and click the **New Org** button.
-
-Enter your organization name and click **Create**.
+Click the **org selector** in navbar >> **New Org**
 
 </div>
 
 <div className="fd-step">
 ### Create Project
 
-To create a new project, first select your organization in navbar.
+To create a new project, first select your organization in navbar
 
-Click the project selector in navbar and click the **New Project** button.
-
-Enter your project name and click **Create**.
+Click the **project selector** in navbar >> **New Project**
 
 </div>
 
 <div className="fd-step">
-### Add Project API Keys
+### Add Sandbox Provider (optional)
 
-Click the project gear icon in navbar and click the **API Keys** button.
+You can build semantic data models locally, using your own AI agent or without AI.
 
-Add Sandbox Provider api key
+You can also launch an Editor AI agent session via the Mprove UI on the Builder page.
 
-Add LLM Provider api key or use [OpenAI Codex Setup](/content/docs/ai-sessions/llm-providers#openai-codex)
+This will start an OpenCode server in a remote sandbox (a separate sandbox for each session).
 
-</div>
+To do this, you need to provide an API key from the E2B provider.
 
-<div className="fd-step">
-### Add Connection
-
-To create a new database connection, first select your project in navbar.
-
-Click the project gear icon in navbar and click the **Connections** button.
-
-On the Project Connections page, click the **New Connection** button.
-
-Enter your connection details and click **Create**.
+Click the **project gear icon** in navbar >> **Sandbox Provider** >> Add E2B Api Key
 
 </div>
 
 <div className="fd-step">
-### Ask AI to Setup Mprove Project
 
-Click the **Builder** in navbar.
+### Add LLM Provider and Model
 
-Toggle Editor Session.
+You need to add an LLM model for AI Explorer or Editor (Builder) sessions.
 
-Ask "Setup mprove project and use malloy types"
+Click the **project gear icon** in navbar >> **LLM Providers** >> **New Provider**
+
+Add LLM Provider details and click **Add**.
+
+Click **Plus icon** in Models column.
+
+Add LLM Model details and click **Add**.
 
 </div>
 
 <div className="fd-step">
-### Explore created Model in UI
+### Create SQL Connection
+
+Click the **project gear icon** in navbar >> **Connections** >> **New Connection**
+
+</div>
+
+<div className="fd-step">
+### Ask AI to Setup Mprove Project (optional)
+
+Click the **Builder** in navbar >> **Sessions** >> **New Session**.
+
+Ask "Setup Mprove project and use Malloy types" to start Editor Session.
+
+It will create a separate session repository and branch.
+
+As a recommended alternative, you can create semantic models locally and sync your uncommitted changes with Mprove server.
+
+</div>
+
+<div className="fd-step">
+### Explore created Semantic Model in UI
 
 On the Models page, click on the model selector and select the model you created.
 

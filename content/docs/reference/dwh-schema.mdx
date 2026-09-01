@@ -7,11 +7,13 @@ import { extraSchemaYaml } from "@/content/docs/parts/extra-schema-yaml";
 
 # DWH Schema
 
-There are three types of Connection Schemas in Mprove:
+There are three types of Connection DWH Schemas in Mprove:
 
 - **Raw schemas** are fetched automatically from SQL connections - tables, columns, data types, foreign keys, and indexes.
-- **Extra schemas** are YAML files with extra metadata - descriptions, examples, and relationship type.
-- **Combined schemas** merge Raw and Extra schemas. They are useful for LLMs and humans to build Malloy semantic models.
+  They are stored in database and are visible to admins and editors through Combined Schemas.
+- **Extra schemas** contain extra metadata for raw schemas - relationships, descriptions and examples.
+  They are stored as YAML files and managed by project members with File Editor roles.
+- **Combined schemas** merge metadata from Raw and Extra schemas. They are useful for LLMs and humans to build Malloy semantic models.
 
 <Callout type="info" title="Viewing Combined Schemas">
 User see combined schemas in UI and explore Relationships Graph.
@@ -103,5 +105,9 @@ Defining one side is sufficient (no need to define both sides).
 
 ## Cache Unique Values
 
-`cache_unique_values: true` marks the column as recommended for caching unique values. 
-If a column unique values are cached, the Explorer AI session can look up the correct model fields by value before producing the charts. 
+`cache_unique_values: true` marks the column as recommended for caching unique values.
+If a column unique values are cached, the Explorer AI session can look up the correct model fields by value before producing the charts.
+
+For example, if a user asks for "Jeans Sales for the last 3 months" the LLM could look up 
+the cache for the value "Jeans" (to discover the "Product name" dimension) and for "Sales" 
+(to find the corresponding measure), and then construct a query.

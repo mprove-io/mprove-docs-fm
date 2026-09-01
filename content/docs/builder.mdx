@@ -4,9 +4,14 @@ title: "Builder"
 
 # Builder
 
-## Git Version Control
+Builder is a lightweight IDE that is part of the Mprove UI.
 
-Mprove files:
+You can create complete semantic models in the web UI, but we recommend working with Malloy files in your local IDE using the Malloy VS Code extension. 
+You can then sync the files with the Mprove Server to check for errors and explore Mprove models.
+
+## Mprove Files
+
+Mprove project supports the following file types::
 
 - [mprove.yml](/content/docs/reference/project-config) (Project Config)
 - [\*.malloy](/content/docs/reference/model-malloy)
@@ -15,6 +20,18 @@ Mprove files:
 - [\*.report](/content/docs/reference/report)
 - [\*.dashboard](/content/docs/reference/dashboard)
 - [\*.schema](/content/docs/reference/dwh-schema)
+
+## Version Control
+
+Mprove treats the files in the project repository as the single source of truth.
+
+Drafts are stored in the database. Once satisfied with a draft, the user can save it as a file for future use.
+
+When a user saves a draft as a file in the Production repository, the change is committed automatically.
+
+When a user saves a draft as a file in their Dev repository, the change remains uncommitted.
+
+## Project Repositories
 
 Each project has 3 types of repositories that are local to mprove server:
 
@@ -31,6 +48,8 @@ Users with **FilesEditor** role can manually edit files in their personal Dev re
   **Dev** repository in the navigation bar.
 </Callout>
 
+## Files Validation
+
 When user makes a manual change to any file, Mprove does the following:
 
 - Validates all files
@@ -46,17 +65,9 @@ Once the user is satisfied with the changes made, the user can **_commit_** and 
   repository via the **Remote** repository in a single user action.
 </Callout>
 
-## Git Branches
+## Commands
 
-Small projects may only need to use one branch (usually called master or main). Advanced git users may work in different branches.
-
-<Callout type="info">
-  Users can switch between branches using **repo-branch** selector in navigation bar.
-</Callout>
-
-## User Actions
-
-Git related actions are available on the Files page:
+These commands are available on the Files page:
 
 - **Save and Validate** - Save the changes. Mprove will automatically check all files in the project repository data folder for errors.
 
@@ -72,3 +83,11 @@ Git related actions are available on the Files page:
 - **Merge branch** - Merge changes from another branch into the current branch.
 - **Create branch** - Create a new branch.
 - **Delete branch** - Delete current branch.
+
+## Git Branches
+
+Small projects may only need to use one branch (usually called master or main). Advanced git users may work in different branches.
+
+<Callout type="info">
+  Users can switch between branches using **repo-branch** selector in navigation bar.
+</Callout>

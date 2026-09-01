@@ -1,6 +1,6 @@
 {
   "name": "mprove-docs-fm",
-  "version": "13.0.2",
+  "version": "13.0.2-1",
   "private": true,
   "packageManager": "pnpm@10.26.1",
   "scripts": {
